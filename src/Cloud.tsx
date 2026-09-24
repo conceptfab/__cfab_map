@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { layoutGraph, orbitalPosition, type Point } from "./graphModel";
+import { layoutGraph, nodeGroups, orbitalPosition, type Point } from "./graphModel";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import type { FeaturesData, LangKey } from "./types";
+import NodeBubble from "./NodeBubble";
 
 export interface CloudProps {
   data: FeaturesData;
@@ -19,7 +20,10 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const behaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const [size, setSize] = useState({ width: 1200, height: 720 });
   const graph = useMemo(() => layoutGraph(data, size.width, size.height), [data, size]);
+  const groups = useMemo(() => nodeGroups(data), [data]);
   const [transform, setTransform] = useState(zoomIdentity);
+  const transformRef = useRef(zoomIdentity);
+  const viewAnimationRef = useRef<number | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [showLabels, setShowLabels] = useState(false);
@@ -67,22 +71,66 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
-    const behavior = zoom<SVGSVGElement, unknown>().scaleExtent([0.12, 4]).filter(e => !e.button && (e.type === "wheel" || !e.target.closest(".graph-node, .graph-labels text"))).on("start", e => { if (e.sourceEvent) setPaused(true); }).on("zoom", e => setTransform(e.transform));
+    const behavior = zoom<SVGSVGElement, unknown>().scaleExtent([0.12, 4]).filter(e => !e.button && (e.type === "wheel" || !e.target.closest(".graph-node, .graph-node-popped, .graph-labels text, .node-bubble"))).on("start", e => {
+      if (e.sourceEvent) {
+        if (viewAnimationRef.current !== null) cancelAnimationFrame(viewAnimationRef.current);
+        viewAnimationRef.current = null;
+        setPaused(true);
+      }
+    }).on("zoom", e => {
+      transformRef.current = e.transform;
+      setTransform(e.transform);
+    });
     behaviorRef.current = behavior;
     const svg = select(svgRef.current!);
     svg.call(behavior).on("dblclick.zoom", null).call(behavior.transform, fit);
-    return () => { behavior.on("zoom", null).on("start", null); svg.on(".zoom", null); behaviorRef.current = null; };
+    return () => {
+      if (viewAnimationRef.current !== null) cancelAnimationFrame(viewAnimationRef.current);
+      viewAnimationRef.current = null;
+      behavior.on("zoom", null).on("start", null);
+      svg.on(".zoom", null);
+      behaviorRef.current = null;
+    };
   }, [fit]);
+  const moveViewTo = (target: typeof zoomIdentity) => {
+    const behavior = behaviorRef.current;
+    const svgElement = svgRef.current;
+    if (!behavior || !svgElement) return;
+    if (viewAnimationRef.current !== null) cancelAnimationFrame(viewAnimationRef.current);
+    if (reducedMotion) {
+      select(svgElement).call(behavior.transform, target);
+      viewAnimationRef.current = null;
+      return;
+    }
+
+    const start = transformRef.current;
+    const startedAt = performance.now();
+    const duration = 460;
+    const frame = (now: number) => {
+      const progress = Math.min(1, (now - startedAt) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const next = zoomIdentity
+        .translate(
+          start.x + (target.x - start.x) * eased,
+          start.y + (target.y - start.y) * eased
+        )
+        .scale(start.k + (target.k - start.k) * eased);
+      select(svgElement).call(behavior.transform, next);
+      if (progress < 1) viewAnimationRef.current = requestAnimationFrame(frame);
+      else viewAnimationRef.current = null;
+    };
+    viewAnimationRef.current = requestAnimationFrame(frame);
+  };
   const moveTo = (id: string) => {
     onSelect(id);
     const target = graph.byId.get(id)!;
     if (target.node.nodeType === "bridge" && size.width >= 1150) {
-      if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.transform, fit);
+      moveViewTo(fit);
       return;
     }
     const point = orbitalPosition(target, phase);
     const k = Math.max(fit.k * 1.8, 1);
-    if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.transform, zoomIdentity.translate(size.width * (size.width > 700 ? 0.36 : 0.5), size.height * 0.43).scale(k).translate(-point.x, -point.y));
+    moveViewTo(zoomIdentity.translate(size.width * (size.width > 700 ? 0.36 : 0.5), size.height * 0.43).scale(k).translate(-point.x, -point.y));
   };
   const focus = selectedId;
   const active = selectedId ?? hover;
@@ -138,12 +186,11 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     onSelect(null); setQuery("");
     const k = Math.min(size.width/graph.worldWidth, Math.max(100,size.height-160)/graph.worldHeight);
     const overview = zoomIdentity.translate(size.width/2,(size.height+30)/2).scale(k).translate(-graph.worldWidth/2,-graph.worldHeight/2);
-    if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.transform, overview);
+    moveViewTo(overview);
   };
   const viewApp = (point: Point) => {
     onSelect(null); setQuery("");
-    if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.transform,
-      zoomIdentity.translate(size.width/2,(size.height+90)/2).scale(fit.k).translate(-point.x,-point.y));
+    moveViewTo(zoomIdentity.translate(size.width/2,(size.height+90)/2).scale(fit.k).translate(-point.x,-point.y));
   };
 
   return <>
@@ -155,6 +202,12 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
       {graph.points.filter(p => p.node.nodeType === "ecosystem").map(p => <button key={p.id} onClick={() => viewApp(p)}>{p.node.shortTitle[lang]}</button>)}
     </div>
     <svg ref={svgRef} className="cloud" data-motion={moving ? "running" : "paused"} aria-label={pl ? "Interaktywna mapa powiązań" : "Interactive relationship graph"} onClick={e => {if (e.target === e.currentTarget) onSelect(null);}}>
+      <defs>
+        <filter id="popout-shadow" x="-80%" y="-80%" width="260%" height="260%">
+          <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="rgba(0,0,0,0.45)" />
+          <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="rgba(0,0,0,0.28)" />
+        </filter>
+      </defs>
       {bridgeNetwork && <g className="bridge-backdrop" transform={transform.toString()} aria-hidden="true">
         <path className="bridge-spine-glow" d={bridgePath} />
         <path className="bridge-spine" d={bridgePath} />
@@ -167,16 +220,17 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
           const s = position(l.source), t = position(l.target);
           const lit = l.source.id === active || l.target.id === active;
           const bridgeLink = bridgeNetwork && (l.source.node.nodeType === "bridge" || l.target.node.nodeType === "bridge");
-          const shared = { key: `${l.source.id}-${l.target.id}-${l.kind}`, "data-relation": l.relation, "data-kind": l.kind,
+          const key = `${l.source.id}-${l.target.id}-${l.kind}`;
+          const shared = { "data-relation": l.relation, "data-kind": l.kind,
             className: `group-${l.source.group} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""}`,
             opacity: lit ? 1 : active ? 0.025 : bridgeLink ? 0.5 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18,
             vectorEffect: "non-scaling-stroke" as const };
           if (bridgeLink) {
             const bend = Math.abs(t.x - s.x) * 0.48;
             const direction = Math.sign(t.x - s.x);
-            return <path {...shared} d={`M ${s.x} ${s.y} C ${s.x + bend * direction} ${s.y} ${t.x - bend * direction} ${t.y} ${t.x} ${t.y}`} />;
+            return <path key={key} {...shared} d={`M ${s.x} ${s.y} C ${s.x + bend * direction} ${s.y} ${t.x - bend * direction} ${t.y} ${t.x} ${t.y}`} />;
           }
-          return <line {...shared} x1={s.x} y1={s.y} x2={t.x} y2={t.y} />;
+          return <line key={key} {...shared} x1={s.x} y1={s.y} x2={t.x} y2={t.y} />;
         })}
       </g>
       {bridgeNetwork && bridges.length > 0 && <text className="bridge-network-title" x={graph.worldWidth/2*transform.k+transform.x} y={(bridges[0].y-53)*transform.k+transform.y} textAnchor="middle">{territoryLabels.synergy}</text>}
@@ -204,7 +258,100 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
         {leader && <line x1={nodeX} y1={nodeY} x2={x} y2={y-5} className="label-leader" />}
         <text x={x} y={y} fontSize={fontSize} textAnchor="start" className={`${p.node.nodeType === "ecosystem" ? "graph-root" : ""} ${p.node.nodeType === "module" ? "graph-module" : ""}`} onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onClick={() => moveTo(p.id)}>{text}</text>
       </g>)}</g>
+      {/* Foreground 3D popped-out node layer */}
+      {selectedId && (() => {
+        const p = graph.byId.get(selectedId);
+        if (!p) return null;
+        const pos = position(p);
+        const x = pos.x * transform.k + transform.x;
+        const y = pos.y * transform.k + transform.y;
+        const baseR = radius(p);
+        const poppedR = Math.max(13, baseR * 2.4);
+
+        return (
+          <g
+            key={`popped-${p.id}`}
+            className="graph-node-popped-position"
+            transform={`translate(${x},${y})`}
+          >
+            <g
+              className={`graph-node-popped group-${p.group} status-${p.node.status}`}
+              role="button"
+              tabIndex={0}
+              aria-label={pl ? `Zamknij szczegóły: ${p.node.title[lang]}` : `Close details: ${p.node.title[lang]}`}
+              onClick={() => onSelect(null)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " " || event.key === "Escape") {
+                  event.preventDefault();
+                  onSelect(null);
+                }
+              }}
+            >
+            {/* 3D Ground shadow */}
+            <ellipse className="popout-ground-shadow" cx={0} cy={poppedR * 0.95} rx={poppedR * 1.55} ry={poppedR * 0.55} />
+
+            {/* Luminous pulsing outer aura */}
+            <circle className="popout-aura-pulse" r={poppedR * 2.3} />
+            <circle className="popout-aura-inner" r={poppedR * 1.55} />
+
+            {/* Elevated illuminated rim */}
+            <circle className="popout-rim" r={poppedR + 3.5} />
+
+            {/* Main 3D Sphere */}
+            <circle className="popout-sphere" r={poppedR} filter="url(#popout-shadow)" />
+
+            {/* Specular 3D Highlight */}
+            <ellipse
+              className="popout-shine"
+              cx={-poppedR * 0.35}
+              cy={-poppedR * 0.35}
+              rx={poppedR * 0.45}
+              ry={poppedR * 0.28}
+              transform={`rotate(-28, ${-poppedR * 0.35}, ${-poppedR * 0.35})`}
+            />
+
+            {/* Status / Type glyphs */}
+            {p.node.status === "beta" && (
+              <path
+                className="popout-glyph-beta"
+                d={`M 0 ${-poppedR} A ${poppedR} ${poppedR} 0 0 1 0 ${poppedR} Z`}
+              />
+            )}
+            {p.node.status === "roadmap" && (
+              <circle className="popout-glyph-roadmap" r={poppedR * 0.52} />
+            )}
+            {p.node.nodeType === "bridge" && (
+              <polygon
+                className="popout-glyph-bridge"
+                points={`0,${-poppedR * 0.65} ${poppedR * 0.65},0 0,${poppedR * 0.65} ${-poppedR * 0.65},0`}
+              />
+            )}
+            </g>
+          </g>
+        );
+      })()}
     </svg>
+    {selectedId && (() => {
+      const selectedPoint = graph.byId.get(selectedId);
+      if (!selectedPoint) return null;
+      const pos = position(selectedPoint);
+      const screenX = pos.x * transform.k + transform.x;
+      const screenY = pos.y * transform.k + transform.y;
+      return (
+        <NodeBubble
+          key={selectedPoint.id}
+          node={selectedPoint.node}
+          parent={data.nodes.find((n) => n.id === selectedPoint.node.parentId) ?? null}
+          lang={lang}
+          data={data}
+          groups={groups}
+          position={{ x: screenX, y: screenY }}
+          containerSize={size}
+          onClose={() => onSelect(null)}
+          onSelect={moveTo}
+        />
+      );
+    })()}
     <div className="graph-controls" aria-label={pl ? "Sterowanie mapą" : "Graph controls"}>
       <button onClick={() => setShowLabels(!showLabels)} aria-pressed={showLabels} title={pl ? "Pokaż podpisy funkcji" : "Show feature labels"}>{pl ? "Podpisy funkcji" : "Feature labels"}</button>
       <button className="orbit-motion-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reducedMotion} title={reducedMotion ? (pl ? "Ograniczenie ruchu w ustawieniach systemu" : "System reduced motion preference") : undefined}>{paused ? (pl ? "Wznów orbity" : "Resume orbits") : (pl ? "Zatrzymaj orbity" : "Pause orbits")}</button>

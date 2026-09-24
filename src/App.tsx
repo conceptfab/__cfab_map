@@ -163,7 +163,6 @@ export default function App() {
       {view === "cloud" ? (
         <main className="cloud-wrap">
           <Cloud data={data} lang={lang} territoryLabels={territoryLabels} selectedId={selectedId} highlightIds={null} onSelect={setSelectedId} />
-          {selected && <Card node={selected} lang={lang} parent={data.nodes.find((n) => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} />}
         </main>
       ) : (
       <main className="map" aria-label={lang === "pl" ? "Funkcje według etapów pracy" : "Features by work stage"}>

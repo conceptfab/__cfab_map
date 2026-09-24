@@ -604,3 +604,517 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
       linear-gradient(155deg, #e9e7e0, #e5e4dd);
   }
 }
+
+/* ==========================================================================
+   3D POPPED NODE & SPEECH BUBBLE (CHMURKA / DYMEK)
+   ========================================================================== */
+
+@keyframes nodePopSpring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  62% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes popHaloPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.15;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+}
+
+@keyframes bubbleFloatIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 3D Foreground Popped Node */
+.graph-node-popped {
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: nodePopSpring 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.graph-node-popped .popout-ground-shadow {
+  fill: #000000;
+  opacity: 0.45;
+  filter: blur(5px);
+}
+
+.graph-node-popped .popout-aura-pulse {
+  fill: var(--group-color);
+  transform-origin: 0 0;
+  animation: popHaloPulse 2.4s ease-in-out infinite;
+}
+
+.graph-node-popped .popout-aura-inner {
+  fill: var(--group-color);
+  opacity: 0.5;
+}
+
+.graph-node-popped .popout-rim {
+  fill: none;
+  stroke: var(--bg-surface);
+  stroke-width: 2.6px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+}
+
+.graph-node-popped .popout-sphere {
+  fill: var(--group-color);
+  stroke: var(--group-ink);
+  stroke-width: 1.5px;
+}
+
+.graph-node-popped .popout-shine {
+  fill: rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+}
+
+.graph-node-popped .popout-glyph-beta {
+  fill: var(--bg-surface);
+  stroke: var(--group-ink);
+  stroke-width: 1.2px;
+}
+
+.graph-node-popped .popout-glyph-roadmap {
+  fill: var(--bg-surface);
+  stroke: var(--group-ink);
+  stroke-width: 1.2px;
+  stroke-dasharray: 2 2;
+}
+
+.graph-node-popped .popout-glyph-bridge {
+  fill: var(--bg-surface);
+  stroke: var(--group-ink);
+  stroke-width: 1.2px;
+}
+
+/* Node Speech Bubble (Chmurka / Dymek) */
+.node-bubble {
+  position: absolute;
+  z-index: 50;
+  will-change: transform, opacity, filter;
+  animation: bubbleFloatIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow: visible;
+  color: var(--text-primary);
+}
+
+.node-bubble-scroll {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-height: min(520px, calc(100% - 32px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow:
+    0 22px 50px -8px rgba(0, 0, 0, 0.28),
+    0 10px 22px -4px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.node-bubble-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.node-bubble-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.node-bubble-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+
+/* Speech Bubble Arrow Tail */
+.bubble-arrow {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--bg-surface);
+  z-index: 1;
+}
+
+.bubble-arrow.arrow-left {
+  left: -8px;
+  transform: rotate(45deg);
+  border-left: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.bubble-arrow.arrow-right {
+  right: -8px;
+  transform: rotate(45deg);
+  border-right: 1px solid var(--line-strong);
+  border-top: 1px solid var(--line-strong);
+}
+
+.bubble-arrow.arrow-top {
+  top: -8px;
+  transform: rotate(45deg);
+  border-left: 1px solid var(--line-strong);
+  border-top: 1px solid var(--line-strong);
+}
+
+.bubble-arrow.arrow-bottom {
+  bottom: -8px;
+  transform: rotate(45deg);
+  border-right: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+/* Bubble Header & Badges */
+.bubble-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bubble-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bubble-parent-pill {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 2px 7px;
+  background: var(--bg-canvas);
+  border-radius: 4px;
+  border: 1px solid var(--line-subtle);
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bubble-close-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.bubble-close-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-strong);
+}
+
+/* Bubble Main Info */
+.bubble-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bubble-title {
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--text-strong);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.bubble-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 550;
+}
+
+.bubble-status.status-beta {
+  color: var(--warning);
+}
+.bubble-status.status-roadmap {
+  color: var(--text-muted);
+}
+.bubble-status.status-production {
+  color: var(--text-strong);
+}
+
+.bubble-summary {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin: 2px 0 0 0;
+}
+
+.bubble-note {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  border-left: 2px solid var(--line-strong);
+  padding-left: 8px;
+  margin: 4px 0 0 0;
+}
+
+/* Bubble Connections */
+.bubble-connections-section {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bubble-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 650;
+  color: var(--text-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.count-pill {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.bubble-connections-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: 170px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.bubble-connections-list::-webkit-scrollbar {
+  width: 4px;
+}
+.bubble-connections-list::-webkit-scrollbar-thumb {
+  background: var(--line-subtle);
+  border-radius: 4px;
+}
+
+.connection-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--line-subtle);
+  background: var(--bg-canvas);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.connection-chip:hover {
+  background: var(--bg-hover);
+  border-color: var(--line-strong);
+  box-shadow: inset 3px 0 0 var(--group-color);
+}
+
+.connection-chip .graph-dot {
+  flex-shrink: 0;
+}
+
+.connection-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.connection-name {
+  font-size: 12px;
+  font-weight: 550;
+  color: var(--text-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.connection-meta {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.connection-arrow {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+
+.connection-chip:hover .connection-arrow {
+  color: var(--text-strong);
+  transform: translate(1px, -1px);
+}
+
+.no-connections {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 4px 0 0 0;
+}
+
+/* Bubble Extras */
+.bubble-extra-details {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bubble-moat-box {
+  font-size: 12px;
+  padding: 8px 10px;
+  background: rgba(150, 70, 32, 0.08);
+  border-left: 3px solid var(--focus);
+  border-radius: 4px;
+}
+
+.bubble-moat-box .extra-label {
+  font-weight: 600;
+  color: var(--text-strong);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.bubble-moat-box p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.bubble-tags-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+
+.bubble-extra-details .extra-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.bubble-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.bubble-tag {
+  font-size: 10.5px;
+  padding: 1px 6px;
+  background: var(--bg-hover);
+  border-radius: 4px;
+  border: 1px solid var(--line-subtle);
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.replace-tag {
+  background: transparent;
+  border-style: dashed;
+}
+
+/* Charcoal Theme Adjustments */
+[data-graph-theme="charcoal"] .node-bubble {
+  color: var(--text-primary);
+}
+
+[data-graph-theme="charcoal"] .node-bubble-scroll {
+  background: rgba(46, 44, 41, 0.94);
+  box-shadow:
+    0 24px 54px -8px rgba(0, 0, 0, 0.65),
+    0 12px 26px -4px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+[data-graph-theme="charcoal"] .bubble-arrow {
+  background: #2e2c29;
+}
+
+[data-graph-theme="charcoal"] .connection-chip {
+  background: #242321;
+}
+
+[data-graph-theme="charcoal"] .connection-chip:hover {
+  background: #3e3a35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-node-popped,
+  .graph-node-popped .popout-aura-pulse,
+  .node-bubble {
+    animation: none;
+  }
+}

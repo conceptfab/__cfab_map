@@ -1,8 +1,8 @@
 {
   "meta": {
-    "generatedAt": "2026-09-23T20:52:05.955Z",
-    "hubVersion": "BETA 0.393",
-    "timeflowVersion": "0.1.5775",
+    "generatedAt": "2026-09-24T16:11:12.822Z",
+    "hubVersion": "BETA 0.43",
+    "timeflowVersion": "0.1.5776",
     "contracts": {
       "module": 2,
       "service_api": 5,
@@ -18,7 +18,7 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "a748383",
+    "sourceCommit": "07eb8af",
     "distribution": "internal"
   },
   "nodes": [
@@ -65,7 +65,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.393",
+      "version": "BETA 0.43",
       "contract": null,
       "sources": [],
       "keywords": []
@@ -113,7 +113,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": []
@@ -202,7 +202,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser"
@@ -249,7 +249,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render"
@@ -296,7 +296,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.9",
+      "version": "0.8.10",
       "contract": null,
       "sources": [
         "hub:modules/results"
@@ -343,7 +343,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets"
@@ -390,7 +390,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes"
@@ -484,7 +484,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.114",
+      "version": "BETA 0.116",
       "contract": null,
       "sources": [
         "hub:modules/plugins"
@@ -531,7 +531,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
         "hub:modules/bridges"
@@ -578,7 +578,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.704",
+      "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
         "hub:shell/cfab_shell"
@@ -766,7 +766,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.664",
+      "version": "ALPHA 0.665",
       "contract": null,
       "sources": [
         "hub:shared/cfab_ui"
@@ -813,7 +813,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.707",
+      "version": "ALPHA 0.71",
       "contract": null,
       "sources": [
         "hub:shared/cfab_bridge"
@@ -860,7 +860,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.2.0",
+      "version": "0.4.0",
       "contract": null,
       "sources": [
         "hub:shared/cfab_native"
@@ -907,7 +907,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -952,7 +952,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -997,7 +997,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1042,7 +1042,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1087,7 +1087,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1132,7 +1132,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1177,7 +1177,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1222,7 +1222,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1267,7 +1267,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1312,7 +1312,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1357,7 +1357,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1402,7 +1402,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1447,7 +1447,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1492,7 +1492,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -2384,7 +2384,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/parser/c4dgrab.py",
@@ -2447,7 +2447,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/max_reader.py"
@@ -2500,7 +2500,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/parser/c4ddiff.py",
@@ -2557,7 +2557,7 @@
         "pl": "Odbiór na żywej parze Max ↔ C4D trwa.",
         "en": "Sign-off on a live Max ↔ C4D pair in progress."
       },
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/max_exchange.py",
@@ -2611,7 +2611,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/max_space.py"
@@ -2664,7 +2664,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/max_tools.py"
@@ -2716,7 +2716,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/send_to.py"
@@ -2770,7 +2770,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/prefs.py"
@@ -2823,7 +2823,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/inspection.py"
@@ -2875,7 +2875,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.625",
+      "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
         "hub:modules/scenes/scene_tabs.py"
@@ -2929,7 +2929,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/watch.py"
@@ -2981,7 +2981,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/poller.py"
@@ -3034,7 +3034,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/preview.py"
@@ -3086,7 +3086,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/progress.py",
@@ -3142,7 +3142,7 @@
         "pl": "Odbiór na żywej C4D z Coroną trwa.",
         "en": "Sign-off on live C4D with Corona in progress."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:bridges/c4d_bridge/C4Dcfabbridge"
@@ -3198,7 +3198,7 @@
         "pl": "Punkt 0.1-D: kod w pakiecie, odbiór na żywej C4D trwa.",
         "en": "Item 0.1-D: code shipped, live C4D sign-off in progress."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": "history_db 2",
       "sources": [
         "hub:modules/render/poller.py",
@@ -3261,7 +3261,7 @@
         "pl": "Usługa i panel działają, testy zielone; bez osobnego odbioru w BETA.md.",
         "en": "Service and panel work, tests green; no separate sign-off in BETA.md."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/coordinator.py"
@@ -3322,7 +3322,7 @@
         "pl": "Odbiór na żywej C4D trwa.",
         "en": "Live C4D sign-off in progress."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/recovery.py"
@@ -3378,7 +3378,7 @@
         "pl": "Odbiór na żywej C4D z Coroną trwa.",
         "en": "Live C4D with Corona sign-off in progress."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:bridges/c4d_bridge/C4Dcfabbridge/C4Dcfabbridge.pyp"
@@ -3430,7 +3430,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/precheck.py",
@@ -3484,7 +3484,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:service/cfab_service/web_panel.py",
@@ -3538,7 +3538,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/afterqueue.py"
@@ -3591,7 +3591,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/mail.py"
@@ -3646,7 +3646,7 @@
         "pl": "Punkt 0.1-F: kod gotowy, odbiór na serwerze użytkownika trwa.",
         "en": "Item 0.1-F: code ready, sign-off on the user's server in progress."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/notify.py"
@@ -3701,7 +3701,7 @@
         "pl": "Część punktu 0.1-D.",
         "en": "Part of item 0.1-D."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/notify.py"
@@ -3753,7 +3753,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": "cfab_render 3",
       "sources": [
         "hub:modules/render/ledger.py",
@@ -3806,7 +3806,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "hub:modules/render/view.py"
@@ -3861,7 +3861,7 @@
         "pl": "Pozycja otwarta w fali 0.15.",
         "en": "Open item in wave 0.15."
       },
-      "version": "ALPHA 0.725",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -3918,7 +3918,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.9",
+      "version": "0.8.10",
       "contract": null,
       "sources": [
         "hub:modules/results/exruster"
@@ -3971,7 +3971,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.9",
+      "version": "0.8.10",
       "contract": null,
       "sources": [
         "hub:modules/results/exruster"
@@ -4023,7 +4023,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.9",
+      "version": "0.8.10",
       "contract": null,
       "sources": [
         "hub:modules/results/sequences.py",
@@ -4078,7 +4078,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.9",
+      "version": "0.8.10",
       "contract": null,
       "sources": [
         "hub:modules/results/view.py",
@@ -4131,7 +4131,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets/engine.py"
@@ -4187,7 +4187,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets/engine.py"
@@ -4240,7 +4240,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets/engine.py"
@@ -4292,7 +4292,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets/settings_view.py"
@@ -4343,7 +4343,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.222",
+      "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
         "hub:modules/assets/engine.py"
@@ -4395,7 +4395,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser/core/scanner.py"
@@ -4447,7 +4447,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser/core/json_utils.py"
@@ -4499,7 +4499,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser/core/pairing_tab.py"
@@ -4551,7 +4551,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:shared/cfab_core/archives.py"
@@ -4604,7 +4604,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser/core/tools_tab.py",
@@ -4668,7 +4668,7 @@
         "pl": "Status „w odbiorze” dotyczy wyszukiwania AI. Metadane .asset są gotowe od dawna; trwają poprawki bazy wektorowej i odbiór wyszukiwania na dużej bibliotece.",
         "en": "The in-sign-off status applies to AI search. .asset metadata has long been ready; vector DB fixes and search sign-off on a large library are in progress."
       },
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": "ai_vector_db 1",
       "sources": [
         "hub:modules/browser/core/ai/clip_engine.py",
@@ -4729,7 +4729,7 @@
         "pl": "Odbiór na realnej bibliotece trwa.",
         "en": "Sign-off on a real library in progress."
       },
-      "version": "1.7.4",
+      "version": "1.8.0",
       "contract": null,
       "sources": [
         "hub:modules/browser/core/errors_tab.py"
@@ -4788,7 +4788,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": "bridge_protocol 6",
       "sources": [
         "hub:bridges/c4d_bridge/C4Dcfabbridge"
@@ -4843,7 +4843,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": "blender_bridge_protocol 2",
       "sources": [
         "hub:bridges/blender_bridge/cfab_bridge_blender"
@@ -4898,7 +4898,7 @@
         "pl": "Odbiór na żywej parze Blender ↔ C4D z Coroną trwa.",
         "en": "Live Blender ↔ C4D with Corona sign-off in progress."
       },
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
         "hub:bridges/blender_bridge/cfab_bridge_blender",
@@ -4957,7 +4957,7 @@
         "pl": "Etapy A, B i D wdrożone; odbiór na żywym 3ds Maxie trwa.",
         "en": "Stages A, B and D shipped; live 3ds Max sign-off in progress."
       },
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": "max_bridge_protocol 1",
       "sources": [
         "hub:bridges/max_bridge/bundle",
@@ -5015,7 +5015,7 @@
         "pl": "Od BETA 0.346; poprawki stabilności i odbiór na żywym MODO 17 trwają.",
         "en": "Since BETA 0.346; stability fixes and live MODO 17 sign-off in progress."
       },
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": "modo_bridge_protocol 1",
       "sources": [
         "hub:bridges/modo_bridge/cfab_bridge_modo",
@@ -5072,7 +5072,7 @@
         "pl": "Punkt 0.1-E: odbiór w Cinema 4D trwa.",
         "en": "Item 0.1-E: sign-off in Cinema 4D in progress."
       },
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
         "hub:bridges/c4d_bridge/C4Dcfabbridge"
@@ -5125,7 +5125,7 @@
         "pl": "Punkt 0.1-E, otwarty.",
         "en": "Item 0.1-E, open."
       },
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -5174,7 +5174,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.711",
+      "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
         "hub:modules/bridges/bridge_install.py",
@@ -5490,7 +5490,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.114",
+      "version": "BETA 0.116",
       "contract": null,
       "sources": [
         "hub:catalog",
@@ -5541,7 +5541,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.114",
+      "version": "BETA 0.116",
       "contract": null,
       "sources": [
         "hub:docs/audits/2026-09-15/cfab-tools.md"
@@ -5593,7 +5593,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.114",
+      "version": "BETA 0.116",
       "contract": null,
       "sources": [
         "hub:modules/plugins/install.py"
@@ -5644,7 +5644,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.704",
+      "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
         "hub:shell/cfab_shell/main_window.py",
@@ -5702,7 +5702,7 @@
         "pl": "Odbiór przeniesienia na czysty komputer z Windows trwa.",
         "en": "Sign-off of a move to a clean Windows machine in progress."
       },
-      "version": "ALPHA 0.704",
+      "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
         "hub:shell/cfab_shell/launcher.py",
@@ -5758,7 +5758,7 @@
         "pl": "Pozycja otwarta w fali 0.15.",
         "en": "Open item in wave 0.15."
       },
-      "version": "ALPHA 0.704",
+      "version": "ALPHA 0.72",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -6129,7 +6129,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.664",
+      "version": "ALPHA 0.665",
       "contract": null,
       "sources": [
         "hub:shared/cfab_ui/tokens.json",
@@ -6182,7 +6182,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.2.0",
+      "version": "0.4.0",
       "contract": null,
       "sources": [
         "hub:shared/cfab_native/crates"
@@ -6241,7 +6241,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/monitor.rs",
@@ -6295,7 +6295,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/title_parser.rs"
@@ -6347,7 +6347,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/tracker.rs"
@@ -6399,7 +6399,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/tracker.rs"
@@ -6451,7 +6451,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/monitor.rs"
@@ -6502,7 +6502,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/DaemonControl.tsx"
@@ -6560,7 +6560,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
@@ -6612,7 +6612,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
@@ -6664,7 +6664,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
@@ -6715,7 +6715,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Sessions.tsx"
@@ -6768,7 +6768,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/manual_sessions.rs"
@@ -6820,7 +6820,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/folder_scan.rs"
@@ -6872,7 +6872,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/context.rs"
@@ -6923,7 +6923,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs"
@@ -6974,7 +6974,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs"
@@ -7028,7 +7028,7 @@
         "pl": "Zmiana w wersji nieopublikowanej (Unreleased).",
         "en": "Change in an unreleased version."
       },
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs",
@@ -7085,7 +7085,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/assignment_model/auto_safe.rs"
@@ -7138,7 +7138,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/AI.tsx",
@@ -7195,7 +7195,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/mcp/protocol.rs",
@@ -7250,7 +7250,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/mcp/tools.rs"
@@ -7303,7 +7303,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/mcp/backup.rs"
@@ -7354,7 +7354,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Help.tsx"
@@ -7407,7 +7407,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": "cfab_render 3",
       "sources": [
         "tf:dashboard/src-tauri/src/commands/cfab_render.rs",
@@ -7460,7 +7460,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/cfab_render.rs"
@@ -7512,7 +7512,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/cfab_offline.rs"
@@ -7569,7 +7569,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/cfab_render.rs"
@@ -7626,7 +7626,7 @@
         "pl": "Zmiana w wersji nieopublikowanej; odbiór na dwóch maszynach.",
         "en": "Unreleased change; sign-off on two machines pending."
       },
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/sync_common.rs",
@@ -7679,7 +7679,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Renders.tsx"
@@ -7731,7 +7731,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Projects.tsx",
@@ -7784,7 +7784,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/projects.rs"
@@ -7837,7 +7837,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Clients.tsx",
@@ -7890,7 +7890,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/PM.tsx",
@@ -7944,7 +7944,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Applications.tsx"
@@ -7996,7 +7996,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/monitored.rs"
@@ -8049,7 +8049,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/TimeAnalysis.tsx",
@@ -8101,7 +8101,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Dashboard.tsx"
@@ -8153,7 +8153,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Data.tsx",
@@ -8207,7 +8207,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/ImportPage.tsx",
@@ -8260,7 +8260,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/QuickStart.tsx",
@@ -8313,7 +8313,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/webserver.rs",
@@ -8366,7 +8366,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/log_management.rs"
@@ -8417,7 +8417,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/bughunter.rs"
@@ -8468,7 +8468,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/locales"
@@ -8519,7 +8519,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src-tauri/src/commands/costs.rs"
@@ -8573,7 +8573,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/Estimates.tsx",
@@ -8627,7 +8627,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/ReportView.tsx",
@@ -8683,7 +8683,7 @@
         "pl": "Kod w raporcie jest; bez odbioru.",
         "en": "Code is in the report; not signed off."
       },
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/report-view/ReportViewProfitabilitySection.tsx"
@@ -8740,7 +8740,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/lan_sync_orchestrator.rs",
@@ -8803,7 +8803,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5775",
+      "version": "0.1.5776",
       "contract": null,
       "sources": [
         "tf:src/sync_encryption.rs",
