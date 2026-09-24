@@ -4,7 +4,7 @@ import path from "node:path";
 import { HUB_ROOT, OUT_JSON, resolveSource } from "./paths.mjs";
 
 // Tabela 5.0 wytycznych. Rozjazd oznacza, że dokument albo dane są nieaktualne.
-const EXPECTED = { ecosystem: 2, module: 30, bridge: 8, feature: 127 };
+const EXPECTED = { ecosystem: 2, module: 30, bridge: 8, feature: 133 };
 const STAGES = ["assets", "scene", "inspection", "render", "results", "tracking", "billing", "report"];
 const SHORT_MAX = 28;
 
@@ -63,6 +63,35 @@ for (const e of data.edges) {
   if (!ids.has(e.to)) err(e.id, `to ${e.to} nie istnieje`);
   if (e.label && !filled(e.label)) err(e.id, "etykieta bez PL/EN");
 }
+
+// Przewaga jest tezą popartą gotowymi funkcjami, nie dowolną flagą na węźle.
+if (!Array.isArray(data.advantages) || data.advantages.length < 3 || data.advantages.length > 6) {
+  err("advantages", "wymagane 3–6 przewag");
+}
+const advantageIds = new Set();
+const ranks = new Set();
+const evidenceOwner = new Map();
+for (const a of data.advantages ?? []) {
+  if (advantageIds.has(a.id)) err(a.id, "zdublowany id przewagi");
+  advantageIds.add(a.id);
+  if (!Number.isInteger(a.rank) || ranks.has(a.rank)) err(a.id, `nieunikalny lub nieprawidłowy rank ${a.rank}`);
+  ranks.add(a.rank);
+  for (const field of ["title", "thesis", "why"]) if (!filled(a[field])) err(a.id, `brak ${field}.pl albo ${field}.en`);
+  if (!Array.isArray(a.replacesTools) || a.replacesTools.some((item) => !filled(item))) err(a.id, "brak tłumaczenia replacesTools");
+  if (a.flow !== null && (!Array.isArray(a.flow) || a.flow.some((step) => !filled(step)))) err(a.id, "brak tłumaczenia flow");
+  if (a.assumptionId !== null && !assumptionIds.has(a.assumptionId)) err(a.id, `assumptionId ${a.assumptionId} nie istnieje`);
+  if (!Array.isArray(a.ids) || a.ids.length < 5) err(a.id, "mniej niż 5 dowodów");
+  for (const id of a.ids ?? []) {
+    const node = data.nodes.find((item) => item.id === id);
+    if (!node) err(a.id, `dowód ${id} nie istnieje`);
+    else if (node.status !== "production" || !["feature", "bridge"].includes(node.nodeType)) err(a.id, `dowód ${id} nie jest gotową funkcją`);
+    if (evidenceOwner.has(id)) err(a.id, `dowód ${id} należy też do ${evidenceOwner.get(id)}`);
+    evidenceOwner.set(id, a.id);
+  }
+}
+if (!Array.isArray(data.alsoStrong)) err("alsoStrong", "brak listy");
+for (const id of data.alsoStrong ?? []) if (!ids.has(id)) err("alsoStrong", `węzeł ${id} nie istnieje`);
+for (const node of data.nodes) if (node.advantageId !== (evidenceOwner.get(node.id) ?? null)) err(node.id, "advantageId nie zgadza się z listą dowodów");
 
 // 6. wersje zgodne z repozytorium Huba
 const hubVersion = fs.readFileSync(path.join(HUB_ROOT, "VERSION"), "utf8").trim();

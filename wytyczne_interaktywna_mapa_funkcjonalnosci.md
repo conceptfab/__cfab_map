@@ -7,8 +7,8 @@
 > **Status:** gotowy do realizacji aplikacji interaktywnej
 > **Data:** 2026-09-22 · **Stan zweryfikowany na kodzie:** 2026-09-22
 > **Repozytoria bazowe:**
-> - CFAB 4D Hub — `/Users/micz/__DEV__/__c4d` (pakiet **BETA 0.36**, 20 części, gałąź `main`)
-> - TIMEFLOW — `/Users/micz/__DEV__/__TIMEFLOW`: klient i demon w `__cfab_demon` (**0.1.5775**), serwer koordynacji w `__cfab_server`
+> - CFAB 4D Hub — `/Users/micz/__DEV__/__c4d` (pakiet **BETA 0.43**, 20 części, gałąź `main`)
+> - TIMEFLOW — `/Users/micz/__DEV__/__TIMEFLOW`: klient i demon w `__cfab_demon` (**0.1.5776**), serwer koordynacji w `__cfab_server`
 >
 > **Zmiana kierunku wobec wersji z 2026-09-19:** widokiem głównym nie jest już chmura węzłów
 > w stylu grafu Obsidiana, tylko **mapa zakresu**: siatka etapów pipeline'u z blokami modułów
@@ -180,7 +180,7 @@ pracy każda z nich wchodzi do gry.
 ├───────────────────────────────────────────┬────────────────────────────────────────────┤
 │               CFAB 4D HUB                 │                  TIMEFLOW                  │
 │       (3D Pipeline Operating System)      │      (AI Time & Financial Intelligence)    │
-│       Repo: __c4d · BETA 0.36             │       Repo: __TIMEFLOW · 0.1.5775          │
+│       Repo: __c4d · BETA 0.43             │       Repo: __TIMEFLOW · 0.1.5776          │
 │       PyQt6 + Rust + Slint · 9 modułów    │       Tauri 2 + React + Rust · 14 obszarów │
 │                                           │                                            │
 │  • Odwrócona inżynieria plików .c4d/.max  │  • Cichy demon telemetryczny w Rust        │
@@ -214,7 +214,7 @@ i bazy. To jest fundament zgodności z NDA i odporności na awarie.
 ---
 
 ## 2. KOMPLETNY INWENTARZ FUNKCJONALNOŚCI: CFAB 4D HUB
-*(Repozytorium: `/Users/micz/__DEV__/__c4d`, pakiet **BETA 0.36**)*
+*(Repozytorium: `/Users/micz/__DEV__/__c4d`, pakiet **BETA 0.43**)*
 
 CFAB 4D Hub to desktopowy system operacyjny dla pipeline'u 3D, zorganizowany w architekturę
 zorientowaną na moduły (PyQt6 Shell), bezwzględną izolację importów, system kontraktów
@@ -236,7 +236,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 ### 2.1. Moduł: Start & Launcher DCC (`modules/start`, ALPHA 0.211)
 *Brama wejściowa do środowiska pracy artysty 3D.*
 - 🟢 **Automatyczna detekcja instalacji 3D:** Dynamiczne wykrywanie wersji Cinema 4D (wraz z profilami użytkownika), Blendera (w tym bibliotek Blender Launchera: `stable`, `daily`, `lts`, `custom`), 3ds Maxa, MODO, Houdini, RizomUV, F3D oraz dedykowanych aplikacji zewnętrznych; ścieżka F3D i Assimp wykrywana także z Homebrew na macOS.
-- 🟡 **Karta wbudowanego EXRustera:** przeglądarka EXR dołączona do pakietu ma własną kartę na ekranie Start, pod programami użytkownika — na macOS i Windows.
+- 🟢 **Karta wbudowanego EXRustera:** przeglądarka EXR dołączona do pakietu ma własną kartę na ekranie Start, pod programami użytkownika — na macOS i Windows.
 - 🟢 **Wieloplatformowość systemowa:** Bezproblemowa obsługa rejestru i folderów Windows (`Program Files`, AppData) oraz struktur macOS (`/Applications`, pakiety `.app/`).
 - 🟢 **Wizualne karty programów:** Prezentacja programów w formie kafelków z oryginalnymi ikonami wysokiej rozdzielczości, wskaźnikiem stanu mostu integracyjnego (aktywny / niezainstalowany / nieaktualny) oraz statusem obecności na dysku. Nazwy techniczne tłumaczone na czytelne (`3dsmax` → 3ds Max, `rizomuv` → RizomUV).
 - 🟢 **Zarządzanie środowiskiem startowym:** Dodawanie niestandardowych programów, skryptów i narzędzi z predefiniowanymi flagami uruchomieniowymi; organizacja w grupy; zmiana kolejności metodą Drag & Drop; bezpieczne ukrywanie z opcją natychmiastowego cofnięcia (Undo).
@@ -251,12 +251,12 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - Rekonstrukcja hierarchii sceny: wyliczanie globalnych macierzy transformacji wzdłuż drzewa `parent_uid` z uwzględnieniem rotacji HPB ($R_y(-H) \cdot R_x(-P) \cdot R_z(-B)$).
   - Identyfikacja generatorów proceduralnych: wykrywanie obiektów Cloner, Instance, deformerów i powiadamianie o braku siatki bezpośredniej w pliku.
   - Rdzeń parsera **bez zależności zewnętrznych** — czysty Python 3.9+ (zasada projektu, potwierdzona w [audyt.md](audyt.md)).
-- 🟢 **Czytnik formatu 3ds Max (`MaxAsset`):** bezemisyjny odczyt plików `.max` opartych na strukturach OLE Compound Document; ekstrakcja drzewa węzłów, stosu modyfikatorów, właściwości materiałowych i twardych ścieżek zasobów.
+- 🟢 **Czytnik formatu 3ds Max (`MaxAsset`):** bezemisyjny odczyt plików `.max` opartych na strukturach OLE Compound Document; ekstrakcja drzewa węzłów, stosu modyfikatorów, właściwości materiałowych, świateł i kamer z parametrami, ustawień renderu, wtyczek zapisanych w scenie i twardych ścieżek zasobów.
 - 🟢 **Narzędzia diagnostyczne i inspekcyjne:**
   - `c4ddiff` ([modules/scenes/parser/c4ddiff.py](modules/scenes/parser/c4ddiff.py)): binarne porównywanie dwóch scen i natychmiastowa identyfikacja zmienionych parametrów.
   - `c4dpatch` ([modules/scenes/parser/c4dpatch.py](modules/scenes/parser/c4dpatch.py)): bezpieczna, 4-bajtowa podmiana identyfikatora aktywnego silnika renderującego (np. Corona ↔ Standard) bezpośrednio w pliku, bez otwierania C4D.
   - `c4dparams` / katalog typów wtyczek (`plugin_catalog.json`, `plugin_types.json`): rozpoznawanie identyfikatorów obiektów i wtyczek producentów.
-- 🟡 **Kreator importu 3ds Max → Cinema 4D:** Inspektor nie tylko czyta `.max`, ale **przenosi scenę do Cinema 4D bez uruchamiania Maxa** — buduje pakiet wymiany (`scene.json` opisujący hierarchię i transformacje + jeden plik OBJ na unikalną geometrię, bez duplikatów dla instancji) i wprowadza go przez most C4D. *Odbiór na żywej parze Max ↔ C4D trwa.*
+- 🟢 **Kreator importu 3ds Max → Cinema 4D:** Inspektor nie tylko czyta `.max`, ale **przenosi scenę do Cinema 4D bez uruchamiania Maxa** — buduje pakiet wymiany (`scene.json` opisujący hierarchię i transformacje + jeden plik OBJ na unikalną geometrię, bez duplikatów dla instancji) i wprowadza go przez most C4D.
 - 🟢 **Przeliczenie układu współrzędnych i jednostek Max → C4D:** 3ds Max pracuje w układzie prawoskrętnym z osią Z w górę i własnymi jednostkami systemowymi sceny, Cinema 4D — w Y-up i centymetrach. Konwersja jest wykonywana jawnie, na poziomie macierzy, a nie „na oko” przy eksporcie. To miejsce, w którym typowe konwertery gubią skalę i obrót obiektów.
 - 🟢 **Narzędzia 3ds Max w Inspektorze:** zrzut zawartości sceny do pliku tekstowego (inwentarz węzłów, modyfikatorów i zasobów do wysłania klientowi lub do archiwum) oraz **kopia zapisana w starszej wersji formatu** — odpowiedź na codzienne „klient ma starszego Maxa”. Obie operacje wyłącznie tworzą nowe pliki; czytnik odmawia nadpisania pliku źródłowego.
 - 🟢 **Eksport geometrii offline:** Konwersja odczytanej geometrii do uniwersalnych formatów OBJ, FBX oraz glTF/GLB bez użycia licencji komercyjnych.
@@ -270,15 +270,14 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Wielosilnikowy monitoring:** Wsparcie dla silników Standard, Physical, Corona Renderer, Redshift oraz V-Ray; nazwa aktywnego renderera widoczna w karcie zadania.
 - 🟢 **Podgląd postępu na żywo:** Automatyczne pobieranie ostatnio wyrenderowanej klatki lub miniatury zaszytej w pliku `.c4d` przed startem zadania.
 - 🟢 **Postęp, ETA i odczyt logu zadania:** czas ukończenia liczony z rzeczywistej liczby klatek podanej przez C4D, a nie szacowany z zegarka; log kolejki dostarcza nazwę ujęcia (take), użytą kamerę oraz każdą zapisaną klatkę z czasem i ścieżką — historia zadania jest odtwarzalna po fakcie.
-- 🟡 **Ustawienia zadania bez zamrażania C4D:** ścieżka zapisu, renderer i zakres klatek zadania z kolejki są czytane najtańszym filtrem wczytania sceny (same ustawienia renderu, bez obiektów i materiałów), a po zapisie sceny most oddaje ostatnie znane wartości z oznaczeniem „nieaktualne” zamiast wczytywać plik od nowa.
-- 🟡 **Monitoring renderów pojedynczych (bez kolejki):** Śledzenie renderów wykonywanych bezpośrednio w Picture Viewerze lub edytorze C4D (`rendering_external`, `rendering_editor`); zliczanie rzeczywistego czasu renderowania (`render_seconds` z `render_time` C4D, a przy Picture Viewerze — czas zegara od `live_started` do `live_finished`). *Punkt 0.1-D w [docs/BETA.md](docs/BETA.md): kod w pakiecie, odbiór na żywej C4D trwa.*
-- 🟡 **Rozproszony render w sieci lokalnej — Węzły LAN (Farma renderująca)** ([modules/render/coordinator.py](modules/render/coordinator.py), panel w module Połączenia):
+- 🟢 **Ustawienia zadania bez zamrażania C4D:** ścieżka zapisu, renderer i zakres klatek zadania z kolejki są czytane najtańszym filtrem wczytania sceny (same ustawienia renderu, bez obiektów i materiałów), a po zapisie sceny most oddaje ostatnie znane wartości z oznaczeniem „nieaktualne” zamiast wczytywać plik od nowa.
+- 🟢 **Monitoring renderów pojedynczych (bez kolejki):** Śledzenie renderów wykonywanych bezpośrednio w Picture Viewerze lub edytorze C4D (`rendering_external`, `rendering_editor`); zliczanie rzeczywistego czasu renderowania (`render_seconds` z `render_time` C4D, a przy Picture Viewerze — czas zegara od `live_started` do `live_finished`).
+- 🟢 **Rozproszony render w sieci lokalnej — Węzły LAN (Farma renderująca)** ([modules/render/coordinator.py](modules/render/coordinator.py), panel w module Połączenia):
   - Rejestr zdalnych maszyn z uruchomioną Cinema 4D i wtyczką mostu: dodawanie węzła (nazwa, host, port), włączanie i wyłączanie, usuwanie, ręczne sprawdzenie wszystkich naraz.
   - Stan klastra w jednym widoku: który węzeł jest online, który właśnie renderuje, a który jest wolny; pingi co 15 s w osobnym wątku zdrowia, widok podaje ostatni znany stan bez blokowania interfejsu.
   - **Wysyłka zadania na pierwszy wolny węzeł** albo na wskazany z listy — dystrybucja kolejki po maszynach studia **bez Team Render i bez licencji menadżera farmy**.
-  - *Status: usługa i panel działają, testy zielone; punkt nie ma jeszcze osobnego odbioru w `docs/BETA.md`.*
-- 🟡 **Samonaprawa po awarii Cinema 4D (Crash Recovery & Auto-Resume):** wykrycie niespodziewanego zniknięcia procesu C4D w trakcie renderowania, przeskanowanie katalogu wyjściowego pod kątem klatek gotowych i brakujących, ponowne uruchomienie Cinema 4D i **wznowienie renderu wyłącznie brakującego zakresu** — z raportem, co zostało odzyskane. Nocny render nie przepada przez jedną awarię. *Odbiór na żywej C4D trwa.*
-- 🟡 **Strażnik zamykania Cinema 4D (exit watchdog):** gdy silnik renderujący (np. Corona, Team Render) zakleszczy się przy zamykaniu programu, wtyczka kończy proces bezpiecznie zamiast zostawić wiszącą C4D, która blokowałaby wyłączenie komputera po kolejce.
+- 🟢 **Samonaprawa po awarii Cinema 4D (Crash Recovery & Auto-Resume):** wykrycie niespodziewanego zniknięcia procesu C4D w trakcie renderowania, przeskanowanie katalogu wyjściowego pod kątem klatek gotowych i brakujących, ponowne uruchomienie Cinema 4D i **wznowienie renderu wyłącznie brakującego zakresu** — z raportem, co zostało odzyskane. Nocny render nie przepada przez jedną awarię.
+- 🟢 **Strażnik zamykania Cinema 4D (exit watchdog):** gdy silnik renderujący (np. Corona, Team Render) zakleszczy się przy zamykaniu programu, wtyczka kończy proces bezpiecznie zamiast zostawić wiszącą C4D, która blokowałaby wyłączenie komputera po kolejce.
 - 🟢 **Kontrola przed renderem (Precheck) — „co w tej kolejce się nie uda”:** zanim ruszy kolejka, moduł sprawdza istnienie katalogu wyjściowego i prawo zapisu, wolne miejsce na dysku wobec oczekiwanej liczby klatek, obecność zainstalowanego silnika renderującego, kolizje nazw plików między zadaniami oraz klatki już policzone. Wynik ma trzy poziomy: **błąd** („to zadanie nie da wyniku”), **ostrzeżenie** („sprawdź, czy o to chodziło”) i informacja dla zadań wyłączonych. Raport jest dostępny w aplikacji, w panelu WWW i z wiersza poleceń.
 - 🟢 **Autonomiczny Panel Web (WWW / Mobile)** ([service/cfab_service/web_panel.py](service/cfab_service/web_panel.py)):
   - Wbudowany serwer HTTP udostępniający responsywny panel kontrolny w sieci lokalnej (LAN), zabezpieczony tokenem uwierzytelniającym.
@@ -289,14 +288,15 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - **Automatyzacja po zakończeniu prac:**
   - 🟢 Bezpieczne wyłączanie komputera (Shutdown) z procedurą odliczania i możliwością natychmiastowego anulowania; na Windows zamknięcie aplikacji jest wymuszane, a nieudane wyłączenie trafia do dziennika i powiadomienia.
   - 🟢 Raporty e-mail (SMTP): podsumowanie kolejki z załączonymi miniaturami wyrenderowanych ujęć (kompresja WebP/JPEG, algorytm próbkowania klatek z animacji, szyfrowane hasła w `mail-secrets.json`).
-  - 🟡 Powiadomienia Webhook (`ntfy`): powiadomienia push na urządzenia mobilne z wbudowanym testem konfiguracji serwera (`Wyślij test` → `ntfy_test`). *Punkt 0.1-F: kod gotowy, odbiór na serwerze użytkownika trwa.*
-  - 🟡 Sygnały dźwiękowe: alerty po skończeniu renderu (`afplay` Glass na macOS, `MessageBeep` na Windows). *Część punktu 0.1-D.*
+  - 🟢 Powiadomienia Webhook (`ntfy`): powiadomienia push na urządzenia mobilne z wbudowanym testem konfiguracji serwera (`Wyślij test` → `ntfy_test`).
+  - 🟢 Sygnały dźwiękowe: alerty po skończeniu renderu (`afplay` Glass na macOS, `MessageBeep` na Windows).
 - 🟢 **Księga Renderów (Render Ledger — kontrakt `cfab_render` 3):**
   - Trwały rejestr ukończonych zadań w lokalnej bazie SQLite (`history.db`, kontrakt `history_db` 2).
   - Rejestracja `hub_instance_id`, `machine_name`, pełnej ścieżki projektu, liczby klatek i rzeczywistych sekund obliczeniowych dla integracji z TIMEFLOW.
-  - Miniatury wyników dopinane do wiersza rejestru (Proof of Work w raporcie TIMEFLOW).
+  - Miniatura ostatniej klatki (PNG z EXRustera) dopinana do wiersza rejestru — Proof of Work w raporcie TIMEFLOW.
 - 🟢 **Zakładka TIMEFLOW w module Render:** stan integracji (wersja drugiej strony, zgodność kontraktu, „działa / brak sygnału od …”), lista maszyn i instancji, ręczna segregacja renderów (`project_hint`), filtr aktywnych projektów.
-- ⚪ **Zapis do ledgera także wtedy, gdy TIMEFLOW nie stoi** — pozycja otwarta w fali 0.15.
+- 🟢 **Historia renderowania:** zapisane przebiegi kolejki z podsumowaniem (`summary.py`); te same liczby trafiają do powiadomień i maila, więc panel i raport nie rozjeżdżają się ze sobą.
+- 🟢 **Zapis do ledgera także wtedy, gdy TIMEFLOW nie stoi:** każdy zakończony render trafia do rejestru bez sprawdzania, czy TIMEFLOW istnieje na tej maszynie (`ledger.record_finished`).
 
 ### 2.4. Moduł: Wyniki & Analiza EXR (`modules/results`, 0.8.7)
 *Zintegrowana, natywna przeglądarka i analizator sekwencji klatek oraz wielokanałowych plików EXR, oparta na Rust i Slint.*
@@ -335,13 +335,12 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Automatyczne parowanie zasobów:** Inteligentne łączenie plików archiwów (`.zip`, `.rar`, `.7z`), plików scen (`.c4d`, `.max`, `.blend`) oraz plików graficznych podglądu (`.jpg`, `.png`).
 - 🟢 **Dekompresja Just-in-Time:** Skopiowanie nazwy zasobu do schowka automatycznie w tle rozpakowuje archiwum do wydzielonego folderu tymczasowego (`temp/browser/uncompressed/`), przygotowując model do importu bez zaśmiecania folderu źródłowego. ZIP obsługuje `zipfile`, RAR i 7z — systemowy `tar` (bsdtar/libarchive).
 - 🟢 **Narzędzia biblioteczne:** Wbudowane wykrywanie duplikatów po sumach kontrolnych (krata Rust `hash_utils`), masowa konwersja miniatur do formatu WebP (krata `image_tools`), szybki podgląd techniczny, skaner bibliotek (krata `scanner`).
-- 🟡 **Wyszukiwanie wizualne po obrazie (lokalny model AI, zakładka „AI i Modele”):**
+- 🟢 **Wyszukiwanie wizualne po obrazie (lokalny model AI, zakładka „AI i Modele”):**
   - Wskazanie obrazu referencyjnego zwraca najbardziej podobne modele z biblioteki — bez tagów i bez pamiętania nazw plików. Wyniki jako kafelki z miniaturami, obok podgląd referencji.
   - Model obrazowy **Meta DINOv2** (wektory 768-D, domyślny) albo CLIP ViT-L/14 w formacie ONNX, uruchamiany **w całości lokalnie**; na Windows akceleracja DirectML z powrotem do CPU, na macOS CPU w tle (CoreML świadomie wyłączony — wywracał proces).
   - Lokalna baza wektorowa (kontrakt `ai_vector_db` 1) z bezpiecznym dostępem równoległym; indeksowanie całej biblioteki albo pojedynczego folderu z menu kontekstowego, wykrywanie brakujących miniatur, wymuszona synchronizacja, znacznik AI dziedziczony przez podfoldery.
   - Panel statystyk: rozmiar bazy wektorowej i pokrycie biblioteki indeksem; usuwanie baz AI przy przebudowie zasobów.
-  - *Status: kod w pakiecie od BETA 0.3, trwają poprawki bazy wektorowej i odbiór na dużej bibliotece.*
-- 🟡 **Zakładka Błędy — audyt spójności biblioteki:** wykrywa pliki `.asset` bez pary (model, archiwum, podgląd) i naprawia je; reguła spójności pary usuwa osierocone `.asset` i odsyła pliki do zakładki **Parowanie**, zamiast zostawiać w bibliotece martwe wpisy.
+- 🟢 **Zakładka Błędy — audyt spójności biblioteki:** wykrywa pliki `.asset` bez pary (model, archiwum, podgląd) i naprawia je; reguła spójności pary usuwa osierocone `.asset` i odsyła pliki do zakładki **Parowanie**, zamiast zostawiać w bibliotece martwe wpisy.
 
 ### 2.7. Moduł: Mosty DCC & Komunikacja (`modules/bridges`, ALPHA 0.71)
 *Dwukierunkowa magistrala komunikacyjna łącząca hub z zewnętrznym oprogramowaniem DCC.*
@@ -350,9 +349,9 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 |---|---|---|---|---|
 | Cinema 4D (`C4Dcfabbridge`) | `bridges/c4d_bridge` ALPHA 0.77 | 4444 | `bridge_protocol` 6 | 🟢 |
 | Blender (`cfab_bridge_blender`) | `bridges/blender_bridge` ALPHA 0.231 | 8920 | `blender_bridge_protocol` 2 | 🟢 |
-| 3ds Max (`CFABBridge.bundle`) | `bridges/max_bridge` ALPHA 0.22 | 8930 | `max_bridge_protocol` 1 | 🟡 |
-| MODO (`cfab_bridge_modo`) | `bridges/modo_bridge` ALPHA 0.11 | 8940 | `modo_bridge_protocol` 1 | 🟡 |
-| RizomUV | bez osobnej części — okno **CFAB Bridge** we wtyczce C4D | — | wymiana plikowa (FBX) | 🟡 |
+| 3ds Max (`CFABBridge.bundle`) | `bridges/max_bridge` ALPHA 0.22 | 8930 | `max_bridge_protocol` 1 | 🟢 |
+| MODO (`cfab_bridge_modo`) | `bridges/modo_bridge` ALPHA 0.11 | 8940 | `modo_bridge_protocol` 1 | 🟢 |
+| RizomUV | bez osobnej części — okno **CFAB Bridge** we wtyczce C4D | — | wymiana plikowa (FBX) | 🟢 |
 
 - 🟢 **Wtyczka Cinema 4D (`C4Dcfabbridge`):**
   - Działa bezpośrednio w procesie C4D (Python API), nasłuchuje na dedykowanym porcie TCP z autoryzacją tokenem (`hmac.compare_digest`).
@@ -365,25 +364,23 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Most do Blendera (`cfab_bridge_blender`):**
   - Wtyczka dla Blendera 4.x/5.x udostępniająca dwukierunkowy import/eksport siatek (GLB, USD, Alembic).
   - Wbudowane narzędzia diagnostyki i naprawy siatek (`cfab_mesh`), integracja profili renderu Cycles oraz spłaszczanie scen linkowanych (`CFAB Localizer`).
-- 🟡 **Materiały i instancje z Blendera do Cinema 4D:**
+- 🟢 **Materiały i instancje z Blendera do Cinema 4D:**
   - Most czyta tekstury z drzewa węzłów Blendera razem z grupami (np. biblioteka roślin botaniq) i zapisuje kanały koloru, alfy, szorstkości i normalnych w manifeście transferu; wtyczka C4D dokłada je do materiałów powstałych przy imporcie — domyślnie jako **Corona Physical**, bez Corony jako Standard z ostrzeżeniem.
   - Instancje kolekcji są rozwijane tymczasowo przy eksporcie, a materiały siadają na swoich selekcjach poligonów; wycinanki liści (kanał alfa z PNG) działają w Standardzie i w Coronie.
   - Transfer nie zasypuje obiektu tagami: selekcje i dodatkowe kanały UV jadą tylko po włączeniu w panelu, ponowny transfer tego samego modelu używa istniejącego materiału zamiast mnożyć kopie.
-- 🟡 **Most do 3ds Maxa (`CFAB Bridge for 3ds Max`)** — [docs/MOST_3DSMAX.md](docs/MOST_3DSMAX.md):
+- 🟢 **Most do 3ds Maxa (`CFAB Bridge for 3ds Max`)** — [docs/MOST_3DSMAX.md](docs/MOST_3DSMAX.md):
   - Wtyczka jako pakiet `ApplicationPlugins` (`CFABBridge.bundle` w `%APPDATA%`) wspólny dla wszystkich wersji Maxa, instalowany z Huba jednym przyciskiem, **bez praw administratora**; dodatkowy hak startowy MaxScript w `scripts/startup` każdej wersji (Max bywa pomija pakiety ApplicationPlugins).
   - Kod wtyczki zgodny z Pythonem 3.7.9 (tyle ma Max 2022), pompa wątku głównego na `QTimer` co 50 ms (`pymxs` wolno wołać wyłącznie z wątku głównego), `bridge_info` omija kolejkę i odpowiada nawet przy otwartym oknie modalnym.
   - Polecenia: `bridge_info`, `status` (plik, liczba obiektów, zaznaczenie, jednostki, renderer), `export_selection`, `import_file`.
   - Wymiana siatek w **FBX i OBJ** (Max 2022 nie ma wtyczki glTF — most mówi to wprost zamiast udawać), wymuszone centymetry przy FBX, manifest `.cfab.json`, jeden krok Undo, zaznaczenie użytkownika wraca na miejsce.
   - Przepływy `max_to_c4d` i `c4d_to_max` w [shared/cfab_core/transfer.py](shared/cfab_core/transfer.py) z pingiem obu mostów przed startem.
   - `macroScript CFAB_SendToC4D` w kategorii „CFAB Bridge” — wysyłka wprost z paska narzędzi Maxa.
-  - *Status: etapy A, B i D wdrożone; polecenia sprawdzone jednostkowo i na atrapie `pymxs`, odbiór na żywym 3ds Maxie trwa.*
-- 🟡 **Most do Foundry MODO (`cfab_bridge_modo`)** — [docs/MOST_MODO.md](docs/MOST_MODO.md):
+- 🟢 **Most do Foundry MODO (`cfab_bridge_modo`)** — [docs/MOST_MODO.md](docs/MOST_MODO.md):
   - Wtyczka w standardzie MODO Kit (katalog kitów użytkownika), instalowana i aktualizowana z Huba; pasek i menu **CFAB Bridge** w MODO oraz osobny panel Qt z przyciskami mostu.
   - Polecenia: `bridge_info`, `status`, `objects`, `select`, `export_selection`, `import_file`; operacje na scenie wykonywane w wątku aplikacji MODO, każda w jednym bloku Undo.
   - Przepływy `modo_to_c4d` i `c4d_to_modo` przez `staging/` (FBX + manifest `.cfab.json`) z przeliczeniem jednostek (metry MODO ↔ centymetry C4D); z Cinema 4D do MODO jadą wyłącznie modele i bryły.
   - Wskaźnik MODO w pasku górnym Huba, karta na ekranie Start, komendy MODO w palecie Cinema 4D.
-  - *Status: most działa od BETA 0.346, trwają poprawki stabilności i odbiór na żywym MODO 17.*
-- 🟡 **Most do RizomUV:** okno **CFAB Bridge** we wtyczce C4D z zakładkami Blender / Rizom UV (Export / Import, lista map UV, zmiana nazwy, ustawienia, ikony). Ścieżka do RizomUV pochodzi z Programów Huba albo z autowykrycia — nie ze sztywnego `S:\`. C4D nie zamarza: opcja „Czekaj na zamknięcie i importuj” działa w wątku roboczym z Timerem.
+- 🟢 **Most do RizomUV:** okno **CFAB Bridge** we wtyczce C4D z zakładkami Blender / Rizom UV (Export / Import, lista map UV, zmiana nazwy, ustawienia, ikony). Ścieżka do RizomUV pochodzi z Programów Huba albo z autowykrycia — nie ze sztywnego `S:\`. C4D nie zamarza: opcja „Czekaj na zamknięcie i importuj” działa w wątku roboczym z Timerem.
   - ⚪ Przepływ uruchamiany **z poziomu Huba** (Sceny → Rizom → siatka z UV z powrotem) pozostaje otwarty (punkt 0.1-E); osobna część `bridges/rizom_bridge/` wymagałaby zatwierdzenia jako nowy obszar.
 - 🟢 **Zarządzanie instalacjami:** Panel weryfikacji zainstalowanych wtyczek w profilach C4D, Blendera, Maxa i MODO; kolumna z wersją zainstalowanej wtyczki; instalacja, aktualizacja, przywracanie z kopii zapasowej i usuwanie jednym kliknięciem; powiadomienie o nieaktualnej wtyczce z nazwami konkretnych instalacji i przejściem do instalatora; wykrycie skasowanego haka startowego i pliku makra.
 
@@ -397,7 +394,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - `render/`: Klatki podglądu i logi procesów renderujących.
   - `cache/`: Długoterminowa pamięć miniatur i histogramów z mechanizmem LRU (Least Recently Used).
 - 🟢 **Zarządzanie retencją i czyszczeniem:** Automatyczne usuwanie plików sesyjnych po zamknięciu aplikacji, czyszczenie starych zadań stagingu, telemetria wolnego miejsca w czasie rzeczywistym na pasku stanu z ostrzeżeniami o przekroczeniu limitu bezpieczeństwa (np. <15 GB).
-- 🟢 **Podglądy plików w przestrzeni roboczej:** automatyczne miniatury geometrii dla plików, które same ich nie niosą — wykrywanie zainstalowanego F3D i generowanie kopii wyłącznie z geometrią dla starszych FBX-ów, a konwersje podglądu wykonywane **w świeżym procesie Blendera w tle**, który nigdy nie zapisuje niczego na pliku źródłowym.
+- 🟢 **Podglądy plików w przestrzeni roboczej:** miniatury tekstur (Qt), plików EXR i HDR (EXRuster) oraz geometrii dla plików, które same ich nie niosą — wykrywanie zainstalowanego F3D i generowanie kopii wyłącznie z geometrią dla starszych FBX-ów, a konwersje podglądu wykonywane **w świeżym procesie Blendera w tle**, który nigdy nie zapisuje niczego na pliku źródłowym.
 - 🟢 **Zintegrowana przeglądarka Robocze (Scratch Navigator):** Drzewo plików i katalogów przestrzeni roboczej umożliwiające natychmiastowe otwarcie znalezionych plików w odpowiednim module (sceny `.c4d`/`.max` w Inspektorze, `.exr` w Wynikach, archiwa w Bibliotece).
 
 ### 2.9. Moduł: Katalog Skryptów i Wtyczek (`modules/plugins`, BETA 0.114)
@@ -409,7 +406,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 ### 2.10. Powłoka, usługa i rdzeń współdzielony *(warstwa niewidoczna dla użytkownika, kluczowa dla inwestora)*
 *Ta warstwa nie ma własnej zakładki w railu, ale to ona sprawia, że 9 modułów zachowuje się jak jeden produkt.*
 - 🟢 **Powłoka `cfab_shell` (ALPHA 0.703):** rail modułów, jedna instancja aplikacji (`single_instance`), globalne okno Ustawień z zakładką dla każdego modułu (punkt 0.1-G: nawigacja i `create_settings()` gotowe, odbiór ergonomii trwa), wskaźniki połączeń DCC w pasku górnym (C4D, Blender, 3ds Max, MODO), launcher modułów w trybie samodzielnym; zminimalizowane okno schodzi do paska menu macOS / zasobnika Windows, a monitoring pracuje dalej.
-- 🟡 **Uruchamianie i przenoszenie instalacji:** aplikacja z ikoną (`CFAB 4D Hub.app` na macOS, `CFAB 4D Hub.exe` na Windows), polecenie `update.py` odświeżające zależności oraz `package_windows.py` pakujący kompletną instalację (z modelami AI albo bez) do przeniesienia na inny komputer z Windows.
+- 🟢 **Uruchamianie i przenoszenie instalacji:** aplikacja z ikoną (`CFAB 4D Hub.app` na macOS, `CFAB 4D Hub.exe` na Windows), polecenie `update.py` odświeżające zależności oraz `package_windows.py` pakujący kompletną instalację (z modelami AI albo bez) do przeniesienia na inny komputer z Windows.
 - 🟢 **Usługa `cfab_service` (ALPHA 0.721, kontrakt `service_api` 5):** bezgłowy proces odpytujący mosty (`poll_c4d`, `poll_blender`, `poll_max`, `poll_modo`), utrzymujący panel WWW, cykl ACK z TIMEFLOW, kolejkę powiadomień; działa niezależnie od otwartego okna Huba.
 - 🟢 **Rdzeń `cfab_core` (ALPHA 0.95):** magistrala zdarzeń (`events`), rejestr akcji międzymodułowych bez importów krzyżowych (`actions`), zadania w tle bez zależności od Qt (`tasks`), rotujące logi per rola procesu (`logs`), i18n PL/EN (`i18n`), wykrywanie DCC (`dcc`, `programs`, `tools`), odczyt EXR (`exr`), numeracja klatek (`frames`), archiwa (`archives`), transfer między DCC (`transfer`), magazyn scratch (`storage`), ustawienia (`settings`), wersjonowanie (`version`).
 - 🟢 **Kontrakty `cfab_contracts` (ALPHA 0.53):** jedno miejsce z numerami kontraktów; zmiana kontraktu wymusza testy wszystkich części, które go czytają.
@@ -423,7 +420,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 ---
 
 ## 3. KOMPLETNY INWENTARZ FUNKCJONALNOŚCI: TIMEFLOW
-*(Repozytorium: `/Users/micz/__DEV__/__TIMEFLOW`, wersja **0.1.5775**)*
+*(Repozytorium: `/Users/micz/__DEV__/__TIMEFLOW`, wersja **0.1.5776**)*
 
 TIMEFLOW to zaawansowany system śledzenia czasu, wycen i analityki biznesowej dla freelancerów oraz
 małych zespołów projektowych. Składa się z trzech części:
@@ -459,7 +456,7 @@ Poza nawigacją: Ustawienia, Pomoc, Quick Start, Import.
 - 🟢 **Warstwa 2: Historia aplikacji** (`context.rs`): Uczenie się preferencji użytkownika — które narzędzia i w jakich konfiguracjach służą do realizacji konkretnych zleceń.
 - 🟢 **Warstwa 3: Wzorce czasowe:** Rozpoznawanie cykli dobowych i tygodniowych przypisanych do danych klientów.
 - 🟢 **Warstwa 4: Tokenizacja semantyczna** (`scoring.rs`): Rozbijanie tytułów okien i kart na tokeny semantyczne i dopasowywanie do słowników projektowych.
-- 🟡 **Fakty przed pamięcią:** ścieżka pliku leżąca w folderze projektu wygrywa z wyuczoną historią; model nie uczy się już na własnych automatycznych przypisaniach (koniec z utrwalaniem błędów), tokeny ważone IDF, nazwa aplikacji czyszczona z tytułów okien. *Zmiana w wersji nieopublikowanej (sekcja „Unreleased” w CHANGELOG TIMEFLOW).*
+- 🟢 **Fakty przed pamięcią:** ścieżka pliku leżąca w folderze projektu wygrywa z wyuczoną historią; model nie uczy się już na własnych automatycznych przypisaniach (koniec z utrwalaniem błędów), tokeny ważone IDF, nazwa aplikacji czyszczona z tytułów okien.
 - 🟢 **Tryb `auto_safe` z procedurą wycofania** (`auto_safe.rs`): Automatyczne przypisywanie sesji do projektów tylko powyżej określonego progu pewności (confidence threshold), z możliwością 1-kliknięciowego cofnięcia wszystkich automatycznych decyzji (Rollback).
 - 🟢 **Ekran „AI i model”:** metryki skuteczności modelu, status wytrenowanej wiedzy, ponowne trenowanie (`training.rs`) oraz **reset wiedzy AI** (usunięcie modelu i historii) — pełna kontrola użytkownika nad tym, czego system się o nim nauczył.
 
@@ -485,16 +482,18 @@ Poza nawigacją: Ustawienia, Pomoc, Quick Start, Import.
 - 🟢 **Automatyczne i ręczne przypisywanie:** dopasowanie do projektów po prefiksie ścieżki (Longest-Prefix Path Match) lub ręczne przypisanie wsadowe z możliwością odpięcia (`detachCfabRender`); **ręczne zawsze wygrywa z automatem**.
 - 🟢 **Obsługa renderów ze stacji offline (`cfab_offline.rs`):** import danych renderów z zewnętrznych stacji roboczych / farm renderujących nieposiadających bezpośredniego połączenia — przez paczkę `.cfabx`.
 - 🟢 **Szczegółowa kalkulacja kosztu renderu (`CfabRenderCostDetail`):** wyliczenie kosztu maszynowego na podstawie stawek, limitów i współczynników RBH; doliczane do wyceny **dopiero po włączeniu przełącznika** przez artystę.
-- 🟡 **Czas renderów wędruje między maszynami:** przypisane rendery są objęte synchronizacją LAN i online. Przez sieć idzie wyłącznie czas renderu, tożsamość wpisu i nazwa projektu — kwoty każda maszyna liczy ze swoich stawek. Konflikt przypisania rozstrzyga nowszy zapis, a odpięcie renderu propaguje się na pozostałe maszyny. *Zmiana w wersji nieopublikowanej.*
+- 🟢 **Czas renderów wędruje między maszynami:** przypisane rendery są objęte synchronizacją LAN i online. Przez sieć idzie wyłącznie czas renderu, tożsamość wpisu i nazwa projektu — kwoty każda maszyna liczy ze swoich stawek. Konflikt przypisania rozstrzyga nowszy zapis, a odpięcie renderu propaguje się na pozostałe maszyny.
 - 🟢 **Sekcja Stan integracji:** wersja Huba po drugiej stronie, numer kontraktu, „działa / brak sygnału od …”, lista maszyn i instancji, ACK zamykający wysyłkę.
 
 ### 3.6. Organizacja Sesji, Projekty, Klienci i Zadania (PM / Todo)
 - 🟢 **Wielopoziomowe widoki osi czasu (`Sessions.tsx`):** przegląd dzienny, tygodniowy, miesięczny i all-time; oś czasu dnia projektu.
-- 🟢 **Pipeline edycji sesji:** dzielenie (split), łączenie, grupowe przenoszenie i sesje manualne (spotkania offline, telefony, praca koncepcyjna), komentarze do sesji, zaokrąglanie czasu wg konfigurowalnej reguły.
-- 🟢 **Zarządzanie projektami (`Projects.tsx`, `ProjectPageView.tsx`):** kolorystyka, mapowanie folderów, stawki godzinowe, limity godzin (Hour Limits) z alertami wyczerpania budżetu, zamrażanie, wykluczanie, archiwizacja i przywracanie.
+- 🟢 **Pipeline edycji sesji:** dzielenie (split), łączenie, grupowe przenoszenie i sesje manualne (spotkania offline, telefony, praca koncepcyjna), komentarze do sesji, mnożnik stawki dla wybranych sesji (domyślnie ×2).
+- 🟢 **Zarządzanie projektami (`Projects.tsx`, `ProjectPageView.tsx`):** kolorystyka, mapowanie folderów, stawki godzinowe, zamrażanie, wykluczanie, archiwizacja i przywracanie.
+- 🟢 **Limit godzin w okresie rozliczeniowym (`project_limits.rs`):** budżet godzin na okres z dniem startu cyklu, pasek zużycia liczony tym samym czasem co reszta aplikacji, nadgodziny rozliczane mnożnikiem; w raporcie sekcje „Limit godzin” i lista sesji z mnożnikiem.
 - 🟢 **Scalanie etapów w projekt nadrzędny:** projekty-etapy łączą się logicznie w jeden projekt — czas dzieci sumuje się u rodzica, karta projektu pokazuje rozbicie na etapy, scalenie można cofnąć, a znacznik przechodzi przez synchronizację LAN bez ryzyka wyzerowania przez starszą maszynę.
 - 🟢 **Zarządzanie klientami (`Clients.tsx`, `ClientPage.tsx`):** dane rozliczeniowe, waluty, zagregowane podsumowania finansowe, cykl rozliczeniowy.
-- 🟢 **Zintegrowany Project Manager & Zadania (`PM.tsx`, `Todo.tsx`):** lekki system zadań powiązanych z projektami i śledzeniem czasu.
+- 🟢 **Menedżer projektów PM (`PM.tsx`, `pm_manager.rs`):** nowy projekt z klientem, opisem, budżetem i terminem; numer podpowiadany jako najwyższy w roku + 1 (z listy i ze skanu dysku), drzewo folderów z szablonu (własne szablony, `{name}`), status, filtry z zapisem domyślnego widoku, rozmiar folderu na dysku i dopasowanie do projektów TIMEFLOW (śledzony czas obok budżetu). Format `projects_list.json` zgodny z dawnym PM w Pythonie.
+- 🟢 **Lista zadań (`Todo.tsx`, `todos.rs`):** zadania globalne, klienta albo projektu z terminem, godziną, priorytetem i notatkami; grupy „zaległe / dziś / ten tydzień / później / bez terminu”, wyszukiwarka i filtr zakresu.
 
 ### 3.7. Aplikacje, Analiza Czasu i Dashboard
 - 🟢 **Aplikacje (`Applications.tsx`):** rejestr wszystkich programów wykrytych przez demona, wyszukiwarka, licznik aplikacji, oznaczanie monitorowanych i ignorowanych, przypisanie aplikacji do projektu jedną akcją (także przez MCP).
@@ -510,11 +509,14 @@ Poza nawigacją: Ustawienia, Pomoc, Quick Start, Import.
 
 ### 3.8. Wyceny, Estymacje i Raporty PDF (Proof of Work)
 - 🟢 **Rejestr kosztów dodatkowych projektu (`costs.rs`):** osobna, pełna ewidencja kosztów spoza czasu pracy — licencje, materiały, podwykonawcy, koszt maszyny — z dodawaniem, edycją i usuwaniem pozycji. Koszty wchodzą do wyceny i do raportu dla klienta obok roboczogodzin.
-- 🟢 **Kalkulator wartości pracy (`Estimates.tsx`, `EstimateReport.tsx`):** przeliczanie czasu rzeczywistego na kwoty na podstawie stawek bazowych, mnożników trudności i kosztów maszynowych.
+- 🟢 **Kalkulator wartości pracy (`Estimates.tsx`):** przeliczanie czasu rzeczywistego na kwoty na podstawie stawek bazowych, mnożników trudności i kosztów maszynowych.
 - 🟢 **Generator profesjonalnych raportów PDF (`ReportView.tsx`, `Reports.tsx`):**
   - Eleganckie zestawienia dla klienta z podziałem na etapy, wykresami i statystykami, z konfigurowalnym okresem raportu.
   - Dołączanie dowodu pracy (Proof of Work) w postaci miniatur wykonanych renderów pochodzących z EXRustera po stronie Huba; galeria renderów w raporcie pokazuje przy każdej pozycji RBH i wartość, a pod galerią sumy.
-- 🟡 **Analiza rentowności w raporcie:** zestawienie składników projektu (czas pracy z sesji, czas maszyny, koszty dodatkowe) z ilością i wartością — odpowiedź na pytanie „czy ten projekt zarobił”, a nie tylko „ile trwał”.
+- 🟢 **Raport estymacji (`EstimateReport.tsx`):** projekty z czasem i wartością dla jednego albo wszystkich klientów w wybranym zakresie dat, z rozbiciem na dni, gotowy do PDF.
+- 🟢 **Edytor szablonów raportów (`Reports.tsx`):** własne szablony z wybranymi i uporządkowanymi sekcjami, fontem bazowym, rozmiarem i logo TIMEFLOW; podgląd na żywo, zapis automatyczny, gotowe szablony estymacji.
+- 🟢 **Okres, zaokrąglanie i scalanie w raporcie:** raport zawężony do okresu rozliczeniowego (presety miesięczne albo własny zakres), czas pełny albo zaokrąglony do interwału (suma, każda sesja, pełne godziny dziennie) i scalanie powtarzających się wpisów — bez zmiany danych źródłowych.
+- 🟢 **Analiza rentowności w raporcie:** zestawienie składników projektu (czas pracy z sesji, czas maszyny, koszty dodatkowe) z ilością i wartością — odpowiedź na pytanie „czy ten projekt zarobił”, a nie tylko „ile trwał”.
 
 ### 3.9. Bezpieczna Synchronizacja: P2P LAN & Szyfrowany Cloud
 - 🟢 **Darmowy P2P LAN Sync (Zero-Cloud):**
@@ -571,10 +573,9 @@ co już działa, a co jest w kolejce.
 - Przyrostowa synchronizacja (`TimeflowSync`): tick bez zmian w bazie drugiej strony **nie otwiera połączenia** — koniec z odpytywaniem pełnej bazy co 60 s.
 - Wskaźnik sondy integracji w interfejsie obu programów + wspólny raport diagnostyczny.
 
-### 4.2. Rozdział Czasu Maszynowego od Ludzkiego (Machine vs. Human Time) 🟡
+### 4.2. Rozdział Czasu Maszynowego od Ludzkiego (Machine vs. Human Time) 🟢
 - Tradycyjne trackery traktują wielogodzinny render 3D jako „aktywność użytkownika” w Cinema 4D lub Blenderze, fałszując statystyki czasu pracy twórczej.
 - Hub raportuje stan renderingu (`rendering_external`, `rendering_editor`) w snapshotcie statusu; TIMEFLOW oddziela czas spędzony przez artystę przed monitorem od czasu, w którym stacja robocza samodzielnie liczyła piksele.
-- *Warunek pełnego odbioru: punkt 0.1-D (trwały zapis czasu renderu).*
 
 ### 4.3. Zautomatyzowany Render Ledger & Wyceny Maszynowe 🟢
 - Zakończony render w Hubie generuje wpis w księdze renderów z **kluczem kompozytowym** `(hub_instance_id, ledger_id)` — druga maszyna lub nowa baza Huba nie powoduje kolizji ACK (kontrakt `cfab_render` 3).
@@ -582,10 +583,10 @@ co już działa, a co jest w kolejce.
 $$\text{Koszt Dodatkowy} = \text{Sekundy Renderu} \times \text{Współczynnik RBH} \times \text{Stawka Godzinowa}$$
 - Po przetworzeniu TIMEFLOW generuje potwierdzenie ACK, a Hub archiwizuje rekord wysyłki (historia Renderu zostaje), zapobiegając duplikatom.
 - Hub odświeża listę projektów i ACK w tle w wybranym interwale (domyślnie 60 s); TIMEFLOW nie ma własnego ticka ingestu — wczytuje na żądanie użytkownika.
-- 🟡 Czas przypisanych renderów przechodzi synchronizacją TIMEFLOW na pozostałe maszyny użytkownika (LAN i online) — render policzony w biurze widać w wycenie na laptopie w domu (rozdz. 3.5).
-- ⚪ Otwarte: zapis do ledgera **zawsze**, także gdy TIMEFLOW nigdy nie był uruchomiony na tej maszynie.
+- 🟢 Czas przypisanych renderów przechodzi synchronizacją TIMEFLOW na pozostałe maszyny użytkownika (LAN i online) — render policzony w biurze widać w wycenie na laptopie w domu (rozdz. 3.5).
+- 🟢 Zapis do ledgera **zawsze**, także gdy TIMEFLOW nigdy nie był uruchomiony na tej maszynie (rozdz. 2.3).
 
-### 4.4. Rejestr aktywności DCC i indeks projektów 🟡
+### 4.4. Rejestr aktywności DCC i indeks projektów 🟢
 - **`dcc_activity` (kontrakt 1):** Hub zapisuje, który plik jest w danej chwili aktywny w Cinema 4D, Blenderze i 3ds Maxie. TIMEFLOW przypisuje sesje **po pełnej ścieżce pliku**, a nie po tytule okna — to skokowa poprawa trafności przypisań w programach, które w tytule pokazują samą nazwę dokumentu. Model przypisań TIMEFLOW daje już faktom ze ścieżki pierwszeństwo przed wyuczoną historią (rozdz. 3.3).
 - **`cfab_project_index` (kontrakt 1):** dopasowanie ścieżka → projekt robi **wyłącznie TIMEFLOW** i publikuje wynik jako indeks; Hub tylko go czyta (decyzja D-S2). Jedno źródło prawdy zamiast dwóch rozjeżdżających się heurystyk.
 
@@ -594,14 +595,17 @@ $$\text{Koszt Dodatkowy} = \text{Sekundy Renderu} \times \text{Współczynnik RB
 - Rendery robocze C4D (poza kolejką) także trafiają do paczki.
 - To odpowiedź na realia farm renderujących i maszyn w innej sieci — czas maszyny nie przepada tylko dlatego, że stacja nie ma dostępu do bazy studia.
 
-### 4.6. Ogólny mechanizm „propozycja → ACK” ⚪
-- Jeden kontrakt (`cfab_proposals`) dla wszystkich rzeczy, które Hub **proponuje**, a TIMEFLOW **zatwierdza**: rendery, koszty, znaleziska audytu sceny (brakujące tekstury jako zadania projektu), prognozy kosztu przed kolejką.
-- Decyzja D-S6: zamiast osobnej tabeli na każdy przypadek — jeden mechanizm, wiele rodzajów.
+### 4.6. Ogólny mechanizm „propozycja → ACK” 🟡
+- Jeden kontrakt (`cfab_proposals` 1) dla rzeczy, które Hub **proponuje**, a TIMEFLOW **zatwierdza** (decyzja D-S6: jeden mechanizm, wiele rodzajów).
+- Działa: Hub proponuje projekt dla renderu (`project_hint`), TIMEFLOW pokazuje „Propozycja: …” w sekcji Nieprzypisane i zatwierdza jednym kliknięciem albo kilka naraz; paczka `.cfabx` niesie `proposals.jsonl`, a import w TIMEFLOW obsługuje rodzaje `render` i `cost`.
+- Otwarte: Hub nie wysyła jeszcze propozycji kosztów, znalezisk audytu sceny (brakujące tekstury jako zadania projektu) ani prognoz kosztu przed kolejką.
 
-### 4.7. Wizualny Dowód Pracy w Raportach 🟢
-- Dzięki mostowi z modułem Wyniki (EXRuster) miniatury wyrenderowanych klatek trafiają do rejestru renderów, na oś czasu projektu w TIMEFLOW oraz do generowanego raportu PDF dla klienta, tworząc profesjonalny audyt wykonanych prac.
+### 4.7. Wizualny Dowód Pracy w Raportach 🟡
+- Hub zapisuje w rejestrze renderów miniaturę ostatniej klatki (PNG z EXRustera), a TIMEFLOW przenosi ją do galerii renderów w raporcie PDF dla klienta.
+- Do 2026-09-24 obraz nie wyświetlał się w raporcie (webview bez protokołu `asset`, CSP bez takich źródeł). Poprawka w TIMEFLOW osadza miniaturę jako `data:` URL po stronie backendu raportu — niewydana, odbiór na żywym raporcie trwa.
+- Oś czasu projektu w TIMEFLOW **nie** pokazuje miniatur.
 
-### 4.8. Jedna obecność w systemie 🟡
+### 4.8. Jedna obecność w systemie 🟢
 - Skoordynowany autostart (opcja „Uruchamiaj TIMEFLOW razem z CFAB Hub”), autostart serwera MCP, wzajemne wskaźniki obecności w interfejsach, wspólny raport diagnostyczny integracji, zdarzenia Huba przekazywane do TIMEFLOW (render, eksport i wczytanie paczki offline).
 - ⚪ Otwarte: systemowy autostart przy logowaniu. Hub ma już własną ikonę i zejście do zasobnika; wspólnej ikony obu programów nie ma.
 
@@ -610,9 +614,9 @@ $$\text{Koszt Dodatkowy} = \text{Sekundy Renderu} \times \text{Współczynnik RB
 | Etap | Cel | Stan |
 |---|---|---|
 | **A — Fundament** | Integracja nie gubi danych, sama znajduje drugą stronę, nie rośnie kosztem z historią | 🟢 wdrożony (kontrakt 2/3, latarnie, READONLY, `TimeflowSync`, zakładki w obu programach) |
-| **B — Kontekst i trafność** | Czas pracy i rendery trafiają do właściwego projektu; render nie udaje pracy człowieka | 🟡 częściowo (`dcc_activity`, indeks projektów, znacznik aktywnego projektu; czeka na 0.1-D) |
-| **C — Wartość biznesowa** | Hub pokazuje koszt i limit **przed** renderem, raport pokazuje efekty | ⚪ prognoza kosztu przed kolejką i limity w Hubie — otwarte; miniatury w raporcie 🟢, galeria renderów z RBH i wartością 🟡 |
-| **D — Pakiet** | Oba programy działają jak jeden produkt | 🟡 MCP (odczyt), diagnostyka, autostart, `.cfabx` 🟢; raport rentowności i synchronizacja czasu renderów między maszynami 🟡; znaleziska → zadania ⚪ |
+| **B — Kontekst i trafność** | Czas pracy i rendery trafiają do właściwego projektu; render nie udaje pracy człowieka | 🟢 wdrożony (`dcc_activity`, indeks projektów, znacznik aktywnego projektu, rozdział czasu maszyny) |
+| **C — Wartość biznesowa** | Hub pokazuje koszt i limit **przed** renderem, raport pokazuje efekty | ⚪ prognoza kosztu przed kolejką i limity w Hubie — otwarte; galeria renderów z RBH i wartością 🟢, miniatury w raporcie 🟡 |
+| **D — Pakiet** | Oba programy działają jak jeden produkt | 🟡 MCP (odczyt), diagnostyka, autostart, `.cfabx`, raport rentowności i synchronizacja czasu renderów między maszynami 🟢; propozycje → ACK 🟡 (rendery); znaleziska → zadania ⚪ |
 
 ---
 
@@ -632,7 +636,7 @@ porządku, a nie przez gęstość świecących punktów.
 ### 5.0. Budżet elementów — skąd bierze się liczba na liczniku
 
 Liczby na liczniku muszą wynikać z pliku danych, nie z odczucia. Rozdziały 2–4 tego dokumentu
-dają następujący rozkład (stan 2026-09-22):
+dają następujący rozkład (stan 2026-09-24):
 
 | Typ elementu (`nodeType`) | Liczba | Skąd |
 |---|---|---|
@@ -641,8 +645,8 @@ dają następujący rozkład (stan 2026-09-22):
 | `module` — części warstwy wspólnej Huba | 7 | shell, service, cfab_core, cfab_ui, cfab_contracts, cfab_bridge, cfab_native (rozdz. 2.10) |
 | `module` — obszary TIMEFLOW | 14 | nawigacja aplikacji (rozdz. 3) |
 | `bridge` — elementy pomostu synergii | 8 | rozdz. 4.1–4.8 (4.9 to tabela etapów, nie element) |
-| `feature` — funkcje | **127** | wypunktowania ze statusem w rozdz. 2–3: Hub 78, TIMEFLOW 49 |
-| **Razem** | **167 elementów** | |
+| `feature` — funkcje | **133** | wypunktowania ze statusem w rozdz. 2–3: Hub 79, TIMEFLOW 54 |
+| **Razem** | **173 elementy** | |
 
 Metoda liczenia `feature`: każde wypunktowanie oznaczone 🟢 / 🟡 / ⚪ w rozdziałach 2–4 to
 jedna funkcja; podpunkty bez własnego znacznika statusu są treścią karty tej funkcji, nie
@@ -651,23 +655,26 @@ i ledger bez TIMEFLOW, 4.8: autostart przy logowaniu) powtarzają funkcje z rozd
 liczą się raz, jako funkcje swojego modułu. Generator (rozdz. 10) liczy tak samo — jeśli jego wynik różni się od
 tabeli, poprawia się tabelę, nie generator.
 
-Komunikat dla inwestora: **„2 systemy · 30 modułów · 127 udokumentowanych funkcji · 4 mosty DCC
+Komunikat dla inwestora: **„2 systemy · 30 modułów · 133 udokumentowane funkcje · 4 mosty DCC
 + most UV · 2 serwery MCP · lokalne wyszukiwanie AI · farma renderująca w LAN · 100% local-first”**.
 Każda z tych liczb ma pokrycie w tabeli wyżej i w pliku danych — nie wolno ich zaokrąglać
 w górę „na oko”.
 
 ### 5.1. Widoki
 
-Aplikacja ma trzy widoki na **tych samych danych**. Przełącznik widoków jest w górnym pasku;
-widok główny otwiera się domyślnie.
+Aplikacja ma cztery sposoby przeglądania **tych samych danych**: trzy zakładki w kolejności
+**Przewagi · Chmura · Etapy pracy** oraz ręczny spacer po ośmiu etapach w Chmurze.
+Domyślnie otwiera się pełnoekranowa Chmura. Jej interfejs pojawia się po pierwszym kliknięciu
+lub przejściu klawiaturą do elementu mapy, bez zmiany położenia węzłów. Link do konkretnej
+przewagi odsłania interfejs od razu, aby pokazać kontekst podświetlenia.
 
-#### 5.1.1. Mapa zakresu — widok główny
+#### 5.1.1. Mapa zakresu — widok „Etapy pracy”
 
 Siatka, w której **kolumny to etapy pracy**, a **kolory to programy**:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][127 funkcji][4 mosty][2 MCP][0 %] │
+│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][133 funkcje][4 mosty][2 MCP][0 %] │
 │ [Mapa zakresu] [Moduły] [Matryca]      Filtry: Program · Status · Moaty · Odbiorca   [PL|EN] │
 ├──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬─────────────────┤
 │1 Zasoby  │2 Scena   │3 Inspek- │4 Render  │5 Wyniki  │6 Czas    │7 Wycena  │8 Raport         │
@@ -710,25 +717,30 @@ Siatka, w której **kolumny to etapy pracy**, a **kolory to programy**:
   **deterministyczny** — ta sama wersja danych daje zawsze ten sam obraz, więc mapę da się
   omawiać jak slajd.
 
-#### 5.1.2. Widok modułów
+#### 5.1.2. Chmura — widok relacji
 
-Ta sama treść pogrupowana **program → moduł**: trzy sekcje (CFAB 4D Hub, Pomost Synergii,
-TIMEFLOW), w każdej kafle modułów w kolejności z railu / nawigacji, w kaflu wszystkie funkcje
-modułu jako te same chipy. Odpowiada na pytanie „co ma Hub”, a nie „co dzieje się na etapie
-renderu”. Filtry, wyszukiwarka i karty działają identycznie jak w mapie zakresu.
+Istniejąca chmura pokazuje dwa ekosystemy i pomost między nimi. Zachowuje obecny układ.
+Kliknięcie w węzeł otwiera kartę, a ścieżka ostatnich wyborów pozwala wrócić do odwiedzonych
+elementów. Ręczny spacer po etapach wygasza pozostałe węzły na miejscu. Link z Przewag
+podświetla tylko dowody wybranej tezy; istniejące relacje między nimi pojawiają się na żądanie.
 
-#### 5.1.3. Matryca przewag
+#### 5.1.3. Przewagi — widok tez i dowodów
 
-Widok tabelaryczny z rozdz. 8, z filtrowaniem wg barier wejścia (Tech Moats), dojrzałości
-(`status`) i oszczędności dla klienta. Każdy wiersz ma odnośniki do funkcji, które go
-uzasadniają — klik przenosi do mapy zakresu z podświetlonymi chipami.
+Pięć tez z sekcji 8.0 ma stały ranking. Po wejściu do tego widoku pierwsza jest rozwinięta, a pozostałe
+pokazują tytuł, skrót tezy i zastępowane narzędzia. Można rozwinąć jedną tezę naraz. Rozwinięcie
+pokazuje powód trudności skopiowania, założenie wartości z jawną etykietą, status i liczbę
+gotowych funkcji oraz klikalne dowody. Pierwsza teza pokazuje cztery kroki od renderu do PDF.
+„Pokaż na mapie” przechodzi do Chmury lub ostatnio używanych Etapów pracy, wygasza inne węzły
+bez zmiany układu i zapisuje `?view=cloud&adv=<id>` (albo `view=grid`). Pasek nad mapą pozwala
+przejść do sąsiedniej przewagi lub wyczyścić podświetlenie; Esc robi to samo. Karta funkcji
+prowadzi z powrotem do tezy. Matryca poniżej pozostaje materiałem analitycznym, a nie osobną
+zakładką.
 
 #### 5.1.4. Spacer po etapach
 
-Przycisk „Przejdź pipeline krok po kroku” w mapie zakresu: mapa podświetla kolejno
-kolumny 1–8, przy każdej wyświetla jedno zdanie o tym, co robi freelancer i które funkcje go
-obsługują; reszta mapy wygasa do ~25 % krycia. Strzałki ← → i Esc. To zastępuje osobny
-widok osi czasu z poprzedniej wersji dokumentu — oś jest wbudowana w mapę.
+Przycisk „Spacer po etapach” w Chmurze podświetla kolejno elementy etapów 1–8; reszta
+mapy wygasa na miejscu. Użytkownik przechodzi strzałkami ← → i kończy przyciskiem × lub Esc.
+To nie jest osobna zakładka ani autoodtwarzanie.
 
 ### 5.2. Warstwy Prezentacji Informacji (Progressive Disclosure)
 
@@ -850,7 +862,7 @@ Animacje przejść (wygaszanie, otwarcie panelu) trwają 150–200 ms i respektu
 
 - `shortTitle` ma **maks. 28 znaków** w obu językach (walidacja 6.5). Pełny `title` jest w karcie i podpowiedzi. Chip nie skraca tekstu wielokropkiem — za długi tytuł to błąd danych, nie problem układu.
 - Chip: wysokość 22 px, font `Geist` body 11 (skala z `tokens.json`), odstęp między chipami 4 px, znacznik statusu 8 px. Nagłówek bloku: label 11/600. Nagłówek kolumny: title 13/600. Tytuł strony: display 16/600.
-- **Cała mapa zakresu mieści się na ekranie 1440 × 900 bez przewijania** przy obecnych 167 elementach. Jeśli kolumna przerośnie wysokość, jej bloki układają chipy w dwóch podkolumnach; jeśli i to nie wystarczy, strona przewija się w pionie z przyklejonymi nagłówkami kolumn. **Font nigdy nie spada poniżej 10 px** i żaden tekst nie jest ukrywany, żeby zmieścić mapę.
+- **Cała mapa zakresu mieści się na ekranie 1440 × 900 bez przewijania** przy obecnych 173 elementach. Jeśli kolumna przerośnie wysokość, jej bloki układają chipy w dwóch podkolumnach; jeśli i to nie wystarczy, strona przewija się w pionie z przyklejonymi nagłówkami kolumn. **Font nigdy nie spada poniżej 10 px** i żaden tekst nie jest ukrywany, żeby zmieścić mapę.
 - Nic nie nachodzi na nic: siatka CSS układa elementy bez kolizji z definicji, bez detekcji kolizji w kodzie.
 
 #### 5.5.7. Wydajność i technika
@@ -976,6 +988,7 @@ interface FeatureNode {
   contract: string | null;       // np. "cfab_render 3", "bridge_protocol 6"
   sources: string[];             // ścieżki w repo; dowód istnienia funkcji
   keywords: string[];            // zasilenie Omniboxa (PL i EN razem)
+  advantageId: string | null;     // teza z advantages[], jeśli węzeł jest jej dowodem
 }
 ```
 
@@ -1091,7 +1104,9 @@ features_data.json
 ├── meta          { generatedAt, hubVersion, timeflowVersion, contracts, sourceCommit }
 ├── nodes[]       FeatureNode
 ├── edges[]       FeatureEdge
-└── assumptions[] { id, pl, en, value, unit, source }   // model ROI, rozdz. 7.2
+├── assumptions[] { id, pl, en, value, maxValue?, unit, source } // model ROI, rozdz. 7.2
+├── advantages[]  { id, rank, title, thesis, why, replacesTools[], assumptionId, flow, ids[] }
+└── alsoStrong[]  id węzłów drugiego rzędu
 ```
 
 **Reguły walidacji (test blokujący build):**
@@ -1104,6 +1119,9 @@ features_data.json
 7. Każdy element ma `shortTitle` o długości 1–28 znaków w **obu** językach.
 8. Każdy `feature` i `bridge` ma `stage` z listy 6.3 albo jawne `null` (Fundament); `order` jest unikalne w obrębie bloku (moduł × etap).
 9. Liczba elementów każdego typu zgadza się z tabelą 5.0 — rozjazd oznacza, że dokument albo dane są nieaktualne.
+10. `advantages[]` zawiera 3–6 pozycji o unikalnym `rank`; tytuł, teza, powód, zastępowane narzędzia i kroki przepływu mają niepuste wersje PL i EN.
+11. Każda przewaga ma co najmniej 5 istniejących dowodów `production`; jeden węzeł należy najwyżej do jednej przewagi, a jego `advantageId` zgadza się z listą dowodów.
+12. Każdy identyfikator w `alsoStrong[]` istnieje, a niepusty `assumptionId` wskazuje założenie z `assumptions[]`.
 
 ---
 
@@ -1148,6 +1166,19 @@ i **są w interfejsie edytowalne** — inwestor musi móc podstawić własne za�
 ---
 
 ## 8. MATRYCA PRZEWAG KONKURENCYJNYCH (TECH MOATS & ROI)
+
+### 8.0. Pięć przewag pokazywanych inwestorowi
+
+| # | Tytuł | Teza | Gotowe dowody | Zastępuje |
+|---|---|---|---:|---|
+| 1 | Czas renderu trafia do wyceny | Czas maszyny z Huba zostaje przypisany do projektu i trafia do wyceny oraz PDF po włączeniu przez artystę. | 12 | Ręczne liczenie czasu renderu, Excel |
+| 2 | Pliki .c4d i .max bez programu i licencji | Inspektor czyta i porównuje zamknięte formaty oraz przenosi scenę z Maxa do C4D bez uruchamiania programów. | 9 | Licencje Cinema 4D i 3ds Max, Connecter, konwertery chmurowe |
+| 3 | Nocny render kończy się klatkami | Hub sprawdza kolejkę, rozdziela zadania w LAN i po awarii wznawia tylko brakujące klatki. | 10 | Deadline, Team Render |
+| 4 | Czas pracy liczy się sam i uczciwie | Demon bez stopera unika podwójnego liczenia i przypisuje sesje do projektów, także z kontekstu pliku 3D. | 11 | Toggl, Harvest, Clockify |
+| 5 | Dane i AI zostają na komputerze | Lokalne MCP i wyszukiwanie obrazu łączą się z synchronizacją LAN oraz szyfrowaną synchronizacją online. | 9 | Chmury SaaS |
+
+Lista dowodów i pełna treść PL/EN pochodzą z `advantages[]`; powyższa tabela jest skrótem.
+Drugi rząd `alsoStrong[]` pozostaje klikalny, ale nie stanowi osobnej tezy.
 
 Poniższa matryca stanowi gotowy materiał analityczny dla komitetu inwestycyjnego:
 
@@ -1207,7 +1238,7 @@ temu zieleń zostaje wyłącznie kolorem TIMEFLOW i nie myli się z „gotowe”
 Efekt ma służyć czytaniu, nie konkurować z nim. Dozwolone są trzy:
 - **Spacer po etapach** (rozdz. 5.1.4) — kolumny podświetlane kolejno 1 → 8, z jednym zdaniem o dniu pracy freelancera na każdym etapie. To jest główny punkt demo na spotkaniu.
 - **Impulsy na liniach relacji** `data_flow` i `file_exchange` między Hubem a TIMEFLOW (latarnie, ledger, `.cfabx`, miniatury) — wyłącznie gdy relacja jest podświetlona.
-- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `127 Funkcji`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
+- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `133 Funkcje`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
 
 ### 9.4. Materiały wspierające
 - Pobranie z poziomu mapy zsyntetyzowanego raportu PDF (*One-Pager / Pitch Deck Summary*) z tabelą założeń ROI w przypisach.
@@ -1356,26 +1387,16 @@ nie może łamać własnej obietnicy.**
 
 ## 13. DODATEK A: STAN REALIZACJI — CO JEST 🟡 I CZEGO BRAKUJE DO 🟢
 
-Źródło: [docs/BETA.md](docs/BETA.md) (fale 0.1 i 0.15) oraz [CHANGELOG.md](CHANGELOG.md).
+Źródło: [docs/BETA.md](docs/BETA.md) (fale 0.1 i 0.15), [CHANGELOG.md](CHANGELOG.md) oraz odbiory potwierdzone przez właściciela 2026-09-24 (monitoring C4D, samonaprawa i strażnik zamykania, farma LAN, ntfy i dźwięk, mosty 3ds Max / MODO / Blender → C4D / RizomUV w C4D, wyszukiwanie AI, zakładka Błędy, karta EXRustera, instalacja i przenosiny, zmiany TIMEFLOW z „Unreleased”, rozdział czasu maszyny, rejestr aktywności DCC, wspólny start). `docs/BETA.md` w repo Huba nie ma jeszcze tych odhaczeń.
 
 | Funkcja | Status | Czego brakuje |
 |---|---|---|
-| Monitoring renderów C4D bez kolejki + trwały `render_seconds` (0.1-D) | 🟡 | odbiór w oknie Huba na żywej C4D; zgłoszenia z [todo.MD](todo.MD) dotyczące renderów próbnych i zerowych danych w module Render (wg [docs/ANALIZA_AI.md](docs/ANALIZA_AI.md) do naprawy przed funkcjami AI) |
-| Test konfiguracji ntfy (0.1-F) | 🟡 | odbiór na serwerze ntfy użytkownika |
-| Okno globalnych ustawień (0.1-G) | 🟡 | odbiór ergonomii: „da się znaleźć i zmienić parametr bez znajomości kodu” |
-| Most RizomUV (0.1-E) | 🟡 | przepływ uruchamiany z Huba (Sceny → Rizom → siatka z UV z powrotem) |
-| Most 3ds Max | 🟡 | odbiór na żywym 3ds Maxie (etapy A, B, D wdrożone; testy na atrapie `pymxs`) |
-| Most MODO | 🟡 | poprawki stabilności (wątki, pętla Qt, ładowanie kitu) i odbiór na żywym MODO 17; punkt nie ma jeszcze wpisu w `docs/BETA.md` |
-| Wyszukiwanie wizualne w Bibliotece (DINOv2 / CLIP) | 🟡 | trwające poprawki bazy wektorowej (zmiany w toku w drzewie roboczym) i odbiór na dużej bibliotece; punkt bez wpisu w `docs/BETA.md` |
-| Zakładka Błędy w Bibliotece | 🟡 | odbiór na realnej bibliotece z parami `.asset` |
-| Materiały i instancje Blender → C4D | 🟡 | odbiór na żywej parze Blender ↔ C4D z Coroną |
-| Strażnik zamykania C4D, ustawienia zadania bez zamrażania | 🟡 | odbiór na żywej C4D z Coroną (testy tylko u użytkownika) |
-| Uruchamianie i przenoszenie instalacji (`.app`, `.exe`, `update.py`, `package_windows.py`) | 🟡 | odbiór przeniesienia na czysty komputer z Windows |
-| TIMEFLOW: synchronizacja czasu renderów, fakty przed pamięcią w modelu, analiza rentowności | 🟡 | wydanie wersji z sekcji „Unreleased” i odbiór na dwóch maszynach |
-| Rozdział czasu maszyny od człowieka | 🟡 | zależy od 0.1-D |
-| Ledger zapisywany zawsze, także bez TIMEFLOW | ⚪ | pozycja otwarta w fali 0.15 |
+| Wizualny dowód pracy (miniatury w raporcie PDF) | 🟡 | wydanie TIMEFLOW z poprawką wyświetlania (`data:` URL z backendu raportu) i odbiór na żywym raporcie; oś czasu projektu nie pokazuje miniatur |
+| Propozycja → ACK (`cfab_proposals`) | 🟡 | rendery działają; Hub nie wysyła propozycji kosztów, znalezisk audytu ani prognoz |
+| Okno globalnych ustawień (0.1-G) | 🟡 | odbiór ergonomii: „da się znaleźć i zmienić parametr bez znajomości kodu” (na mapie część funkcji „Pasek modułów, ustawienia i zasobnik”) |
+| Przepływ RizomUV uruchamiany z Huba (0.1-E) | ⚪ | Sceny → Rizom → siatka z UV z powrotem; okno Rizom w C4D odebrane |
 | Prognoza kosztu renderu przed kolejką, limity w Hubie (etap C) | ⚪ | nierozpoczęte |
-| Znaleziska audytu sceny → zadania TIMEFLOW (etap D) | ⚪ | nierozpoczęte; czeka na kontrakt `cfab_proposals` |
+| Znaleziska audytu sceny → zadania TIMEFLOW (etap D) | ⚪ | nierozpoczęte; kontrakt `cfab_proposals` 1 już jest (rendery) |
 | Systemowy autostart przy logowaniu | ⚪ | osobny plan poza specyfikacją renderu (ikona i zasobnik już są) |
 | Wyszukiwanie tekstem w Bibliotece, prognoza kosztu renderu, diagnoza nieudanego renderu | ⚪ | propozycje z [docs/ANALIZA_AI.md](docs/ANALIZA_AI.md); nierozpoczęte — **nie pokazywać na mapie**, dopóki nie trafią do `docs/BETA.md` |
 | Narzędzie PBR (C4D / Corona / V-Ray), Max → materiał → konwersja | ⚪ | fala 0.16, świadomie poza bieżącym etapem |
@@ -1388,7 +1409,7 @@ ale **nigdy jako działające**. Dla inwestora wiarygodna roadmapa jest aktywem;
 
 ## 14. DODATEK B: WERSJE, CZĘŚCI I KONTRAKTY (stan 2026-09-22)
 
-**Pakiet CFAB 4D Hub: `BETA 0.36`** · TIMEFLOW: `0.1.5775`
+**Pakiet CFAB 4D Hub: `BETA 0.43`** · TIMEFLOW: `0.1.5776`
 
 | Część | Wersja | | Część | Wersja |
 |---|---|---|---|---|
@@ -1427,7 +1448,6 @@ Poniższe rozstrzygnięcia nie blokują pisania aplikacji, ale zmieniają jej ks
 | M8 | Czy funkcje 🟡 dodane po 2026-09-19 (MODO, wyszukiwanie wizualne, zmiany TIMEFLOW z „Unreleased”) mają być na mapie od razu, czy dopiero po wpisie w `docs/BETA.md`? | są na mapie jako 🟡 z notą „czego brakuje” (rozdz. 13) |
 
 ---
-*Dokument zweryfikowany na kodzie repozytoriów `/Users/micz/__DEV__/__c4d` (BETA 0.36) oraz
-`/Users/micz/__DEV__/__TIMEFLOW` (0.1.5775) w dniu 2026-09-22. Statusy zgodne z `docs/BETA.md`
-i `CHANGELOG.md` na ten dzień; funkcje dodane po 2026-09-19 bez wpisu w `docs/BETA.md`
-oznaczone 🟡 (rozdz. 13).*
+*Dokument zweryfikowany na kodzie repozytoriów `/Users/micz/__DEV__/__c4d` (BETA 0.43) oraz
+`/Users/micz/__DEV__/__TIMEFLOW` (0.1.5776) w dniu 2026-09-24. Statusy zgodne z `docs/BETA.md`, `CHANGELOG.md` i odbiorami potwierdzonymi
+przez właściciela 2026-09-24 (rozdz. 13).*

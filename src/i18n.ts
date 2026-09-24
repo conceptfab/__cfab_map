@@ -13,6 +13,7 @@ export const STAGES: { id: Stage; pl: string; en: string }[] = [
 ];
 
 const STRINGS = {
+  viewAdvantages: { pl: "Przewagi", en: "Advantages" },
   mapTitle: { pl: "Mapa funkcjonalności", en: "Feature map" },
   viewCloud: { pl: "Chmura", en: "Cloud" },
   viewGrid: { pl: "Etapy pracy", en: "Work stages" },

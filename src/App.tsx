@@ -5,27 +5,30 @@ import { STAGES, t } from "./i18n";
 import { buildBlocks, metrics, type Block } from "./layout";
 import Cloud from "./Cloud";
 import { nodeGroups } from "./graphModel";
+import Advantages from "./Advantages";
 
 const data = raw as unknown as FeaturesData;
 const groups = nodeGroups(data);
 
 const MARKER: Record<Status, string> = { production: "●", beta: "◐", roadmap: "○" };
+type View = "advantages" | "cloud" | "grid";
+const advantageById = new Map(data.advantages.map((advantage) => [advantage.id, advantage]));
 
 function initialLang(): LangKey {
   const fromUrl = new URLSearchParams(location.search).get("lang");
   return fromUrl === "en" ? "en" : "pl";
 }
 
-function Chip({ node, lang, onSelect }: { node: FeatureNode; lang: LangKey; onSelect: (id: string) => void }) {
+function Chip({ node, lang, onSelect, dimmed }: { node: FeatureNode; lang: LangKey; onSelect: (id: string) => void; dimmed: boolean }) {
   return (
-    <li><button className={`chip group-${groups.get(node.id)} status-${node.status}`} data-id={node.id} onClick={() => onSelect(node.id)} title={node.title[lang]}>
+    <li><button className={`chip group-${groups.get(node.id)} status-${node.status} ${dimmed ? "is-dimmed" : ""}`} data-id={node.id} onClick={() => onSelect(node.id)} title={node.title[lang]}>
       <span className="marker" aria-hidden>{node.nodeType === "bridge" ? "◆" : MARKER[node.status]}</span>
       <span className="label">{node.shortTitle[lang]}</span>
     </button></li>
   );
 }
 
-function BlockView({ block, lang, onSelect }: { block: Block; lang: LangKey; onSelect: (id: string) => void }) {
+function BlockView({ block, lang, onSelect, highlightIds }: { block: Block; lang: LangKey; onSelect: (id: string) => void; highlightIds: Set<string> | null }) {
   const title = block.title ? block.title[lang] : t("synergy", lang);
   return (
     <section className={`block app-${block.app}`}>
@@ -33,22 +36,24 @@ function BlockView({ block, lang, onSelect }: { block: Block; lang: LangKey; onS
         {title} <span className="count">· {block.items.length}</span>
       </h3>
       <ul className="chips">
-        {block.items.map((n) => <Chip key={n.id} node={n} lang={lang} onSelect={onSelect} />)}
+        {block.items.map((n) => <Chip key={n.id} node={n} lang={lang} onSelect={onSelect} dimmed={Boolean(highlightIds && !highlightIds.has(n.id))} />)}
       </ul>
     </section>
   );
 }
 
-function Card({ node, parent, lang, onClose, onSelect }: { node: FeatureNode; parent: FeatureNode | null; lang: LangKey; onClose: () => void; onSelect: (id: string) => void }) {
+function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node: FeatureNode; parent: FeatureNode | null; lang: LangKey; onClose: () => void; onSelect: (id: string) => void; onOpenAdvantage: (id: string) => void }) {
   const connectedIds = new Set<string>();
   if (node.parentId) connectedIds.add(node.parentId);
   data.nodes.forEach(n => { if (n.parentId === node.id) connectedIds.add(n.id); });
   data.edges.forEach(e => { if (e.from === node.id) connectedIds.add(e.to); if (e.to === node.id) connectedIds.add(e.from); });
   const connected = data.nodes.filter(n => connectedIds.has(n.id));
   const statusKey = node.status === "production" ? "statusProduction" : node.status === "beta" ? "statusBeta" : "statusRoadmap";
+  const advantage = node.advantageId ? advantageById.get(node.advantageId) : null;
   return (
     <aside className={`card group-${groups.get(node.id)}`} aria-label={node.title[lang]}>
       <button className="close" onClick={onClose} aria-label={lang === "pl" ? "Zamknij szczegóły" : "Close details"}>×</button>
+      {advantage && <button className="card-adv-link" onClick={() => onOpenAdvantage(advantage.id)}>{lang === "pl" ? "Część przewagi" : "Part of advantage"} {advantage.rank} · {advantage.title[lang]} ↗</button>}
       {parent && <p className="card-parent">{parent.title[lang]}{node.version ? ` · ${node.version}` : ""}</p>}
       <p className={`stage-badge group-${groups.get(node.id)}`}><span className="graph-dot" />{STAGES.find(s => s.id === groups.get(node.id))?.[lang] ?? t("foundation",lang)}</p>
       <h2>{node.title[lang]}</h2>
@@ -68,34 +73,60 @@ function Card({ node, parent, lang, onClose, onSelect }: { node: FeatureNode; pa
 
 export default function App() {
   const [lang, setLang] = useState<LangKey>(initialLang);
-  const [view, setView] = useState<"cloud" | "grid">(() => (new URLSearchParams(location.search).get("view") === "grid" ? "grid" : "cloud"));
+  const [view, setView] = useState<View>(() => { const value = new URLSearchParams(location.search).get("view"); return value === "advantages" || value === "grid" ? value : "cloud"; });
+  const [cloudUiVisible, setCloudUiVisible] = useState(() => Boolean(new URLSearchParams(location.search).get("adv")));
   const [theme, setTheme] = useState<"paper" | "charcoal">(() => new URLSearchParams(location.search).get("theme") === "charcoal" ? "charcoal" : "paper");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [openAdvId, setOpenAdvId] = useState(() => { const id = new URLSearchParams(location.search).get("adv"); return id && advantageById.has(id) ? id : data.advantages[0].id; });
+  const [activeAdvId, setActiveAdvId] = useState<string | null>(() => { const params = new URLSearchParams(location.search); const id = params.get("adv"); return (params.get("view") === "cloud" || params.get("view") === "grid") && id && advantageById.has(id) ? id : null; });
+  const lastMapView = useRef<"cloud" | "grid">(new URLSearchParams(location.search).get("view") === "grid" ? "grid" : "cloud");
   const selected = selectedId ? data.nodes.find((n) => n.id === selectedId) ?? null : null;
   const territoryLabels = useMemo(() => ({ cfab_hub: "CFAB 4D Hub", synergy: t("synergy", lang), timeflow: "TIMEFLOW" }), [lang]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelectedId(null); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setSelectedId(null);
+      if (view !== "advantages") {
+        setActiveAdvId(null);
+        const url = new URL(location.href);
+        url.searchParams.delete("adv");
+        history.replaceState(null, "", url);
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [view]);
   const columns = useMemo(() => STAGES.map((s) => ({ stage: s, blocks: buildBlocks(data, s.id) })), []);
   const foundation = useMemo(() => buildBlocks(data, null), []);
   const m = useMemo(() => metrics(data), []);
+  const statusCounts = useMemo(() => Object.fromEntries((["production", "beta", "roadmap"] as Status[]).map((status) => [status, data.nodes.filter((node) => (node.nodeType === "feature" || node.nodeType === "bridge") && node.status === status).length])) as Record<Status, number>, []);
+  const activeAdvantage = activeAdvId ? advantageById.get(activeAdvId) ?? null : null;
+  const highlightIds = useMemo(() => activeAdvantage ? new Set(activeAdvantage.ids) : null, [activeAdvantage]);
   const topRef = useRef<HTMLElement>(null);
+  const mapKeyRef = useRef<HTMLDivElement>(null);
+  const mapBarRef = useRef<HTMLDivElement>(null);
+  const legendRef = useRef<HTMLElement>(null);
 
 
   // Przewijanie w pionie z przyklejonym nagłówkiem strony i rzędem etapów:
   // rząd etapów przykleja się tuż pod nagłówkiem, którego wysokość zależy od języka.
   useLayoutEffect(() => {
     const top = topRef.current;
-    if (!top) return;
-    const update = () => document.documentElement.style.setProperty("--sticky-top", `${top.offsetHeight}px`);
+    const update = () => {
+      const topHeight = top?.offsetHeight ?? 0;
+      const keyHeight = mapKeyRef.current?.offsetHeight ?? 0;
+      const barHeight = mapBarRef.current?.offsetHeight ?? 0;
+      document.documentElement.style.setProperty("--sticky-top", `${topHeight}px`);
+      document.documentElement.style.setProperty("--mapkey-height", `${keyHeight}px`);
+      document.documentElement.style.setProperty("--cloud-chrome-height", `${topHeight + keyHeight + barHeight}px`);
+      document.documentElement.style.setProperty("--legend-height", `${legendRef.current?.offsetHeight ?? 0}px`);
+    };
     update();
     const observer = new ResizeObserver(update);
-    observer.observe(top);
+    [top, mapKeyRef.current, mapBarRef.current, legendRef.current].forEach((element) => { if (element) observer.observe(element); });
     return () => observer.disconnect();
-  }, []);
+  }, [view, cloudUiVisible, activeAdvId]);
 
   const switchLang = (next: LangKey) => {
     setLang(next);
@@ -110,12 +141,28 @@ export default function App() {
     url.searchParams.set("theme", next);
     history.replaceState(null, "", url);
   };
-  const switchView = (next: "cloud" | "grid") => {
-    setView(next);
+  const updateUrl = (next: View, advId: string | null) => {
     const url = new URL(location.href);
     url.searchParams.set("view", next);
+    if (advId) url.searchParams.set("adv", advId);
+    else url.searchParams.delete("adv");
     history.replaceState(null, "", url);
   };
+  const clearAdvantage = () => {
+    setActiveAdvId(null);
+    if (view !== "advantages") updateUrl(view, null);
+  };
+  const switchView = (next: View) => {
+    setView(next);
+    if (next === "cloud") setCloudUiVisible(true);
+    setSelectedId(null);
+    if (next !== "advantages") { lastMapView.current = next; setActiveAdvId(null); }
+    updateUrl(next, next === "advantages" ? openAdvId : null);
+  };
+  const expandAdvantage = (id: string) => { setOpenAdvId(id); updateUrl("advantages", id); };
+  const showAdvantageOnMap = (id: string) => { setOpenAdvId(id); setActiveAdvId(id); setSelectedId(null); setCloudUiVisible(true); setView(lastMapView.current); updateUrl(lastMapView.current, id); };
+  const openAdvantage = (id: string) => { setOpenAdvId(id); setActiveAdvId(null); setSelectedId(null); setView("advantages"); updateUrl("advantages", id); };
+  const selectFromAdvantages = (id: string) => setSelectedId(id);
 
   const tiles: [string, string | number][] = [
     [t("metricSystems", lang), m.systems],
@@ -127,13 +174,14 @@ export default function App() {
   ];
 
   return (
-    <div className={`page view-${view}`} data-graph-theme={theme}>
+    <div className={`page view-${view} ${activeAdvantage ? "has-advantage" : ""} ${view === "cloud" ? cloudUiVisible ? "cloud-chrome-visible" : "is-immersive" : ""}`} data-graph-theme={theme} onPointerDownCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }} onFocusCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }}>
       <header className="top" ref={topRef}>
         <div className="intro">
           <h1>CFAB 4D Hub × TIMEFLOW</h1>
           <p className="subtitle">{lang === "pl" ? "Dwa systemy. Wspólna przestrzeń pracy." : "Two systems. One connected workspace."}</p>
         </div>
           <div className="views" role="tablist" aria-label={lang === "pl" ? "Widok mapy" : "Map view"}>
+            <button role="tab" aria-selected={view === "advantages"} onClick={() => switchView("advantages")}>{t("viewAdvantages", lang)}</button>
             <button role="tab" aria-selected={view === "cloud"} onClick={() => switchView("cloud")}>{t("viewCloud", lang)}</button>
             <button role="tab" aria-selected={view === "grid"} onClick={() => switchView("grid")}>{t("viewGrid", lang)}</button>
           </div>
@@ -154,15 +202,17 @@ export default function App() {
         </div>
         </div>
       </header>
-      <div className="map-key" aria-label={lang === "pl" ? "Kolory etapów pracy" : "Work-stage colours"}>
+      {view !== "advantages" && <div className="map-key" ref={mapKeyRef} aria-label={lang === "pl" ? "Kolory etapów pracy" : "Work-stage colours"}>
         <span className="key-caption">{lang === "pl" ? "Obszary pracy" : "Work areas"}</span>
         {STAGES.map(s => <span key={s.id} className={`group-${s.id}`}><i className="graph-dot" />{s[lang]}</span>)}
         <span className="group-foundation"><i className="graph-dot" />{t("foundation",lang)}</span>
-      </div>
+      </div>}
 
-      {view === "cloud" ? (
+      {activeAdvantage && view !== "advantages" && <div className="adv-map-bar" ref={mapBarRef}><span>{lang === "pl" ? "Przewaga" : "Advantage"} {activeAdvantage.rank} {lang === "pl" ? "z" : "of"} {data.advantages.length} · <strong>{activeAdvantage.title[lang]}</strong></span><div><button onClick={() => showAdvantageOnMap(data.advantages[(activeAdvantage.rank + data.advantages.length - 2) % data.advantages.length].id)} aria-label={lang === "pl" ? "Poprzednia przewaga" : "Previous advantage"}>←</button><button onClick={() => showAdvantageOnMap(data.advantages[activeAdvantage.rank % data.advantages.length].id)} aria-label={lang === "pl" ? "Następna przewaga" : "Next advantage"}>→</button><button onClick={clearAdvantage} aria-label={lang === "pl" ? "Wyczyść podświetlenie" : "Clear highlight"}>×</button></div></div>}
+
+      {view === "advantages" ? <Advantages data={data} lang={lang} expandedId={openAdvId} onExpand={expandAdvantage} onSelectNode={selectFromAdvantages} onShowMap={showAdvantageOnMap} /> : view === "cloud" ? (
         <main className="cloud-wrap">
-          <Cloud data={data} lang={lang} territoryLabels={territoryLabels} selectedId={selectedId} highlightIds={null} onSelect={setSelectedId} />
+          <Cloud data={data} lang={lang} territoryLabels={territoryLabels} selectedId={selectedId} highlightIds={highlightIds} onSelect={setSelectedId} onOpenAdvantage={openAdvantage} />
         </main>
       ) : (
       <main className="map" aria-label={lang === "pl" ? "Funkcje według etapów pracy" : "Features by work stage"}>
@@ -171,7 +221,7 @@ export default function App() {
             <section key={stage.id} className={`stage-section group-${stage.id}`}>
               <h2 className="column-title"><span className="graph-dot" /><span>{stage[lang]}</span><span className="count">{blocks.reduce((sum,b) => sum+b.items.length,0)}</span></h2>
               <div className="column">
-                {blocks.map(b => <BlockView key={b.key} block={b} lang={lang} onSelect={setSelectedId} />)}
+                {blocks.map(b => <BlockView key={b.key} block={b} lang={lang} onSelect={setSelectedId} highlightIds={highlightIds} />)}
               </div>
             </section>
           ))}
@@ -179,14 +229,14 @@ export default function App() {
         <section className="foundation group-foundation">
           <h2 className="column-title"><span className="graph-dot" />{t("foundation", lang)}</h2>
           <div className="foundation-blocks">
-            {foundation.map(b => <BlockView key={b.key} block={b} lang={lang} onSelect={setSelectedId} />)}
+            {foundation.map(b => <BlockView key={b.key} block={b} lang={lang} onSelect={setSelectedId} highlightIds={highlightIds} />)}
           </div>
         </section>
-        {selected && <Card node={selected} lang={lang} parent={data.nodes.find(n => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} />}
+        {selected && <Card node={selected} lang={lang} parent={data.nodes.find(n => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} onOpenAdvantage={openAdvantage} />}
       </main>
       )}
 
-      {view === "cloud" ? <footer className="legend legend-cloud" aria-label={lang === "pl" ? "Jak czytać chmurę" : "How to read the cloud"}>
+      {view === "cloud" ? <footer className="legend legend-cloud" ref={legendRef} aria-label={lang === "pl" ? "Jak czytać chmurę" : "How to read the cloud"}>
         <div className="legend-group">
           <strong>{lang === "pl" ? "Węzły" : "Nodes"}</strong>
           <span><i className="legend-node legend-app" />{lang === "pl" ? "aplikacja" : "application"}</span>
@@ -196,19 +246,20 @@ export default function App() {
         </div>
         <div className="legend-group">
           <strong>{lang === "pl" ? "Stan" : "Status"}</strong>
-          <span><i className="legend-status legend-ready" />{t("statusProduction", lang)}</span>
-          <span><i className="legend-status legend-beta" />{t("statusBeta", lang)}</span>
-          <span><i className="legend-status legend-planned" />{t("statusRoadmap", lang)}</span>
+          <span><i className="legend-status legend-ready" />{t("statusProduction", lang)} {statusCounts.production}</span>
+          <span><i className="legend-status legend-beta" />{t("statusBeta", lang)} {statusCounts.beta}</span>
+          <span><i className="legend-status legend-planned" />{t("statusRoadmap", lang)} {statusCounts.roadmap}</span>
         </div>
         <div className="legend-group legend-hint">
           <span>{lang === "pl" ? "Poświata oznacza wskazany węzeł · Linie pokazują powiązania" : "Glow marks the focused node · Lines show connections"}</span>
         </div>
-      </footer> : <footer className="legend legend-grid" aria-label={lang === "pl" ? "Oznaczenia etapów pracy" : "Work-stage key"}>
-        <span>● {t("statusProduction", lang)}</span>
-        <span>◐ {t("statusBeta", lang)}</span>
-        <span>○ {t("statusRoadmap", lang)}</span>
+      </footer> : view === "grid" ? <footer className="legend legend-grid" aria-label={lang === "pl" ? "Oznaczenia etapów pracy" : "Work-stage key"}>
+        <span>● {t("statusProduction", lang)} {statusCounts.production}</span>
+        <span>◐ {t("statusBeta", lang)} {statusCounts.beta}</span>
+        <span>○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span>
         <span>◆ {lang === "pl" ? "wspólna funkcja" : "shared feature"}</span>
-      </footer>}
+      </footer> : <footer className="legend legend-advantages"><span>● {t("statusProduction", lang)} {statusCounts.production} · ◐ {t("statusBeta", lang)} {statusCounts.beta} · ○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span></footer>}
+      {view === "advantages" && selected && <Card node={selected} lang={lang} parent={data.nodes.find(n => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} onOpenAdvantage={openAdvantage} />}
     </div>
   );
 }

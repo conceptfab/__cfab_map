@@ -112,6 +112,7 @@ export interface NodeBubbleProps {
   containerSize: { width: number; height: number };
   onClose: () => void;
   onSelect: (id: string) => void;
+  onOpenAdvantage: (id: string) => void;
 }
 
 export default function NodeBubble({
@@ -124,6 +125,7 @@ export default function NodeBubble({
   containerSize,
   onClose,
   onSelect,
+  onOpenAdvantage,
 }: NodeBubbleProps) {
   const bubbleRef = useRef<HTMLDivElement>(null);
   const [bubbleHeight, setBubbleHeight] = useState(380);
@@ -143,6 +145,7 @@ export default function NodeBubble({
     () => getNodeConnections(node, data, groups),
     [node, data, groups]
   );
+  const advantage = node.advantageId ? data.advantages.find((item) => item.id === node.advantageId) : null;
 
   useLayoutEffect(() => {
     if (bubbleRef.current) {
@@ -254,6 +257,8 @@ export default function NodeBubble({
           ×
         </button>
       </div>
+
+      {advantage && <button className="bubble-adv-link" onClick={() => onOpenAdvantage(advantage.id)}>{pl ? "Część przewagi" : "Part of advantage"} {advantage.rank} · {advantage.title[lang]} ↗</button>}
 
       <div className="bubble-main-info">
         <h3 className="bubble-title">{node.title[lang]}</h3>

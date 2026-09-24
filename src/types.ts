@@ -27,6 +27,29 @@ export interface FeatureNode {
   contract: string | null;
   sources: string[];
   keywords: string[];
+  advantageId: string | null;
+}
+
+export interface Advantage {
+  id: string;
+  rank: number;
+  title: Lang;
+  thesis: Lang;
+  why: Lang;
+  replacesTools: Lang[];
+  assumptionId: string | null;
+  flow: Lang[] | null;
+  ids: string[];
+}
+
+export interface Assumption {
+  id: string;
+  pl: string;
+  en: string;
+  value: number;
+  maxValue?: number;
+  unit: string;
+  source: string;
 }
 
 export interface FeatureEdge {
@@ -44,4 +67,7 @@ export interface FeaturesData {
   meta: { generatedAt: string; hubVersion: string; timeflowVersion: string; sourceCommit: string | null; distribution: string };
   nodes: FeatureNode[];
   edges: FeatureEdge[];
+  assumptions: Assumption[];
+  advantages: Advantage[];
+  alsoStrong: string[];
 }

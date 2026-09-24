@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execSync } from "node:child_process";
 import { HUB_ROOT, TF_ROOT, OUT_JSON, OUT_PUBLIC_JSON } from "./paths.mjs";
-import { ecosystems, modules, bridges, features, assumptions, edges } from "../data/source.mjs";
+import { ecosystems, modules, bridges, features, assumptions, advantages, alsoStrong, edges } from "../data/source.mjs";
 
 const PUBLIC = process.argv.includes("--public");
 const read = (p) => fs.readFileSync(p, "utf8").trim();
@@ -92,6 +92,23 @@ const edgeList = edges.map(([from, to, type, label, contract, status], i) => ({
   contract, animated: type === "data_flow" || type === "file_exchange", status,
 }));
 
+const advantageIdOf = new Map();
+for (const advantage of advantages) for (const id of advantage.ids) {
+  if (!advantageIdOf.has(id)) advantageIdOf.set(id, advantage.id);
+}
+for (const node of nodes) node.advantageId = advantageIdOf.get(node.id) ?? null;
+const advantageList = advantages.map((advantage) => ({
+  id: advantage.id,
+  rank: advantage.rank,
+  title: lang(advantage.t),
+  thesis: lang(advantage.d),
+  why: lang(advantage.why),
+  replacesTools: advantage.rep.map(lang),
+  assumptionId: advantage.assumptionId,
+  flow: advantage.flow?.map(lang) ?? null,
+  ids: advantage.ids,
+}));
+
 if (PUBLIC) {
   // Poziom inwestorski / publiczny (rozdz. 11.2): bez ścieżek, zostaje nazwa modułu.
   const titleOf = new Map(nodes.map((n) => [n.id, n.title.en]));
@@ -107,10 +124,10 @@ const data = {
     distribution: PUBLIC ? "investor" : "internal",
   },
   nodes, edges: edgeList,
-  assumptions,
+  assumptions, advantages: advantageList, alsoStrong,
 };
 
-for (const out of [OUT_JSON, OUT_PUBLIC_JSON]) {
+for (const out of PUBLIC ? [OUT_JSON, OUT_PUBLIC_JSON] : [OUT_JSON]) {
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, JSON.stringify(data, null, 2) + "\n");
 }

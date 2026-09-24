@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-24T16:11:12.822Z",
+    "generatedAt": "2026-09-24T22:27:48.916Z",
     "hubVersion": "BETA 0.43",
     "timeflowVersion": "0.1.5776",
     "contracts": {
@@ -68,7 +68,8 @@
       "version": "BETA 0.43",
       "contract": null,
       "sources": [],
-      "keywords": []
+      "keywords": [],
+      "advantageId": null
     },
     {
       "id": "tf",
@@ -116,7 +117,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [],
-      "keywords": []
+      "keywords": [],
+      "advantageId": null
     },
     {
       "id": "hub.start",
@@ -163,7 +165,8 @@
       "keywords": [
         "start",
         "start"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser",
@@ -210,7 +213,8 @@
       "keywords": [
         "biblioteka",
         "library"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render",
@@ -257,7 +261,8 @@
       "keywords": [
         "render",
         "render"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.results",
@@ -304,7 +309,8 @@
       "keywords": [
         "wyniki",
         "results"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets",
@@ -351,7 +357,8 @@
       "keywords": [
         "zasoby",
         "assets"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scenes",
@@ -398,7 +405,8 @@
       "keywords": [
         "inspektor",
         "inspector"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch",
@@ -445,7 +453,8 @@
       "keywords": [
         "robocze",
         "scratch"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.plugins",
@@ -492,7 +501,8 @@
       "keywords": [
         "wtyczki",
         "plug-ins"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges",
@@ -539,7 +549,8 @@
       "keywords": [
         "połączenia",
         "connections"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.shell",
@@ -586,7 +597,8 @@
       "keywords": [
         "interfejs huba",
         "shell"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.service",
@@ -633,7 +645,8 @@
       "keywords": [
         "usługa w tle",
         "service"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.core",
@@ -680,7 +693,8 @@
       "keywords": [
         "rdzeń",
         "core"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.contracts",
@@ -727,7 +741,8 @@
       "keywords": [
         "wersje połączeń",
         "contracts"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.ui",
@@ -774,7 +789,8 @@
       "keywords": [
         "system projektowy",
         "design system"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.cfab_bridge",
@@ -821,7 +837,8 @@
       "keywords": [
         "komunikacja z programami 3d",
         "bridge protocol"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.native",
@@ -868,7 +885,8 @@
       "keywords": [
         "moduły rust",
         "rust crates"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.dashboard",
@@ -913,7 +931,8 @@
       "keywords": [
         "dashboard",
         "dashboard"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.sessions",
@@ -958,7 +977,8 @@
       "keywords": [
         "sesje",
         "sessions"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.projects",
@@ -1003,7 +1023,8 @@
       "keywords": [
         "projekty",
         "projects"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.estimates",
@@ -1048,7 +1069,8 @@
       "keywords": [
         "wyceny",
         "estimates"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.clients",
@@ -1093,7 +1115,8 @@
       "keywords": [
         "klienci",
         "clients"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.applications",
@@ -1138,7 +1161,8 @@
       "keywords": [
         "aplikacje",
         "applications"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.analysis",
@@ -1183,7 +1207,8 @@
       "keywords": [
         "analiza czasu",
         "time analysis"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.ai",
@@ -1228,7 +1253,8 @@
       "keywords": [
         "ai i model",
         "ai & model"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.data",
@@ -1273,7 +1299,8 @@
       "keywords": [
         "dane",
         "data"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.reports",
@@ -1318,7 +1345,8 @@
       "keywords": [
         "raporty",
         "reports"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.pm",
@@ -1363,7 +1391,8 @@
       "keywords": [
         "planowanie pracy",
         "pm"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.daemon",
@@ -1408,7 +1437,8 @@
       "keywords": [
         "pomiar w tle",
         "daemon"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.todo",
@@ -1425,8 +1455,8 @@
         "en": "Tasks"
       },
       "summary": {
-        "pl": "Lista zadań projektu; funkcje opisane razem z PM.",
-        "en": "A project task list; features are described together with PM."
+        "pl": "Zadania z terminami i priorytetami, przypięte do projektu, klienta albo globalne.",
+        "en": "Tasks with due dates and priorities, pinned to a project, a client or global."
       },
       "category": "core",
       "stage": null,
@@ -1453,7 +1483,8 @@
       "keywords": [
         "zadania",
         "tasks"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.renders",
@@ -1498,7 +1529,8 @@
       "keywords": [
         "renderingi",
         "renders"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "syn.beacons",
@@ -1557,7 +1589,8 @@
         "beacon",
         "integracja",
         "readonly"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "syn.machine_time",
@@ -1603,11 +1636,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Czeka na odbiór 0.1-D (trwały zapis czasu renderu).",
-        "en": "Waiting for sign-off of 0.1-D (persistent render time)."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": null,
       "contract": null,
       "sources": [
@@ -1616,7 +1646,8 @@
       "keywords": [
         "czas maszyny",
         "machine time"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "syn.ledger",
@@ -1679,7 +1710,8 @@
         "koszt maszyny",
         "machine cost",
         "ack"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "syn.dcc_activity",
@@ -1721,11 +1753,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Część etapu B synergii; czeka na odbiór 0.1-D.",
-        "en": "Part of synergy stage B; waiting for 0.1-D sign-off."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": null,
       "contract": "dcc_activity 1",
       "sources": [
@@ -1736,7 +1765,8 @@
         "ścieżka",
         "path",
         "przypisanie"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "syn.cfabx",
@@ -1794,7 +1824,8 @@
         "cfabx",
         "offline",
         "farma"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "syn.proposals",
@@ -1811,8 +1842,8 @@
         "en": "Approve Hub data"
       },
       "summary": {
-        "pl": "Hub zgłasza rendery, koszty i wyniki audytu sceny, a TIMEFLOW pozwala je zatwierdzić.",
-        "en": "One contract for everything Hub proposes and TIMEFLOW approves: renders, costs, scene-audit findings, cost forecasts."
+        "pl": "Hub proponuje projekt dla renderu, a TIMEFLOW zatwierdza propozycję jednym kliknięciem, także kilka naraz; paczka .cfabx niesie propozycje renderów i kosztów.",
+        "en": "Hub proposes a project for a render and TIMEFLOW approves it in one click, several at once too; a .cfabx package carries render and cost proposals."
       },
       "category": "integration",
       "stage": "billing",
@@ -1826,6 +1857,8 @@
         "description": null
       },
       "techStack": [
+        "Python",
+        "Rust",
         "SQLite"
       ],
       "replacesTools": [],
@@ -1836,19 +1869,24 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "roadmap",
+      "status": "beta",
       "statusNote": {
-        "pl": "Zaplanowane (decyzja D-S6), nierozpoczęte.",
-        "en": "Planned (decision D-S6), not started."
+        "pl": "Rendery działają; Hub nie wysyła jeszcze kosztów ani wyników audytu sceny.",
+        "en": "Renders work; Hub does not send costs or scene-audit findings yet."
       },
       "version": null,
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core/cfabx.py",
+        "tf:dashboard/src-tauri/src/commands/cfab_offline.rs",
+        "tf:dashboard/src/pages/Renders.tsx"
+      ],
       "keywords": [
         "proposal",
         "ack",
         "cfab_proposals"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "syn.proof",
@@ -1865,8 +1903,8 @@
         "en": "Thumbnails in report"
       },
       "summary": {
-        "pl": "Miniatury wyrenderowanych klatek z EXRustera trafiają do rejestru renderów, na oś czasu projektu i do raportu PDF dla klienta.",
-        "en": "Rendered-frame thumbnails from EXRuster go into the render log, the project timeline and the client PDF report."
+        "pl": "Hub zapisuje w rejestrze renderów miniaturę ostatniej klatki zrobioną przez EXRustera, a TIMEFLOW przenosi jej ścieżkę do galerii renderów w raporcie PDF.",
+        "en": "Hub stores an EXRuster thumbnail of the last frame in the render log, and TIMEFLOW carries its path into the render gallery of the PDF report."
       },
       "category": "integration",
       "stage": "report",
@@ -1891,20 +1929,24 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "production",
-      "statusNote": null,
+      "status": "beta",
+      "statusNote": {
+        "pl": "Wyświetlanie w PDF poprawione w kodzie TIMEFLOW (niewydane); odbiór na żywym raporcie trwa.",
+        "en": "PDF display fixed in TIMEFLOW code (unreleased); sign-off on a live report pending."
+      },
       "version": null,
       "contract": null,
       "sources": [
-        "hub:modules/render/thumbnails.py",
-        "tf:dashboard/src/pages/report-view"
+        "hub:modules/render/ledger.py",
+        "tf:dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx"
       ],
       "keywords": [
         "proof of work",
         "miniatury",
         "thumbnails",
         "pdf"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "syn.presence",
@@ -1946,11 +1988,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Otwarte: systemowy autostart przy logowaniu.",
-        "en": "Open: OS login autostart."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": null,
       "contract": null,
       "sources": [
@@ -1960,7 +1999,8 @@
       "keywords": [
         "autostart",
         "diagnostyka"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.detect",
@@ -2014,7 +2054,8 @@
         "detekcja",
         "detection",
         "dcc"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.exruster_card",
@@ -2057,11 +2098,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Nowa od BETA 0.34; bez osobnego odbioru.",
-        "en": "New since BETA 0.34; no separate sign-off yet."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
@@ -2070,7 +2108,8 @@
       "keywords": [
         "exruster",
         "start"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.crossplatform",
@@ -2122,7 +2161,8 @@
       "keywords": [
         "windows",
         "macos"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.cards",
@@ -2174,7 +2214,8 @@
       "keywords": [
         "karty",
         "cards"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.launcher",
@@ -2226,7 +2267,8 @@
       "keywords": [
         "launcher",
         "grupy"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.recent",
@@ -2278,7 +2320,8 @@
       "keywords": [
         "ostatnie",
         "recent"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.start.active_badge",
@@ -2331,7 +2374,8 @@
       "keywords": [
         "timeflow",
         "aktywny projekt"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scenes.c4d_parser",
@@ -2396,7 +2440,8 @@
         "offline",
         "reverse engineering",
         "licencja"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.max_reader",
@@ -2413,8 +2458,8 @@
         "en": ".max reader, no Max"
       },
       "summary": {
-        "pl": "Odczyt plików .max ze struktur OLE: drzewo węzłów, modyfikatory, materiały i ścieżki zasobów.",
-        "en": "Reads .max files from OLE structures: node tree, modifiers, materials and asset paths."
+        "pl": "Odczyt plików .max ze struktur OLE: drzewo węzłów, modyfikatory, materiały, światła i kamery, ustawienia renderu, wtyczki zapisane w scenie i ścieżki zasobów.",
+        "en": "Reads .max files from OLE structures: node tree, modifiers, materials, lights and cameras, render settings, plug-ins recorded in the scene and asset paths."
       },
       "category": "core",
       "stage": "inspection",
@@ -2456,7 +2501,8 @@
         "max",
         "ole",
         "maxasset"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.diag_tools",
@@ -2510,7 +2556,8 @@
         "c4ddiff",
         "c4dpatch",
         "corona"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.max_import",
@@ -2552,11 +2599,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na żywej parze Max ↔ C4D trwa.",
-        "en": "Sign-off on a live Max ↔ C4D pair in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
@@ -2567,7 +2611,8 @@
         "max",
         "import",
         "c4d"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.max_space",
@@ -2620,7 +2665,8 @@
         "jednostki",
         "units",
         "z-up"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.max_tools",
@@ -2672,7 +2718,8 @@
       "keywords": [
         "max",
         "starsza wersja"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.export",
@@ -2726,7 +2773,8 @@
         "obj",
         "fbx",
         "glb"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.exchange_format",
@@ -2779,7 +2827,8 @@
         "usd",
         "glb",
         "naprawa"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scenes.materials",
@@ -2831,7 +2880,8 @@
       "keywords": [
         "materiały",
         "tekstury"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.scenes.tree",
@@ -2883,7 +2933,8 @@
       "keywords": [
         "drzewo",
         "tree"
-      ]
+      ],
+      "advantageId": "closed_formats"
     },
     {
       "id": "hub.render.queue",
@@ -2937,7 +2988,8 @@
       "keywords": [
         "kolejka",
         "queue"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.engines",
@@ -2990,7 +3042,8 @@
         "corona",
         "redshift",
         "vray"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.live_preview",
@@ -3042,7 +3095,8 @@
       "keywords": [
         "podgląd",
         "preview"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.eta_log",
@@ -3095,7 +3149,8 @@
       "keywords": [
         "eta",
         "log"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.job_info",
@@ -3137,11 +3192,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na żywej C4D z Coroną trwa.",
-        "en": "Sign-off on live C4D with Corona in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3150,7 +3202,8 @@
       "keywords": [
         "job_info",
         "c4d"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.single",
@@ -3193,11 +3246,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Punkt 0.1-D: kod w pakiecie, odbiór na żywej C4D trwa.",
-        "en": "Item 0.1-D: code shipped, live C4D sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": "history_db 2",
       "sources": [
@@ -3207,7 +3257,8 @@
       "keywords": [
         "picture viewer",
         "render_seconds"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.lan_farm",
@@ -3256,11 +3307,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Usługa i panel działają, testy zielone; bez osobnego odbioru w BETA.md.",
-        "en": "Service and panel work, tests green; no separate sign-off in BETA.md."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3271,7 +3319,8 @@
         "farm",
         "lan",
         "węzły"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.recovery",
@@ -3317,11 +3366,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na żywej C4D trwa.",
-        "en": "Live C4D sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3331,7 +3377,8 @@
         "recovery",
         "awaria",
         "crash"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.watchdog",
@@ -3373,11 +3420,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na żywej C4D z Coroną trwa.",
-        "en": "Live C4D with Corona sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3386,7 +3430,8 @@
       "keywords": [
         "watchdog",
         "deadlock"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.precheck",
@@ -3439,7 +3484,8 @@
       "keywords": [
         "precheck",
         "kontrola"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.web_panel",
@@ -3494,7 +3540,8 @@
         "panel",
         "www",
         "mobile"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.shutdown",
@@ -3546,7 +3593,8 @@
       "keywords": [
         "shutdown",
         "wyłączenie"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.mail",
@@ -3599,7 +3647,8 @@
       "keywords": [
         "email",
         "smtp"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.ntfy",
@@ -3641,11 +3690,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Punkt 0.1-F: kod gotowy, odbiór na serwerze użytkownika trwa.",
-        "en": "Item 0.1-F: code ready, sign-off on the user's server in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3654,7 +3700,8 @@
       "keywords": [
         "ntfy",
         "push"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.render.sound",
@@ -3696,11 +3743,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Część punktu 0.1-D.",
-        "en": "Part of item 0.1-D."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
@@ -3709,7 +3753,8 @@
       "keywords": [
         "dźwięk",
         "sound"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.ledger",
@@ -3762,7 +3807,8 @@
       "keywords": [
         "ledger",
         "historia"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "hub.render.tf_tab",
@@ -3814,7 +3860,8 @@
       "keywords": [
         "timeflow",
         "integracja"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.ledger_always",
@@ -3856,17 +3903,73 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "roadmap",
-      "statusNote": {
-        "pl": "Pozycja otwarta w fali 0.15.",
-        "en": "Open item in wave 0.15."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/render/ledger.py",
+        "hub:modules/render/watch.py"
+      ],
       "keywords": [
         "ledger"
-      ]
+      ],
+      "advantageId": "render_cost"
+    },
+    {
+      "id": "hub.render.history",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.render",
+      "parentId": "hub.render",
+      "title": {
+        "pl": "Historia renderowania",
+        "en": "Render history"
+      },
+      "shortTitle": {
+        "pl": "Historia przebiegów kolejki",
+        "en": "Queue run history"
+      },
+      "summary": {
+        "pl": "Zapisane przebiegi kolejki z podsumowaniem; te same liczby trafiają do powiadomień i maila.",
+        "en": "Saved queue runs with a summary; the same numbers feed notifications and the e-mail."
+      },
+      "category": "analysis",
+      "stage": "render",
+      "order": 18,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "SQLite"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.73",
+      "contract": null,
+      "sources": [
+        "hub:modules/render/summary.py",
+        "hub:modules/render/view.py"
+      ],
+      "keywords": [
+        "historia",
+        "history"
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.results.exruster",
@@ -3927,7 +4030,8 @@
         "exr",
         "exruster",
         "rust"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.results.passes",
@@ -3979,7 +4083,8 @@
       "keywords": [
         "passy",
         "cryptomatte"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.results.sequences",
@@ -4033,7 +4138,8 @@
         "klatki",
         "frames",
         "missing"
-      ]
+      ],
+      "advantageId": "night_render"
     },
     {
       "id": "hub.results.thumb_cache",
@@ -4087,7 +4193,8 @@
       "keywords": [
         "cache",
         "miniatury"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets.audit",
@@ -4139,7 +4246,8 @@
       "keywords": [
         "audyt",
         "missing assets"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets.relink",
@@ -4196,7 +4304,8 @@
         "relink",
         "ścieżki",
         "paths"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets.textures",
@@ -4248,7 +4357,8 @@
       "keywords": [
         "tekstury",
         "pbr"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets.libraries",
@@ -4299,7 +4409,8 @@
       ],
       "keywords": [
         "biblioteki"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.assets.undo",
@@ -4351,7 +4462,8 @@
       "keywords": [
         "undo",
         "cofnięcie"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.multi_tb",
@@ -4403,7 +4515,8 @@
       "keywords": [
         "nas",
         "smb"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.asset_format",
@@ -4455,7 +4568,8 @@
       "keywords": [
         "asset",
         "metadane"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.pairing",
@@ -4507,7 +4621,8 @@
       "keywords": [
         "parowanie",
         "pairing"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.jit",
@@ -4560,7 +4675,8 @@
         "zip",
         "rar",
         "7z"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.tools",
@@ -4614,7 +4730,8 @@
         "duplikaty",
         "webp",
         "rust"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.browser.visual_search",
@@ -4663,11 +4780,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Status „w odbiorze” dotyczy wyszukiwania AI. Metadane .asset są gotowe od dawna; trwają poprawki bazy wektorowej i odbiór wyszukiwania na dużej bibliotece.",
-        "en": "The in-sign-off status applies to AI search. .asset metadata has long been ready; vector DB fixes and search sign-off on a large library are in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "1.8.0",
       "contract": "ai_vector_db 1",
       "sources": [
@@ -4682,7 +4796,8 @@
         "wyszukiwanie",
         "search",
         "podobne"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "hub.browser.errors_tab",
@@ -4724,11 +4839,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na realnej bibliotece trwa.",
-        "en": "Sign-off on a real library in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "1.8.0",
       "contract": null,
       "sources": [
@@ -4738,7 +4850,8 @@
         "błędy",
         "errors",
         "audyt"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.c4d",
@@ -4798,7 +4911,8 @@
         "most",
         "bridge",
         "texmat"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.blender",
@@ -4851,7 +4965,8 @@
       "keywords": [
         "blender",
         "most"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.blender_mats",
@@ -4893,11 +5008,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór na żywej parze Blender ↔ C4D z Coroną trwa.",
-        "en": "Live Blender ↔ C4D with Corona sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
@@ -4908,7 +5020,8 @@
         "corona",
         "botaniq",
         "materiały"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.max",
@@ -4952,11 +5065,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Etapy A, B i D wdrożone; odbiór na żywym 3ds Maxie trwa.",
-        "en": "Stages A, B and D shipped; live 3ds Max sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.712",
       "contract": "max_bridge_protocol 1",
       "sources": [
@@ -4966,7 +5076,8 @@
       "keywords": [
         "3ds max",
         "most"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.modo",
@@ -5010,11 +5121,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Od BETA 0.346; poprawki stabilności i odbiór na żywym MODO 17 trwają.",
-        "en": "Since BETA 0.346; stability fixes and live MODO 17 sign-off in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.712",
       "contract": "modo_bridge_protocol 1",
       "sources": [
@@ -5024,7 +5132,8 @@
       "keywords": [
         "modo",
         "most"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.rizom",
@@ -5067,11 +5176,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Punkt 0.1-E: odbiór w Cinema 4D trwa.",
-        "en": "Item 0.1-E: sign-off in Cinema 4D in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
@@ -5080,7 +5186,8 @@
       "keywords": [
         "rizom",
         "uv"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.rizom_hub",
@@ -5130,7 +5237,8 @@
       "sources": [],
       "keywords": [
         "rizom"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.bridges.installs",
@@ -5183,7 +5291,8 @@
       "keywords": [
         "instalacja",
         "install"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch.isolation",
@@ -5235,7 +5344,8 @@
       "keywords": [
         "scratch",
         "dysk"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch.zones",
@@ -5287,7 +5397,8 @@
       "keywords": [
         "staging",
         "sandbox"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch.retention",
@@ -5339,7 +5450,8 @@
       "keywords": [
         "retencja",
         "miejsce"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch.previews",
@@ -5352,12 +5464,12 @@
         "en": "Scratch file previews"
       },
       "shortTitle": {
-        "pl": "Podglądy geometrii",
-        "en": "Geometry previews"
+        "pl": "Podglądy plików",
+        "en": "File previews"
       },
       "summary": {
-        "pl": "Miniatury geometrii przez F3D albo świeży proces Blendera w tle, który nigdy nie zapisuje pliku źródłowego.",
-        "en": "Geometry thumbnails via F3D or a fresh background Blender process that never writes to the source file."
+        "pl": "Miniatury tekstur, plików EXR i HDR przez EXRustera oraz geometrii przez F3D albo świeży proces Blendera w tle, który nigdy nie zapisuje pliku źródłowego.",
+        "en": "Thumbnails for textures, EXR and HDR files via EXRuster, and for geometry via F3D or a fresh background Blender process that never writes to the source file."
       },
       "category": "ui",
       "stage": null,
@@ -5388,13 +5500,15 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
+        "hub:modules/scratch/thumbnails.py",
         "hub:modules/scratch/mesh_preview.py",
         "hub:modules/scratch/preview_process.py"
       ],
       "keywords": [
         "podgląd",
         "f3d"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.scratch.navigator",
@@ -5446,7 +5560,8 @@
       ],
       "keywords": [
         "nawigator"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.plugins.catalog",
@@ -5499,7 +5614,8 @@
       "keywords": [
         "skrypty",
         "scripts"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.plugins.audit",
@@ -5549,7 +5665,8 @@
       "keywords": [
         "audyt",
         "bezpieczeństwo"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.plugins.install",
@@ -5600,7 +5717,8 @@
       ],
       "keywords": [
         "instalacja"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.shell.shell",
@@ -5654,7 +5772,8 @@
         "powłoka",
         "shell",
         "tray"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.shell.install_move",
@@ -5697,11 +5816,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Odbiór przeniesienia na czysty komputer z Windows trwa.",
-        "en": "Sign-off of a move to a clean Windows machine in progress."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
@@ -5713,7 +5829,8 @@
         "instalacja",
         "update",
         "windows"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.shell.login_autostart",
@@ -5763,7 +5880,8 @@
       "sources": [],
       "keywords": [
         "autostart"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.service.service",
@@ -5815,7 +5933,8 @@
       "keywords": [
         "usługa",
         "service"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.core.core",
@@ -5843,11 +5962,8 @@
         "tech_director"
       ],
       "techMoat": {
-        "isUniqueMoat": true,
-        "description": {
-          "pl": "Izolacja modułów: 9 modułów działa jak jeden produkt i każdy uruchamia się też osobno.",
-          "en": "Module isolation: 9 modules act as one product and each also runs on its own."
-        }
+        "isUniqueMoat": false,
+        "description": null
       },
       "techStack": [
         "Python"
@@ -5872,7 +5988,8 @@
       "keywords": [
         "rdzeń",
         "core"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.core.mcp",
@@ -5930,7 +6047,8 @@
         "ai",
         "agent",
         "claude"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "hub.core.diagnostic",
@@ -5981,7 +6099,8 @@
       ],
       "keywords": [
         "diagnostyka"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.core.autostart",
@@ -6032,7 +6151,8 @@
       ],
       "keywords": [
         "autostart"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.contracts.contracts",
@@ -6083,7 +6203,8 @@
       ],
       "keywords": [
         "kontrakty"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.ui.ui",
@@ -6138,7 +6259,8 @@
       "keywords": [
         "design system",
         "tokeny"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.native.native",
@@ -6189,7 +6311,8 @@
       ],
       "keywords": [
         "rust"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.daemon.events",
@@ -6251,7 +6374,8 @@
         "demon",
         "daemon",
         "tracking"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.daemon.title_parser",
@@ -6303,7 +6427,8 @@
       "keywords": [
         "tytuł okna",
         "title"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.daemon.idle",
@@ -6355,7 +6480,8 @@
       "keywords": [
         "idle",
         "bezczynność"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.daemon.background",
@@ -6407,7 +6533,8 @@
       "keywords": [
         "cpu",
         "tło"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.daemon.pid_cache",
@@ -6458,7 +6585,8 @@
       ],
       "keywords": [
         "pid"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.daemon.control",
@@ -6509,7 +6637,8 @@
       ],
       "keywords": [
         "demon"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.sessions.no_double",
@@ -6568,7 +6697,8 @@
       "keywords": [
         "fair time",
         "uczciwy czas"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.sessions.split",
@@ -6620,7 +6750,8 @@
       "keywords": [
         "podział",
         "split"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.sessions.transparency",
@@ -6671,7 +6802,8 @@
       ],
       "keywords": [
         "transparentność"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.sessions.timeline",
@@ -6723,7 +6855,8 @@
       "keywords": [
         "oś czasu",
         "timeline"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.sessions.editing",
@@ -6740,8 +6873,8 @@
         "en": "Editing and manual sessions"
       },
       "summary": {
-        "pl": "Dzielenie, łączenie i przenoszenie sesji, sesje ręczne (spotkania, telefony), komentarze i zaokrąglanie.",
-        "en": "Split, merge and move sessions, manual sessions (meetings, calls), comments and rounding."
+        "pl": "Dzielenie, łączenie i przenoszenie sesji, sesje ręczne (spotkania, telefony), komentarze i mnożnik stawki dla sesji.",
+        "en": "Split, merge and move sessions, manual sessions (meetings, calls), comments and a per-session rate multiplier."
       },
       "category": "ui",
       "stage": "tracking",
@@ -6776,7 +6909,8 @@
       "keywords": [
         "sesje",
         "manual"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.ai.layer_paths",
@@ -6828,7 +6962,8 @@
       "keywords": [
         "model",
         "ścieżki"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.ai.layer_apps",
@@ -6879,7 +7014,8 @@
       ],
       "keywords": [
         "model"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.ai.layer_time",
@@ -6930,7 +7066,8 @@
       ],
       "keywords": [
         "model"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.ai.layer_tokens",
@@ -6981,7 +7118,8 @@
       ],
       "keywords": [
         "tokeny"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.ai.facts_first",
@@ -7023,11 +7161,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Zmiana w wersji nieopublikowanej (Unreleased).",
-        "en": "Change in an unreleased version."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "0.1.5776",
       "contract": null,
       "sources": [
@@ -7037,7 +7172,8 @@
       "keywords": [
         "idf",
         "fakty"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.ai.auto_safe",
@@ -7093,7 +7229,8 @@
       "keywords": [
         "auto_safe",
         "rollback"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.ai.ai_screen",
@@ -7147,7 +7284,8 @@
       "keywords": [
         "ai",
         "trening"
-      ]
+      ],
+      "advantageId": "honest_time"
     },
     {
       "id": "tf.mcp_arch",
@@ -7205,7 +7343,8 @@
         "mcp",
         "claude",
         "agent"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "tf.mcp_tools",
@@ -7258,7 +7397,8 @@
       "keywords": [
         "mcp",
         "narzędzia"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "tf.mcp_backup",
@@ -7310,7 +7450,8 @@
       ],
       "keywords": [
         "backup"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "tf.mcp_help",
@@ -7362,7 +7503,8 @@
       "keywords": [
         "pomoc",
         "mcp"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.renders.ingest",
@@ -7416,7 +7558,8 @@
       "keywords": [
         "ingest",
         "rendery"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.renders.assign",
@@ -7468,7 +7611,8 @@
       "keywords": [
         "przypisanie",
         "prefix"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.renders.offline",
@@ -7520,7 +7664,8 @@
       "keywords": [
         "cfabx",
         "offline"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.renders.cost",
@@ -7578,7 +7723,8 @@
         "rbh",
         "koszt",
         "cost"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.renders.render_sync",
@@ -7621,11 +7767,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Zmiana w wersji nieopublikowanej; odbiór na dwóch maszynach.",
-        "en": "Unreleased change; sign-off on two machines pending."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "0.1.5776",
       "contract": null,
       "sources": [
@@ -7635,7 +7778,8 @@
       "keywords": [
         "sync",
         "rendery"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.renders.integration_state",
@@ -7686,7 +7830,8 @@
       ],
       "keywords": [
         "integracja"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.projects.projects",
@@ -7699,12 +7844,12 @@
         "en": "Project management"
       },
       "shortTitle": {
-        "pl": "Stawki, limity, foldery",
-        "en": "Rates, limits, folders"
+        "pl": "Stawki, kolory, foldery",
+        "en": "Rates, colours, folders"
       },
       "summary": {
-        "pl": "Kolory, mapowanie folderów, stawki godzinowe, limity godzin z alertami, zamrażanie, wykluczanie i archiwum.",
-        "en": "Colours, folder mapping, hourly rates, hour limits with alerts, freezing, exclusion and archive."
+        "pl": "Kolory, mapowanie folderów, stawki godzinowe, zamrażanie, wykluczanie i archiwum.",
+        "en": "Colours, folder mapping, hourly rates, freezing, exclusion and archive."
       },
       "category": "finance",
       "stage": "billing",
@@ -7734,13 +7879,69 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "tf:dashboard/src/pages/Projects.tsx",
-        "tf:dashboard/src-tauri/src/commands/project_limits.rs"
+        "tf:dashboard/src/pages/Projects.tsx"
       ],
       "keywords": [
-        "projekty",
-        "limity"
-      ]
+        "projekty"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "tf.projects.limits",
+      "nodeType": "feature",
+      "app": "timeflow",
+      "module": "tf.projects",
+      "parentId": "tf.projects",
+      "title": {
+        "pl": "Limit godzin w okresie rozliczeniowym",
+        "en": "Hour limit per billing period"
+      },
+      "shortTitle": {
+        "pl": "Limit godzin i nadgodziny",
+        "en": "Hour limit and overtime"
+      },
+      "summary": {
+        "pl": "Budżet godzin na okres rozliczeniowy z paskiem zużycia i nadgodzinami liczonymi mnożnikiem; w raporcie osobna sekcja z listą sesji z mnożnikiem.",
+        "en": "An hour budget per billing period with a live usage bar and overtime billed with a multiplier; the report has its own section listing multiplied sessions."
+      },
+      "category": "finance",
+      "stage": "billing",
+      "order": 1,
+      "audiences": [
+        "artist",
+        "agency_owner"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "React",
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.1.5776",
+      "contract": null,
+      "sources": [
+        "tf:dashboard/src-tauri/src/commands/project_limits.rs",
+        "tf:dashboard/src/pages/report-view/ReportViewLimitSection.tsx",
+        "tf:dashboard/src/pages/report-view/ReportViewBoostsSection.tsx"
+      ],
+      "keywords": [
+        "limity",
+        "nadgodziny",
+        "boost"
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.projects.merge",
@@ -7762,7 +7963,7 @@
       },
       "category": "finance",
       "stage": "billing",
-      "order": 1,
+      "order": 2,
       "audiences": [
         "artist",
         "agency_owner"
@@ -7792,7 +7993,8 @@
       "keywords": [
         "scalanie",
         "merge"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.clients.clients",
@@ -7845,7 +8047,8 @@
       ],
       "keywords": [
         "klienci"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.pm.pm",
@@ -7854,18 +8057,18 @@
       "module": "tf.pm",
       "parentId": "tf.pm",
       "title": {
-        "pl": "Zadania powiązane z projektami",
-        "en": "Project Manager and Tasks"
+        "pl": "Menedżer projektów PM",
+        "en": "PM project manager"
       },
       "shortTitle": {
-        "pl": "Zadania przy projektach",
-        "en": "Tasks on projects"
+        "pl": "Numeracja i foldery",
+        "en": "Numbering and folders"
       },
       "summary": {
-        "pl": "Lekki system zadań powiązanych z projektami i śledzeniem czasu.",
-        "en": "A lightweight task system tied to projects and time tracking."
+        "pl": "Nowy projekt z klientem, budżetem i terminem: numer podpowiadany z listy i dysku, drzewo folderów z szablonu, rozmiar folderu i śledzony czas obok budżetu.",
+        "en": "A new project with client, budget and deadline: a number suggested from the list and the disk, a folder tree from a template, folder size and tracked time next to the budget."
       },
-      "category": "core",
+      "category": "automation",
       "stage": "tracking",
       "order": 0,
       "audiences": [
@@ -7894,13 +8097,70 @@
       "contract": null,
       "sources": [
         "tf:dashboard/src/pages/PM.tsx",
-        "tf:dashboard/src/pages/Todo.tsx"
+        "tf:dashboard/src-tauri/src/commands/pm_manager.rs",
+        "tf:dashboard/src-tauri/src/commands/pm.rs"
       ],
       "keywords": [
         "pm",
+        "numeracja",
+        "foldery"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "tf.todo.todo",
+      "nodeType": "feature",
+      "app": "timeflow",
+      "module": "tf.todo",
+      "parentId": "tf.todo",
+      "title": {
+        "pl": "Lista zadań z terminami",
+        "en": "Task list with due dates"
+      },
+      "shortTitle": {
+        "pl": "Zadania z terminami",
+        "en": "Tasks with due dates"
+      },
+      "summary": {
+        "pl": "Zadania globalne, klienta albo projektu z terminem, priorytetem i notatkami, pogrupowane na zaległe, dzisiejsze, tygodniowe i późniejsze.",
+        "en": "Global, client or project tasks with a due date, priority and notes, grouped into overdue, today, this week and later."
+      },
+      "category": "ui",
+      "stage": "tracking",
+      "order": 0,
+      "audiences": [
+        "artist",
+        "agency_owner"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "React",
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.1.5776",
+      "contract": null,
+      "sources": [
+        "tf:dashboard/src/pages/Todo.tsx",
+        "tf:dashboard/src-tauri/src/commands/todos.rs"
+      ],
+      "keywords": [
         "zadania",
         "todo"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.applications.apps",
@@ -7951,7 +8211,8 @@
       ],
       "keywords": [
         "aplikacje"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.applications.drag_apps",
@@ -8004,7 +8265,8 @@
       "keywords": [
         "drag",
         "aplikacje"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.analysis.analysis",
@@ -8057,7 +8319,8 @@
       ],
       "keywords": [
         "analiza"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.dashboard.dashboard",
@@ -8108,7 +8371,8 @@
       ],
       "keywords": [
         "dashboard"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.data.data",
@@ -8162,7 +8426,8 @@
       "keywords": [
         "baza",
         "dane"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.data.import",
@@ -8216,7 +8481,8 @@
       "keywords": [
         "import",
         "eksport"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.quickstart",
@@ -8269,7 +8535,8 @@
       "keywords": [
         "pomoc",
         "help"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.webserver",
@@ -8322,7 +8589,8 @@
       "keywords": [
         "www",
         "parowanie"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "tf.logs",
@@ -8373,7 +8641,8 @@
       ],
       "keywords": [
         "logi"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.bughunter",
@@ -8424,7 +8693,8 @@
       ],
       "keywords": [
         "błędy"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.i18n",
@@ -8475,7 +8745,8 @@
       ],
       "keywords": [
         "i18n"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.estimates.costs",
@@ -8526,7 +8797,8 @@
       ],
       "keywords": [
         "koszty"
-      ]
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.estimates.estimates",
@@ -8582,7 +8854,62 @@
       "keywords": [
         "wycena",
         "estimate"
-      ]
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "tf.estimates.estimate_report",
+      "nodeType": "feature",
+      "app": "timeflow",
+      "module": "tf.estimates",
+      "parentId": "tf.estimates",
+      "title": {
+        "pl": "Raport estymacji",
+        "en": "Estimate report"
+      },
+      "shortTitle": {
+        "pl": "Raport estymacji do PDF",
+        "en": "Estimate report to PDF"
+      },
+      "summary": {
+        "pl": "Projekty z czasem i wartością dla jednego albo wszystkich klientów w wybranym zakresie dat, z rozbiciem na dni.",
+        "en": "Projects with time and value for one or all clients over a chosen date range, broken down by day."
+      },
+      "category": "finance",
+      "stage": "report",
+      "order": 0,
+      "audiences": [
+        "artist",
+        "agency_owner"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "React"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.1.5776",
+      "contract": null,
+      "sources": [
+        "tf:dashboard/src/pages/EstimateReport.tsx",
+        "tf:dashboard/src/pages/estimate-report/EstimateReportDocument.tsx"
+      ],
+      "keywords": [
+        "estymacja",
+        "raport"
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.reports.pdf",
@@ -8636,7 +8963,8 @@
       "keywords": [
         "pdf",
         "raport"
-      ]
+      ],
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.reports.profitability",
@@ -8678,11 +9006,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Kod w raporcie jest; bez odbioru.",
-        "en": "Code is in the report; not signed off."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": "0.1.5776",
       "contract": null,
       "sources": [
@@ -8691,7 +9016,117 @@
       "keywords": [
         "rentowność",
         "profitability"
-      ]
+      ],
+      "advantageId": "render_cost"
+    },
+    {
+      "id": "tf.reports.templates",
+      "nodeType": "feature",
+      "app": "timeflow",
+      "module": "tf.reports",
+      "parentId": "tf.reports",
+      "title": {
+        "pl": "Edytor szablonów raportów",
+        "en": "Report template editor"
+      },
+      "shortTitle": {
+        "pl": "Szablony raportów",
+        "en": "Report templates"
+      },
+      "summary": {
+        "pl": "Własne szablony z wybranymi sekcjami, fontem, rozmiarem i logo TIMEFLOW, z podglądem na żywo i zapisem automatycznym.",
+        "en": "Custom templates with chosen sections, font, size and the TIMEFLOW logo, with a live preview and autosave."
+      },
+      "category": "ui",
+      "stage": "report",
+      "order": 2,
+      "audiences": [
+        "artist",
+        "agency_owner"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "React"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.1.5776",
+      "contract": null,
+      "sources": [
+        "tf:dashboard/src/pages/Reports.tsx",
+        "tf:dashboard/src/pages/reports/ReportsTemplateEditor.tsx"
+      ],
+      "keywords": [
+        "szablon",
+        "template"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "tf.reports.report_options",
+      "nodeType": "feature",
+      "app": "timeflow",
+      "module": "tf.reports",
+      "parentId": "tf.reports",
+      "title": {
+        "pl": "Okres, zaokrąglanie i scalanie w raporcie",
+        "en": "Period, rounding and merging in reports"
+      },
+      "shortTitle": {
+        "pl": "Okres i zaokrąglanie",
+        "en": "Period and rounding"
+      },
+      "summary": {
+        "pl": "Raport zawężony do okresu rozliczeniowego, czas pełny albo zaokrąglony do interwału i scalanie powtarzających się wpisów; dane źródłowe się nie zmieniają.",
+        "en": "A report narrowed to a billing period, exact or interval-rounded time, and merging of repeated entries; the source data stays unchanged."
+      },
+      "category": "finance",
+      "stage": "report",
+      "order": 3,
+      "audiences": [
+        "artist",
+        "agency_owner"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "React"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.1.5776",
+      "contract": null,
+      "sources": [
+        "tf:dashboard/src/pages/report-view/ReportViewToolbar.tsx",
+        "tf:dashboard/src/pages/settings/SettingsRoundingTab.tsx"
+      ],
+      "keywords": [
+        "zaokrąglanie",
+        "okres",
+        "rounding"
+      ],
+      "advantageId": null
     },
     {
       "id": "tf.data.lan_sync",
@@ -8751,7 +9186,8 @@
         "lan",
         "sync",
         "p2p"
-      ]
+      ],
+      "advantageId": "local_first"
     },
     {
       "id": "tf.data.cloud_sync",
@@ -8814,7 +9250,8 @@
         "cloud",
         "sync",
         "aes"
-      ]
+      ],
+      "advantageId": "local_first"
     }
   ],
   "edges": [
@@ -9442,8 +9879,248 @@
       "pl": "Odzysk przychodu z rozliczenia renderów",
       "en": "Revenue recovered by billing renders",
       "value": 10,
-      "unit": "% (widełki 10–25)",
+      "maxValue": 25,
+      "unit": "%",
       "source": "widełki do zatwierdzenia"
     }
+  ],
+  "advantages": [
+    {
+      "id": "render_cost",
+      "rank": 1,
+      "title": {
+        "pl": "Czas renderu trafia do wyceny",
+        "en": "Render time lands in the quote"
+      },
+      "thesis": {
+        "pl": "Hub zapisuje każdy zakończony render z maszyną i sekundami, a TIMEFLOW przypisuje go do projektu i dolicza koszt maszyny do wyceny i raportu PDF — po włączeniu przez artystę.",
+        "en": "Hub logs every finished render with its machine and seconds; TIMEFLOW assigns it to a project and adds the machine cost to the quote and the PDF report once the artist switches it on."
+      },
+      "why": {
+        "pl": "Potrzebny jest stan renderu z wnętrza programu 3D i aplikacja rozliczeniowa po drugiej stronie. Trackery czasu nie widzą renderu, a menedżery renderu nie robią wycen.",
+        "en": "It needs render state from inside the 3D app and a billing app on the other side. Time trackers can't see renders; render managers don't do quotes."
+      },
+      "replacesTools": [
+        {
+          "pl": "ręczne liczenie czasu renderu",
+          "en": "manual render-time tracking"
+        },
+        {
+          "pl": "Excel",
+          "en": "Excel"
+        }
+      ],
+      "assumptionId": "A-ODZYSK",
+      "flow": [
+        {
+          "pl": "Render w Hubie",
+          "en": "Render in Hub"
+        },
+        {
+          "pl": "Księga renderów",
+          "en": "Render log"
+        },
+        {
+          "pl": "Przypisanie w TIMEFLOW",
+          "en": "Assignment in TIMEFLOW"
+        },
+        {
+          "pl": "Koszt w wycenie i PDF",
+          "en": "Cost in quote and PDF"
+        }
+      ],
+      "ids": [
+        "syn.machine_time",
+        "hub.render.ledger",
+        "hub.render.ledger_always",
+        "syn.ledger",
+        "tf.renders.ingest",
+        "tf.renders.assign",
+        "tf.renders.cost",
+        "syn.cfabx",
+        "tf.renders.offline",
+        "tf.renders.render_sync",
+        "tf.reports.profitability",
+        "tf.reports.pdf"
+      ]
+    },
+    {
+      "id": "closed_formats",
+      "rank": 2,
+      "title": {
+        "pl": "Pliki .c4d i .max bez programu i licencji",
+        "en": ".c4d and .max files without the app or a licence"
+      },
+      "thesis": {
+        "pl": "Inspektor czyta geometrię, hierarchię i materiały z plików Cinema 4D i 3ds Max, porównuje sceny, zmienia silnik renderu w pliku i przenosi scenę z Maxa do C4D — bez uruchamiania tych programów.",
+        "en": "The Inspector reads geometry, hierarchy and materials from Cinema 4D and 3ds Max files, compares scenes, swaps the render engine in the file and moves a Max scene into C4D — without launching either app."
+      },
+      "why": {
+        "pl": "Oba formaty są zamknięte. Strukturę .c4d odtworzono inżynierią wsteczną, a .max jest czytany ze struktur OLE bez API Autodesku.",
+        "en": "Both formats are closed. The .c4d layout was reverse-engineered; .max is read from OLE structures without Autodesk's API."
+      },
+      "replacesTools": [
+        {
+          "pl": "licencja Cinema 4D",
+          "en": "Cinema 4D licence"
+        },
+        {
+          "pl": "licencja 3ds Max",
+          "en": "3ds Max licence"
+        },
+        {
+          "pl": "Connecter",
+          "en": "Connecter"
+        },
+        {
+          "pl": "konwertery chmurowe",
+          "en": "cloud converters"
+        }
+      ],
+      "assumptionId": "A-INSPEKCJA",
+      "flow": null,
+      "ids": [
+        "hub.scenes.c4d_parser",
+        "hub.scenes.max_reader",
+        "hub.scenes.max_import",
+        "hub.scenes.max_space",
+        "hub.scenes.diag_tools",
+        "hub.scenes.max_tools",
+        "hub.scenes.export",
+        "hub.scenes.materials",
+        "hub.scenes.tree"
+      ]
+    },
+    {
+      "id": "night_render",
+      "rank": 3,
+      "title": {
+        "pl": "Nocny render kończy się klatkami",
+        "en": "An overnight render ends with frames"
+      },
+      "thesis": {
+        "pl": "Przed startem Hub sprawdza kolejkę, w trakcie pilnuje postępu i wysyła zadania na wolne maszyny w sieci lokalnej, a po awarii Cinema 4D restartuje program i renderuje tylko brakujące klatki. Rano czeka mail z miniaturami.",
+        "en": "Before the start Hub checks the queue; during the night it tracks progress and sends jobs to free LAN machines; after a Cinema 4D crash it restarts the app and renders only the missing frames. A mail with thumbnails waits in the morning."
+      },
+      "why": {
+        "pl": "Most działa wewnątrz procesu Cinema 4D, a Hub prowadzi rejestr klatek — wie, co już policzył, więc wie, co dokończyć.",
+        "en": "The bridge runs inside the Cinema 4D process and Hub keeps a frame log — it knows what is done, so it knows what to finish."
+      },
+      "replacesTools": [
+        {
+          "pl": "Deadline",
+          "en": "Deadline"
+        },
+        {
+          "pl": "Team Render",
+          "en": "Team Render"
+        }
+      ],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.render.precheck",
+        "hub.render.recovery",
+        "hub.render.watchdog",
+        "hub.render.lan_farm",
+        "hub.render.eta_log",
+        "hub.render.web_panel",
+        "hub.render.ntfy",
+        "hub.render.mail",
+        "hub.results.sequences",
+        "hub.render.shutdown"
+      ]
+    },
+    {
+      "id": "honest_time",
+      "rank": 4,
+      "title": {
+        "pl": "Czas pracy liczy się sam i uczciwie",
+        "en": "Work time counts itself, fairly"
+      },
+      "thesis": {
+        "pl": "Demon mierzy pracę ze zdarzeń systemu, bez stopera. Nie liczy podwójnie przy przełączaniu okien ani pracy maszyny w tle, a lokalny model przypisuje sesje do projektów — także po ścieżce pliku otwartego w programie 3D, którą podaje Hub.",
+        "en": "The daemon measures work from system events, with no stopwatch. It doesn't double-count window switching or background machine work, and a local model assigns sessions to projects — including by the path of the file open in the 3D app, supplied by Hub."
+      },
+      "why": {
+        "pl": "Haki zdarzeń Win32 i Quartz w Rust, Algorytm Uczciwego Czasu i model uczący się lokalnie. Ścieżkę pliku z wnętrza programu 3D ma tylko para Hub i TIMEFLOW.",
+        "en": "Win32 and Quartz event hooks in Rust, the Fair Time Algorithm and a model that learns locally. Only the Hub–TIMEFLOW pair has the file path from inside the 3D app."
+      },
+      "replacesTools": [
+        {
+          "pl": "Toggl",
+          "en": "Toggl"
+        },
+        {
+          "pl": "Harvest",
+          "en": "Harvest"
+        },
+        {
+          "pl": "Clockify",
+          "en": "Clockify"
+        }
+      ],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "tf.daemon.events",
+        "tf.daemon.title_parser",
+        "tf.daemon.idle",
+        "tf.daemon.background",
+        "tf.sessions.no_double",
+        "tf.sessions.split",
+        "syn.dcc_activity",
+        "tf.ai.layer_paths",
+        "tf.ai.facts_first",
+        "tf.ai.auto_safe",
+        "tf.ai.ai_screen"
+      ]
+    },
+    {
+      "id": "local_first",
+      "rank": 5,
+      "title": {
+        "pl": "Dane i AI zostają na komputerze",
+        "en": "Data and AI stay on the machine"
+      },
+      "thesis": {
+        "pl": "Dwa lokalne serwery MCP dla agentów AI, wyszukiwanie po obrazie na lokalnym modelu, synchronizacja w sieci lokalnej bez chmury i szyfrowana synchronizacja online, w której serwer widzi tylko rewizje i sumy kontrolne.",
+        "en": "Two local MCP servers for AI agents, image search on a local model, LAN sync with no cloud, and encrypted online sync where the server sees only revisions and checksums."
+      },
+      "why": {
+        "pl": "Cały stos działa lokalnie: serwery MCP tylko na pętli zwrotnej, model DINOv2 lub CLIP na maszynie, AES-256-GCM z kluczem, którego serwer nie zna.",
+        "en": "The whole stack is local: MCP servers on loopback only, a DINOv2 or CLIP model on the machine, AES-256-GCM with a key the server never sees."
+      },
+      "replacesTools": [
+        {
+          "pl": "chmury SaaS",
+          "en": "SaaS clouds"
+        }
+      ],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.core.mcp",
+        "tf.mcp_arch",
+        "tf.mcp_tools",
+        "tf.mcp_backup",
+        "hub.browser.visual_search",
+        "tf.data.lan_sync",
+        "tf.data.cloud_sync",
+        "syn.beacons",
+        "tf.webserver"
+      ]
+    }
+  ],
+  "alsoStrong": [
+    "hub.results.exruster",
+    "hub.results.passes",
+    "hub.results.thumb_cache",
+    "hub.assets.relink",
+    "hub.bridges.c4d",
+    "hub.bridges.blender_mats",
+    "hub.bridges.max",
+    "hub.bridges.modo",
+    "hub.browser.jit"
   ]
 }

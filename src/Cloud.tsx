@@ -4,6 +4,7 @@ import { select } from "d3-selection";
 import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import type { FeaturesData, LangKey } from "./types";
 import NodeBubble from "./NodeBubble";
+import { STAGES } from "./i18n";
 
 export interface CloudProps {
   data: FeaturesData;
@@ -12,9 +13,10 @@ export interface CloudProps {
   selectedId: string | null;
   highlightIds: Set<string> | null;
   onSelect: (id: string | null) => void;
+  onOpenAdvantage: (id: string) => void;
 }
 
-export default function Cloud({ data, lang, territoryLabels, selectedId, highlightIds, onSelect }: CloudProps) {
+export default function Cloud({ data, lang, territoryLabels, selectedId, highlightIds, onSelect, onOpenAdvantage }: CloudProps) {
 
   const svgRef = useRef<SVGSVGElement>(null);
   const behaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
@@ -26,6 +28,8 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const viewAnimationRef = useRef<number | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [trail, setTrail] = useState<string[]>([]);
+  const [stageIndex, setStageIndex] = useState<number | null>(null);
   const [showLabels, setShowLabels] = useState(false);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -37,6 +41,11 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     const update = () => setReducedMotion(media.matches);
     update(); media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setStageIndex(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
   useEffect(() => {
     if (!moving) return;
@@ -122,6 +131,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     viewAnimationRef.current = requestAnimationFrame(frame);
   };
   const moveTo = (id: string) => {
+    setTrail((previous) => [...previous.filter((item) => item !== id), id].slice(-4));
     onSelect(id);
     const target = graph.byId.get(id)!;
     if (target.node.nodeType === "bridge" && size.width >= 1150) {
@@ -141,7 +151,9 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   }
   const matches = query.trim() ? graph.points.filter(p => `${p.node.title[lang]} ${p.node.summary[lang]}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase())) : [];
   const matchIds = new Set(matches.map(p => p.id));
-  const dimmed = (id: string) => focus ? !related.has(id) : query.trim() ? !matchIds.has(id) : highlightIds ? !highlightIds.has(id) : false;
+  const stageIds = stageIndex === null ? null : new Set(data.nodes.filter((node) => node.stage === STAGES[stageIndex].id).map((node) => node.id));
+  const effectiveHighlight = highlightIds ?? stageIds;
+  const dimmed = (id: string) => focus ? !related.has(id) : query.trim() ? !matchIds.has(id) : effectiveHighlight ? !effectiveHighlight.has(id) : false;
   const position = (p: Point) => orbitalPosition(p, phase);
   const bridgeNetwork = size.width >= 1150;
   const bridges = graph.points.filter(p => p.node.nodeType === "bridge");
@@ -183,7 +195,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   });
   const scaleBy = (factor: number) => { if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.scaleBy, factor); };
   const reset = () => {
-    onSelect(null); setQuery("");
+    onSelect(null); setQuery(""); setTrail([]); setStageIndex(null);
     const k = Math.min(size.width/graph.worldWidth, Math.max(100,size.height-160)/graph.worldHeight);
     const overview = zoomIdentity.translate(size.width/2,(size.height+30)/2).scale(k).translate(-graph.worldWidth/2,-graph.worldHeight/2);
     moveViewTo(overview);
@@ -201,6 +213,9 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     <div className="orbit-app-switch" aria-label={pl ? "Przejdź do aplikacji" : "Go to application"}>
       {graph.points.filter(p => p.node.nodeType === "ecosystem").map(p => <button key={p.id} onClick={() => viewApp(p)}>{p.node.shortTitle[lang]}</button>)}
     </div>
+    {!highlightIds && <div className="graph-stage-lens">
+      {stageIndex === null ? <button onClick={() => { onSelect(null); setStageIndex(0); }}>{pl ? "Spacer po etapach" : "Walk through stages"} →</button> : <><span>{String(stageIndex + 1).padStart(2, "0")}/08 · {STAGES[stageIndex][lang]}</span><button onClick={() => { onSelect(null); setStageIndex((stageIndex + 7) % 8); }} aria-label={pl ? "Poprzedni etap" : "Previous stage"}>←</button><button onClick={() => { onSelect(null); setStageIndex((stageIndex + 1) % 8); }} aria-label={pl ? "Następny etap" : "Next stage"}>→</button><button onClick={() => setStageIndex(null)} aria-label={pl ? "Zamknij spacer" : "Close stage walk"}>×</button></>}
+    </div>}
     <svg ref={svgRef} className="cloud" data-motion={moving ? "running" : "paused"} aria-label={pl ? "Interaktywna mapa powiązań" : "Interactive relationship graph"} onClick={e => {if (e.target === e.currentTarget) onSelect(null);}}>
       <defs>
         <filter id="popout-shadow" x="-80%" y="-80%" width="260%" height="260%">
@@ -218,12 +233,13 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
       <g className="graph-edges" transform={transform.toString()}>
         {graph.links.map(l => {
           const s = position(l.source), t = position(l.target);
-          const lit = l.source.id === active || l.target.id === active;
+          const advantageTrace = !active && Boolean(highlightIds?.has(l.source.id) && highlightIds?.has(l.target.id) && l.relation === "integration");
+          const lit = l.source.id === active || l.target.id === active || advantageTrace;
           const bridgeLink = bridgeNetwork && (l.source.node.nodeType === "bridge" || l.target.node.nodeType === "bridge");
           const key = `${l.source.id}-${l.target.id}-${l.kind}`;
           const shared = { "data-relation": l.relation, "data-kind": l.kind,
-            className: `group-${l.source.group} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""}`,
-            opacity: lit ? 1 : active ? 0.025 : bridgeLink ? 0.5 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18,
+            className: `group-${l.source.group} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""} ${advantageTrace ? "is-advantage-trace" : ""}`,
+            opacity: lit ? 1 : active || highlightIds ? 0.025 : bridgeLink ? 0.5 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18,
             vectorEffect: "non-scaling-stroke" as const };
           if (bridgeLink) {
             const bend = Math.abs(t.x - s.x) * 0.48;
@@ -349,9 +365,11 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
           containerSize={size}
           onClose={() => onSelect(null)}
           onSelect={moveTo}
+          onOpenAdvantage={onOpenAdvantage}
         />
       );
     })()}
+    {selectedId && trail.length > 1 && <nav className="graph-trail" aria-label={pl ? "Odwiedzone węzły" : "Visited nodes"}><span>{pl ? "Twoja ścieżka" : "Your path"}</span>{trail.map((id, index) => <span key={id} className="graph-trail-item">{index > 0 && <i aria-hidden="true">›</i>}<button aria-current={id === selectedId} onClick={() => moveTo(id)}>{graph.byId.get(id)?.node.shortTitle[lang] ?? id}</button></span>)}</nav>}
     <div className="graph-controls" aria-label={pl ? "Sterowanie mapą" : "Graph controls"}>
       <button onClick={() => setShowLabels(!showLabels)} aria-pressed={showLabels} title={pl ? "Pokaż podpisy funkcji" : "Show feature labels"}>{pl ? "Podpisy funkcji" : "Feature labels"}</button>
       <button className="orbit-motion-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reducedMotion} title={reducedMotion ? (pl ? "Ograniczenie ruchu w ustawieniach systemu" : "System reduced motion preference") : undefined}>{paused ? (pl ? "Wznów orbity" : "Resume orbits") : (pl ? "Zatrzymaj orbity" : "Pause orbits")}</button>
