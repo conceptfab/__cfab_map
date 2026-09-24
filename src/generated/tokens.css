@@ -1,0 +1,82 @@
+/* Wygenerowane przez scripts/tokens.mjs z shared/cfab_ui/tokens.json — nie edytuj ręcznie. */
+@font-face { font-family: "Geist"; src: url("./fonts/Geist-Regular.ttf") format("truetype"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Geist"; src: url("./fonts/Geist-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Geist Mono"; src: url("./fonts/GeistMono-Regular.ttf") format("truetype"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Geist Mono"; src: url("./fonts/GeistMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: block; }
+:root {
+  --bg-sunken: #16161e;
+  --bg-canvas: #16161e;
+  --bg-surface: #1c1c26;
+  --bg-raised: #1c1c26;
+  --bg-hover: #26293a;
+  --bg-selection: #3d4a72;
+  --text-strong: #d4d8e1;
+  --text-primary: #b6bcc8;
+  --text-muted: #8f95a3;
+  --text-disabled: #6e748a;
+  --text-accent: #a8c1fb;
+  --line-subtle: #26293a;
+  --line-strong: #414868;
+  --line-control: #6e748a;
+  --focus: #a8c1fb;
+  --focus-on-accent: #ffffff;
+  --accent: #7aa2f7;
+  --primary: #4d6bb8;
+  --primary-hover: #4f70bc;
+  --primary-pressed: #3f5aa0;
+  --on-primary: #ffffff;
+  --success: #9ece6a;
+  --warning: #e0af68;
+  --danger: #f7768e;
+  --danger-fill: #c44b5e;
+  --info: #7dcfff;
+  --vis-on: #9ece6a;
+  --vis-off: #f7768e;
+  --vis-default: #6e748a;
+  --queue-selected-text: #ffa632;
+  --channel-r: #ff8181;
+  --channel-g: #b0ffb0;
+  --channel-b: #92d2ff;
+  --rating-off: #8f95a3;
+  --rating-on: #a8c1fb;
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 12px;
+  --space-6: 16px;
+  --space-8: 24px;
+  --row: 20px;
+  --control: 22px;
+  --header: 32px;
+  --nav: 44px;
+  --indent: 16px;
+  --icon-s: 14px;
+  --icon-m: 16px;
+  --icon-l: 24px;
+  --icon-xl: 40px;
+  --radius-s: 2px;
+  --radius-m: 3px;
+  --radius-l: 6px;
+  --tile-s: 128px;
+  --tile-m: 192px;
+  --tile-l: 256px;
+  --progress-global: 3px;
+  --progress-task: 9px;
+  --window-min-width: 960px;
+  --window-min-height: 600px;
+  --type-caption-size: 10px;
+  --type-caption-weight: 400;
+  --type-body-size: 11px;
+  --type-body-weight: 400;
+  --type-label-size: 11px;
+  --type-label-weight: 600;
+  --type-title-size: 13px;
+  --type-title-weight: 600;
+  --type-display-size: 16px;
+  --type-display-weight: 600;
+  --type-mono-size: 11px;
+  --type-mono-weight: 400;
+  --font-ui: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
