@@ -19,3 +19,11 @@ Statyczna strona z mapą funkcjonalności dla inwestorów. Specyfikacja:
 npm run build          # tokeny → dane → walidacja → typy → vite
 npm run shot -- pl     # zrzut 1440×900 + pomiar: ucięte etykiety, wysokość strony
 ```
+
+## Deploy (Vercel)
+
+Vercel nie ma dostępu do repozytoriów Huba i TIMEFLOW, więc buduje z
+zacommitowanych plików `src/generated/` (`vercel.json` → `npm run build:vercel`:
+walidacja → typy → vite, bez `tokens`/`data`). Walidacja pomija wtedy sprawdzanie
+ścieżek źródeł i wersji. Przed pushem: `npm run build` lokalnie i commit
+`src/generated/`.

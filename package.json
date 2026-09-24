@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "tokens": "node scripts/tokens.mjs",
     "data": "node scripts/build-data.mjs",
@@ -10,6 +13,7 @@
     "prebuild": "npm run tokens && npm run data && npm run validate",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "build:vercel": "npm run validate && tsc --noEmit && vite build",
     "shot": "node scripts/shot.mjs"
   },
   "devDependencies": {

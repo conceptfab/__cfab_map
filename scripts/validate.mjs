@@ -9,6 +9,8 @@ const STAGES = ["assets", "scene", "inspection", "render", "results", "tracking"
 const SHORT_MAX = 28;
 
 const data = JSON.parse(fs.readFileSync(OUT_JSON, "utf8"));
+// Build bez sąsiednich repozytoriów (np. Vercel): sprawdzamy tylko zacommitowane dane.
+const OFFLINE = !fs.existsSync(HUB_ROOT);
 const errors = [];
 const err = (id, msg) => errors.push(`${id}: ${msg}`);
 const ids = new Set();
@@ -36,7 +38,7 @@ for (const n of data.nodes) {
   // 5. gotowa funkcja ma istniejące źródło
   if (data.meta.distribution === "internal") {
     if (n.nodeType === "feature" && n.status === "production" && n.sources.length === 0) err(n.id, "funkcja production bez sources");
-    for (const s of n.sources) if (!fs.existsSync(resolveSource(s))) err(n.id, `źródło nie istnieje: ${s}`);
+    if (!OFFLINE) for (const s of n.sources) if (!fs.existsSync(resolveSource(s))) err(n.id, `źródło nie istnieje: ${s}`);
   }
   // 7. krótki tytuł
   for (const l of ["pl", "en"]) {
@@ -94,10 +96,12 @@ for (const id of data.alsoStrong ?? []) if (!ids.has(id)) err("alsoStrong", `wę
 for (const node of data.nodes) if (node.advantageId !== (evidenceOwner.get(node.id) ?? null)) err(node.id, "advantageId nie zgadza się z listą dowodów");
 
 // 6. wersje zgodne z repozytorium Huba
-const hubVersion = fs.readFileSync(path.join(HUB_ROOT, "VERSION"), "utf8").trim();
-const release = JSON.parse(fs.readFileSync(path.join(HUB_ROOT, "RELEASE.json"), "utf8"));
-if (data.meta.hubVersion !== hubVersion) err("meta", `hubVersion ${data.meta.hubVersion} ≠ VERSION ${hubVersion}`);
-if (JSON.stringify(data.meta.contracts) !== JSON.stringify(release.contracts)) err("meta", "contracts ≠ RELEASE.json");
+if (!OFFLINE) {
+  const hubVersion = fs.readFileSync(path.join(HUB_ROOT, "VERSION"), "utf8").trim();
+  const release = JSON.parse(fs.readFileSync(path.join(HUB_ROOT, "RELEASE.json"), "utf8"));
+  if (data.meta.hubVersion !== hubVersion) err("meta", `hubVersion ${data.meta.hubVersion} ≠ VERSION ${hubVersion}`);
+  if (JSON.stringify(data.meta.contracts) !== JSON.stringify(release.contracts)) err("meta", "contracts ≠ RELEASE.json");
+}
 
 // 9. liczby z tabeli 5.0
 for (const [type, expected] of Object.entries(EXPECTED)) {
@@ -109,4 +113,4 @@ if (errors.length) {
   console.error(`Walidacja: ${errors.length} błędów\n  ` + errors.join("\n  "));
   process.exit(1);
 }
-console.log(`Walidacja: OK (${data.nodes.length} elementów, ${data.edges.length} relacji)`);
+console.log(`Walidacja: OK (${data.nodes.length} elementów, ${data.edges.length} relacji)${OFFLINE ? " — bez repozytorium Huba: pominięto źródła i wersje" : ""}`);
