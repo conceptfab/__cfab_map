@@ -601,6 +601,8 @@ $$\text{Koszt Dodatkowy} = \text{Sekundy Renderu} \times \text{Współczynnik RB
 - Otwarte: Hub nie wysyła jeszcze propozycji kosztów, znalezisk audytu sceny (brakujące tekstury jako zadania projektu) ani prognoz kosztu przed kolejką.
 
 ### 4.7. Wizualny Dowód Pracy w Raportach 🟡
+> **Usunięte z mapy 2026-09-25 decyzją właściciela** — funkcja nie jest pokazywana inwestorom.
+
 - Hub zapisuje w rejestrze renderów miniaturę ostatniej klatki (PNG z EXRustera), a TIMEFLOW przenosi ją do galerii renderów w raporcie PDF dla klienta.
 - Do 2026-09-24 obraz nie wyświetlał się w raporcie (webview bez protokołu `asset`, CSP bez takich źródeł). Poprawka w TIMEFLOW osadza miniaturę jako `data:` URL po stronie backendu raportu — niewydana, odbiór na żywym raporcie trwa.
 - Oś czasu projektu w TIMEFLOW **nie** pokazuje miniatur.
@@ -644,9 +646,9 @@ dają następujący rozkład (stan 2026-09-24):
 | `module` — moduły Huba | 9 | rail aplikacji (rozdz. 2.1–2.9) |
 | `module` — części warstwy wspólnej Huba | 7 | shell, service, cfab_core, cfab_ui, cfab_contracts, cfab_bridge, cfab_native (rozdz. 2.10) |
 | `module` — obszary TIMEFLOW | 14 | nawigacja aplikacji (rozdz. 3) |
-| `bridge` — elementy pomostu synergii | 8 | rozdz. 4.1–4.8 (4.9 to tabela etapów, nie element) |
+| `bridge` — elementy pomostu synergii | 7 | rozdz. 4.1–4.6 i 4.8 (4.7 usunięte z mapy 2026-09-25; 4.9 to tabela etapów, nie element) |
 | `feature` — funkcje | **133** | wypunktowania ze statusem w rozdz. 2–3: Hub 79, TIMEFLOW 54 |
-| **Razem** | **173 elementy** | |
+| **Razem** | **172 elementy** | |
 
 Metoda liczenia `feature`: każde wypunktowanie oznaczone 🟢 / 🟡 / ⚪ w rozdziałach 2–4 to
 jedna funkcja; podpunkty bez własnego znacznika statusu są treścią karty tej funkcji, nie

@@ -157,12 +157,6 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const position = (p: Point) => orbitalPosition(p, phase);
   const bridgeNetwork = size.width >= 1150;
   const bridges = graph.points.filter(p => p.node.nodeType === "bridge");
-  const bridgePath = bridges.map((p, i) => {
-    if (i === 0) return `M ${p.x} ${p.y}`;
-    const previous = bridges[i - 1];
-    const middleY = (previous.y + p.y) / 2;
-    return `C ${previous.x} ${middleY} ${p.x} ${middleY} ${p.x} ${p.y}`;
-  }).join(" ");
   const radius = (p: Point) => p.node.nodeType === "ecosystem" ? 6 : p.node.nodeType === "module" ? 5 : p.node.nodeType === "bridge" ? 4 : 3.2;
   // Stable labels: try nearby free positions before using a short leader line.
   // Selection never reorders labels or shrinks the text.
@@ -223,10 +217,6 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
           <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="rgba(0,0,0,0.28)" />
         </filter>
       </defs>
-      {bridgeNetwork && <g className="bridge-backdrop" transform={transform.toString()} aria-hidden="true">
-        <path className="bridge-spine-glow" d={bridgePath} />
-        <path className="bridge-spine" d={bridgePath} />
-      </g>}
       <g className="orbit-tracks" transform={transform.toString()} aria-hidden="true">
         {graph.orbits.map(orbit => <circle key={orbit.id} cx={orbit.x} cy={orbit.y} r={orbit.radius} vectorEffect="non-scaling-stroke" />)}
       </g>

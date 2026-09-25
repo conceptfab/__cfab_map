@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-09-24T22:34:22.343Z",
-    "hubVersion": "BETA 0.43",
+    "generatedAt": "2026-09-25T07:44:57.618Z",
+    "hubVersion": "BETA 0.443",
     "timeflowVersion": "0.1.5776",
     "contracts": {
       "module": 2,
@@ -18,7 +18,7 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "07eb8af",
+    "sourceCommit": "150a5af",
     "distribution": "investor"
   },
   "nodes": [
@@ -65,7 +65,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.43",
+      "version": "BETA 0.443",
       "contract": null,
       "sources": [],
       "keywords": [],
@@ -295,7 +295,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.10",
+      "version": "0.9.3",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -663,7 +663,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.955",
+      "version": "ALPHA 0.956",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1840,63 +1840,6 @@
       "advantageId": null
     },
     {
-      "id": "syn.proof",
-      "nodeType": "bridge",
-      "app": "synergy",
-      "module": "",
-      "parentId": null,
-      "title": {
-        "pl": "Miniatury renderów w raportach",
-        "en": "Render thumbnails in reports"
-      },
-      "shortTitle": {
-        "pl": "Miniatury w raporcie",
-        "en": "Thumbnails in report"
-      },
-      "summary": {
-        "pl": "Hub zapisuje w rejestrze renderów miniaturę ostatniej klatki zrobioną przez EXRustera, a TIMEFLOW przenosi jej ścieżkę do galerii renderów w raporcie PDF.",
-        "en": "Hub stores an EXRuster thumbnail of the last frame in the render log, and TIMEFLOW carries its path into the render gallery of the PDF report."
-      },
-      "category": "integration",
-      "stage": "report",
-      "order": 6,
-      "audiences": [
-        "agency_owner",
-        "investor"
-      ],
-      "techMoat": {
-        "isUniqueMoat": false,
-        "description": null
-      },
-      "techStack": [
-        "Rust",
-        "React"
-      ],
-      "replacesTools": [],
-      "businessValue": {
-        "timeSavedHoursMonth": 0,
-        "costAvoidedPerSeatMonthUSD": 0,
-        "revenueRecoveryPct": 0,
-        "financialGainType": "cost_reduction",
-        "assumptionId": ""
-      },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Wyświetlanie w PDF poprawione w kodzie TIMEFLOW (niewydane); odbiór na żywym raporcie trwa.",
-        "en": "PDF display fixed in TIMEFLOW code (unreleased); sign-off on a live report pending."
-      },
-      "version": null,
-      "contract": null,
-      "sources": [],
-      "keywords": [
-        "proof of work",
-        "miniatury",
-        "thumbnails",
-        "pdf"
-      ],
-      "advantageId": null
-    },
-    {
       "id": "syn.presence",
       "nodeType": "bridge",
       "app": "synergy",
@@ -1916,7 +1859,7 @@
       },
       "category": "integration",
       "stage": null,
-      "order": 7,
+      "order": 6,
       "audiences": [
         "agency_owner",
         "investor"
@@ -3955,7 +3898,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.10",
+      "version": "0.9.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4009,7 +3952,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.10",
+      "version": "0.9.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4062,7 +4005,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.10",
+      "version": "0.9.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4117,7 +4060,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.8.10",
+      "version": "0.9.3",
       "contract": null,
       "sources": [
         "Results"
@@ -5900,7 +5843,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.955",
+      "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
         "Core"
@@ -5957,7 +5900,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.955",
+      "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
         "Core"
@@ -6012,7 +5955,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.955",
+      "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
         "Core"
@@ -6064,7 +6007,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.955",
+      "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
         "Core"
@@ -9238,30 +9181,7 @@
       "status": "beta"
     },
     {
-      "id": "e009.hub.results.thumb_cache->syn.proof",
-      "from": "hub.results.thumb_cache",
-      "to": "syn.proof",
-      "type": "file_exchange",
-      "label": {
-        "pl": "miniatury",
-        "en": "thumbnails"
-      },
-      "contract": null,
-      "animated": true,
-      "status": "production"
-    },
-    {
-      "id": "e010.syn.proof->tf.reports.pdf",
-      "from": "syn.proof",
-      "to": "tf.reports.pdf",
-      "type": "data_flow",
-      "label": null,
-      "contract": null,
-      "animated": true,
-      "status": "production"
-    },
-    {
-      "id": "e011.hub.render.ledger->syn.cfabx",
+      "id": "e009.hub.render.ledger->syn.cfabx",
       "from": "hub.render.ledger",
       "to": "syn.cfabx",
       "type": "file_exchange",
@@ -9274,7 +9194,7 @@
       "status": "production"
     },
     {
-      "id": "e012.syn.cfabx->tf.renders.offline",
+      "id": "e010.syn.cfabx->tf.renders.offline",
       "from": "syn.cfabx",
       "to": "tf.renders.offline",
       "type": "file_exchange",
@@ -9287,7 +9207,7 @@
       "status": "production"
     },
     {
-      "id": "e013.hub.render.single->syn.machine_time",
+      "id": "e011.hub.render.single->syn.machine_time",
       "from": "hub.render.single",
       "to": "syn.machine_time",
       "type": "data_flow",
@@ -9300,7 +9220,7 @@
       "status": "beta"
     },
     {
-      "id": "e014.syn.machine_time->tf.daemon.background",
+      "id": "e012.syn.machine_time->tf.daemon.background",
       "from": "syn.machine_time",
       "to": "tf.daemon.background",
       "type": "data_flow",
@@ -9310,7 +9230,7 @@
       "status": "beta"
     },
     {
-      "id": "e015.hub.bridges.c4d->syn.dcc_activity",
+      "id": "e013.hub.bridges.c4d->syn.dcc_activity",
       "from": "hub.bridges.c4d",
       "to": "syn.dcc_activity",
       "type": "data_flow",
@@ -9323,7 +9243,7 @@
       "status": "beta"
     },
     {
-      "id": "e016.syn.dcc_activity->tf.ai.facts_first",
+      "id": "e014.syn.dcc_activity->tf.ai.facts_first",
       "from": "syn.dcc_activity",
       "to": "tf.ai.facts_first",
       "type": "data_flow",
@@ -9336,7 +9256,7 @@
       "status": "beta"
     },
     {
-      "id": "e017.syn.beacons->hub.core.diagnostic",
+      "id": "e015.syn.beacons->hub.core.diagnostic",
       "from": "syn.beacons",
       "to": "hub.core.diagnostic",
       "type": "file_exchange",
@@ -9346,7 +9266,7 @@
       "status": "production"
     },
     {
-      "id": "e018.syn.beacons->tf.renders.integration_state",
+      "id": "e016.syn.beacons->tf.renders.integration_state",
       "from": "syn.beacons",
       "to": "tf.renders.integration_state",
       "type": "file_exchange",
@@ -9356,7 +9276,7 @@
       "status": "production"
     },
     {
-      "id": "e019.syn.beacons->hub.render.tf_tab",
+      "id": "e017.syn.beacons->hub.render.tf_tab",
       "from": "syn.beacons",
       "to": "hub.render.tf_tab",
       "type": "file_exchange",
@@ -9366,7 +9286,7 @@
       "status": "production"
     },
     {
-      "id": "e020.tf.projects.projects->hub.start.active_badge",
+      "id": "e018.tf.projects.projects->hub.start.active_badge",
       "from": "tf.projects.projects",
       "to": "hub.start.active_badge",
       "type": "data_flow",
@@ -9379,7 +9299,7 @@
       "status": "production"
     },
     {
-      "id": "e021.hub.results.sequences->hub.render.queue",
+      "id": "e019.hub.results.sequences->hub.render.queue",
       "from": "hub.results.sequences",
       "to": "hub.render.queue",
       "type": "data_flow",
@@ -9392,7 +9312,7 @@
       "status": "production"
     },
     {
-      "id": "e022.hub.render.precheck->hub.render.queue",
+      "id": "e020.hub.render.precheck->hub.render.queue",
       "from": "hub.render.precheck",
       "to": "hub.render.queue",
       "type": "depends_on",
@@ -9402,7 +9322,7 @@
       "status": "production"
     },
     {
-      "id": "e023.hub.render.recovery->hub.render.queue",
+      "id": "e021.hub.render.recovery->hub.render.queue",
       "from": "hub.render.recovery",
       "to": "hub.render.queue",
       "type": "depends_on",
@@ -9412,7 +9332,7 @@
       "status": "beta"
     },
     {
-      "id": "e024.hub.render.lan_farm->hub.bridges.c4d",
+      "id": "e022.hub.render.lan_farm->hub.bridges.c4d",
       "from": "hub.render.lan_farm",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9422,7 +9342,7 @@
       "status": "beta"
     },
     {
-      "id": "e025.hub.render.queue->hub.bridges.c4d",
+      "id": "e023.hub.render.queue->hub.bridges.c4d",
       "from": "hub.render.queue",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9432,7 +9352,7 @@
       "status": "production"
     },
     {
-      "id": "e026.hub.assets.relink->hub.bridges.c4d",
+      "id": "e024.hub.assets.relink->hub.bridges.c4d",
       "from": "hub.assets.relink",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9445,7 +9365,7 @@
       "status": "production"
     },
     {
-      "id": "e027.hub.bridges.blender->hub.scratch.zones",
+      "id": "e025.hub.bridges.blender->hub.scratch.zones",
       "from": "hub.bridges.blender",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9458,7 +9378,7 @@
       "status": "production"
     },
     {
-      "id": "e028.hub.bridges.max->hub.scratch.zones",
+      "id": "e026.hub.bridges.max->hub.scratch.zones",
       "from": "hub.bridges.max",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9471,7 +9391,7 @@
       "status": "beta"
     },
     {
-      "id": "e029.hub.bridges.modo->hub.scratch.zones",
+      "id": "e027.hub.bridges.modo->hub.scratch.zones",
       "from": "hub.bridges.modo",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9484,7 +9404,7 @@
       "status": "beta"
     },
     {
-      "id": "e030.hub.bridges.c4d->hub.scratch.zones",
+      "id": "e028.hub.bridges.c4d->hub.scratch.zones",
       "from": "hub.bridges.c4d",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9497,7 +9417,7 @@
       "status": "production"
     },
     {
-      "id": "e031.hub.bridges.blender_mats->hub.bridges.c4d",
+      "id": "e029.hub.bridges.blender_mats->hub.bridges.c4d",
       "from": "hub.bridges.blender_mats",
       "to": "hub.bridges.c4d",
       "type": "file_exchange",
@@ -9510,7 +9430,7 @@
       "status": "beta"
     },
     {
-      "id": "e032.hub.scenes.max_import->hub.bridges.c4d",
+      "id": "e030.hub.scenes.max_import->hub.bridges.c4d",
       "from": "hub.scenes.max_import",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9520,7 +9440,7 @@
       "status": "beta"
     },
     {
-      "id": "e033.hub.scenes.max_reader->hub.scenes.max_import",
+      "id": "e031.hub.scenes.max_reader->hub.scenes.max_import",
       "from": "hub.scenes.max_reader",
       "to": "hub.scenes.max_import",
       "type": "data_flow",
@@ -9530,7 +9450,7 @@
       "status": "beta"
     },
     {
-      "id": "e034.hub.scenes.max_space->hub.scenes.max_import",
+      "id": "e032.hub.scenes.max_space->hub.scenes.max_import",
       "from": "hub.scenes.max_space",
       "to": "hub.scenes.max_import",
       "type": "depends_on",
@@ -9540,7 +9460,7 @@
       "status": "beta"
     },
     {
-      "id": "e035.hub.browser.jit->hub.scratch.zones",
+      "id": "e033.hub.browser.jit->hub.scratch.zones",
       "from": "hub.browser.jit",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9550,7 +9470,7 @@
       "status": "production"
     },
     {
-      "id": "e036.hub.browser.visual_search->hub.browser.asset_format",
+      "id": "e034.hub.browser.visual_search->hub.browser.asset_format",
       "from": "hub.browser.visual_search",
       "to": "hub.browser.asset_format",
       "type": "depends_on",
@@ -9560,7 +9480,7 @@
       "status": "beta"
     },
     {
-      "id": "e037.hub.browser.errors_tab->hub.browser.pairing",
+      "id": "e035.hub.browser.errors_tab->hub.browser.pairing",
       "from": "hub.browser.errors_tab",
       "to": "hub.browser.pairing",
       "type": "data_flow",
@@ -9570,7 +9490,7 @@
       "status": "beta"
     },
     {
-      "id": "e038.hub.native.native->hub.browser.tools",
+      "id": "e036.hub.native.native->hub.browser.tools",
       "from": "hub.native.native",
       "to": "hub.browser.tools",
       "type": "depends_on",
@@ -9580,7 +9500,7 @@
       "status": "production"
     },
     {
-      "id": "e039.hub.core.mcp->hub.render.ledger",
+      "id": "e037.hub.core.mcp->hub.render.ledger",
       "from": "hub.core.mcp",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -9590,7 +9510,7 @@
       "status": "production"
     },
     {
-      "id": "e040.tf.mcp_tools->tf.projects.projects",
+      "id": "e038.tf.mcp_tools->tf.projects.projects",
       "from": "tf.mcp_tools",
       "to": "tf.projects.projects",
       "type": "data_flow",
@@ -9600,7 +9520,7 @@
       "status": "production"
     },
     {
-      "id": "e041.tf.mcp_backup->tf.mcp_tools",
+      "id": "e039.tf.mcp_backup->tf.mcp_tools",
       "from": "tf.mcp_backup",
       "to": "tf.mcp_tools",
       "type": "depends_on",
@@ -9610,7 +9530,7 @@
       "status": "production"
     },
     {
-      "id": "e042.tf.daemon.events->tf.sessions.no_double",
+      "id": "e040.tf.daemon.events->tf.sessions.no_double",
       "from": "tf.daemon.events",
       "to": "tf.sessions.no_double",
       "type": "data_flow",
@@ -9620,7 +9540,7 @@
       "status": "production"
     },
     {
-      "id": "e043.tf.daemon.title_parser->tf.ai.layer_tokens",
+      "id": "e041.tf.daemon.title_parser->tf.ai.layer_tokens",
       "from": "tf.daemon.title_parser",
       "to": "tf.ai.layer_tokens",
       "type": "data_flow",
@@ -9630,7 +9550,7 @@
       "status": "production"
     },
     {
-      "id": "e044.tf.ai.auto_safe->tf.sessions.timeline",
+      "id": "e042.tf.ai.auto_safe->tf.sessions.timeline",
       "from": "tf.ai.auto_safe",
       "to": "tf.sessions.timeline",
       "type": "data_flow",
@@ -9640,7 +9560,7 @@
       "status": "production"
     },
     {
-      "id": "e045.tf.sessions.split->tf.estimates.estimates",
+      "id": "e043.tf.sessions.split->tf.estimates.estimates",
       "from": "tf.sessions.split",
       "to": "tf.estimates.estimates",
       "type": "data_flow",
@@ -9653,7 +9573,7 @@
       "status": "production"
     },
     {
-      "id": "e046.tf.renders.render_sync->tf.data.lan_sync",
+      "id": "e044.tf.renders.render_sync->tf.data.lan_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.lan_sync",
       "type": "depends_on",
@@ -9663,7 +9583,7 @@
       "status": "beta"
     },
     {
-      "id": "e047.tf.renders.render_sync->tf.data.cloud_sync",
+      "id": "e045.tf.renders.render_sync->tf.data.cloud_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.cloud_sync",
       "type": "depends_on",
@@ -9673,7 +9593,7 @@
       "status": "beta"
     },
     {
-      "id": "e048.hub.core.autostart->syn.presence",
+      "id": "e046.hub.core.autostart->syn.presence",
       "from": "hub.core.autostart",
       "to": "syn.presence",
       "type": "data_flow",
@@ -9683,7 +9603,7 @@
       "status": "beta"
     },
     {
-      "id": "e049.syn.proposals->tf.pm.pm",
+      "id": "e047.syn.proposals->tf.pm.pm",
       "from": "syn.proposals",
       "to": "tf.pm.pm",
       "type": "data_flow",
@@ -9696,7 +9616,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e050.hub.assets.audit->syn.proposals",
+      "id": "e048.hub.assets.audit->syn.proposals",
       "from": "hub.assets.audit",
       "to": "syn.proposals",
       "type": "data_flow",
@@ -9706,7 +9626,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e051.hub.render.ledger_always->hub.render.ledger",
+      "id": "e049.hub.render.ledger_always->hub.render.ledger",
       "from": "hub.render.ledger_always",
       "to": "hub.render.ledger",
       "type": "depends_on",
@@ -9716,7 +9636,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e052.hub.render.single->hub.render.ledger",
+      "id": "e050.hub.render.single->hub.render.ledger",
       "from": "hub.render.single",
       "to": "hub.render.ledger",
       "type": "data_flow",
