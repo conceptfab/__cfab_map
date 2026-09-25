@@ -250,7 +250,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - Ekstrakcja geometrii: odczyt tablic punktów (float64: $X, Y, Z$), poligonów i czworokątów (quads), koordynatów UV (float32, 8 wartości/wielokąt), normalnych wierzchołkowych (int16 ze skalowaniem 32000) oraz wag map wierzchołków (Vertex Maps).
   - Rekonstrukcja hierarchii sceny: wyliczanie globalnych macierzy transformacji wzdłuż drzewa `parent_uid` z uwzględnieniem rotacji HPB ($R_y(-H) \cdot R_x(-P) \cdot R_z(-B)$).
   - Identyfikacja generatorów proceduralnych: wykrywanie obiektów Cloner, Instance, deformerów i powiadamianie o braku siatki bezpośredniej w pliku.
-  - Rdzeń parsera **bez zależności zewnętrznych** — czysty Python 3.9+ (zasada projektu, potwierdzona w [audyt.md](audyt.md)).
+  - Rdzeń parsera w Pythonie 3.9+; jedyną zależnością jest NumPy (tablice UV i normalnych, decyzja 2026-09-24). Przyspieszenie w Ruście ma wersję zapasową w czystym Pythonie.
 - 🟢 **Czytnik formatu 3ds Max (`MaxAsset`):** bezemisyjny odczyt plików `.max` opartych na strukturach OLE Compound Document; ekstrakcja drzewa węzłów, stosu modyfikatorów, właściwości materiałowych, świateł i kamer z parametrami, ustawień renderu, wtyczek zapisanych w scenie i twardych ścieżek zasobów.
 - 🟢 **Narzędzia diagnostyczne i inspekcyjne:**
   - `c4ddiff` ([modules/scenes/parser/c4ddiff.py](modules/scenes/parser/c4ddiff.py)): binarne porównywanie dwóch scen i natychmiastowa identyfikacja zmienionych parametrów.
@@ -263,6 +263,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Domyślny format wymiany i automatyczna naprawa siatki:** jedno ustawienie decydujące, czym moduły wymieniają geometrię (GLB / OBJ / FBX / USD) oraz czy siatka przechodzi naprawę przy transferze.
 - 🟢 **Inspekcja materiałów i tekstur:** Podgląd zaszytych w pliku miniatur materiałów, inwentaryzacja zależności bitmapowych, mapowanie kanałów, weryfikacja brakujących zasobów.
 - 🟢 **Drzewo obiektów o wysokiej ergonomii:** Szybkie rozwijanie/zwijanie gałęzi, zaawansowane wyszukiwanie z zachowaniem kontekstu hierarchii, filtry widoczności (edytor/render z dziedziczeniem po rodzicach — wskaźniki kropkowe zgodne z C4D Object Manager).
+- 🟢 **Szybszy odczyt dużych scen (Rust + NumPy):** nazwy obiektów w `.c4d` wyszukuje moduł Rust `scene_scan` (z wersją zapasową w Pythonie), UV i normalne są tablicami NumPy, a strumień `.max` jest czytany ciągami sektorów do jednego bufora. Scena `.c4d` 189 MB: odczyt 5,08 s → 1,78 s. Scena `.max` 858 MB: 0,91 s → 0,54 s, szczyt pamięci 1835 → 874 MB. Eksport OBJ/GLB i odczytane strumienie są bajt w bajt takie jak wcześniej.
 
 ### 2.3. Moduł: Render & Orkiestracja (`modules/render`, ALPHA 0.72)
 *Centrala dowodzenia renderem studyjnym, kolejkowaniem, monitoringiem zdalnym i rozliczeniami.*
@@ -313,6 +314,9 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - Ograniczenie współbieżnych procesów dekodujących (maks. 4 wątki robocze) eliminujące zacinanie interfejsu przy katalogach z tysiącami ujęć.
   - Automatyczne czyszczenie osieroconych plików tymczasowych (`.part.png`) i starych kluczy poza wątkiem GUI.
   - Nagłówek EXR i podgląd 1080 poza wątkiem GUI; odtwarzanie sekwencji trzyma jedno ładowanie naraz.
+- 🟢 **Płynna praca z dużymi plikami EXR (6000 px, kilkanaście warstw):** EXRuster dekoduje tylko kanały pokazywanej warstwy i otwiera plik leniwie (pozostałe warstwy na żądanie, pamięć podręczna z limitem), podgląd liczy w rozdzielczości okna, a miniatury zmniejsza już w trakcie dekodowania. Plik 6000×4000 z 12 warstwami: otwarcie 2,3 s i 3,5 GB RAM → 0,30 s i 0,94 GB. Okno podglądu sekwencji przygotowuje w tle kolejne klatki, więc przewijanie nie czeka.
+- 🟢 **TIFF i PSD/PSB w Wynikach:** EXRuster czyta sam spłaszczony obraz i pomija blok warstw Photoshopa, który zajmuje 80–90% pliku. Obsługuje TIFF-y z C4D z dodatkowymi kanałami, których Qt nie czyta, a 32-bitowe TIFF-y mapuje tonalnie jak EXR. PSB 8033×45452 (633 MB): miniatura w 4,6 s przy 4 MB RAM. Wątek GUI Huba nie dekoduje żadnego dużego obrazu.
+- 🟢 **OpenImageIO w Wynikach i EXRusterze:** przypięta wersja OpenImageIO 3.1.17 (repozytorium `cfab_oiio`, macOS i Windows, sumy SHA-256). Hub robi przez `oiiotool` miniatury DDS i JPEG 2000 oraz zapasowe miniatury EXR/HDR/TIFF/PSD, gdy EXRustera brak. EXRuster eksportuje bieżącą warstwę do JPG przez ACES 2.0, naprawia NaN/Inf w nowym pliku EXR i zapisuje warstwę jako teksturę TX; oryginał zawsze zostaje. Dekodery EXRustera są sprawdzane testami, w których wzorcem jest OpenImageIO.
 
 ### 2.5. Moduł: Zasoby Sceny & Relink (`modules/assets`, ALPHA 0.22)
 *Audytor spójności sceny 3D i automatyczny naprawiacz brakujących ścieżek.*
@@ -402,6 +406,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Zarządzanie skryptami produkcyjnymi:** wyselekcjonowane, przetestowane narzędzia w [catalog/](catalog/README.md): **31 skryptów Python dla Cinema 4D** w 8 grupach (corona-bitmapy, corona-override, materiały, proxy-corona, proxy-vray, scena-obiekty, scena-struktura, tekstury) oraz **3 dodatki do Blendera** (CFAB Mesh Tool, LiquiFeel, NodePreview) — stan wg `catalog/catalog.json`. Pula źródłowa poza repozytorium liczy ~300 plików — do pakietu wchodzi wyłącznie część po audycie.
 - 🟢 **Bezpieczeństwo i audyt:** narzędzia przeszły audyt ([docs/audits/2026-09-15/cfab-tools.md](docs/audits/2026-09-15/cfab-tools.md)) pod kątem wycieków pamięci, bezpieczeństwa kodu i kompatybilności wersji; szkice, testy i materiały obce (keygeny, archiwa RAR, sekrety SMTP, zasoby Quixel) świadomie **nie wchodzą** do pakietu.
 - 🟢 **Instalacja profilowa:** osobne zakładki Cinema 4D / Blender, liczba skryptów, oceny i opisy, ikony z systemu projektowego, akcje zainstaluj / aktualizuj / cofnij / usuń w konkretnych wersjach środowisk graficznych z poziomu jednego okna Huba; rozpoznawanie już wgranych dodatków po plikach, nie tylko po rejestrze JSON Huba.
+- 🟢 **Plasticity Bridge dla Cinema 4D i Blendera:** wtyczka Plasticity dla C4D (open source, MIT) i dodatek Plasticity dla Blendera instalują się i aktualizują z katalogu jak pozostałe narzędzia. Bryły z Plasticity trafiają do otwartej sceny bez eksportu plików pośrednich.
 
 ### 2.10. Powłoka, usługa i rdzeń współdzielony *(warstwa niewidoczna dla użytkownika, kluczowa dla inwestora)*
 *Ta warstwa nie ma własnej zakładki w railu, ale to ona sprawia, że 9 modułów zachowuje się jak jeden produkt.*
@@ -411,7 +416,8 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 - 🟢 **Rdzeń `cfab_core` (ALPHA 0.95):** magistrala zdarzeń (`events`), rejestr akcji międzymodułowych bez importów krzyżowych (`actions`), zadania w tle bez zależności od Qt (`tasks`), rotujące logi per rola procesu (`logs`), i18n PL/EN (`i18n`), wykrywanie DCC (`dcc`, `programs`, `tools`), odczyt EXR (`exr`), numeracja klatek (`frames`), archiwa (`archives`), transfer między DCC (`transfer`), magazyn scratch (`storage`), ustawienia (`settings`), wersjonowanie (`version`).
 - 🟢 **Kontrakty `cfab_contracts` (ALPHA 0.53):** jedno miejsce z numerami kontraktów; zmiana kontraktu wymusza testy wszystkich części, które go czytają.
 - 🟢 **System projektowy `cfab_ui` (ALPHA 0.663):** tokeny (`tokens.json`), generator stylów QSS, komponenty, galeria zrzutów PL/EN, generator motywu dla Slinta (`colors.slint`). **Zero literałów kolorów w modułach** — pilnuje tego `tests/test_design_system.py`.
-- 🟢 **Natywne krate'y Rust `cfab_native` (0.2.0):** `scanner` (skan bibliotek), `image_tools` (konwersje i miniatury), `hash_utils` (sumy kontrolne, wykrywanie duplikatów).
+- 🟢 **Natywne krate'y Rust `cfab_native` (0.4.0):** `scanner` (skan bibliotek), `image_tools` (konwersje i miniatury), `hash_utils` (sumy kontrolne, wykrywanie duplikatów), `scene_scan` (nazwy obiektów w scenach `.c4d`).
+- 🟢 **Budowanie i kontrola modułów Rust:** `tools/rust` buduje `cfab_native` i EXRustera jednym poleceniem i aktualizuje zależności Cargo (po nieudanym buildzie przywraca poprzedni `Cargo.lock`, uruchamia `cargo audit`). Ustawienia → Dane pokazują stan każdego modułu z przyciskiem „Sprawdź działanie”, a pasek stanu ma wskaźnik „Rust 4/4”.
 - 🟢 **Serwer MCP Huba** ([shared/cfab_core/mcp_server.py](shared/cfab_core/mcp_server.py)): lokalny serwer Model Context Protocol (`cfab-hub-mcp`, port 8423, **wyłącznie loopback, wyłącznie odczyt**, hardened headers) wystawiający agentom AI: `list_render_jobs`, `get_render_ledger`, `get_active_documents`, `get_integration_status`, `get_project_summary`. Włączany w Ustawienia → Integracja.
 - 🟢 **Raport diagnostyczny integracji** ([shared/cfab_core/diagnostic.py](shared/cfab_core/diagnostic.py)): stan obu latarni, wyniki prób połączenia z bazami, numery kontraktów po obu stronach — jeden przycisk zamiast zgadywania, gdzie pękła integracja.
 - 🟢 **Skoordynowany autostart** ([shared/cfab_core/autostart.py](shared/cfab_core/autostart.py)): opcja „Uruchamiaj TIMEFLOW razem z CFAB Hub” oraz autostart serwera MCP.
@@ -638,7 +644,7 @@ porządku, a nie przez gęstość świecących punktów.
 ### 5.0. Budżet elementów — skąd bierze się liczba na liczniku
 
 Liczby na liczniku muszą wynikać z pliku danych, nie z odczucia. Rozdziały 2–4 tego dokumentu
-dają następujący rozkład (stan 2026-09-24):
+dają następujący rozkład (stan 2026-09-25):
 
 | Typ elementu (`nodeType`) | Liczba | Skąd |
 |---|---|---|
@@ -647,8 +653,8 @@ dają następujący rozkład (stan 2026-09-24):
 | `module` — części warstwy wspólnej Huba | 7 | shell, service, cfab_core, cfab_ui, cfab_contracts, cfab_bridge, cfab_native (rozdz. 2.10) |
 | `module` — obszary TIMEFLOW | 14 | nawigacja aplikacji (rozdz. 3) |
 | `bridge` — elementy pomostu synergii | 7 | rozdz. 4.1–4.6 i 4.8 (4.7 usunięte z mapy 2026-09-25; 4.9 to tabela etapów, nie element) |
-| `feature` — funkcje | **133** | wypunktowania ze statusem w rozdz. 2–3: Hub 79, TIMEFLOW 54 |
-| **Razem** | **172 elementy** | |
+| `feature` — funkcje | **139** | wypunktowania ze statusem w rozdz. 2–3: Hub 85, TIMEFLOW 54 |
+| **Razem** | **178 elementów** | |
 
 Metoda liczenia `feature`: każde wypunktowanie oznaczone 🟢 / 🟡 / ⚪ w rozdziałach 2–4 to
 jedna funkcja; podpunkty bez własnego znacznika statusu są treścią karty tej funkcji, nie
@@ -657,7 +663,7 @@ i ledger bez TIMEFLOW, 4.8: autostart przy logowaniu) powtarzają funkcje z rozd
 liczą się raz, jako funkcje swojego modułu. Generator (rozdz. 10) liczy tak samo — jeśli jego wynik różni się od
 tabeli, poprawia się tabelę, nie generator.
 
-Komunikat dla inwestora: **„2 systemy · 30 modułów · 133 udokumentowane funkcje · 4 mosty DCC
+Komunikat dla inwestora: **„2 systemy · 30 modułów · 139 udokumentowanych funkcji · 4 mosty DCC
 + most UV · 2 serwery MCP · lokalne wyszukiwanie AI · farma renderująca w LAN · 100% local-first”**.
 Każda z tych liczb ma pokrycie w tabeli wyżej i w pliku danych — nie wolno ich zaokrąglać
 w górę „na oko”.
@@ -676,7 +682,7 @@ Siatka, w której **kolumny to etapy pracy**, a **kolory to programy**:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][133 funkcje][4 mosty][2 MCP][0 %] │
+│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][139 funkcji][4 mosty][2 MCP][0 %] │
 │ [Mapa zakresu] [Moduły] [Matryca]      Filtry: Program · Status · Moaty · Odbiorca   [PL|EN] │
 ├──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬─────────────────┤
 │1 Zasoby  │2 Scena   │3 Inspek- │4 Render  │5 Wyniki  │6 Czas    │7 Wycena  │8 Raport         │
@@ -1240,7 +1246,7 @@ temu zieleń zostaje wyłącznie kolorem TIMEFLOW i nie myli się z „gotowe”
 Efekt ma służyć czytaniu, nie konkurować z nim. Dozwolone są trzy:
 - **Spacer po etapach** (rozdz. 5.1.4) — kolumny podświetlane kolejno 1 → 8, z jednym zdaniem o dniu pracy freelancera na każdym etapie. To jest główny punkt demo na spotkaniu.
 - **Impulsy na liniach relacji** `data_flow` i `file_exchange` między Hubem a TIMEFLOW (latarnie, ledger, `.cfabx`, miniatury) — wyłącznie gdy relacja jest podświetlona.
-- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `133 Funkcje`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
+- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `139 Funkcji`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
 
 ### 9.4. Materiały wspierające
 - Pobranie z poziomu mapy zsyntetyzowanego raportu PDF (*One-Pager / Pitch Deck Summary*) z tabelą założeń ROI w przypisach.

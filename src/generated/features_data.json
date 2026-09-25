@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-09-25T07:44:57.618Z",
-    "hubVersion": "BETA 0.443",
+    "generatedAt": "2026-09-25T09:14:51.926Z",
+    "hubVersion": "BETA 0.451",
     "timeflowVersion": "0.1.5776",
     "contracts": {
       "module": 2,
@@ -18,8 +18,8 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "150a5af",
-    "distribution": "investor"
+    "sourceCommit": "4e62b57",
+    "distribution": "internal"
   },
   "nodes": [
     {
@@ -65,7 +65,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.443",
+      "version": "BETA 0.451",
       "contract": null,
       "sources": [],
       "keywords": [],
@@ -159,7 +159,9 @@
       "statusNote": null,
       "version": "ALPHA 0.212",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/start"
+      ],
       "keywords": [
         "start",
         "start"
@@ -205,7 +207,9 @@
       "statusNote": null,
       "version": "1.8.0",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/browser"
+      ],
       "keywords": [
         "biblioteka",
         "library"
@@ -251,7 +255,9 @@
       "statusNote": null,
       "version": "ALPHA 0.73",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/render"
+      ],
       "keywords": [
         "render",
         "render"
@@ -295,9 +301,11 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.10.1",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/results"
+      ],
       "keywords": [
         "wyniki",
         "results"
@@ -343,7 +351,9 @@
       "statusNote": null,
       "version": "ALPHA 0.223",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/assets"
+      ],
       "keywords": [
         "zasoby",
         "assets"
@@ -389,7 +399,9 @@
       "statusNote": null,
       "version": "ALPHA 0.629",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/scenes"
+      ],
       "keywords": [
         "inspektor",
         "inspector"
@@ -435,7 +447,9 @@
       "statusNote": null,
       "version": "ALPHA 0.133",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/scratch"
+      ],
       "keywords": [
         "robocze",
         "scratch"
@@ -481,7 +495,9 @@
       "statusNote": null,
       "version": "BETA 0.116",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/plugins"
+      ],
       "keywords": [
         "wtyczki",
         "plug-ins"
@@ -527,7 +543,9 @@
       "statusNote": null,
       "version": "ALPHA 0.712",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/bridges"
+      ],
       "keywords": [
         "połączenia",
         "connections"
@@ -573,7 +591,9 @@
       "statusNote": null,
       "version": "ALPHA 0.72",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shell/cfab_shell"
+      ],
       "keywords": [
         "interfejs huba",
         "shell"
@@ -619,7 +639,9 @@
       "statusNote": null,
       "version": "ALPHA 0.726",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:service/cfab_service"
+      ],
       "keywords": [
         "usługa w tle",
         "service"
@@ -665,7 +687,9 @@
       "statusNote": null,
       "version": "ALPHA 0.956",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core"
+      ],
       "keywords": [
         "rdzeń",
         "core"
@@ -711,7 +735,9 @@
       "statusNote": null,
       "version": "ALPHA 0.531",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_contracts"
+      ],
       "keywords": [
         "wersje połączeń",
         "contracts"
@@ -757,7 +783,9 @@
       "statusNote": null,
       "version": "ALPHA 0.665",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_ui"
+      ],
       "keywords": [
         "system projektowy",
         "design system"
@@ -803,7 +831,9 @@
       "statusNote": null,
       "version": "ALPHA 0.71",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_bridge"
+      ],
       "keywords": [
         "komunikacja z programami 3d",
         "bridge protocol"
@@ -849,7 +879,9 @@
       "statusNote": null,
       "version": "0.4.0",
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_native"
+      ],
       "keywords": [
         "moduły rust",
         "rust crates"
@@ -1548,7 +1580,10 @@
       "statusNote": null,
       "version": null,
       "contract": "cfab_render 3",
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core/integration_beacon.py",
+        "hub:shared/cfab_core/timeflow_bridge.py"
+      ],
       "keywords": [
         "latarnia",
         "beacon",
@@ -1605,7 +1640,9 @@
       "statusNote": null,
       "version": null,
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:modules/render/poller.py"
+      ],
       "keywords": [
         "czas maszyny",
         "machine time"
@@ -1663,7 +1700,10 @@
       "statusNote": null,
       "version": null,
       "contract": "cfab_render 3",
-      "sources": [],
+      "sources": [
+        "hub:modules/render/ledger.py",
+        "tf:dashboard/src-tauri/src/commands/cfab_render.rs"
+      ],
       "keywords": [
         "ledger",
         "rbh",
@@ -1717,7 +1757,9 @@
       "statusNote": null,
       "version": null,
       "contract": "dcc_activity 1",
-      "sources": [],
+      "sources": [
+        "hub:modules/render/store.py"
+      ],
       "keywords": [
         "dcc_activity",
         "ścieżka",
@@ -1774,7 +1816,10 @@
       "statusNote": null,
       "version": null,
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core/cfabx.py",
+        "tf:dashboard/src-tauri/src/commands/cfab_offline.rs"
+      ],
       "keywords": [
         "cfabx",
         "offline",
@@ -1831,7 +1876,11 @@
       },
       "version": null,
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core/cfabx.py",
+        "tf:dashboard/src-tauri/src/commands/cfab_offline.rs",
+        "tf:dashboard/src/pages/Renders.tsx"
+      ],
       "keywords": [
         "proposal",
         "ack",
@@ -1883,7 +1932,10 @@
       "statusNote": null,
       "version": null,
       "contract": null,
-      "sources": [],
+      "sources": [
+        "hub:shared/cfab_core/autostart.py",
+        "hub:shared/cfab_core/diagnostic.py"
+      ],
       "keywords": [
         "autostart",
         "diagnostyka"
@@ -1935,7 +1987,8 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:shared/cfab_core/dcc.py",
+        "hub:shared/cfab_core/programs.py"
       ],
       "keywords": [
         "detekcja",
@@ -1990,7 +2043,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:modules/start/view.py"
       ],
       "keywords": [
         "exruster",
@@ -2043,7 +2096,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:shared/cfab_core/dcc.py"
       ],
       "keywords": [
         "windows",
@@ -2096,7 +2149,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:modules/start/view.py"
       ],
       "keywords": [
         "karty",
@@ -2149,7 +2202,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:modules/start/add_dialog.py"
       ],
       "keywords": [
         "launcher",
@@ -2202,7 +2255,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:modules/start/recent.py"
       ],
       "keywords": [
         "ostatnie",
@@ -2256,7 +2309,7 @@
       "version": "ALPHA 0.212",
       "contract": null,
       "sources": [
-        "Start"
+        "hub:shared/cfab_core/timeflow_bridge.py"
       ],
       "keywords": [
         "timeflow",
@@ -2293,8 +2346,8 @@
       "techMoat": {
         "isUniqueMoat": true,
         "description": {
-          "pl": "Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; rdzeń nie ma żadnej zależności zewnętrznej.",
-          "en": "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core has zero external dependencies."
+          "pl": "Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; jedyną zależnością rdzenia jest NumPy.",
+          "en": "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core's only dependency is NumPy."
         }
       },
       "techStack": [
@@ -2318,7 +2371,8 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/parser/c4dgrab.py",
+        "hub:modules/scenes/parser/c4d_types.py"
       ],
       "keywords": [
         "c4d",
@@ -2381,7 +2435,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/max_reader.py"
       ],
       "keywords": [
         "max",
@@ -2435,7 +2489,8 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/parser/c4ddiff.py",
+        "hub:modules/scenes/parser/c4dpatch.py"
       ],
       "keywords": [
         "c4ddiff",
@@ -2489,7 +2544,8 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/max_exchange.py",
+        "hub:modules/scenes/max_import_view.py"
       ],
       "keywords": [
         "max",
@@ -2543,7 +2599,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/max_space.py"
       ],
       "keywords": [
         "jednostki",
@@ -2597,7 +2653,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/max_tools.py"
       ],
       "keywords": [
         "max",
@@ -2650,7 +2706,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/send_to.py"
       ],
       "keywords": [
         "eksport",
@@ -2705,7 +2761,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/prefs.py"
       ],
       "keywords": [
         "usd",
@@ -2759,7 +2815,7 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/inspection.py"
       ],
       "keywords": [
         "materiały",
@@ -2812,13 +2868,72 @@
       "version": "ALPHA 0.629",
       "contract": null,
       "sources": [
-        "Inspector"
+        "hub:modules/scenes/scene_tabs.py"
       ],
       "keywords": [
         "drzewo",
         "tree"
       ],
       "advantageId": "closed_formats"
+    },
+    {
+      "id": "hub.scenes.fast_read",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.scenes",
+      "parentId": "hub.scenes",
+      "title": {
+        "pl": "Szybszy odczyt dużych scen (Rust + NumPy)",
+        "en": "Faster reading of large scenes (Rust + NumPy)"
+      },
+      "shortTitle": {
+        "pl": "Scena 189 MB: 5,1 → 1,8 s",
+        "en": "189 MB scene: 5.1 → 1.8 s"
+      },
+      "summary": {
+        "pl": "Nazwy obiektów .c4d szuka moduł Rust, UV i normalne są tablicami NumPy, a .max czyta się ciągami sektorów. Scena .c4d 189 MB: 5,08 → 1,78 s; .max 858 MB: 0,91 → 0,54 s przy połowie pamięci.",
+        "en": "A Rust module finds .c4d object names, UVs and normals are NumPy arrays and .max streams are read in sector runs. A 189 MB .c4d scene: 5.08 → 1.78 s; an 858 MB .max: 0.91 → 0.54 s with half the memory."
+      },
+      "category": "core",
+      "stage": "inspection",
+      "order": 10,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust",
+        "NumPy",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.629",
+      "contract": null,
+      "sources": [
+        "hub:shared/cfab_native/crates/scene_scan",
+        "hub:modules/scenes/parser/c4dgrab.py",
+        "hub:modules/scenes/max/reader.py"
+      ],
+      "keywords": [
+        "rust",
+        "numpy",
+        "wydajność",
+        "performance"
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.queue",
@@ -2867,7 +2982,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/watch.py"
       ],
       "keywords": [
         "kolejka",
@@ -2920,7 +3035,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/poller.py"
       ],
       "keywords": [
         "corona",
@@ -2974,7 +3089,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/preview.py"
       ],
       "keywords": [
         "podgląd",
@@ -3027,7 +3142,8 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/progress.py",
+        "hub:modules/render/logparse.py"
       ],
       "keywords": [
         "eta",
@@ -3080,7 +3196,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:bridges/c4d_bridge/C4Dcfabbridge"
       ],
       "keywords": [
         "job_info",
@@ -3134,7 +3250,8 @@
       "version": "ALPHA 0.73",
       "contract": "history_db 2",
       "sources": [
-        "Render"
+        "hub:modules/render/poller.py",
+        "hub:modules/render/events.py"
       ],
       "keywords": [
         "picture viewer",
@@ -3194,7 +3311,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/coordinator.py"
       ],
       "keywords": [
         "farma",
@@ -3253,7 +3370,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/recovery.py"
       ],
       "keywords": [
         "recovery",
@@ -3307,7 +3424,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:bridges/c4d_bridge/C4Dcfabbridge/C4Dcfabbridge.pyp"
       ],
       "keywords": [
         "watchdog",
@@ -3360,7 +3477,8 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/precheck.py",
+        "hub:modules/render/rules.py"
       ],
       "keywords": [
         "precheck",
@@ -3414,7 +3532,8 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:service/cfab_service/web_panel.py",
+        "hub:modules/render/web.py"
       ],
       "keywords": [
         "panel",
@@ -3468,7 +3587,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/afterqueue.py"
       ],
       "keywords": [
         "shutdown",
@@ -3522,7 +3641,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/mail.py"
       ],
       "keywords": [
         "email",
@@ -3575,7 +3694,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/notify.py"
       ],
       "keywords": [
         "ntfy",
@@ -3628,7 +3747,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/notify.py"
       ],
       "keywords": [
         "dźwięk",
@@ -3681,7 +3800,8 @@
       "version": "ALPHA 0.73",
       "contract": "cfab_render 3",
       "sources": [
-        "Render"
+        "hub:modules/render/ledger.py",
+        "hub:modules/render/store.py"
       ],
       "keywords": [
         "ledger",
@@ -3734,7 +3854,7 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/view.py"
       ],
       "keywords": [
         "timeflow",
@@ -3787,7 +3907,8 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/ledger.py",
+        "hub:modules/render/watch.py"
       ],
       "keywords": [
         "ledger"
@@ -3840,7 +3961,8 @@
       "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
-        "Render"
+        "hub:modules/render/summary.py",
+        "hub:modules/render/view.py"
       ],
       "keywords": [
         "historia",
@@ -3898,10 +4020,10 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.10.1",
       "contract": null,
       "sources": [
-        "Results"
+        "hub:modules/results/exruster"
       ],
       "keywords": [
         "exr",
@@ -3952,10 +4074,10 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.10.1",
       "contract": null,
       "sources": [
-        "Results"
+        "hub:modules/results/exruster"
       ],
       "keywords": [
         "passy",
@@ -4005,10 +4127,11 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.10.1",
       "contract": null,
       "sources": [
-        "Results"
+        "hub:modules/results/sequences.py",
+        "hub:modules/results/missing.py"
       ],
       "keywords": [
         "klatki",
@@ -4060,14 +4183,188 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.10.1",
       "contract": null,
       "sources": [
-        "Results"
+        "hub:modules/results/view.py",
+        "hub:shared/cfab_core/exr.py"
       ],
       "keywords": [
         "cache",
         "miniatury"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.large_exr",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "Płynna praca z dużymi plikami EXR",
+        "en": "Smooth work with large EXR files"
+      },
+      "shortTitle": {
+        "pl": "EXR 6000 px: 2,3 → 0,3 s",
+        "en": "6000 px EXR: 2.3 → 0.3 s"
+      },
+      "summary": {
+        "pl": "Dekodowanie tylko pokazywanej warstwy, leniwe otwieranie, podgląd w rozdzielczości okna i kolejne klatki przygotowane w tle. 6000×4000, 12 warstw: 2,3 s i 3,5 GB → 0,30 s i 0,94 GB.",
+        "en": "Decodes only the shown layer, opens files lazily, previews at window resolution and prepares the next frames in the background. 6000×4000, 12 layers: 2.3 s and 3.5 GB → 0.30 s and 0.94 GB."
+      },
+      "category": "analysis",
+      "stage": "results",
+      "order": 4,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.10.1",
+      "contract": null,
+      "sources": [
+        "hub:modules/results/exruster/src/io/channel_subset.rs",
+        "hub:modules/results/exruster/src/io/lazy_exr_loader.rs",
+        "hub:modules/results/view.py"
+      ],
+      "keywords": [
+        "exr",
+        "wydajność",
+        "performance",
+        "warstwy"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.tiff_psd",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "TIFF i PSD/PSB w Wynikach",
+        "en": "TIFF and PSD/PSB in Results"
+      },
+      "shortTitle": {
+        "pl": "TIFF i PSD bez warstw",
+        "en": "TIFF and PSD, no layers"
+      },
+      "summary": {
+        "pl": "Sam spłaszczony obraz bez bloku warstw Photoshopa, TIFF-y z C4D z dodatkowymi kanałami, 32-bit mapowane jak EXR. PSB 633 MB: miniatura w 4,6 s przy 4 MB RAM.",
+        "en": "Only the flattened image, skipping the Photoshop layer block; C4D TIFFs with extra channels; 32-bit tone-mapped like EXR. A 633 MB PSB: thumbnail in 4.6 s with 4 MB of RAM."
+      },
+      "category": "analysis",
+      "stage": "results",
+      "order": 5,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.10.1",
+      "contract": null,
+      "sources": [
+        "hub:modules/results/exruster/src/io/tiff_composite.rs",
+        "hub:modules/results/exruster/src/io/psd_composite.rs"
+      ],
+      "keywords": [
+        "tiff",
+        "psd",
+        "psb",
+        "photoshop"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.oiio",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "OpenImageIO w Wynikach i EXRusterze",
+        "en": "OpenImageIO in Results and EXRuster"
+      },
+      "shortTitle": {
+        "pl": "OpenImageIO: ACES, NaN, TX",
+        "en": "OpenImageIO: ACES, NaN, TX"
+      },
+      "summary": {
+        "pl": "Przypięte OpenImageIO 3.1.17: miniatury DDS i JPEG 2000, zapas gdy brak EXRustera, eksport warstwy do JPG przez ACES 2.0, naprawa NaN i tekstura TX w nowym pliku obok źródła.",
+        "en": "Pinned OpenImageIO 3.1.17: DDS and JPEG 2000 thumbnails, a fallback when EXRuster is missing, layer export to JPG through ACES 2.0, NaN repair and a TX texture in a new file next to the source."
+      },
+      "category": "integration",
+      "stage": "results",
+      "order": 6,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "OpenImageIO",
+        "OCIO",
+        "Rust",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.10.1",
+      "contract": null,
+      "sources": [
+        "hub:modules/results/view.py",
+        "hub:modules/results/exruster"
+      ],
+      "keywords": [
+        "openimageio",
+        "oiio",
+        "aces",
+        "tx",
+        "nan"
       ],
       "advantageId": null
     },
@@ -4116,7 +4413,7 @@
       "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
-        "Assets"
+        "hub:modules/assets/engine.py"
       ],
       "keywords": [
         "audyt",
@@ -4173,7 +4470,7 @@
       "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
-        "Assets"
+        "hub:modules/assets/engine.py"
       ],
       "keywords": [
         "relink",
@@ -4227,7 +4524,7 @@
       "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
-        "Assets"
+        "hub:modules/assets/engine.py"
       ],
       "keywords": [
         "tekstury",
@@ -4280,7 +4577,7 @@
       "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
-        "Assets"
+        "hub:modules/assets/settings_view.py"
       ],
       "keywords": [
         "biblioteki"
@@ -4332,7 +4629,7 @@
       "version": "ALPHA 0.223",
       "contract": null,
       "sources": [
-        "Assets"
+        "hub:modules/assets/engine.py"
       ],
       "keywords": [
         "undo",
@@ -4385,7 +4682,7 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:modules/browser/core/scanner.py"
       ],
       "keywords": [
         "nas",
@@ -4438,7 +4735,7 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:modules/browser/core/json_utils.py"
       ],
       "keywords": [
         "asset",
@@ -4491,7 +4788,7 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:modules/browser/core/pairing_tab.py"
       ],
       "keywords": [
         "parowanie",
@@ -4544,7 +4841,7 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:shared/cfab_core/archives.py"
       ],
       "keywords": [
         "zip",
@@ -4598,7 +4895,8 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:modules/browser/core/tools_tab.py",
+        "hub:shared/cfab_native/crates"
       ],
       "keywords": [
         "duplikaty",
@@ -4659,7 +4957,9 @@
       "version": "1.8.0",
       "contract": "ai_vector_db 1",
       "sources": [
-        "Library"
+        "hub:modules/browser/core/ai/clip_engine.py",
+        "hub:modules/browser/core/ai/vector_store.py",
+        "hub:modules/browser/core/ai_search_panel.py"
       ],
       "keywords": [
         "ai",
@@ -4716,7 +5016,7 @@
       "version": "1.8.0",
       "contract": null,
       "sources": [
-        "Library"
+        "hub:modules/browser/core/errors_tab.py"
       ],
       "keywords": [
         "błędy",
@@ -4776,7 +5076,7 @@
       "version": "ALPHA 0.712",
       "contract": "bridge_protocol 6",
       "sources": [
-        "Connections"
+        "hub:bridges/c4d_bridge/C4Dcfabbridge"
       ],
       "keywords": [
         "c4d",
@@ -4832,7 +5132,7 @@
       "version": "ALPHA 0.712",
       "contract": "blender_bridge_protocol 2",
       "sources": [
-        "Connections"
+        "hub:bridges/blender_bridge/cfab_bridge_blender"
       ],
       "keywords": [
         "blender",
@@ -4885,7 +5185,8 @@
       "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
-        "Connections"
+        "hub:bridges/blender_bridge/cfab_bridge_blender",
+        "hub:shared/cfab_bridge/manifest.py"
       ],
       "keywords": [
         "corona",
@@ -4941,7 +5242,8 @@
       "version": "ALPHA 0.712",
       "contract": "max_bridge_protocol 1",
       "sources": [
-        "Connections"
+        "hub:bridges/max_bridge/bundle",
+        "hub:shared/cfab_core/transfer.py"
       ],
       "keywords": [
         "3ds max",
@@ -4996,7 +5298,8 @@
       "version": "ALPHA 0.712",
       "contract": "modo_bridge_protocol 1",
       "sources": [
-        "Connections"
+        "hub:bridges/modo_bridge/cfab_bridge_modo",
+        "hub:shared/cfab_core/transfer.py"
       ],
       "keywords": [
         "modo",
@@ -5050,7 +5353,7 @@
       "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
-        "Connections"
+        "hub:bridges/c4d_bridge/C4Dcfabbridge"
       ],
       "keywords": [
         "rizom",
@@ -5103,9 +5406,7 @@
       },
       "version": "ALPHA 0.712",
       "contract": null,
-      "sources": [
-        "Connections"
-      ],
+      "sources": [],
       "keywords": [
         "rizom"
       ],
@@ -5156,7 +5457,8 @@
       "version": "ALPHA 0.712",
       "contract": null,
       "sources": [
-        "Connections"
+        "hub:modules/bridges/bridge_install.py",
+        "hub:modules/bridges/installations.py"
       ],
       "keywords": [
         "instalacja",
@@ -5209,7 +5511,7 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
-        "Scratch"
+        "hub:shared/cfab_core/storage.py"
       ],
       "keywords": [
         "scratch",
@@ -5262,7 +5564,7 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
-        "Scratch"
+        "hub:shared/cfab_core/storage.py"
       ],
       "keywords": [
         "staging",
@@ -5315,7 +5617,7 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
-        "Scratch"
+        "hub:modules/scratch/operations.py"
       ],
       "keywords": [
         "retencja",
@@ -5370,7 +5672,9 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
-        "Scratch"
+        "hub:modules/scratch/thumbnails.py",
+        "hub:modules/scratch/mesh_preview.py",
+        "hub:modules/scratch/preview_process.py"
       ],
       "keywords": [
         "podgląd",
@@ -5423,7 +5727,8 @@
       "version": "ALPHA 0.133",
       "contract": null,
       "sources": [
-        "Scratch"
+        "hub:modules/scratch/opener.py",
+        "hub:modules/scratch/view.py"
       ],
       "keywords": [
         "nawigator"
@@ -5475,7 +5780,8 @@
       "version": "BETA 0.116",
       "contract": null,
       "sources": [
-        "Plug-ins"
+        "hub:catalog",
+        "hub:modules/plugins/catalog.py"
       ],
       "keywords": [
         "skrypty",
@@ -5526,7 +5832,7 @@
       "version": "BETA 0.116",
       "contract": null,
       "sources": [
-        "Plug-ins"
+        "hub:docs/audits/2026-09-15/cfab-tools.md"
       ],
       "keywords": [
         "audyt",
@@ -5579,10 +5885,65 @@
       "version": "BETA 0.116",
       "contract": null,
       "sources": [
-        "Plug-ins"
+        "hub:modules/plugins/install.py"
       ],
       "keywords": [
         "instalacja"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.plugins.plasticity",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.plugins",
+      "parentId": "hub.plugins",
+      "title": {
+        "pl": "Plasticity Bridge dla C4D i Blendera",
+        "en": "Plasticity Bridge for C4D and Blender"
+      },
+      "shortTitle": {
+        "pl": "Plasticity → C4D i Blender",
+        "en": "Plasticity → C4D and Blender"
+      },
+      "summary": {
+        "pl": "Wtyczka Plasticity dla C4D (MIT) i dodatek dla Blendera instalowane z katalogu; bryły z Plasticity trafiają do sceny bez plików pośrednich.",
+        "en": "The Plasticity plug-in for C4D (MIT) and the Blender add-on install from the catalogue; Plasticity solids reach the scene with no intermediate files."
+      },
+      "category": "integration",
+      "stage": "scene",
+      "order": 3,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "BETA 0.116",
+      "contract": null,
+      "sources": [
+        "hub:catalog/c4d/plasticity-bridge",
+        "hub:catalog/blender/plasticity"
+      ],
+      "keywords": [
+        "plasticity",
+        "cad",
+        "nurbs"
       ],
       "advantageId": null
     },
@@ -5631,7 +5992,8 @@
       "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
-        "Shell"
+        "hub:shell/cfab_shell/main_window.py",
+        "hub:shell/cfab_shell/single_instance.py"
       ],
       "keywords": [
         "powłoka",
@@ -5686,7 +6048,9 @@
       "version": "ALPHA 0.72",
       "contract": null,
       "sources": [
-        "Shell"
+        "hub:shell/cfab_shell/launcher.py",
+        "hub:update.py",
+        "hub:package_windows.py"
       ],
       "keywords": [
         "instalacja",
@@ -5740,9 +6104,7 @@
       },
       "version": "ALPHA 0.72",
       "contract": null,
-      "sources": [
-        "Shell"
-      ],
+      "sources": [],
       "keywords": [
         "autostart"
       ],
@@ -5793,7 +6155,7 @@
       "version": "ALPHA 0.726",
       "contract": "service_api 5",
       "sources": [
-        "Service"
+        "hub:service/cfab_service/service.py"
       ],
       "keywords": [
         "usługa",
@@ -5846,7 +6208,9 @@
       "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
-        "Core"
+        "hub:shared/cfab_core/events.py",
+        "hub:shared/cfab_core/actions.py",
+        "hub:shared/cfab_core/tasks.py"
       ],
       "keywords": [
         "rdzeń",
@@ -5903,7 +6267,7 @@
       "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
-        "Core"
+        "hub:shared/cfab_core/mcp_server.py"
       ],
       "keywords": [
         "mcp",
@@ -5958,7 +6322,7 @@
       "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
-        "Core"
+        "hub:shared/cfab_core/diagnostic.py"
       ],
       "keywords": [
         "diagnostyka"
@@ -6010,7 +6374,7 @@
       "version": "ALPHA 0.956",
       "contract": null,
       "sources": [
-        "Core"
+        "hub:shared/cfab_core/autostart.py"
       ],
       "keywords": [
         "autostart"
@@ -6062,7 +6426,7 @@
       "version": "ALPHA 0.531",
       "contract": null,
       "sources": [
-        "Contracts"
+        "hub:shared/cfab_contracts"
       ],
       "keywords": [
         "kontrakty"
@@ -6116,7 +6480,8 @@
       "version": "ALPHA 0.665",
       "contract": null,
       "sources": [
-        "Design system"
+        "hub:shared/cfab_ui/tokens.json",
+        "hub:shared/cfab_ui/qss.py"
       ],
       "keywords": [
         "design system",
@@ -6139,8 +6504,8 @@
         "en": "Scans, images, hashes"
       },
       "summary": {
-        "pl": "Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur i wykrywanie duplikatów.",
-        "en": "The scanner, image_tools and hash_utils crates that speed up library scans, thumbnails and duplicate detection."
+        "pl": "Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur, wykrywanie duplikatów i odczyt scen .c4d.",
+        "en": "The scanner, image_tools, hash_utils and scene_scan crates speed up library scans, thumbnails, duplicate detection and .c4d reading."
       },
       "category": "core",
       "stage": null,
@@ -6169,10 +6534,66 @@
       "version": "0.4.0",
       "contract": null,
       "sources": [
-        "Rust crates"
+        "hub:shared/cfab_native/crates"
       ],
       "keywords": [
         "rust"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.native.rust_tools",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.native",
+      "parentId": "hub.native",
+      "title": {
+        "pl": "Budowanie i kontrola modułów Rust",
+        "en": "Building and checking Rust modules"
+      },
+      "shortTitle": {
+        "pl": "Rust: build i status",
+        "en": "Rust: build and status"
+      },
+      "summary": {
+        "pl": "Jedno polecenie buduje moduły Rust i EXRustera, aktualizacja Cargo cofa się po nieudanym buildzie, a Ustawienia i pasek stanu pokazują stan każdego modułu.",
+        "en": "One command builds the Rust modules and EXRuster, a Cargo update rolls back after a failed build, and Settings and the status bar show each module's state."
+      },
+      "category": "core",
+      "stage": null,
+      "order": 1,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.4.0",
+      "contract": null,
+      "sources": [
+        "hub:tools/rust",
+        "hub:shared/cfab_native/paths.py"
+      ],
+      "keywords": [
+        "rust",
+        "cargo",
+        "build"
       ],
       "advantageId": null
     },
@@ -6229,7 +6650,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:src/monitor.rs",
+        "tf:src/monitor_macos.rs"
       ],
       "keywords": [
         "demon",
@@ -6283,7 +6705,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:src/title_parser.rs"
       ],
       "keywords": [
         "tytuł okna",
@@ -6336,7 +6758,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:src/tracker.rs"
       ],
       "keywords": [
         "idle",
@@ -6389,7 +6811,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:src/tracker.rs"
       ],
       "keywords": [
         "cpu",
@@ -6442,7 +6864,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:src/monitor.rs"
       ],
       "keywords": [
         "pid"
@@ -6494,7 +6916,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Daemon"
+        "tf:dashboard/src/pages/DaemonControl.tsx"
       ],
       "keywords": [
         "demon"
@@ -6553,7 +6975,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Sessions"
+        "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
       ],
       "keywords": [
         "fair time",
@@ -6606,7 +7028,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Sessions"
+        "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
       ],
       "keywords": [
         "podział",
@@ -6659,7 +7081,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Sessions"
+        "tf:dashboard/src-tauri/src/commands/time_algorithm.rs"
       ],
       "keywords": [
         "transparentność"
@@ -6711,7 +7133,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Sessions"
+        "tf:dashboard/src/pages/Sessions.tsx"
       ],
       "keywords": [
         "oś czasu",
@@ -6765,7 +7187,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Sessions"
+        "tf:dashboard/src-tauri/src/commands/manual_sessions.rs"
       ],
       "keywords": [
         "sesje",
@@ -6818,7 +7240,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/folder_scan.rs"
       ],
       "keywords": [
         "model",
@@ -6871,7 +7293,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/context.rs"
       ],
       "keywords": [
         "model"
@@ -6923,7 +7345,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs"
       ],
       "keywords": [
         "model"
@@ -6975,7 +7397,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs"
       ],
       "keywords": [
         "tokeny"
@@ -7027,7 +7449,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/scoring.rs",
+        "tf:dashboard/src-tauri/src/commands/assignment_model/training.rs"
       ],
       "keywords": [
         "idf",
@@ -7084,7 +7507,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src-tauri/src/commands/assignment_model/auto_safe.rs"
       ],
       "keywords": [
         "auto_safe",
@@ -7138,7 +7561,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "AI & model"
+        "tf:dashboard/src/pages/AI.tsx",
+        "tf:dashboard/src-tauri/src/commands/assignment_model/training.rs"
       ],
       "keywords": [
         "ai",
@@ -7195,7 +7619,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/mcp/protocol.rs",
+        "tf:dashboard/src-tauri/src/mcp/mod.rs"
       ],
       "keywords": [
         "mcp",
@@ -7250,7 +7675,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/mcp/tools.rs"
       ],
       "keywords": [
         "mcp",
@@ -7304,7 +7729,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/mcp/backup.rs"
       ],
       "keywords": [
         "backup"
@@ -7356,7 +7781,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src/pages/Help.tsx"
       ],
       "keywords": [
         "pomoc",
@@ -7410,7 +7835,8 @@
       "version": "0.1.5776",
       "contract": "cfab_render 3",
       "sources": [
-        "Renders"
+        "tf:dashboard/src-tauri/src/commands/cfab_render.rs",
+        "tf:dashboard/src/pages/Renders.tsx"
       ],
       "keywords": [
         "ingest",
@@ -7463,7 +7889,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Renders"
+        "tf:dashboard/src-tauri/src/commands/cfab_render.rs"
       ],
       "keywords": [
         "przypisanie",
@@ -7516,7 +7942,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Renders"
+        "tf:dashboard/src-tauri/src/commands/cfab_offline.rs"
       ],
       "keywords": [
         "cfabx",
@@ -7574,7 +8000,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Renders"
+        "tf:dashboard/src-tauri/src/commands/cfab_render.rs"
       ],
       "keywords": [
         "rbh",
@@ -7629,7 +8055,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Renders"
+        "tf:src/sync_common.rs",
+        "tf:src/lan_server.rs"
       ],
       "keywords": [
         "sync",
@@ -7682,7 +8109,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Renders"
+        "tf:dashboard/src/pages/Renders.tsx"
       ],
       "keywords": [
         "integracja"
@@ -7735,7 +8162,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Projects"
+        "tf:dashboard/src/pages/Projects.tsx"
       ],
       "keywords": [
         "projekty"
@@ -7788,7 +8215,9 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Projects"
+        "tf:dashboard/src-tauri/src/commands/project_limits.rs",
+        "tf:dashboard/src/pages/report-view/ReportViewLimitSection.tsx",
+        "tf:dashboard/src/pages/report-view/ReportViewBoostsSection.tsx"
       ],
       "keywords": [
         "limity",
@@ -7842,7 +8271,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Projects"
+        "tf:dashboard/src-tauri/src/commands/projects.rs"
       ],
       "keywords": [
         "scalanie",
@@ -7896,7 +8325,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Clients"
+        "tf:dashboard/src/pages/Clients.tsx",
+        "tf:dashboard/src-tauri/src/commands/clients.rs"
       ],
       "keywords": [
         "klienci"
@@ -7949,7 +8379,9 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "PM"
+        "tf:dashboard/src/pages/PM.tsx",
+        "tf:dashboard/src-tauri/src/commands/pm_manager.rs",
+        "tf:dashboard/src-tauri/src/commands/pm.rs"
       ],
       "keywords": [
         "pm",
@@ -8004,7 +8436,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Tasks"
+        "tf:dashboard/src/pages/Todo.tsx",
+        "tf:dashboard/src-tauri/src/commands/todos.rs"
       ],
       "keywords": [
         "zadania",
@@ -8057,7 +8490,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Applications"
+        "tf:dashboard/src/pages/Applications.tsx"
       ],
       "keywords": [
         "aplikacje"
@@ -8110,7 +8543,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Applications"
+        "tf:dashboard/src-tauri/src/commands/monitored.rs"
       ],
       "keywords": [
         "drag",
@@ -8164,7 +8597,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Time analysis"
+        "tf:dashboard/src/pages/TimeAnalysis.tsx",
+        "tf:dashboard/src-tauri/src/commands/analysis.rs"
       ],
       "keywords": [
         "analiza"
@@ -8216,7 +8650,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Dashboard"
+        "tf:dashboard/src/pages/Dashboard.tsx"
       ],
       "keywords": [
         "dashboard"
@@ -8269,7 +8703,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Data"
+        "tf:dashboard/src/pages/Data.tsx",
+        "tf:dashboard/src-tauri/src/commands/database.rs"
       ],
       "keywords": [
         "baza",
@@ -8323,7 +8758,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Data"
+        "tf:dashboard/src/pages/ImportPage.tsx",
+        "tf:dashboard/src-tauri/src/commands/import.rs"
       ],
       "keywords": [
         "import",
@@ -8376,7 +8812,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src/pages/QuickStart.tsx",
+        "tf:dashboard/src/pages/Help.tsx"
       ],
       "keywords": [
         "pomoc",
@@ -8429,7 +8866,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/commands/webserver.rs",
+        "tf:src/webui_host_ctl.rs"
       ],
       "keywords": [
         "www",
@@ -8482,7 +8920,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/commands/log_management.rs"
       ],
       "keywords": [
         "logi"
@@ -8534,7 +8972,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src-tauri/src/commands/bughunter.rs"
       ],
       "keywords": [
         "błędy"
@@ -8586,7 +9024,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "TIMEFLOW"
+        "tf:dashboard/src/locales"
       ],
       "keywords": [
         "i18n"
@@ -8638,7 +9076,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Estimates"
+        "tf:dashboard/src-tauri/src/commands/costs.rs"
       ],
       "keywords": [
         "koszty"
@@ -8693,7 +9131,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Estimates"
+        "tf:dashboard/src/pages/Estimates.tsx",
+        "tf:dashboard/src-tauri/src/commands/estimates.rs"
       ],
       "keywords": [
         "wycena",
@@ -8746,7 +9185,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Estimates"
+        "tf:dashboard/src/pages/EstimateReport.tsx",
+        "tf:dashboard/src/pages/estimate-report/EstimateReportDocument.tsx"
       ],
       "keywords": [
         "estymacja",
@@ -8800,7 +9240,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Reports"
+        "tf:dashboard/src/pages/ReportView.tsx",
+        "tf:dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx"
       ],
       "keywords": [
         "pdf",
@@ -8853,7 +9294,7 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Reports"
+        "tf:dashboard/src/pages/report-view/ReportViewProfitabilitySection.tsx"
       ],
       "keywords": [
         "rentowność",
@@ -8906,7 +9347,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Reports"
+        "tf:dashboard/src/pages/Reports.tsx",
+        "tf:dashboard/src/pages/reports/ReportsTemplateEditor.tsx"
       ],
       "keywords": [
         "szablon",
@@ -8959,7 +9401,8 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Reports"
+        "tf:dashboard/src/pages/report-view/ReportViewToolbar.tsx",
+        "tf:dashboard/src/pages/settings/SettingsRoundingTab.tsx"
       ],
       "keywords": [
         "zaokrąglanie",
@@ -9018,7 +9461,9 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Data"
+        "tf:src/lan_sync_orchestrator.rs",
+        "tf:src/lan_discovery.rs",
+        "tf:src/tombstone_triggers.rs"
       ],
       "keywords": [
         "lan",
@@ -9080,7 +9525,9 @@
       "version": "0.1.5776",
       "contract": null,
       "sources": [
-        "Data"
+        "tf:src/sync_encryption.rs",
+        "tf:dashboard/src-tauri/src/commands/delta_export.rs",
+        "tf:dashboard/src-tauri/src/commands/secure_store.rs"
       ],
       "keywords": [
         "cloud",

@@ -196,8 +196,8 @@ export const features = [
     t: ["Parser binarny .c4d (c4dgrab)", "Binary .c4d parser (c4dgrab)"], sh: ["Parser .c4d bez licencji", ".c4d parser, no licence"],
     d: ["Odczyt geometrii, hierarchii i materiałów ze sceny Cinema 4D bez uruchamiania C4D i bez licencji.",
         "Reads geometry, hierarchy and materials from a Cinema 4D scene with no C4D install and no licence."],
-    m: ["Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; rdzeń nie ma żadnej zależności zewnętrznej.",
-        "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core has zero external dependencies."],
+    m: ["Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; jedyną zależnością rdzenia jest NumPy.",
+        "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core's only dependency is NumPy."],
     tech: ["Python 3.9+", "Reverse-engineered binary parser"], rep: ["licencja Cinema 4D", "Connecter", "konwertery chmurowe"],
     src: ["hub:modules/scenes/parser/c4dgrab.py", "hub:modules/scenes/parser/c4d_types.py"],
     kw: ["c4d", "parser", "offline", "reverse engineering", "licencja"],
@@ -247,6 +247,13 @@ export const features = [
     d: ["Szybkie drzewo z wyszukiwaniem w kontekście hierarchii i filtrami widoczności jak w C4D Object Manager.",
         "A fast tree with hierarchy-aware search and visibility filters like C4D's Object Manager."],
     tech: ["PyQt6"], src: ["hub:modules/scenes/scene_tabs.py"], kw: ["drzewo", "tree"] },
+
+  { p: "hub.scenes", id: "fast_read", s: "inspection", st: "production", c: "core",
+    t: ["Szybszy odczyt dużych scen (Rust + NumPy)", "Faster reading of large scenes (Rust + NumPy)"], sh: ["Scena 189 MB: 5,1 → 1,8 s", "189 MB scene: 5.1 → 1.8 s"],
+    d: ["Nazwy obiektów .c4d szuka moduł Rust, UV i normalne są tablicami NumPy, a .max czyta się ciągami sektorów. Scena .c4d 189 MB: 5,08 → 1,78 s; .max 858 MB: 0,91 → 0,54 s przy połowie pamięci.",
+        "A Rust module finds .c4d object names, UVs and normals are NumPy arrays and .max streams are read in sector runs. A 189 MB .c4d scene: 5.08 → 1.78 s; an 858 MB .max: 0.91 → 0.54 s with half the memory."],
+    tech: ["Rust", "NumPy", "Python"], src: ["hub:shared/cfab_native/crates/scene_scan", "hub:modules/scenes/parser/c4dgrab.py", "hub:modules/scenes/max/reader.py"],
+    kw: ["rust", "numpy", "wydajność", "performance"] },
 
   // ===================== 2.3 Render
   { p: "hub.render", id: "queue", s: "render", st: "production", c: "automation",
@@ -362,6 +369,25 @@ export const features = [
         "Thumbnails from disk; EXRuster only for changed files, at most 4 processes, clean-up off the GUI thread."],
     tech: ["Python", "Rust"], src: ["hub:modules/results/view.py", "hub:shared/cfab_core/exr.py"], kw: ["cache", "miniatury"],
     bv: { timeSavedHoursMonth: 4, financialGainType: "cost_reduction", assumptionId: "A-MINIATURY" } },
+
+  { p: "hub.results", id: "large_exr", s: "results", st: "production", c: "analysis", aud: ["artist", "tech_director"],
+    t: ["Płynna praca z dużymi plikami EXR", "Smooth work with large EXR files"], sh: ["EXR 6000 px: 2,3 → 0,3 s", "6000 px EXR: 2.3 → 0.3 s"],
+    d: ["Dekodowanie tylko pokazywanej warstwy, leniwe otwieranie, podgląd w rozdzielczości okna i kolejne klatki przygotowane w tle. 6000×4000, 12 warstw: 2,3 s i 3,5 GB → 0,30 s i 0,94 GB.",
+        "Decodes only the shown layer, opens files lazily, previews at window resolution and prepares the next frames in the background. 6000×4000, 12 layers: 2.3 s and 3.5 GB → 0.30 s and 0.94 GB."],
+    tech: ["Rust"], src: ["hub:modules/results/exruster/src/io/channel_subset.rs", "hub:modules/results/exruster/src/io/lazy_exr_loader.rs", "hub:modules/results/view.py"],
+    kw: ["exr", "wydajność", "performance", "warstwy"] },
+  { p: "hub.results", id: "tiff_psd", s: "results", st: "production", c: "analysis",
+    t: ["TIFF i PSD/PSB w Wynikach", "TIFF and PSD/PSB in Results"], sh: ["TIFF i PSD bez warstw", "TIFF and PSD, no layers"],
+    d: ["Sam spłaszczony obraz bez bloku warstw Photoshopa, TIFF-y z C4D z dodatkowymi kanałami, 32-bit mapowane jak EXR. PSB 633 MB: miniatura w 4,6 s przy 4 MB RAM.",
+        "Only the flattened image, skipping the Photoshop layer block; C4D TIFFs with extra channels; 32-bit tone-mapped like EXR. A 633 MB PSB: thumbnail in 4.6 s with 4 MB of RAM."],
+    tech: ["Rust"], src: ["hub:modules/results/exruster/src/io/tiff_composite.rs", "hub:modules/results/exruster/src/io/psd_composite.rs"],
+    kw: ["tiff", "psd", "psb", "photoshop"] },
+  { p: "hub.results", id: "oiio", s: "results", st: "production", c: "integration",
+    t: ["OpenImageIO w Wynikach i EXRusterze", "OpenImageIO in Results and EXRuster"], sh: ["OpenImageIO: ACES, NaN, TX", "OpenImageIO: ACES, NaN, TX"],
+    d: ["Przypięte OpenImageIO 3.1.17: miniatury DDS i JPEG 2000, zapas gdy brak EXRustera, eksport warstwy do JPG przez ACES 2.0, naprawa NaN i tekstura TX w nowym pliku obok źródła.",
+        "Pinned OpenImageIO 3.1.17: DDS and JPEG 2000 thumbnails, a fallback when EXRuster is missing, layer export to JPG through ACES 2.0, NaN repair and a TX texture in a new file next to the source."],
+    tech: ["OpenImageIO", "OCIO", "Rust", "Python"], src: ["hub:modules/results/view.py", "hub:modules/results/exruster"],
+    kw: ["openimageio", "oiio", "aces", "tx", "nan"] },
 
   // ===================== 2.5 Zasoby
   { p: "hub.assets", id: "audit", s: "inspection", st: "production", c: "analysis",
@@ -511,6 +537,12 @@ export const features = [
         "C4D and Blender tabs, ratings and descriptions, install, update, revert and remove in a specific app version."],
     tech: ["Python"], src: ["hub:modules/plugins/install.py"], kw: ["instalacja"] },
 
+  { p: "hub.plugins", id: "plasticity", s: "scene", st: "production", c: "integration",
+    t: ["Plasticity Bridge dla C4D i Blendera", "Plasticity Bridge for C4D and Blender"], sh: ["Plasticity → C4D i Blender", "Plasticity → C4D and Blender"],
+    d: ["Wtyczka Plasticity dla C4D (MIT) i dodatek dla Blendera instalowane z katalogu; bryły z Plasticity trafiają do sceny bez plików pośrednich.",
+        "The Plasticity plug-in for C4D (MIT) and the Blender add-on install from the catalogue; Plasticity solids reach the scene with no intermediate files."],
+    tech: ["Python"], src: ["hub:catalog/c4d/plasticity-bridge", "hub:catalog/blender/plasticity"], kw: ["plasticity", "cad", "nurbs"] },
+
   // ===================== 2.10 Warstwa wspólna
   { p: "hub.shell", id: "shell", s: null, st: "production", c: "ui",
     t: ["Pasek modułów, ustawienia i zasobnik", "Shell: rail, settings, tray"], sh: ["Moduły, ustawienia, zasobnik", "Rail, settings, tray"],
@@ -562,9 +594,14 @@ export const features = [
     tech: ["PyQt6", "QSS", "Slint"], src: ["hub:shared/cfab_ui/tokens.json", "hub:shared/cfab_ui/qss.py"], kw: ["design system", "tokeny"] },
   { p: "hub.native", id: "native", s: null, st: "production", c: "core",
     t: ["Szybsze skanowanie i miniatury", "Native Rust crates"], sh: ["Skan i miniatury w Rust", "Scans, images, hashes"],
-    d: ["Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur i wykrywanie duplikatów.",
-        "The scanner, image_tools and hash_utils crates that speed up library scans, thumbnails and duplicate detection."],
+    d: ["Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur, wykrywanie duplikatów i odczyt scen .c4d.",
+        "The scanner, image_tools, hash_utils and scene_scan crates speed up library scans, thumbnails, duplicate detection and .c4d reading."],
     tech: ["Rust"], src: ["hub:shared/cfab_native/crates"], kw: ["rust"] },
+  { p: "hub.native", id: "rust_tools", s: null, st: "production", c: "core",
+    t: ["Budowanie i kontrola modułów Rust", "Building and checking Rust modules"], sh: ["Rust: build i status", "Rust: build and status"],
+    d: ["Jedno polecenie buduje moduły Rust i EXRustera, aktualizacja Cargo cofa się po nieudanym buildzie, a Ustawienia i pasek stanu pokazują stan każdego modułu.",
+        "One command builds the Rust modules and EXRuster, a Cargo update rolls back after a failed build, and Settings and the status bar show each module's state."],
+    tech: ["Rust", "Python"], src: ["hub:tools/rust", "hub:shared/cfab_native/paths.py"], kw: ["rust", "cargo", "build"] },
 
   // ===================== 3.1 Demon
   { p: "tf.daemon", id: "events", s: "tracking", st: "production", c: "core", aud: ["artist", "agency_owner", "investor"],
