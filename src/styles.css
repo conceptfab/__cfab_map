@@ -1196,7 +1196,6 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .proof-col .app-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--app-color); }
 .proof-col .adv-proofs { gap: 5px; }
 .adv-proof { min-height: 28px; padding: 4px 9px; font-size: 12.5px; background: var(--bg-surface); }
-.adv-proof .proof-marker { color: var(--app-color); }
 .adv-also { gap: 14px; min-height: 46px; }
 .adv-also strong { font-size: 12.5px; }
 .adv-also button { padding: 4px 9px; font-size: 12px; }
@@ -1208,7 +1207,8 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .view-grid .column-title .count { font-size: 12px; }
 .view-grid .column-title > span:nth-child(2) { flex-basis: calc(100% - 20px); }
 .view-grid .column { gap: 14px; padding-top: 12px; }
-.view-grid .block { gap: 4px; padding-left: 7px; border-left: 3px solid var(--app-color, var(--line-subtle)); }
+.view-grid .block { gap: 4px; padding-left: 7px; border-left: 3px solid var(--line-subtle); }
+.page[data-color-by="app"].view-grid .block { border-left-color: var(--app-color, var(--line-subtle)); }
 .view-grid .block-title { display: flex; align-items: baseline; gap: 5px; padding: 0 2px; font-size: 12px; line-height: 1.35; }
 .app-tag { flex: none; color: var(--app-ink); font: 600 9.5px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
 .view-grid .chip { gap: 7px; min-height: 26px; padding: 4px 4px; font-size: 12.5px; line-height: 1.3; }
@@ -1263,3 +1263,6 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .view-grid .stage-section { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
 .view-grid .column-title { min-height: 0; }
 .adv-count > span:first-child { color: var(--text-muted); }
+/* Pasek udziału programów w nagłówku kolumny tylko w trybie „Program” — w trybie etapów kolor niesie funkcję. */
+.page[data-color-by="stage"].view-grid .column-title .app-share { display: none; }
+.page[data-color-by="stage"].view-grid .column-title .count { margin-left: auto; }

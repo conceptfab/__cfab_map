@@ -78,7 +78,7 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
 export default function App() {
   const [lang, setLang] = useState<LangKey>(initialLang);
   const [view, setView] = useState<View>(() => { const value = new URLSearchParams(location.search).get("view"); return value === "advantages" || value === "grid" || value === "cloud" ? value : NARROW ? "advantages" : "cloud"; });
-  const [colorBy, setColorBy] = useState<ColorBy>(() => new URLSearchParams(location.search).get("color") === "stage" ? "stage" : "app");
+  const [colorBy, setColorBy] = useState<ColorBy>(() => new URLSearchParams(location.search).get("color") === "app" ? "app" : "stage");
   const [cloudUiVisible, setCloudUiVisible] = useState(() => Boolean(new URLSearchParams(location.search).get("adv")));
   const [theme, setTheme] = useState<"paper" | "charcoal">(() => new URLSearchParams(location.search).get("theme") === "charcoal" ? "charcoal" : "paper");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -160,7 +160,7 @@ export default function App() {
   const switchColorBy = (next: ColorBy) => {
     setColorBy(next);
     const url = new URL(location.href);
-    if (next === "stage") url.searchParams.set("color", "stage"); else url.searchParams.delete("color");
+    if (next === "app") url.searchParams.set("color", "app"); else url.searchParams.delete("color");
     history.replaceState(null, "", url);
   };
   const switchView = (next: View) => {
@@ -215,8 +215,8 @@ export default function App() {
       </header>
       {view !== "advantages" && <div className="map-key" ref={mapKeyRef} aria-label={lang === "pl" ? "Legenda kolorów" : "Colour key"}>
         <span className="color-by" role="group" aria-label={lang === "pl" ? "Koloruj według" : "Colour by"}>
-          <button aria-pressed={colorBy === "app"} onClick={() => switchColorBy("app")}>{lang === "pl" ? "Program" : "Application"}</button>
           <button aria-pressed={colorBy === "stage"} onClick={() => switchColorBy("stage")}>{lang === "pl" ? "Etap pracy" : "Work stage"}</button>
+          <button aria-pressed={colorBy === "app"} onClick={() => switchColorBy("app")}>{lang === "pl" ? "Program" : "Application"}</button>
         </span>
         {colorBy === "app" ? APPS.map(app => <span key={app.id} className={`app-key app-${app.id}`}><i className="graph-dot" />{app[lang]}</span>) : <>
           {STAGES.map(s => <span key={s.id} className={`group-${s.id}`}><i className="graph-dot" />{s[lang]}</span>)}
