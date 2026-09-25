@@ -209,7 +209,7 @@ export default function NodeBubble({
   return (
     <div
       ref={bubbleRef}
-      className={`node-bubble group-${group} arrow-side-${arrowSide}`}
+      className={`node-bubble group-${group} app-${node.app} arrow-side-${arrowSide}`}
       style={{
         left: `${Math.round(left)}px`,
         top: `${Math.round(top)}px`,
@@ -286,7 +286,7 @@ export default function NodeBubble({
               <li key={conn.id}>
                 <button
                   type="button"
-                  className={`connection-chip group-${conn.group}`}
+                  className={`connection-chip group-${conn.group} app-${conn.node.app}`}
                   onClick={() => onSelect(conn.id)}
                 >
                   <span className="graph-dot" />

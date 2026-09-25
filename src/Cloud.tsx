@@ -208,7 +208,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   return <>
     <div className="graph-search">
       <label><span aria-hidden="true">⌕</span><input aria-label={pl ? "Szukaj w mapie" : "Search the map"} placeholder={pl ? "Znajdź funkcję lub moduł…" : "Find a feature or module…"} value={query} onChange={e => {setQuery(e.target.value); onSelect(null);}} onKeyDown={e => { if (e.key === "Escape") setQuery(""); }} />{query && <button onClick={() => setQuery("")} aria-label={pl ? "Wyczyść wyszukiwanie" : "Clear search"}>×</button>}</label>
-      {query.trim() && <div className="graph-results"><p role="status">{matches.length} {pl ? "wyników" : "results"}</p>{matches.slice(0, 12).map(p => <button key={p.id} onClick={() => {moveTo(p.id); setQuery("");}}><span className={`graph-dot group-${p.group}`} />{p.node.title[lang]}</button>)}</div>}
+      {query.trim() && <div className="graph-results"><p role="status">{matches.length} {pl ? "wyników" : "results"}</p>{matches.slice(0, 12).map(p => <button key={p.id} onClick={() => {moveTo(p.id); setQuery("");}}><span className={`graph-dot group-${p.group} app-${p.node.app}`} />{p.node.title[lang]}</button>)}</div>}
     </div>
     <div className="orbit-app-switch" aria-label={pl ? "Przejdź do aplikacji" : "Go to application"}>
       {graph.points.filter(p => p.node.nodeType === "ecosystem").map(p => <button key={p.id} onClick={() => viewApp(p)}>{p.node.shortTitle[lang]}</button>)}
@@ -238,7 +238,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
           const bridgeLink = bridgeNetwork && (l.source.node.nodeType === "bridge" || l.target.node.nodeType === "bridge");
           const key = `${l.source.id}-${l.target.id}-${l.kind}`;
           const shared = { "data-relation": l.relation, "data-kind": l.kind,
-            className: `group-${l.source.group} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""} ${advantageTrace ? "is-advantage-trace" : ""}`,
+            className: `group-${l.source.group} app-${l.source.node.app} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""} ${advantageTrace ? "is-advantage-trace" : ""}`,
             opacity: lit ? 1 : active || highlightIds ? 0.025 : bridgeLink ? 0.5 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18,
             vectorEffect: "non-scaling-stroke" as const };
           if (bridgeLink) {
@@ -250,7 +250,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
         })}
       </g>
       {bridgeNetwork && bridges.length > 0 && <text className="bridge-network-title" x={graph.worldWidth/2*transform.k+transform.x} y={(bridges[0].y-53)*transform.k+transform.y} textAnchor="middle">{territoryLabels.synergy}</text>}
-      {graph.points.map(p => {const pos = position(p); const x = pos.x*transform.k+transform.x, y = pos.y*transform.k+transform.y; const bridgeIndex = bridges.findIndex(b => b.id === p.id); return <g key={p.id} className={`graph-node group-${p.group} status-${p.node.status} ${p.node.nodeType === "ecosystem" ? "orbit-center" : ""} ${p.node.nodeType === "bridge" && bridgeNetwork ? "bridge-node" : ""} ${p.id===active ? "is-active" : ""}`} transform={`translate(${x},${y})`} opacity={dimmed(p.id) ? 0.15 : 1} role="button" tabIndex={0} aria-label={p.node.title[lang]} aria-pressed={selectedId===p.id}
+      {graph.points.map(p => {const pos = position(p); const x = pos.x*transform.k+transform.x, y = pos.y*transform.k+transform.y; const bridgeIndex = bridges.findIndex(b => b.id === p.id); return <g key={p.id} className={`graph-node group-${p.group} app-${p.node.app} status-${p.node.status} ${p.node.nodeType === "ecosystem" ? "orbit-center" : ""} ${p.node.nodeType === "bridge" && bridgeNetwork ? "bridge-node" : ""} ${p.id===active ? "is-active" : ""}`} transform={`translate(${x},${y})`} opacity={dimmed(p.id) ? 0.15 : 1} role="button" tabIndex={0} aria-label={p.node.title[lang]} aria-pressed={selectedId===p.id}
         onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(p.id)} onBlur={() => setHover(null)}
         onKeyDown={e => {if (e.key === "Enter" || e.key === " ") {e.preventDefault(); moveTo(p.id);} if(e.key === "Escape") onSelect(null);}}
         onClick={() => moveTo(p.id)}>
@@ -291,7 +291,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
             transform={`translate(${x},${y})`}
           >
             <g
-              className={`graph-node-popped group-${p.group} status-${p.node.status}`}
+              className={`graph-node-popped group-${p.group} app-${p.node.app} status-${p.node.status}`}
               role="button"
               tabIndex={0}
               aria-label={pl ? `Zamknij szczegóły: ${p.node.title[lang]}` : `Close details: ${p.node.title[lang]}`}

@@ -5,13 +5,16 @@ import { STAGES, t } from "./i18n";
 import { buildBlocks, metrics, type Block } from "./layout";
 import Cloud from "./Cloud";
 import { nodeGroups } from "./graphModel";
-import Advantages from "./Advantages";
+import Advantages, { APPS } from "./Advantages";
 
 const data = raw as unknown as FeaturesData;
 const groups = nodeGroups(data);
 
 const MARKER: Record<Status, string> = { production: "●", beta: "◐", roadmap: "○" };
 type View = "advantages" | "cloud" | "grid";
+type ColorBy = "app" | "stage";
+// Na wąskim ekranie chmura jest nieczytelna — bez parametru ?view= startuje od Przewag.
+const NARROW = typeof matchMedia === "function" && matchMedia("(max-width: 720px)").matches;
 const advantageById = new Map(data.advantages.map((advantage) => [advantage.id, advantage]));
 
 function initialLang(): LangKey {
@@ -21,9 +24,9 @@ function initialLang(): LangKey {
 
 function Chip({ node, lang, onSelect, dimmed }: { node: FeatureNode; lang: LangKey; onSelect: (id: string) => void; dimmed: boolean }) {
   return (
-    <li><button className={`chip group-${groups.get(node.id)} status-${node.status} ${dimmed ? "is-dimmed" : ""}`} data-id={node.id} onClick={() => onSelect(node.id)} title={node.title[lang]}>
+    <li><button className={`chip group-${groups.get(node.id)} app-${node.app} status-${node.status} ${dimmed ? "is-dimmed" : ""}`} data-id={node.id} onClick={() => onSelect(node.id)} title={node.title[lang]}>
       <span className="marker" aria-hidden>{node.nodeType === "bridge" ? "◆" : MARKER[node.status]}</span>
-      <span className="label">{node.shortTitle[lang]}</span>
+      <span className="label">{node.shortTitle[lang]}{node.status !== "production" && <span className="status-tag">{t(node.status === "beta" ? "statusBeta" : "statusRoadmap", lang)}</span>}</span>
     </button></li>
   );
 }
@@ -33,7 +36,8 @@ function BlockView({ block, lang, onSelect, highlightIds }: { block: Block; lang
   return (
     <section className={`block app-${block.app}`}>
       <h3 className="block-title">
-        {title} <span className="count">· {block.items.length}</span>
+        <span className="app-tag">{APPS.find((app) => app.id === block.app)?.short}</span>
+        <span>{title} <span className="count">· {block.items.length}</span></span>
       </h3>
       <ul className="chips">
         {block.items.map((n) => <Chip key={n.id} node={n} lang={lang} onSelect={onSelect} dimmed={Boolean(highlightIds && !highlightIds.has(n.id))} />)}
@@ -51,7 +55,7 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
   const statusKey = node.status === "production" ? "statusProduction" : node.status === "beta" ? "statusBeta" : "statusRoadmap";
   const advantage = node.advantageId ? advantageById.get(node.advantageId) : null;
   return (
-    <aside className={`card group-${groups.get(node.id)}`} aria-label={node.title[lang]}>
+    <aside className={`card group-${groups.get(node.id)} app-${node.app}`} aria-label={node.title[lang]}>
       <button className="close" onClick={onClose} aria-label={lang === "pl" ? "Zamknij szczegóły" : "Close details"}>×</button>
       {advantage && <button className="card-adv-link" onClick={() => onOpenAdvantage(advantage.id)}>{lang === "pl" ? "Część przewagi" : "Part of advantage"} {advantage.rank} · {advantage.title[lang]} ↗</button>}
       {parent && <p className="card-parent">{parent.title[lang]}{node.version ? ` · ${node.version}` : ""}</p>}
@@ -60,7 +64,7 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
       <p className={`card-status status-${node.status}`}>{MARKER[node.status]} {t(statusKey, lang)}</p>
       <p>{node.summary[lang]}</p>
       {node.statusNote && <p className="card-note">{node.statusNote[lang]}</p>}
-      {connected.length > 0 && <section className="card-connections"><h3>{lang === "pl" ? "Połączone elementy" : "Connected nodes"} · {connected.length}</h3><ul>{connected.map(n => <li key={n.id}><button onClick={() => onSelect(n.id)}><span className={`graph-dot group-${groups.get(n.id)}`} />{n.title[lang]}<span aria-hidden="true">↗</span></button></li>)}</ul></section>}
+      {connected.length > 0 && <section className="card-connections"><h3>{lang === "pl" ? "Połączone elementy" : "Connected nodes"} · {connected.length}</h3><ul>{connected.map(n => <li key={n.id}><button onClick={() => onSelect(n.id)}><span className={`graph-dot group-${groups.get(n.id)} app-${n.app}`} />{n.title[lang]}<span aria-hidden="true">↗</span></button></li>)}</ul></section>}
       {node.techMoat.isUniqueMoat && node.techMoat.description && (
         <section><h3>{t("moat", lang)}</h3><p>{node.techMoat.description[lang]}</p></section>
       )}
@@ -73,7 +77,8 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
 
 export default function App() {
   const [lang, setLang] = useState<LangKey>(initialLang);
-  const [view, setView] = useState<View>(() => { const value = new URLSearchParams(location.search).get("view"); return value === "advantages" || value === "grid" ? value : "cloud"; });
+  const [view, setView] = useState<View>(() => { const value = new URLSearchParams(location.search).get("view"); return value === "advantages" || value === "grid" || value === "cloud" ? value : NARROW ? "advantages" : "cloud"; });
+  const [colorBy, setColorBy] = useState<ColorBy>(() => new URLSearchParams(location.search).get("color") === "stage" ? "stage" : "app");
   const [cloudUiVisible, setCloudUiVisible] = useState(() => Boolean(new URLSearchParams(location.search).get("adv")));
   const [theme, setTheme] = useState<"paper" | "charcoal">(() => new URLSearchParams(location.search).get("theme") === "charcoal" ? "charcoal" : "paper");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -152,6 +157,12 @@ export default function App() {
     setActiveAdvId(null);
     if (view !== "advantages") updateUrl(view, null);
   };
+  const switchColorBy = (next: ColorBy) => {
+    setColorBy(next);
+    const url = new URL(location.href);
+    if (next === "stage") url.searchParams.set("color", "stage"); else url.searchParams.delete("color");
+    history.replaceState(null, "", url);
+  };
   const switchView = (next: View) => {
     setView(next);
     if (next === "cloud") setCloudUiVisible(true);
@@ -164,17 +175,17 @@ export default function App() {
   const openAdvantage = (id: string) => { setOpenAdvId(id); setActiveAdvId(null); setSelectedId(null); setView("advantages"); updateUrl("advantages", id); };
   const selectFromAdvantages = (id: string) => setSelectedId(id);
 
+  // Wersja kompaktowa kafelków z rozdz. 5.6 do nagłówka; pełne etykiety są w pasie liczb (Przewagi).
   const tiles: [string, string | number][] = [
-    [t("metricSystems", lang), m.systems],
     [t("metricModules", lang), m.modules],
     [t("metricFeatures", lang), m.features],
-    [t("metricBridges", lang), m.bridges],
-    [t("metricMcp", lang), m.mcp],
-    [t("metricCloud", lang), "0 %"],
+    [lang === "pl" ? "Mosty 3D" : "3D bridges", m.bridges],
+    [lang === "pl" ? "Serwery MCP" : "MCP servers", m.mcp],
+    [lang === "pl" ? "Danych w chmurze" : "Data in the cloud", "0 %"],
   ];
 
   return (
-    <div className={`page view-${view} ${activeAdvantage ? "has-advantage" : ""} ${view === "cloud" ? cloudUiVisible ? "cloud-chrome-visible" : "is-immersive" : ""}`} data-graph-theme={theme} onPointerDownCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }} onFocusCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }}>
+    <div className={`page view-${view} ${activeAdvantage ? "has-advantage" : ""} ${view === "cloud" ? cloudUiVisible ? "cloud-chrome-visible" : "is-immersive" : ""}`} data-graph-theme={theme} data-color-by={colorBy} onPointerDownCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }} onFocusCapture={() => { if (view === "cloud" && !cloudUiVisible) setCloudUiVisible(true); }}>
       <header className="top" ref={topRef}>
         <div className="intro">
           <h1>CFAB 4D Hub × TIMEFLOW</h1>
@@ -202,10 +213,15 @@ export default function App() {
         </div>
         </div>
       </header>
-      {view !== "advantages" && <div className="map-key" ref={mapKeyRef} aria-label={lang === "pl" ? "Kolory etapów pracy" : "Work-stage colours"}>
-        <span className="key-caption">{lang === "pl" ? "Obszary pracy" : "Work areas"}</span>
-        {STAGES.map(s => <span key={s.id} className={`group-${s.id}`}><i className="graph-dot" />{s[lang]}</span>)}
-        <span className="group-foundation"><i className="graph-dot" />{t("foundation",lang)}</span>
+      {view !== "advantages" && <div className="map-key" ref={mapKeyRef} aria-label={lang === "pl" ? "Legenda kolorów" : "Colour key"}>
+        <span className="color-by" role="group" aria-label={lang === "pl" ? "Koloruj według" : "Colour by"}>
+          <button aria-pressed={colorBy === "app"} onClick={() => switchColorBy("app")}>{lang === "pl" ? "Program" : "Application"}</button>
+          <button aria-pressed={colorBy === "stage"} onClick={() => switchColorBy("stage")}>{lang === "pl" ? "Etap pracy" : "Work stage"}</button>
+        </span>
+        {colorBy === "app" ? APPS.map(app => <span key={app.id} className={`app-key app-${app.id}`}><i className="graph-dot" />{app[lang]}</span>) : <>
+          {STAGES.map(s => <span key={s.id} className={`group-${s.id}`}><i className="graph-dot" />{s[lang]}</span>)}
+          <span className="group-foundation"><i className="graph-dot" />{t("foundation",lang)}</span>
+        </>}
       </div>}
 
       {activeAdvantage && view !== "advantages" && <div className="adv-map-bar" ref={mapBarRef}><span>{lang === "pl" ? "Przewaga" : "Advantage"} {activeAdvantage.rank} {lang === "pl" ? "z" : "of"} {data.advantages.length} · <strong>{activeAdvantage.title[lang]}</strong></span><div><button onClick={() => showAdvantageOnMap(data.advantages[(activeAdvantage.rank + data.advantages.length - 2) % data.advantages.length].id)} aria-label={lang === "pl" ? "Poprzednia przewaga" : "Previous advantage"}>←</button><button onClick={() => showAdvantageOnMap(data.advantages[activeAdvantage.rank % data.advantages.length].id)} aria-label={lang === "pl" ? "Następna przewaga" : "Next advantage"}>→</button><button onClick={clearAdvantage} aria-label={lang === "pl" ? "Wyczyść podświetlenie" : "Clear highlight"}>×</button></div></div>}
@@ -219,7 +235,7 @@ export default function App() {
         <div className="columns">
           {columns.map(({ stage, blocks }) => (
             <section key={stage.id} className={`stage-section group-${stage.id}`}>
-              <h2 className="column-title"><span className="graph-dot" /><span>{stage[lang]}</span><span className="count">{blocks.reduce((sum,b) => sum+b.items.length,0)}</span></h2>
+              <h2 className="column-title"><span className="graph-dot" /><span>{stage[lang]}</span><span className="count">{blocks.reduce((sum,b) => sum+b.items.length,0)}</span><span className="app-share" aria-hidden="true">{APPS.map(app => { const n = blocks.filter(b => b.app === app.id).reduce((sum, b) => sum + b.items.length, 0); return n ? <i key={app.id} className={`app-${app.id}`} style={{ flexGrow: n }} /> : null; })}</span></h2>
               <div className="column">
                 {blocks.map(b => <BlockView key={b.key} block={b} lang={lang} onSelect={setSelectedId} highlightIds={highlightIds} />)}
               </div>
@@ -258,6 +274,7 @@ export default function App() {
         <span>◐ {t("statusBeta", lang)} {statusCounts.beta}</span>
         <span>○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span>
         <span>◆ {lang === "pl" ? "wspólna funkcja" : "shared feature"}</span>
+        <span className="grid-hint">{lang === "pl" ? "Czytaj od lewej do prawej — tak wygląda dzień pracy." : "Read left to right — that's a working day."}</span>
       </footer> : <footer className="legend legend-advantages"><span>● {t("statusProduction", lang)} {statusCounts.production} · ◐ {t("statusBeta", lang)} {statusCounts.beta} · ○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span></footer>}
       {view === "advantages" && selected && <Card node={selected} lang={lang} parent={data.nodes.find(n => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} onOpenAdvantage={openAdvantage} />}
     </div>
