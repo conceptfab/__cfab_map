@@ -1,11 +1,13 @@
 // Źródło treści mapy. Treść pochodzi wyłącznie z rozdziałów 2–4
-// wytycznych (__c4d/wytyczne_interaktywna_mapa_funkcjonalnosci.md, stan 2026-09-24).
+// lokalnych wytycznych (wytyczne_interaktywna_mapa_funkcjonalnosci.md).
+// Aktualizacja C4D 2026-09-26: rozdz. 2.5 i 2.7 zweryfikowane z kodem bridge'a ALPHA 0.86.
 // Nie dopisuj funkcji spoza dokumentu (reguła R1). Zmiana w rozdz. 2–4 = zmiana tutaj.
 //
 // Skróty pól: p = rodzic, s = etap (null = Fundament), st = status,
 // t = tytuł [pl, en], sh = krótki tytuł [pl, en] (≤ 28 znaków),
 // d = opis [pl, en], m = tech moat [pl, en], note = nota statusu [pl, en],
-// c = kategoria, tech = stos, rep = zastępowane narzędzia, src = źródła
+// c = kategoria, part = część repo Huba dostarczająca wersję funkcji,
+// tech = stos, rep = zastępowane narzędzia, src = źródła
 // ("hub:…" w repo Huba, "tf:…" w repo TIMEFLOW), kw = słowa kluczowe,
 // aud = odbiorcy, bv = wartość biznesowa, k = kontrakt.
 
@@ -85,7 +87,7 @@ export const modules = [
   { id: "tf.data", p: "tf", t: ["Dane", "Data"], c: "security",
     d: ["Baza, import i eksport oraz synchronizacja między maszynami.", "The database, import/export and sync between machines."] },
   { id: "tf.reports", p: "tf", t: ["Raporty", "Reports"], c: "finance",
-    d: ["Raporty PDF dla klienta z dowodem pracy.", "Client PDF reports with proof of work."] },
+    d: ["Raporty dla klienta oraz wewnętrzna analiza kosztów i rentowności projektu.", "Client reports and internal analysis of project costs and profitability."] },
   { id: "tf.pm", p: "tf", t: ["Planowanie pracy", "PM"], c: "core",
     d: ["Lekki menadżer projektów powiązany ze śledzeniem czasu.", "A lightweight project manager tied to time tracking."] },
   { id: "tf.daemon", p: "tf", t: ["Pomiar w tle", "Daemon"], c: "core",
@@ -115,16 +117,15 @@ export const bridges = [
         "Requires render state from inside the DCC — an ordinary tracker does not have it."],
     tech: ["Python", "Rust"], src: ["hub:modules/render/poller.py"], kw: ["czas maszyny", "machine time"] },
   { id: "syn.ledger", s: "billing", st: "production", k: "cfab_render 3",
-    t: ["Koszt renderu w wycenie projektu", "Render Ledger and machine-cost estimates"],
-    sh: ["Render → koszt projektu", "Render Ledger → estimate"],
-    d: ["Po zakończeniu renderu Hub zapisuje czas maszyny, a TIMEFLOW przypisuje go do projektu i po zatwierdzeniu dolicza koszt do wyceny.",
-        "A finished render goes into the ledger; TIMEFLOW assigns it to a project and, once approved, adds machine cost to the estimate; an ACK closes the hand-off."],
+    t: ["Koszt renderu w kosztach projektu", "Render Ledger and project costs"],
+    sh: ["Render → koszt projektu", "Render → project cost"],
+    d: ["Hub zapisuje czas renderu, a TIMEFLOW przypisuje go do projektu i oblicza koszt maszyny do wewnętrznej analizy kosztów. W uzasadnionych przypadkach artysta może osobno uwzględnić ten koszt w wycenie.",
+        "Hub records render time; TIMEFLOW assigns it to a project and calculates machine cost for internal cost analysis. Where appropriate, the artist can separately include that cost in an estimate."],
     m: ["Klucz (hub_instance_id, ledger_id) i przypisanie po najdłuższym prefiksie ścieżki — bez kolizji między maszynami i bazami.",
         "The (hub_instance_id, ledger_id) key and longest-prefix path matching — no collisions across machines and databases."],
     tech: ["SQLite", "Python", "Rust"], rep: ["ręczne liczenie czasu renderu"],
     src: ["hub:modules/render/ledger.py", "tf:dashboard/src-tauri/src/commands/cfab_render.rs"],
-    kw: ["ledger", "rbh", "koszt maszyny", "machine cost", "ack"],
-    bv: { revenueRecoveryPct: 10, financialGainType: "revenue_recovery", assumptionId: "A-ODZYSK" } },
+    kw: ["ledger", "rbh", "koszt maszyny", "machine cost", "ack"] },
   { id: "syn.dcc_activity", s: "tracking", st: "production", k: "dcc_activity 1",
     t: ["Przypisywanie czasu po otwartym pliku 3D", "DCC activity log and project index"],
     sh: ["Plik 3D → projekt", "Active DCC file → session"],
@@ -207,7 +208,7 @@ export const features = [
     d: ["Odczyt plików .max ze struktur OLE: drzewo węzłów, modyfikatory, materiały, światła i kamery, ustawienia renderu, wtyczki zapisane w scenie i ścieżki zasobów.",
         "Reads .max files from OLE structures: node tree, modifiers, materials, lights and cameras, render settings, plug-ins recorded in the scene and asset paths."],
     m: ["Odczyt zamkniętego formatu Autodesku bez Maxa i bez jego API.", "Reads Autodesk's closed format without Max and without its API."],
-    tech: ["Python", "OLE Compound Document"], rep: ["licencja 3ds Max"], src: ["hub:modules/scenes/max_reader.py"], kw: ["max", "ole", "maxasset"] },
+    tech: ["Python", "OLE Compound Document"], src: ["hub:modules/scenes/max_reader.py"], kw: ["max", "ole", "maxasset"] },
   { p: "hub.scenes", id: "diag_tools", s: "inspection", st: "production", c: "analysis",
     t: ["Porównanie scen i zmiana silnika renderu", "c4ddiff and c4dpatch diagnostic tools"], sh: ["Porównanie scen .c4d", ".c4d diff and patch"],
     d: ["Binarne porównanie dwóch scen oraz 4-bajtowa podmiana silnika renderującego w pliku bez otwierania C4D.",
@@ -404,9 +405,9 @@ export const features = [
     bv: { timeSavedHoursMonth: 12, financialGainType: "cost_reduction", assumptionId: "A-RELINK" } },
   { p: "hub.assets", id: "textures", s: "inspection", st: "production", c: "automation",
     t: ["Operacje i standaryzacja tekstur", "Texture operations and standardisation"], sh: ["Tekstury: skala i nazwy", "Textures: scale and names"],
-    d: ["Wypakowanie z Asset Browsera Maxona, skalowanie, konwersje i masowa zmiana nazw wg standardu PBR.",
-        "Extraction from Maxon's Asset Browser, resizing, conversions and bulk PBR-standard renaming."],
-    tech: ["Python"], src: ["hub:modules/assets/engine.py"], kw: ["tekstury", "pbr"] },
+    d: ["Wypakowanie z Asset Browsera Maxona, skalowanie i nazwy PBR. Konwersja do TX podmienia odwołania we wszystkich pasujących bitmapach C4D, także zapisanych samą nazwą pliku. W zapisanym projekcie backup obejmuje tylko oryginały z tex/; pliki spoza niego pozostają na miejscu.",
+        "Extraction from Maxon's Asset Browser, resizing and PBR naming. TX conversion updates references in all matching C4D bitmaps, including filename-only paths. For a saved project, original-file backup is limited to its tex/ folder; files outside it stay in place."],
+    tech: ["Python", "OpenImageIO"], src: ["hub:modules/assets/engine.py", "hub:modules/assets/view.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/relink.py"], kw: ["tekstury", "pbr", "tx", "maketx", "bitmap", "backup"] },
   { p: "hub.assets", id: "libraries", s: "assets", st: "production", c: "ui",
     t: ["Zarządzanie folderami bibliotek", "Library folder management"], sh: ["Foldery bibliotek", "Library folders"],
     d: ["Edytowalna tabela folderów bibliotek zsynchronizowana z modułem Biblioteka.", "An editable table of library folders synced with the Library module."],
@@ -454,12 +455,42 @@ export const features = [
     tech: ["Python"], src: ["hub:modules/browser/core/errors_tab.py"], kw: ["błędy", "errors", "audyt"] },
 
   // ===================== 2.7 Połączenia
-  { p: "hub.bridges", id: "c4d", s: "scene", st: "production", c: "integration", k: "bridge_protocol 6",
+  { p: "hub.bridges", id: "c4d", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "integration", k: "bridge_protocol 6",
     t: ["Wtyczka Cinema 4D", "Cinema 4D plug-in"], sh: ["Most Cinema 4D", "Cinema 4D bridge"],
-    d: ["Działa w procesie C4D z tokenem, wykonuje zadania w wątku głównym, tworzy materiały Corony z tekstur, piecze geometrię i obsługuje ujęcia.",
-        "Runs inside C4D with a token, executes on the main thread, builds Corona materials from textures, bakes geometry and manages takes."],
+    d: ["Działa w procesie C4D z autoryzacją tokenem i kolejką zadań w wątku głównym. Tworzy materiały Corony z tekstur, piecze geometrię, obsługuje ujęcia i udostępnia Shader Browser do porządkowania materiałów i shaderów.",
+        "Runs inside C4D with token authentication and a main-thread task queue. Builds Corona materials from textures, bakes geometry, manages takes and includes Shader Browser for organising materials and shaders."],
     m: ["Stabilne wykonywanie poleceń w wątku głównym C4D przez Timer / CoreMessage.", "Stable command execution on C4D's main thread via Timer / CoreMessage."],
-    tech: ["Python", "TCP"], rep: ["Connecter"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge"], kw: ["c4d", "most", "bridge", "texmat"] },
+    tech: ["Python", "TCP"], rep: ["Connecter"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge"], kw: ["c4d", "most", "bridge", "texmat", "shader browser"] },
+  { p: "hub.bridges", id: "c4d_shader_browser", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "ui",
+    t: ["Shader Browser — drzewo materiałów i shaderów", "Shader Browser — material and shader tree"], sh: ["Shader Browser", "Shader Browser"],
+    d: ["Wbudowane okno C4D pokazuje materiały oraz zagnieżdżone shadery C4D, Corony i V-Raya, z kanałem, teksturą i ścieżką pliku. Sortowanie kolumn, zwijanie drzewa i powiększony widok z podglądem materiałów ułatwiają inspekcję; okno można zapisać w layoucie C4D.",
+        "A built-in C4D window shows materials and nested C4D, Corona and V-Ray shaders with their channel, texture and file path. Column sorting, tree folding and an enlarged view with material previews aid inspection; the window can be saved in the C4D layout."],
+    tech: ["Python", "Cinema 4D API"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_browser.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/shader_browser_tree.py"], kw: ["c4d", "shader browser", "materiały", "materials", "shadery", "corona", "v-ray"] },
+  { p: "hub.bridges", id: "c4d_shader_layers", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "automation",
+    t: ["Selekcje i warstwy materiałów w C4D", "C4D material selections and layers"], sh: ["Selekcje i warstwy", "Selections and layers"],
+    d: ["Shader Browser zaznacza materiały według typu lub warstwy oraz bitmapy C4D, Corony i V-Raya. Pozwala zaznaczyć wszystkie materiały, wyczyścić zaznaczenie, filtrować widok do jednej warstwy i przenieść wybrane materiały na warstwę z jednym krokiem Undo.",
+        "Shader Browser selects materials by type or layer, and C4D, Corona and V-Ray bitmaps. Select all materials, clear the selection, filter the view to one layer or move selected materials to a layer with a single undo step."],
+    tech: ["Python", "Cinema 4D API"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_browser.py"], kw: ["c4d", "shader browser", "warstwy", "layers", "selekcje", "selection"] },
+  { p: "hub.bridges", id: "c4d_bitmap_conversion", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "automation",
+    t: ["Konwersja shaderów bitmapowych C4D, Corona i V-Ray", "C4D, Corona and V-Ray bitmap shader conversion"], sh: ["Konwersja bitmap", "Bitmap shader conversion"],
+    d: ["Zamienia shadery V-Ray Bitmap ↔ Corona Bitmap oraz C4D Bitmap ↔ Corona Bitmap. Działa na wybranych shaderach albo pasujących bitmapach wewnątrz zaznaczonych materiałów, również zagnieżdżonych; wynik operacji pojawia się na pasku statusu.",
+        "Converts V-Ray Bitmap ↔ Corona Bitmap and C4D Bitmap ↔ Corona Bitmap shaders. Works on selected shaders or matching bitmaps inside selected materials, including nested shaders; the status bar reports the result."],
+    tech: ["Python", "Cinema 4D API"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_browser.py"], kw: ["c4d", "shader browser", "bitmap", "conversion", "konwersja", "corona", "v-ray"] },
+  { p: "hub.bridges", id: "c4d_color_correct", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "automation",
+    t: ["Zbiorcze dodawanie Corona Color Correct", "Batch Corona Color Correct insertion"], sh: ["Corona Color Correct", "Corona Color Correct"],
+    d: ["Wstawia Corona Color Correct nad teksturą wybranego kanału zaznaczonych materiałów Corona Physical lub Legacy, np. koloru, szorstkości czy alfy. Zachowuje teksturę jako dziecko korektora, pomija puste lub już opakowane kanały i pozwala cofnąć operację jednym krokiem.",
+        "Inserts Corona Color Correct above the texture of a chosen channel in selected Corona Physical or Legacy materials, such as colour, roughness or alpha. Keeps the texture as a child of the correction shader, skips empty or already wrapped channels and supports a single undo step."],
+    tech: ["Python", "Corona", "Cinema 4D API"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/shader_browser_color_correct.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_browser.py"], kw: ["c4d", "shader browser", "corona", "color correct", "kanały", "channels"] },
+  { p: "hub.bridges", id: "c4d_material_names", part: "bridges/c4d_bridge", s: "scene", st: "production", c: "automation",
+    t: ["Nazwy materiałów według zapisanego schematu", "Material names from a saved naming pattern"], sh: ["Schematy nazw materiałów", "Material naming patterns"],
+    d: ["Zmienia nazwy materiałów według obiektu, selekcji poligonów, starej nazwy, warstwy, typu i numeru. Zakładka Shader Browser w CFAB Bridge zapisuje schemat, presety i opcje czyszczenia nazw z przykładem na żywo. Przed zmianą pokazuje podgląd do zatwierdzenia, rozwiązuje kolizje nazw i zapewnia jeden krok Undo.",
+        "Renames materials using the object, polygon selection, old name, layer, type and index. The Shader Browser tab in CFAB Bridge saves the pattern and name-cleaning options, with presets and a live example. Renaming presents a confirmation preview, resolves name collisions and uses one undo step."],
+    tech: ["Python", "Cinema 4D API"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/shader_browser_names.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_settings.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/shader_browser_settings.py"], kw: ["c4d", "shader browser", "nazwy", "rename", "pattern", "presety", "undo"] },
+  { p: "hub.bridges", id: "c4d_texture_metadata", part: "bridges/c4d_bridge", s: "inspection", st: "production", c: "analysis",
+    t: ["Metadane tekstur z Huba w Shader Browserze", "Hub texture metadata in Shader Browser"], sh: ["Tekstury: rozmiar, bity, TX", "Texture size, depth and TX"],
+    d: ["Pobiera z działającego Huba rozdzielczość, głębię bitową i dostępność plików TX. Pokazuje dane przy bitmapach oraz zbiorczy stan TX w wierszach materiałów. Pobieranie jest ręczne lub automatyczne przy otwarciu okna, także z layoutu C4D; ustawienie zapisuje zakładka Shader Browser w CFAB Bridge.",
+        "Fetches resolution, bit depth and TX file availability from a running Hub. Shows bitmap metadata and an aggregate TX status on material rows. Fetch manually or automatically when opening the window, including from a C4D layout; the Shader Browser tab in CFAB Bridge saves the setting."],
+    tech: ["Python", "OpenImageIO", "HTTP"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/ui_shader_browser.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/service_link.py", "hub:bridges/c4d_bridge/C4Dcfabbridge/c4dcfabbridge_lib/shader_browser_settings.py"], kw: ["c4d", "shader browser", "metadane", "metadata", "resolution", "bit depth", "tx"] },
   { p: "hub.bridges", id: "blender", s: "scene", st: "production", c: "integration", k: "blender_bridge_protocol 2",
     t: ["Most do Blendera", "Blender bridge"], sh: ["Most Blender", "Blender bridge"],
     d: ["Dwukierunkowy import i eksport siatek (GLB, USD, Alembic), naprawa siatek, profile Cycles i spłaszczanie scen linkowanych.",
@@ -730,11 +761,10 @@ export const features = [
     tech: ["Rust"], src: ["tf:dashboard/src-tauri/src/commands/cfab_offline.rs"], kw: ["cfabx", "offline"] },
   { p: "tf.renders", id: "cost", s: "billing", st: "production", c: "finance", aud: ["agency_owner", "artist", "investor"],
     t: ["Kalkulacja kosztu renderu", "Render cost calculation"], sh: ["Koszt maszyny (RBH)", "Machine cost (RBH)"],
-    d: ["Koszt maszyny ze stawek, limitów i współczynnika RBH, doliczany do wyceny dopiero po włączeniu przez artystę.",
-        "Machine cost from rates, limits and the RBH factor, added to the estimate only once the artist turns it on."],
-    m: ["Czas maszyny rozliczony w wycenie — coś, czego trackery czasu w ogóle nie widzą.", "Machine time billed in the estimate — something time trackers never see."],
-    tech: ["Rust", "React"], src: ["tf:dashboard/src-tauri/src/commands/cfab_render.rs"], kw: ["rbh", "koszt", "cost"],
-    bv: { revenueRecoveryPct: 10, financialGainType: "revenue_recovery", assumptionId: "A-ODZYSK" } },
+    d: ["Oblicza koszt maszyny na podstawie czasu renderu, stawek, limitów i współczynnika RBH. To składnik kosztów projektu służący artyście do oceny rentowności; uwzględnienie go w wycenie jest osobną, opcjonalną decyzją.",
+        "Calculates machine cost from render time, rates, limits and the RBH factor. It contributes to project costs and the artist’s profitability analysis; including it in an estimate is a separate, optional decision."],
+    m: ["Łączy zmierzony czas maszyny z kosztami konkretnego projektu, oddzielnie od czasu pracy artysty.", "Connects measured machine time to a specific project’s costs, separately from the artist’s working time."],
+    tech: ["Rust", "React"], src: ["tf:dashboard/src-tauri/src/commands/cfab_render.rs"], kw: ["rbh", "koszt", "cost"] },
   { p: "tf.renders", id: "render_sync", s: "billing", st: "production", c: "integration",
     t: ["Synchronizacja czasu renderów", "Render time travels between machines"], sh: ["Rendery między maszynami", "Renders across machines"],
     d: ["Dane o renderach synchronizują się przez sieć lokalną lub internet. Przesyłany jest czas i identyfikator renderu; koszt każda maszyna oblicza u siebie.",
@@ -830,11 +860,11 @@ export const features = [
   // ===================== 3.8 Wyceny i raporty
   { p: "tf.estimates", id: "costs", s: "billing", st: "production", c: "finance",
     t: ["Rejestr kosztów dodatkowych", "Extra cost register"], sh: ["Koszty poza czasem pracy", "Costs beyond work time"],
-    d: ["Licencje, materiały, podwykonawcy i koszt maszyny obok roboczogodzin, w wycenie i raporcie.", "Licences, materials, subcontractors and machine cost next to hours, in the estimate and report."],
+    d: ["Ewidencja licencji, materiałów, podwykonawców i kosztów maszyny do analizy kosztów projektu. Ich uwzględnienie w wycenie zależy od sposobu rozliczenia projektu.", "Records licences, materials, subcontractors and machine costs for project cost analysis. Their inclusion in an estimate depends on how the project is billed."],
     tech: ["Rust"], src: ["tf:dashboard/src-tauri/src/commands/costs.rs"], kw: ["koszty"] },
   { p: "tf.estimates", id: "estimates", s: "billing", st: "production", c: "finance",
     t: ["Kalkulator wartości pracy", "Work value calculator"], sh: ["Wycena z czasu i stawek", "Estimate from time & rates"],
-    d: ["Przelicza czas na kwoty wg stawek, mnożników trudności i kosztów maszyny.", "Turns time into amounts using rates, difficulty multipliers and machine costs."],
+    d: ["Przelicza czas pracy na kwoty według stawek i mnożników trudności. Koszt maszyny można uwzględnić opcjonalnie, gdy uzasadnia to sposób wyceny projektu.", "Turns work time into amounts using rates and difficulty multipliers. Machine cost can optionally be included where the project’s pricing approach calls for it."],
     tech: ["React", "Rust"], rep: ["Excel"], src: ["tf:dashboard/src/pages/Estimates.tsx", "tf:dashboard/src-tauri/src/commands/estimates.rs"], kw: ["wycena", "estimate"] },
   { p: "tf.estimates", id: "estimate_report", s: "report", st: "production", c: "finance",
     t: ["Raport estymacji", "Estimate report"], sh: ["Raport estymacji do PDF", "Estimate report to PDF"],
@@ -843,11 +873,11 @@ export const features = [
     tech: ["React"], src: ["tf:dashboard/src/pages/EstimateReport.tsx", "tf:dashboard/src/pages/estimate-report/EstimateReportDocument.tsx"], kw: ["estymacja", "raport"] },
   { p: "tf.reports", id: "pdf", s: "report", st: "production", c: "finance",
     t: ["Raporty PDF dla klienta", "Client PDF reports"], sh: ["Raport PDF dla klienta", "Client PDF report"],
-    d: ["Zestawienia z etapami, wykresami i galerią renderów z RBH i wartością przy każdej pozycji.", "Summaries with stages, charts and a render gallery showing RBH and value per item."],
+    d: ["Zestawienia dla klienta z etapami pracy, wykresami i galerią renderów. Zakres raportu dobiera się do odbiorcy; analiza kosztów maszyny służy artyście do oceny projektu.", "Client summaries with work stages, charts and a render gallery. Report content is tailored to the audience; machine cost analysis helps the artist evaluate the project."],
     tech: ["React", "Rust"], src: ["tf:dashboard/src/pages/ReportView.tsx", "tf:dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx"], kw: ["pdf", "raport"] },
   { p: "tf.reports", id: "profitability", s: "report", st: "production", c: "finance", aud: ["agency_owner", "investor"],
-    t: ["Analiza rentowności w raporcie", "Profitability analysis in reports"], sh: ["Czy projekt zarobił", "Did the project pay off"],
-    d: ["Składniki projektu — czas pracy, czas maszyny, koszty dodatkowe — z ilością i wartością.", "Project components — work time, machine time, extra costs — with quantity and value."],
+    t: ["Wewnętrzna analiza rentowności", "Internal profitability analysis"], sh: ["Czy projekt zarobił", "Did the project pay off"],
+    d: ["Wewnętrzne zestawienie czasu pracy, czasu maszyny i kosztów dodatkowych z ilością i wartością. Pomaga artyście lub studiu ocenić faktyczne koszty i rentowność projektu.", "An internal breakdown of work time, machine time and extra costs, with quantities and values. Helps the artist or studio assess actual project costs and profitability."],
     tech: ["React"], src: ["tf:dashboard/src/pages/report-view/ReportViewProfitabilitySection.tsx"], kw: ["rentowność", "profitability"] },
   { p: "tf.reports", id: "templates", s: "report", st: "production", c: "ui",
     t: ["Edytor szablonów raportów", "Report template editor"], sh: ["Szablony raportów", "Report templates"],
@@ -876,42 +906,182 @@ export const features = [
     kw: ["cloud", "sync", "aes"] },
 ];
 
-// Pięć tez inwestorskich. Dowody są wyłącznie gotowymi węzłami z powyższej listy.
+// Przewagi całego ekosystemu; funkcje poniżej są dowodami wspólnych korzyści.
 export const advantages = [
-  { id: "render_cost", rank: 1,
-    t: ["Czas renderu trafia do wyceny", "Render time lands in the quote"],
-    d: ["Hub zapisuje każdy zakończony render z maszyną i sekundami, a TIMEFLOW przypisuje go do projektu i dolicza koszt maszyny do wyceny i raportu PDF — po włączeniu przez artystę.", "Hub logs every finished render with its machine and seconds; TIMEFLOW assigns it to a project and adds the machine cost to the quote and the PDF report once the artist switches it on."],
-    why: ["Potrzebny jest stan renderu z wnętrza programu 3D i aplikacja rozliczeniowa po drugiej stronie. Trackery czasu nie widzą renderu, a menedżery renderu nie robią wycen.", "It needs render state from inside the 3D app and a billing app on the other side. Time trackers can't see renders; render managers don't do quotes."],
-    rep: [["ręczne liczenie czasu renderu", "manual render-time tracking"], ["Excel", "Excel"]], assumptionId: "A-ODZYSK",
-    flow: [["Render w Hubie", "Render in Hub"], ["Księga renderów", "Render log"], ["Przypisanie w TIMEFLOW", "Assignment in TIMEFLOW"], ["Koszt w wycenie i PDF", "Cost in quote and PDF"]],
-    ids: ["syn.machine_time", "hub.render.ledger", "hub.render.ledger_always", "syn.ledger", "tf.renders.ingest", "tf.renders.assign", "tf.renders.cost", "syn.cfabx", "tf.renders.offline", "tf.renders.render_sync", "tf.reports.profitability", "tf.reports.pdf"] },
-  { id: "closed_formats", rank: 2,
-    t: ["Pliki .c4d i .max bez programu i licencji", ".c4d and .max files without the app or a licence"],
-    d: ["Inspektor czyta geometrię, hierarchię i materiały z plików Cinema 4D i 3ds Max, porównuje sceny, zmienia silnik renderu w pliku i przenosi scenę z Maxa do C4D — bez uruchamiania tych programów.", "The Inspector reads geometry, hierarchy and materials from Cinema 4D and 3ds Max files, compares scenes, swaps the render engine in the file and moves a Max scene into C4D — without launching either app."],
-    why: ["Oba formaty są zamknięte. Strukturę .c4d odtworzono inżynierią wsteczną, a .max jest czytany ze struktur OLE bez API Autodesku.", "Both formats are closed. The .c4d layout was reverse-engineered; .max is read from OLE structures without Autodesk's API."],
-    rep: [["licencja Cinema 4D", "Cinema 4D licence"], ["licencja 3ds Max", "3ds Max licence"], ["Connecter", "Connecter"], ["konwertery chmurowe", "cloud converters"]], assumptionId: "A-INSPEKCJA", flow: null,
-    ids: ["hub.scenes.c4d_parser", "hub.scenes.max_reader", "hub.scenes.max_import", "hub.scenes.max_space", "hub.scenes.diag_tools", "hub.scenes.max_tools", "hub.scenes.export", "hub.scenes.materials", "hub.scenes.tree"] },
-  { id: "night_render", rank: 3,
-    t: ["Nocny render kończy się klatkami", "An overnight render ends with frames"],
-    d: ["Przed startem Hub sprawdza kolejkę, w trakcie pilnuje postępu i wysyła zadania na wolne maszyny w sieci lokalnej, a po awarii Cinema 4D restartuje program i renderuje tylko brakujące klatki. Rano czeka mail z miniaturami.", "Before the start Hub checks the queue; during the night it tracks progress and sends jobs to free LAN machines; after a Cinema 4D crash it restarts the app and renders only the missing frames. A mail with thumbnails waits in the morning."],
-    why: ["Most działa wewnątrz procesu Cinema 4D, a Hub prowadzi rejestr klatek — wie, co już policzył, więc wie, co dokończyć.", "The bridge runs inside the Cinema 4D process and Hub keeps a frame log — it knows what is done, so it knows what to finish."],
-    rep: [["Deadline", "Deadline"], ["Team Render", "Team Render"]], assumptionId: null, flow: null,
-    ids: ["hub.render.precheck", "hub.render.recovery", "hub.render.watchdog", "hub.render.lan_farm", "hub.render.eta_log", "hub.render.web_panel", "hub.render.ntfy", "hub.render.mail", "hub.results.sequences", "hub.render.shutdown"] },
-  { id: "honest_time", rank: 4,
-    t: ["Czas pracy liczy się sam i uczciwie", "Work time counts itself, fairly"],
-    d: ["Demon mierzy pracę ze zdarzeń systemu, bez stopera. Nie liczy podwójnie przy przełączaniu okien ani pracy maszyny w tle, a lokalny model przypisuje sesje do projektów — także po ścieżce pliku otwartego w programie 3D, którą podaje Hub.", "The daemon measures work from system events, with no stopwatch. It doesn't double-count window switching or background machine work, and a local model assigns sessions to projects — including by the path of the file open in the 3D app, supplied by Hub."],
-    why: ["Haki zdarzeń Win32 i Quartz w Rust, Algorytm Uczciwego Czasu i model uczący się lokalnie. Ścieżkę pliku z wnętrza programu 3D ma tylko para Hub i TIMEFLOW.", "Win32 and Quartz event hooks in Rust, the Fair Time Algorithm and a model that learns locally. Only the Hub–TIMEFLOW pair has the file path from inside the 3D app."],
-    rep: [["Toggl", "Toggl"], ["Harvest", "Harvest"], ["Clockify", "Clockify"]], assumptionId: null, flow: null,
-    ids: ["tf.daemon.events", "tf.daemon.title_parser", "tf.daemon.idle", "tf.daemon.background", "tf.sessions.no_double", "tf.sessions.split", "syn.dcc_activity", "tf.ai.layer_paths", "tf.ai.facts_first", "tf.ai.auto_safe", "tf.ai.ai_screen"] },
-  { id: "local_first", rank: 5,
-    t: ["Dane i AI zostają na komputerze", "Data and AI stay on the machine"],
-    d: ["Dwa lokalne serwery MCP dla agentów AI, wyszukiwanie po obrazie na lokalnym modelu, synchronizacja w sieci lokalnej bez chmury i szyfrowana synchronizacja online, w której serwer widzi tylko rewizje i sumy kontrolne.", "Two local MCP servers for AI agents, image search on a local model, LAN sync with no cloud, and encrypted online sync where the server sees only revisions and checksums."],
-    why: ["Cały stos działa lokalnie: serwery MCP tylko na pętli zwrotnej, model DINOv2 lub CLIP na maszynie, AES-256-GCM z kluczem, którego serwer nie zna.", "The whole stack is local: MCP servers on loopback only, a DINOv2 or CLIP model on the machine, AES-256-GCM with a key the server never sees."],
-    rep: [["chmury SaaS", "SaaS clouds"]], assumptionId: null, flow: null,
-    ids: ["hub.core.mcp", "tf.mcp_arch", "tf.mcp_tools", "tf.mcp_backup", "hub.browser.visual_search", "tf.data.lan_sync", "tf.data.cloud_sync", "syn.beacons", "tf.webserver"] },
+  {
+    "id": "workflow",
+    "rank": 1,
+    "t": [
+      "Cały proces pracy 3D w jednym ekosystemie",
+      "One ecosystem for the entire 3D workflow"
+    ],
+    "d": [
+      "CFAB 4D Hub łączy bibliotekę zasobów, sceny, programy 3D, renderowanie i analizę wyników. TIMEFLOW dopełnia ten proces projektami, czasem pracy i finansami. Informacje o plikach i renderach przechodzą między aplikacjami i trafiają do właściwego projektu.",
+      "CFAB 4D Hub connects asset libraries, scenes, 3D applications, rendering and result review. TIMEFLOW completes the workflow with projects, work time and finances. File and render information moves between the applications and is linked to the right project."
+    ],
+    "why": [
+      "Wspólne połączenia z programami 3D, ścieżki projektów i wymiana danych łączą pracę twórczą z jej organizacją. Każda aplikacja ma własny zakres, a razem obejmują kolejne etapy realizacji projektu.",
+      "Shared DCC connections, project paths and data exchange connect creative work with project organisation. Each application has its own role; together they cover successive stages of a project."
+    ],
+    "ids": [
+      "hub.browser.multi_tb",
+      "hub.browser.asset_format",
+      "hub.bridges.c4d",
+      "hub.bridges.blender",
+      "hub.bridges.max",
+      "hub.bridges.modo",
+      "hub.render.queue",
+      "hub.results.exruster",
+      "syn.dcc_activity",
+      "syn.presence",
+      "tf.projects.projects",
+      "tf.projects.merge"
+    ],
+    "rep": [],
+    "assumptionId": null,
+    "flow": null
+  },
+  {
+    "id": "automation",
+    "rank": 2,
+    "t": [
+      "Mniej ręcznej pracy między etapami",
+      "Less manual work between stages"
+    ],
+    "d": [
+      "Wyszukanie i przygotowanie zasobu, inspekcja sceny, transfer modelu z materiałami, naprawa ścieżek oraz przypisanie czasu pracy do projektu składają się na jeden obieg pracy. Automatyzacja obejmuje zarówno pliki produkcyjne, jak i organizację pracy.",
+      "Finding and preparing assets, inspecting scenes, transferring models with materials, repairing paths and assigning work time to projects form one workflow. Automation covers both production files and work organisation."
+    ],
+    "why": [
+      "Hub rozumie zasoby i strukturę scen, a TIMEFLOW korzysta z informacji o plikach i aktywności. Odczyt scen .c4d i .max bez uruchamiania programów, mosty DCC oraz lokalne przypisywanie sesji ograniczają powtarzalną obsługę danych.",
+      "Hub understands assets and scene structure; TIMEFLOW uses file and activity context. Reading .c4d and .max scenes without launching the applications, DCC bridges and local session assignment reduce repetitive data handling."
+    ],
+    "ids": [
+      "hub.browser.pairing",
+      "hub.browser.jit",
+      "hub.scenes.c4d_parser",
+      "hub.scenes.max_reader",
+      "hub.scenes.max_import",
+      "hub.scenes.max_space",
+      "hub.scenes.export",
+      "hub.bridges.blender_mats",
+      "hub.assets.relink",
+      "hub.assets.textures",
+      "tf.daemon.events",
+      "tf.ai.layer_paths",
+      "tf.ai.facts_first",
+      "tf.ai.auto_safe"
+    ],
+    "rep": [],
+    "assumptionId": null,
+    "flow": null
+  },
+  {
+    "id": "production",
+    "rank": 3,
+    "t": [
+      "Kontrola od przygotowania sceny do odbioru pracy",
+      "Control from scene preparation to delivery"
+    ],
+    "d": [
+      "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, wykrywanie brakujących klatek oraz raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
+      "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, missing-frame detection and reports help verify and summarise completed work."
+    ],
+    "why": [
+      "Przygotowanie sceny, wykonanie renderu, kontrola plików wynikowych i dokumentacja projektu są dostępne w jednym ekosystemie. Brakujące klatki mogą wrócić do kolejki, a historia renderów i sesji zachowuje przebieg pracy.",
+      "Scene preparation, render execution, output validation and project documentation are available within one ecosystem. Missing frames can return to the queue, while render and session histories preserve the work record."
+    ],
+    "ids": [
+      "hub.assets.audit",
+      "hub.render.precheck",
+      "hub.render.recovery",
+      "hub.render.watchdog",
+      "hub.render.lan_farm",
+      "hub.render.eta_log",
+      "hub.render.web_panel",
+      "hub.render.ntfy",
+      "hub.render.mail",
+      "hub.render.history",
+      "hub.results.passes",
+      "hub.results.sequences",
+      "tf.sessions.timeline",
+      "tf.reports.pdf",
+      "tf.reports.templates"
+    ],
+    "rep": [],
+    "assumptionId": null,
+    "flow": null
+  },
+  {
+    "id": "local_first",
+    "rank": 4,
+    "t": [
+      "Dane i automatyzacja pod własną kontrolą",
+      "Keep control of data and automation"
+    ],
+    "d": [
+      "Biblioteki, dane projektów i modele przypisujące czas pracy działają lokalnie. Ekosystem oferuje lokalne wyszukiwanie wizualne, synchronizację w LAN, opcjonalną szyfrowaną synchronizację online i dwa serwery MCP do integracji z agentami AI.",
+      "Libraries, project data and work-time assignment models run locally. The ecosystem provides local visual search, LAN sync, optional encrypted online sync and two MCP servers for integration with AI agents."
+    ],
+    "why": [
+      "Hub i TIMEFLOW mają własne lokalne bazy i mogą działać samodzielnie. Wymiana danych, kopie zapasowe i cofanie zmian wspierają kontrolę nad pracą, a szyfrowana synchronizacja pozwala przenosić dane między komputerami.",
+      "Hub and TIMEFLOW maintain their own local databases and can run independently. Data exchange, backups and undo support control over work; encrypted sync carries data between computers."
+    ],
+    "ids": [
+      "hub.core.mcp",
+      "tf.mcp_arch",
+      "tf.mcp_tools",
+      "tf.mcp_backup",
+      "hub.browser.visual_search",
+      "tf.ai.ai_screen",
+      "tf.data.lan_sync",
+      "tf.data.cloud_sync",
+      "syn.beacons",
+      "hub.assets.undo"
+    ],
+    "rep": [],
+    "assumptionId": null,
+    "flow": null
+  },
+  {
+    "id": "render_cost",
+    "rank": 5,
+    "t": [
+      "Wiesz, ile kosztuje praca i które projekty zarabiają",
+      "Know what work costs and which projects pay off"
+    ],
+    "d": [
+      "TIMEFLOW zestawia czas pracy i koszty dodatkowe, a Hub dostarcza czas renderowania. Rozdzielenie pracy artysty od pracy maszyny pozwala ocenić faktyczne koszty i rentowność projektu oraz lepiej planować kolejne zlecenia.",
+      "TIMEFLOW brings together work time and extra costs; Hub supplies render time. Separating the artist’s work from machine time helps assess actual project costs and profitability and plan future projects."
+    ],
+    "why": [
+      "To wiedza dla artysty lub studia o własnej działalności. Czas maszyny trafia do analizy kosztów projektu. Uwzględnienie kosztu renderu w wycenie jest osobną, opcjonalną decyzją, uzasadnioną sposobem rozliczenia zlecenia.",
+      "This gives artists and studios insight into their own business. Machine time contributes to project cost analysis. Including render cost in an estimate is a separate, optional decision based on how a job is priced."
+    ],
+    "ids": [
+      "syn.machine_time",
+      "hub.render.ledger",
+      "hub.render.ledger_always",
+      "syn.ledger",
+      "tf.renders.ingest",
+      "tf.renders.assign",
+      "tf.renders.cost",
+      "syn.cfabx",
+      "tf.renders.offline",
+      "tf.renders.render_sync",
+      "tf.sessions.no_double",
+      "tf.sessions.split",
+      "tf.estimates.costs",
+      "tf.estimates.estimates",
+      "tf.reports.profitability"
+    ],
+    "rep": [],
+    "assumptionId": null,
+    "flow": null
+  }
 ];
 
-export const alsoStrong = ["hub.results.exruster", "hub.results.passes", "hub.results.thumb_cache", "hub.assets.relink", "hub.bridges.c4d", "hub.bridges.blender_mats", "hub.bridges.max", "hub.bridges.modo", "hub.browser.jit"];
+export const alsoStrong = ["hub.bridges.c4d_shader_browser", "hub.bridges.c4d_shader_layers", "hub.bridges.c4d_bitmap_conversion", "hub.bridges.c4d_color_correct", "hub.bridges.c4d_material_names", "hub.bridges.c4d_texture_metadata"];
 
 // Założenia modelu ROI (rozdz. 7.2). Wartości ⚠ są szacunkami do zatwierdzenia.
 export const assumptions = [
@@ -920,7 +1090,6 @@ export const assumptions = [
   { id: "A-MINIATURY", pl: "Przeglądanie i selekcja ujęć EXR", en: "Reviewing and picking EXR shots", value: 4, unit: "h / artysta / mies.", source: "szacunek do zatwierdzenia" },
   { id: "A-SAAS", pl: "Wyeliminowane subskrypcje na stanowisko", en: "Subscriptions eliminated per seat", value: 180, unit: "USD / stanowisko / mies.", source: "suma cenników do udokumentowania" },
   { id: "A-RBH", pl: "Współczynnik kosztu maszyny", en: "Machine cost factor", value: 0.2, unit: "—", source: "wartość robocza z funkcje.md" },
-  { id: "A-ODZYSK", pl: "Odzysk przychodu z rozliczenia renderów", en: "Revenue recovered by billing renders", value: 10, maxValue: 25, unit: "%", source: "widełki do zatwierdzenia" },
 ];
 
 // Relacje między elementami (rozdz. 6.2). Hierarchia wynika z parentId.
@@ -929,7 +1098,7 @@ export const edges = [
   ["syn.ledger", "tf.renders.ingest", "data_flow", ["wpisy ledgera", "ledger rows"], "cfab_render 3", "production"],
   ["tf.renders.ingest", "tf.renders.assign", "data_flow", null, null, "production"],
   ["tf.renders.assign", "tf.renders.cost", "data_flow", null, null, "production"],
-  ["tf.renders.cost", "tf.estimates.estimates", "data_flow", ["koszt maszyny → wycena", "machine cost → estimate"], null, "production"],
+  ["tf.renders.cost", "tf.estimates.estimates", "data_flow", ["opcjonalnie → wycena", "optional → estimate"], null, "production"],
   ["tf.estimates.estimates", "tf.reports.pdf", "data_flow", null, null, "production"],
   ["tf.estimates.costs", "tf.reports.profitability", "data_flow", null, null, "beta"],
   ["tf.renders.cost", "tf.reports.profitability", "data_flow", null, null, "beta"],
@@ -949,6 +1118,13 @@ export const edges = [
   ["hub.render.lan_farm", "hub.bridges.c4d", "ipc", null, "bridge_protocol 6", "beta"],
   ["hub.render.queue", "hub.bridges.c4d", "ipc", null, "bridge_protocol 6", "production"],
   ["hub.assets.relink", "hub.bridges.c4d", "ipc", ["zmiana w otwartej scenie", "change in open scene"], "bridge_protocol 6", "production"],
+  ["hub.bridges.c4d_shader_browser", "hub.bridges.c4d", "depends_on", ["okno wtyczki", "plug-in window"], null, "production"],
+  ["hub.bridges.c4d_shader_layers", "hub.bridges.c4d_shader_browser", "depends_on", null, null, "production"],
+  ["hub.bridges.c4d_bitmap_conversion", "hub.bridges.c4d_shader_browser", "depends_on", null, null, "production"],
+  ["hub.bridges.c4d_color_correct", "hub.bridges.c4d_shader_browser", "depends_on", null, null, "production"],
+  ["hub.bridges.c4d_material_names", "hub.bridges.c4d_shader_browser", "depends_on", null, null, "production"],
+  ["hub.bridges.c4d_texture_metadata", "hub.bridges.c4d_shader_browser", "data_flow", ["metadane tekstur", "texture metadata"], null, "production"],
+  ["hub.service", "hub.bridges.c4d_texture_metadata", "data_flow", ["rozdzielczość, głębia, TX", "resolution, depth, TX"], null, "production"],
   ["hub.bridges.blender", "hub.scratch.zones", "file_exchange", ["staging/"], null, "production"],
   ["hub.bridges.max", "hub.scratch.zones", "file_exchange", ["staging/"], null, "beta"],
   ["hub.bridges.modo", "hub.scratch.zones", "file_exchange", ["staging/"], null, "beta"],

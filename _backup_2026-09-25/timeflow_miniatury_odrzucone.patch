@@ -1,0 +1,180 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 6a90f9a..9a6e825 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -4821,6 +4821,7 @@ dependencies = [
+ name = "timeflow-dashboard"
+ version = "0.1.5776"
+ dependencies = [
++ "base64 0.22.1",
+  "chrono",
+  "dotenvy",
+  "flate2",
+diff --git a/dashboard/src-tauri/Cargo.toml b/dashboard/src-tauri/Cargo.toml
+index 6cd2f7a..781e437 100644
+--- a/dashboard/src-tauri/Cargo.toml
++++ b/dashboard/src-tauri/Cargo.toml
+@@ -18,6 +18,7 @@ dotenvy = "0.15"
+ 
+ [dependencies]
+ dotenvy = "0.15"
++base64 = "0.22"
+ serde_json = { workspace = true }
+ serde = { workspace = true }
+ log = { workspace = true }
+diff --git a/dashboard/src-tauri/src/commands/report.rs b/dashboard/src-tauri/src/commands/report.rs
+index 67285a0..31a39b0 100644
+--- a/dashboard/src-tauri/src/commands/report.rs
++++ b/dashboard/src-tauri/src/commands/report.rs
+@@ -74,13 +74,45 @@ pub(crate) fn load_report_cfab_renders(
+                 render_seconds: row.get(3)?,
+                 ended_at: row.get(4)?,
+                 thumbnail_path: row.get(5)?,
++                thumbnail_data: None,
+                 rbh: row.get(6)?,
+                 value: row.get(7)?,
+             })
+         })
+         .map_err(|e| e.to_string())?;
+ 
+-    rows.collect::<Result<Vec<_>, _>>().map_err(|e| e.to_string())
++    let mut renders = rows.collect::<Result<Vec<_>, _>>().map_err(|e| e.to_string())?;
++    for render in &mut renders {
++        render.thumbnail_data = thumbnail_data_url(&render.thumbnail_path);
++    }
++    Ok(renders)
++}
++
++/// Sufit na jedną miniaturę; Hub zapisuje PNG o wysokości kilkuset px.
++const THUMBNAIL_MAX_BYTES: u64 = 4 * 1024 * 1024;
++
++/// Plik miniatury z Huba jako `data:` URL. `None`, gdy pliku nie ma (inna
++/// maszyna, wyczyszczony cache), nie jest obrazem albo jest za duży.
++fn thumbnail_data_url(path: &str) -> Option<String> {
++    use base64::Engine;
++
++    let path = std::path::Path::new(path.trim());
++    let ext = path.extension()?.to_str()?.to_ascii_lowercase();
++    let mime = match ext.as_str() {
++        "png" => "image/png",
++        "jpg" | "jpeg" => "image/jpeg",
++        "webp" => "image/webp",
++        _ => return None,
++    };
++    let meta = std::fs::metadata(path).ok()?;
++    if !meta.is_file() || meta.len() > THUMBNAIL_MAX_BYTES {
++        return None;
++    }
++    let bytes = std::fs::read(path).ok()?;
++    Some(format!(
++        "data:{mime};base64,{}",
++        base64::engine::general_purpose::STANDARD.encode(bytes)
++    ))
+ }
+ 
+ pub(crate) fn load_report_costs(
+@@ -583,7 +615,7 @@ pub fn print_report(window: tauri::WebviewWindow) -> Result<(), CommandError> {
+ #[cfg(test)]
+ mod tests {
+     use super::{
+-        load_report_cfab_renders,
++        load_report_cfab_renders, thumbnail_data_url,
+         attach_effective_seconds, compute_effective_by_source,
+         query_active_project_with_stats_in_range, query_project_date_bounds,
+         query_project_extra_info, query_report_sessions,
+@@ -735,6 +767,28 @@ mod tests {
+         assert_eq!(renders[1].ledger_id, 1);
+         assert_eq!(renders[1].rbh, 0.5);
+         assert_eq!(renders[1].value, 10.0);
++        // Pliku /thumb/shot1.jpg nie ma — raport pokazuje wiersz bez obrazka.
++        assert_eq!(renders[1].thumbnail_data, None);
++    }
++
++    #[test]
++    fn thumbnail_data_url_embeds_existing_image() {
++        let dir = std::env::temp_dir().join(format!("tf_thumb_{}", std::process::id()));
++        std::fs::create_dir_all(&dir).unwrap();
++        let png = dir.join("shot.png");
++        std::fs::write(&png, [0x89, b'P', b'N', b'G']).unwrap();
++        let text = dir.join("shot.txt");
++        std::fs::write(&text, b"not an image").unwrap();
++
++        assert_eq!(
++            thumbnail_data_url(png.to_str().unwrap()).as_deref(),
++            Some("data:image/png;base64,iVBORw==")
++        );
++        assert_eq!(thumbnail_data_url(text.to_str().unwrap()), None);
++        assert_eq!(thumbnail_data_url(""), None);
++        assert_eq!(thumbnail_data_url(dir.join("missing.png").to_str().unwrap()), None);
++
++        std::fs::remove_dir_all(&dir).ok();
+     }
+ 
+ }
+diff --git a/dashboard/src-tauri/src/commands/types.rs b/dashboard/src-tauri/src/commands/types.rs
+index 9961500..3ee9f01 100644
+--- a/dashboard/src-tauri/src/commands/types.rs
++++ b/dashboard/src-tauri/src/commands/types.rs
+@@ -342,6 +342,10 @@ pub struct CfabRenderThumbnail {
+     pub render_seconds: f64,
+     pub ended_at: f64,
+     pub thumbnail_path: String,
++    /// Miniatura jako `data:` URL — webview nie ma protokołu `asset`, a plik
++    /// leży w cache Huba, którego położenie zależy od ustawień Huba.
++    #[serde(default)]
++    pub thumbnail_data: Option<String>,
+     #[serde(default)]
+     pub rbh: f64,
+     #[serde(default)]
+diff --git a/dashboard/src/lib/db-types.ts b/dashboard/src/lib/db-types.ts
+index 32c2773..5923227 100644
+--- a/dashboard/src/lib/db-types.ts
++++ b/dashboard/src/lib/db-types.ts
+@@ -372,6 +372,8 @@ export interface CfabRenderThumbnail {
+   render_seconds: number;
+   ended_at: number;
+   thumbnail_path: string;
++  /** Miniatura jako `data:` URL; brak, gdy plik z Huba jest niedostępny. */
++  thumbnail_data?: string | null;
+   rbh?: number;
+   value?: number;
+ }
+diff --git a/dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx b/dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx
+index b3cc89d..7f602bc 100644
+--- a/dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx
++++ b/dashboard/src/pages/report-view/ReportViewRenderGallerySection.tsx
+@@ -1,4 +1,3 @@
+-import { convertFileSrc } from '@tauri-apps/api/core';
+ import type { ReportViewController } from '@/hooks/useReportViewController';
+ import { formatDurationSlimRaw, formatMoney } from '@/lib/utils';
+ 
+@@ -29,9 +28,7 @@ export function ReportViewRenderGallerySection({
+     0,
+   );
+   const totalValue = renders.reduce((acc, r) => acc + (r.value ?? 0), 0);
+-  const hasThumbnails = renders.some(
+-    (r) => r.thumbnail_path && r.thumbnail_path.trim() !== '',
+-  );
++  const hasThumbnails = renders.some((r) => Boolean(r.thumbnail_data));
+ 
+   return (
+     <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4 print:border-purple-200 print:bg-purple-50 print:break-inside-avoid">
+@@ -67,9 +64,7 @@ export function ReportViewRenderGallerySection({
+           {renders.map((render) => {
+             const fileName =
+               render.working_path.split(/[/\\]/).pop() || render.working_path;
+-            const imgSrc = render.thumbnail_path
+-              ? convertFileSrc(render.thumbnail_path)
+-              : '';
++            const imgSrc = render.thumbnail_data ?? '';
+             const rbhVal =
+               render.rbh ??
+               (render.render_seconds ? render.render_seconds / 3600 : 0);
+@@ -85,7 +80,6 @@ export function ReportViewRenderGallerySection({
+                       src={imgSrc}
+                       alt={fileName}
+                       className="w-full h-full object-cover"
+-                      loading="lazy"
+                       onError={(e) => {
+                         (e.target as HTMLElement).style.display = 'none';
+                       }}

@@ -209,7 +209,7 @@ export default function NodeBubble({
   return (
     <div
       ref={bubbleRef}
-      className={`node-bubble group-${group} app-${node.app} arrow-side-${arrowSide}`}
+      className={`node-bubble group-${group} arrow-side-${arrowSide}`}
       style={{
         left: `${Math.round(left)}px`,
         top: `${Math.round(top)}px`,
@@ -286,7 +286,7 @@ export default function NodeBubble({
               <li key={conn.id}>
                 <button
                   type="button"
-                  className={`connection-chip group-${conn.group} app-${conn.node.app}`}
+                  className={`connection-chip group-${conn.group}`}
                   onClick={() => onSelect(conn.id)}
                 >
                   <span className="graph-dot" />
@@ -314,7 +314,8 @@ export default function NodeBubble({
       </div>
 
       {(node.techMoat.isUniqueMoat ||
-        node.techStack.length > 0) && (
+        node.techStack.length > 0 ||
+        node.replacesTools.length > 0) && (
         <div className="bubble-extra-details">
           {node.techMoat.isUniqueMoat && node.techMoat.description && (
             <div className="bubble-moat-box">
@@ -338,7 +339,18 @@ export default function NodeBubble({
             </div>
           )}
 
-
+          {node.replacesTools.length > 0 && (
+            <div className="bubble-tags-row">
+              <span className="extra-label">{t("replaces", lang)}:</span>
+              <div className="bubble-tags">
+                {node.replacesTools.map((tool) => (
+                  <span key={tool} className="bubble-tag replace-tag">
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
       </div>

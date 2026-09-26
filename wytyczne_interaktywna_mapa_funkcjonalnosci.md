@@ -163,7 +163,7 @@ na ich rozwiązanie. To jest realny odbiorca ekosystemu i to jego dzień pracy p
 | Kontroler jakości ujęć | otwieranie EXR w Photoshopie | EXRuster (Rust + SIMD), dekompozycja passów, wykrywanie dziur w sekwencji |
 | Księgowy własnego czasu | Toggl i pamięć | cichy demon, Algorytm Uczciwego Czasu, model ML offline |
 | Handlowiec i fakturzysta | Excel | wyceny, limity godzin, raport PDF z dowodem pracy |
-| Osoba, która i tak nie policzy czasu maszyny | nie liczy go wcale | Render Ledger → koszt maszyny w wycenie |
+| Osoba, która i tak nie policzy czasu maszyny | nie liczy go wcale | Render Ledger → koszt maszyny w kosztach projektu |
 
 **Teza inwestycyjna w jednym zdaniu:** ekosystem zamienia jedną osobę w pracownię, która rozlicza
 się jak duże studio — bez chmury, bez abonamentów i bez wysyłania czegokolwiek poza własny komputer.
@@ -329,6 +329,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - Wypakowywanie zasobów z wewnętrznej bazy Maxon Asset Browser bezpośrednio do lokalnego folderu `tex/` projektu.
   - Skalowanie rozdzielczości, konwersja na formaty zoptymalizowane (WebP/TIFF) oraz porównywanie różnicowe.
   - Masowa zmiana nazw plików zgodnie ze standardami nazewnictwa PBR (np. `[NazwaObiektu]_[Kanał].png`).
+  - Konwersja do TX przez OpenImageIO aktualizuje odwołania we wszystkich pasujących bitmapach C4D, również zapisanych samą nazwą pliku, z zachowaniem formy ścieżki. W zapisanym projekcie backup dotyczy tylko oryginałów w `tex/`; pliki spoza tego katalogu pozostają na miejscu. Możliwe jest przywrócenie oryginałów z kopii.
 - 🟢 **Zarządzanie bibliotekami zasobów:** edytowalna tabela folderów bibliotek w Ustawieniach (dodawanie, usuwanie, zmiana nazwy) z synchronizacją do modułu Biblioteka.
 - 🟢 **Gwarancja bezpieczeństwa:** Każda operacja modyfikująca strukturę plików tworzy manifest cofnięcia (Undo Manifest) umożliwiający powrót do pierwotnego układu.
 
@@ -351,7 +352,7 @@ Wtyczki / Plug-ins · Połączenia / Connections.
 
 | Most | Część | Port | Kontrakt | Status |
 |---|---|---|---|---|
-| Cinema 4D (`C4Dcfabbridge`) | `bridges/c4d_bridge` ALPHA 0.77 | 4444 | `bridge_protocol` 6 | 🟢 |
+| Cinema 4D (`C4Dcfabbridge`) | `bridges/c4d_bridge` ALPHA 0.86 | 4444 | `bridge_protocol` 6 | 🟢 |
 | Blender (`cfab_bridge_blender`) | `bridges/blender_bridge` ALPHA 0.231 | 8920 | `blender_bridge_protocol` 2 | 🟢 |
 | 3ds Max (`CFABBridge.bundle`) | `bridges/max_bridge` ALPHA 0.22 | 8930 | `max_bridge_protocol` 1 | 🟢 |
 | MODO (`cfab_bridge_modo`) | `bridges/modo_bridge` ALPHA 0.11 | 8940 | `modo_bridge_protocol` 1 | 🟢 |
@@ -365,6 +366,15 @@ Wtyczki / Plug-ins · Połączenia / Connections.
   - Narzędzie pieczenia geometrii (`bake_geometry`): spłaszczanie generatorów proceduralnych do formatów GLB/USD (CSTO).
   - Zarządzanie systemem ujęć (Take System): lista ujęć, tworzenie ujęć z macierzy kamer i wariantów packshotowych.
   - Polecenia **Wyślij do 3ds Maxa** i **Pobierz z 3ds Maxa** oraz komendy MODO z własnymi ikonami w menu i palecie wtyczki.
+- 🟢 **Shader Browser — drzewo materiałów i shaderów:** wbudowane okno C4D z hierarchią shaderów C4D, Corony i V-Raya, nazwami kanałów, teksturami i ścieżkami; sortowanie kolumn, zwijanie drzewa, powiększenie widoku z podglądem materiałów oraz zapis okna w layoucie C4D.
+- 🟢 **Selekcje i warstwy materiałów:** zaznaczanie według typu materiału, typu bitmapy i warstwy; zaznaczanie wszystkich materiałów i odznaczanie; filtrowanie widoku do warstwy oraz przenoszenie materiałów na wybraną warstwę z jednym krokiem Undo.
+- 🟢 **Konwersja shaderów bitmapowych:** V-Ray Bitmap ↔ Corona Bitmap oraz C4D Bitmap ↔ Corona Bitmap, dla zaznaczonych shaderów albo pasujących bitmap wewnątrz zaznaczonych materiałów, także zagnieżdżonych. To konwersja shaderów, nie pełnych materiałów między silnikami.
+- 🟢 **Zbiorcze Corona Color Correct:** wstawianie korektora nad teksturą wybranego kanału materiałów Corona Physical lub Legacy. Zachowanie tekstury jako dziecka, pomijanie pustych i już opakowanych kanałów, raport wyniku i jeden krok Undo.
+- 🟢 **Schematy nazw materiałów:** zmienne obiektu, selekcji poligonów, starej nazwy, warstwy, typu i numeru; presety, czyszczenie nazw i przykład na żywo w zakładce Shader Browser okna CFAB Bridge. Ustawienia zapisują się w C4D. Zmiana nazw ma podgląd do zatwierdzenia, obsługę kolizji i jeden krok Undo; przy wielu obiektach nazwa pochodzi z pierwszego przypisania z uwagą w podglądzie.
+- 🟢 **Metadane tekstur z Huba:** rozdzielczość, głębia bitowa i dostępność TX w Shader Browserze; zbiorczy stan TX w wierszach materiałów. Odczyt ręczny lub automatyczny przy otwarciu okna (również z layoutu), tylko przy działającym Hubie. Opcja automatycznego pobierania jest zapisywana w zakładce Shader Browser okna CFAB Bridge.
+
+Aktualizacja powyższych sześciu funkcji: 2026-09-26, bridge `ALPHA 0.86`; źródła i zakres weryfikacji w `ZMIANY_2026-09-26.md`. Na mapie należą do modułu Połączenia, ale wersję pobierają z `bridges/c4d_bridge` w `RELEASE.json`. Nie zwiększają liczby mostów DCC.
+
 - 🟢 **Most do Blendera (`cfab_bridge_blender`):**
   - Wtyczka dla Blendera 4.x/5.x udostępniająca dwukierunkowy import/eksport siatek (GLB, USD, Alembic).
   - Wbudowane narzędzia diagnostyki i naprawy siatek (`cfab_mesh`), integracja profili renderu Cycles oraz spłaszczanie scen linkowanych (`CFAB Localizer`).
@@ -487,7 +497,7 @@ Poza nawigacją: Ustawienia, Pomoc, Quick Start, Import.
 - 🟢 **Pochłanianie Księgi Renderów (Ingest):** odczyt bazy `history.db` CFAB Huba **na żądanie** (przycisk na stronie projektu i w widoku Renderingi) i rejestracja zadań z podziałem na przypisane i nieprzypisane (`unassigned`).
 - 🟢 **Automatyczne i ręczne przypisywanie:** dopasowanie do projektów po prefiksie ścieżki (Longest-Prefix Path Match) lub ręczne przypisanie wsadowe z możliwością odpięcia (`detachCfabRender`); **ręczne zawsze wygrywa z automatem**.
 - 🟢 **Obsługa renderów ze stacji offline (`cfab_offline.rs`):** import danych renderów z zewnętrznych stacji roboczych / farm renderujących nieposiadających bezpośredniego połączenia — przez paczkę `.cfabx`.
-- 🟢 **Szczegółowa kalkulacja kosztu renderu (`CfabRenderCostDetail`):** wyliczenie kosztu maszynowego na podstawie stawek, limitów i współczynników RBH; doliczane do wyceny **dopiero po włączeniu przełącznika** przez artystę.
+- 🟢 **Szczegółowa kalkulacja kosztu renderu (`CfabRenderCostDetail`):** wyliczenie kosztu maszynowego na podstawie stawek, limitów i współczynników RBH; koszt służy wewnętrznej analizie kosztów i rentowności projektu. Uwzględnienie go w wycenie jest osobną, opcjonalną decyzją artysty, podejmowaną w uzasadnionych przypadkach.
 - 🟢 **Czas renderów wędruje między maszynami:** przypisane rendery są objęte synchronizacją LAN i online. Przez sieć idzie wyłącznie czas renderu, tożsamość wpisu i nazwa projektu — kwoty każda maszyna liczy ze swoich stawek. Konflikt przypisania rozstrzyga nowszy zapis, a odpięcie renderu propaguje się na pozostałe maszyny.
 - 🟢 **Sekcja Stan integracji:** wersja Huba po drugiej stronie, numer kontraktu, „działa / brak sygnału od …”, lista maszyn i instancji, ACK zamykający wysyłkę.
 
@@ -514,15 +524,15 @@ Poza nawigacją: Ustawienia, Pomoc, Quick Start, Import.
 - 🟢 **Dwujęzyczność PL/EN i dostępność:** słowniki `locales/pl` i `locales/en`, etykiety ARIA nawigacji, zwijany pasek boczny.
 
 ### 3.8. Wyceny, Estymacje i Raporty PDF (Proof of Work)
-- 🟢 **Rejestr kosztów dodatkowych projektu (`costs.rs`):** osobna, pełna ewidencja kosztów spoza czasu pracy — licencje, materiały, podwykonawcy, koszt maszyny — z dodawaniem, edycją i usuwaniem pozycji. Koszty wchodzą do wyceny i do raportu dla klienta obok roboczogodzin.
-- 🟢 **Kalkulator wartości pracy (`Estimates.tsx`):** przeliczanie czasu rzeczywistego na kwoty na podstawie stawek bazowych, mnożników trudności i kosztów maszynowych.
+- 🟢 **Rejestr kosztów dodatkowych projektu (`costs.rs`):** osobna, pełna ewidencja kosztów spoza czasu pracy — licencje, materiały, podwykonawcy, koszt maszyny — z dodawaniem, edycją i usuwaniem pozycji. Ewidencja służy analizie kosztów projektu. Uwzględnienie pozycji w wycenie zależy od sposobu rozliczenia; nie oznacza automatycznego przekazywania klientowi wewnętrznych kosztów.
+- 🟢 **Kalkulator wartości pracy (`Estimates.tsx`):** przeliczanie czasu rzeczywistego na kwoty na podstawie stawek bazowych i mnożników trudności, z opcjonalnym uwzględnieniem kosztów maszynowych.
 - 🟢 **Generator profesjonalnych raportów PDF (`ReportView.tsx`, `Reports.tsx`):**
   - Eleganckie zestawienia dla klienta z podziałem na etapy, wykresami i statystykami, z konfigurowalnym okresem raportu.
-  - Dołączanie dowodu pracy (Proof of Work) w postaci miniatur wykonanych renderów pochodzących z EXRustera po stronie Huba; galeria renderów w raporcie pokazuje przy każdej pozycji RBH i wartość, a pod galerią sumy.
+  - Dołączanie dowodu pracy (Proof of Work) w postaci miniatur wykonanych renderów pochodzących z EXRustera po stronie Huba. Raport dla klienta ma zakres dobrany do odbiorcy; dane o koszcie maszyny służą wewnętrznej analizie artysty lub studia.
 - 🟢 **Raport estymacji (`EstimateReport.tsx`):** projekty z czasem i wartością dla jednego albo wszystkich klientów w wybranym zakresie dat, z rozbiciem na dni, gotowy do PDF.
 - 🟢 **Edytor szablonów raportów (`Reports.tsx`):** własne szablony z wybranymi i uporządkowanymi sekcjami, fontem bazowym, rozmiarem i logo TIMEFLOW; podgląd na żywo, zapis automatyczny, gotowe szablony estymacji.
 - 🟢 **Okres, zaokrąglanie i scalanie w raporcie:** raport zawężony do okresu rozliczeniowego (presety miesięczne albo własny zakres), czas pełny albo zaokrąglony do interwału (suma, każda sesja, pełne godziny dziennie) i scalanie powtarzających się wpisów — bez zmiany danych źródłowych.
-- 🟢 **Analiza rentowności w raporcie:** zestawienie składników projektu (czas pracy z sesji, czas maszyny, koszty dodatkowe) z ilością i wartością — odpowiedź na pytanie „czy ten projekt zarobił”, a nie tylko „ile trwał”.
+- 🟢 **Wewnętrzna analiza rentowności:** zestawienie składników projektu dla artysty lub studia (czas pracy z sesji, czas maszyny, koszty dodatkowe) z ilością i wartością — odpowiedź na pytanie „czy ten projekt zarobił”, a nie tylko „ile trwał”.
 
 ### 3.9. Bezpieczna Synchronizacja: P2P LAN & Szyfrowany Cloud
 - 🟢 **Darmowy P2P LAN Sync (Zero-Cloud):**
@@ -583,13 +593,12 @@ co już działa, a co jest w kolejce.
 - Tradycyjne trackery traktują wielogodzinny render 3D jako „aktywność użytkownika” w Cinema 4D lub Blenderze, fałszując statystyki czasu pracy twórczej.
 - Hub raportuje stan renderingu (`rendering_external`, `rendering_editor`) w snapshotcie statusu; TIMEFLOW oddziela czas spędzony przez artystę przed monitorem od czasu, w którym stacja robocza samodzielnie liczyła piksele.
 
-### 4.3. Zautomatyzowany Render Ledger & Wyceny Maszynowe 🟢
+### 4.3. Zautomatyzowany Render Ledger i koszty projektu 🟢
 - Zakończony render w Hubie generuje wpis w księdze renderów z **kluczem kompozytowym** `(hub_instance_id, ledger_id)` — druga maszyna lub nowa baza Huba nie powoduje kolizji ACK (kontrakt `cfab_render` 3).
-- TIMEFLOW odczytuje wpisy, przypisuje je do projektów na podstawie najdłuższego wspólnego prefiksu ścieżki (Longest-Prefix Path Match), a po zatwierdzeniu przez artystę dolicza koszt renderu maszynowego do wyceny i raportu końcowego wg wzoru:
-$$\text{Koszt Dodatkowy} = \text{Sekundy Renderu} \times \text{Współczynnik RBH} \times \text{Stawka Godzinowa}$$
+- TIMEFLOW odczytuje wpisy i przypisuje je do projektów na podstawie najdłuższego wspólnego prefiksu ścieżki (Longest-Prefix Path Match). Czas renderu i stawki pozwalają obliczyć koszt maszyny do wewnętrznej analizy kosztów i rentowności. Artysta może opcjonalnie uwzględnić ten koszt w wycenie, gdy uzasadnia to sposób rozliczenia projektu.
 - Po przetworzeniu TIMEFLOW generuje potwierdzenie ACK, a Hub archiwizuje rekord wysyłki (historia Renderu zostaje), zapobiegając duplikatom.
 - Hub odświeża listę projektów i ACK w tle w wybranym interwale (domyślnie 60 s); TIMEFLOW nie ma własnego ticka ingestu — wczytuje na żądanie użytkownika.
-- 🟢 Czas przypisanych renderów przechodzi synchronizacją TIMEFLOW na pozostałe maszyny użytkownika (LAN i online) — render policzony w biurze widać w wycenie na laptopie w domu (rozdz. 3.5).
+- 🟢 Czas przypisanych renderów przechodzi synchronizacją TIMEFLOW na pozostałe maszyny użytkownika (LAN i online) — czas renderu policzonego w biurze jest dostępny w danych projektu na laptopie w domu (rozdz. 3.5).
 - 🟢 Zapis do ledgera **zawsze**, także gdy TIMEFLOW nigdy nie był uruchomiony na tej maszynie (rozdz. 2.3).
 
 ### 4.4. Rejestr aktywności DCC i indeks projektów 🟢
@@ -644,7 +653,7 @@ porządku, a nie przez gęstość świecących punktów.
 ### 5.0. Budżet elementów — skąd bierze się liczba na liczniku
 
 Liczby na liczniku muszą wynikać z pliku danych, nie z odczucia. Rozdziały 2–4 tego dokumentu
-dają następujący rozkład (stan 2026-09-25):
+dają następujący rozkład (stan 2026-09-26):
 
 | Typ elementu (`nodeType`) | Liczba | Skąd |
 |---|---|---|
@@ -653,8 +662,8 @@ dają następujący rozkład (stan 2026-09-25):
 | `module` — części warstwy wspólnej Huba | 7 | shell, service, cfab_core, cfab_ui, cfab_contracts, cfab_bridge, cfab_native (rozdz. 2.10) |
 | `module` — obszary TIMEFLOW | 14 | nawigacja aplikacji (rozdz. 3) |
 | `bridge` — elementy pomostu synergii | 7 | rozdz. 4.1–4.6 i 4.8 (4.7 usunięte z mapy 2026-09-25; 4.9 to tabela etapów, nie element) |
-| `feature` — funkcje | **139** | wypunktowania ze statusem w rozdz. 2–3: Hub 85, TIMEFLOW 54 |
-| **Razem** | **178 elementów** | |
+| `feature` — funkcje | **145** | wypunktowania ze statusem w rozdz. 2–3: Hub 91, TIMEFLOW 54 |
+| **Razem** | **184 elementów** | |
 
 Metoda liczenia `feature`: każde wypunktowanie oznaczone 🟢 / 🟡 / ⚪ w rozdziałach 2–4 to
 jedna funkcja; podpunkty bez własnego znacznika statusu są treścią karty tej funkcji, nie
@@ -663,7 +672,7 @@ i ledger bez TIMEFLOW, 4.8: autostart przy logowaniu) powtarzają funkcje z rozd
 liczą się raz, jako funkcje swojego modułu. Generator (rozdz. 10) liczy tak samo — jeśli jego wynik różni się od
 tabeli, poprawia się tabelę, nie generator.
 
-Komunikat dla inwestora: **„2 systemy · 30 modułów · 139 udokumentowanych funkcji · 4 mosty DCC
+Komunikat dla inwestora: **„2 systemy · 30 modułów · 145 udokumentowanych funkcji · 4 mosty DCC
 + most UV · 2 serwery MCP · lokalne wyszukiwanie AI · farma renderująca w LAN · 100% local-first”**.
 Każda z tych liczb ma pokrycie w tabeli wyżej i w pliku danych — nie wolno ich zaokrąglać
 w górę „na oko”.
@@ -682,7 +691,7 @@ Siatka, w której **kolumny to etapy pracy**, a **kolory to programy**:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][139 funkcji][4 mosty][2 MCP][0 %] │
+│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][145 funkcji][4 mosty][2 MCP][0 %] │
 │ [Mapa zakresu] [Moduły] [Matryca]      Filtry: Program · Status · Moaty · Odbiorca   [PL|EN] │
 ├──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬─────────────────┤
 │1 Zasoby  │2 Scena   │3 Inspek- │4 Render  │5 Wyniki  │6 Czas    │7 Wycena  │8 Raport         │
@@ -734,10 +743,7 @@ podświetla tylko dowody wybranej tezy; istniejące relacje między nimi pojawia
 
 #### 5.1.3. Przewagi — widok tez i dowodów
 
-Pięć tez z sekcji 8.0 ma stały ranking. Po wejściu do tego widoku pierwsza jest rozwinięta, a pozostałe
-pokazują tytuł, skrót tezy i zastępowane narzędzia. Można rozwinąć jedną tezę naraz. Rozwinięcie
-pokazuje powód trudności skopiowania, założenie wartości z jawną etykietą, status i liczbę
-gotowych funkcji oraz klikalne dowody. Pierwsza teza pokazuje cztery kroki od renderu do PDF.
+Pięć przewag z sekcji 8.0 opisuje cały ekosystem: wspólny obieg pracy, automatyzację, kontrolę produkcji, kontrolę danych oraz rentowność. Pierwsza jest rozwinięta, pozostałe pokazują tytuł i skrót opisu. Rozwinięcie wyjaśnia „Jak to działa razem” i pokazuje powiązane funkcje. Bez przekreśleń, sekcji „Zastępuje”, obietnic ROI i schematu render → wycena → PDF. Szczegółowy brief: `BRIEF_PRZEWAGI.md`.
 „Pokaż na mapie” przechodzi do Chmury lub ostatnio używanych Etapów pracy, wygasza inne węzły
 bez zmiany układu i zapisuje `?view=cloud&adv=<id>` (albo `view=grid`). Pasek nad mapą pozwala
 przejść do sąsiedniej przewagi lub wyczyścić podświetlenie; Esc robi to samo. Karta funkcji
@@ -1035,8 +1041,8 @@ type PipelineStage =              // kolumny mapy zakresu, w tej kolejności (na
   | "render"        // 4 Render — kolejka, farma, monitoring, powiadomienia, ledger
   | "results"       // 5 Wyniki — EXR, sekwencje, brakujące klatki
   | "tracking"      // 6 Czas pracy — demon, Fair Time, model przypisań, sesje
-  | "billing"       // 7 Wycena — projekty, klienci, stawki, limity, koszt maszyny
-  | "report";       // 8 Raport dla klienta — PDF, dowód pracy, rentowność
+  | "billing"       // 7 Koszty i wycena — projekty, klienci, stawki, limity, koszt maszyny
+  | "report";       // 8 Raporty i rentowność — raporty dla klienta i wewnętrzna analiza projektu
 
 type Audience =
   | "agency_owner"   // Właściciel Agencji 3D
@@ -1074,7 +1080,7 @@ type Audience =
         }
       },
       "techStack": ["Python 3.9+", "struct", "Reverse-engineered binary chunk parser"],
-      "replacesTools": ["Cinema 4D licence", "Connecter", "konwertery chmurowe"],
+      "replacesTools": [],
       "businessValue": {
         "timeSavedHoursMonth": 8,
         "costAvoidedPerSeatMonthUSD": 75,
@@ -1158,7 +1164,6 @@ i **są w interfejsie edytowalne** — inwestor musi móc podstawić własne za�
 | `A-MINIATURY` | $h_{\text{miniatury}}$ — przeglądanie i selekcja ujęć EXR | 4 h / artystę / mies. | ⚠ szacunek do zatwierdzenia; pomiar możliwy na cache'u modułu Wyniki |
 | `A-SAAS` | $C_{\text{SaaS}}$ — wyeliminowane subskrypcje na stanowisko | 180 USD / stanowisko / mies. | ⚠ suma cenników: tracker czasu + katalog assetów + przeglądarka EXR + menadżer renderu; **do udokumentowania linkami przed prezentacją** |
 | `A-RBH` | $k_{\text{RBH}}$ — współczynnik kosztu maszyny | 0,2 | wartość robocza z [funkcje.md](funkcje.md) (fala 0.15) |
-| `A-ODZYSK` | Odzysk przychodu z rozliczenia renderów | 10–25 % | ⚠ widełki do zatwierdzenia; górna granica dotyczy studiów z nocnymi renderami |
 
 > **Zasada uczciwości liczb:** każda wartość oznaczona ⚠ jest *założeniem*, nie pomiarem.
 > W interfejsie kalkulatora muszą być widoczne jako edytowalne pola z etykietą „założenie”,
@@ -1175,26 +1180,23 @@ i **są w interfejsie edytowalne** — inwestor musi móc podstawić własne za�
 
 ## 8. MATRYCA PRZEWAG KONKURENCYJNYCH (TECH MOATS & ROI)
 
-### 8.0. Pięć przewag pokazywanych inwestorowi
+### 8.0. Przewagi całego ekosystemu
 
-| # | Tytuł | Teza | Gotowe dowody | Zastępuje |
-|---|---|---|---:|---|
-| 1 | Czas renderu trafia do wyceny | Czas maszyny z Huba zostaje przypisany do projektu i trafia do wyceny oraz PDF po włączeniu przez artystę. | 12 | Ręczne liczenie czasu renderu, Excel |
-| 2 | Pliki .c4d i .max bez programu i licencji | Inspektor czyta i porównuje zamknięte formaty oraz przenosi scenę z Maxa do C4D bez uruchamiania programów. | 9 | Licencje Cinema 4D i 3ds Max, Connecter, konwertery chmurowe |
-| 3 | Nocny render kończy się klatkami | Hub sprawdza kolejkę, rozdziela zadania w LAN i po awarii wznawia tylko brakujące klatki. | 10 | Deadline, Team Render |
-| 4 | Czas pracy liczy się sam i uczciwie | Demon bez stopera unika podwójnego liczenia i przypisuje sesje do projektów, także z kontekstu pliku 3D. | 11 | Toggl, Harvest, Clockify |
-| 5 | Dane i AI zostają na komputerze | Lokalne MCP i wyszukiwanie obrazu łączą się z synchronizacją LAN oraz szyfrowaną synchronizacją online. | 9 | Chmury SaaS |
+| # | Korzyść | Uzasadnienie | Powiązane funkcje |
+|---|---|---|---:|
+| 1 | Cały proces pracy 3D w jednym ekosystemie | CFAB 4D Hub łączy bibliotekę zasobów, sceny, programy 3D, renderowanie i analizę wyników. TIMEFLOW dopełnia ten proces projektami, czasem pracy i finansami. Informacje o plikach i renderach przechodzą między aplikacjami i trafiają do właściwego projektu. | 12 |
+| 2 | Mniej ręcznej pracy między etapami | Wyszukanie i przygotowanie zasobu, inspekcja sceny, transfer modelu z materiałami, naprawa ścieżek oraz przypisanie czasu pracy do projektu składają się na jeden obieg pracy. Automatyzacja obejmuje zarówno pliki produkcyjne, jak i organizację pracy. | 14 |
+| 3 | Kontrola od przygotowania sceny do odbioru pracy | Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, wykrywanie brakujących klatek oraz raporty pozwalają sprawdzić i podsumować wykonaną pracę. | 15 |
+| 4 | Dane i automatyzacja pod własną kontrolą | Biblioteki, dane projektów i modele przypisujące czas pracy działają lokalnie. Ekosystem oferuje lokalne wyszukiwanie wizualne, synchronizację w LAN, opcjonalną szyfrowaną synchronizację online i dwa serwery MCP do integracji z agentami AI. | 10 |
+| 5 | Wiesz, ile kosztuje praca i które projekty zarabiają | TIMEFLOW zestawia czas pracy i koszty dodatkowe, a Hub dostarcza czas renderowania. Rozdzielenie pracy artysty od pracy maszyny pozwala ocenić faktyczne koszty i rentowność projektu oraz lepiej planować kolejne zlecenia. | 15 |
 
-Lista dowodów i pełna treść PL/EN pochodzą z `advantages[]`; powyższa tabela jest skrótem.
-Drugi rząd `alsoStrong[]` pozostaje klikalny, ale nie stanowi osobnej tezy.
-
-Poniższa matryca stanowi gotowy materiał analityczny dla komitetu inwestycyjnego:
+Listy funkcji PL/EN i zasady prezentacji: `BRIEF_PRZEWAGI.md`. Poniższa matryca jest materiałem technicznym; nie służy do wyświetlania list zastępowanych produktów ani przekreślonych nazw.
 
 | Obszar Funkcjonalny | Rozwiązania Konkurencji na Rynku | Rozwiązanie Ekosystemu CFAB | Przewaga Technologiczna (Moat) | Wartość Biznesowa dla Studia |
 |---|---|---|---|---|
 | **Inspekcja plików 3D** | Wymaga pełnej licencji Cinema 4D / 3ds Max lub powolnych konwerterów chmurowych. | Parser binarny `.c4d` (`c4dgrab`), czytnik OLE `.max` (`MaxAsset`), porównywarka `c4ddiff` i podmiana silnika `c4dpatch` — wszystko offline. | Inżynieria wsteczna chunków binarnych, rdzeń bez żadnej zależności zewnętrznej, brak zależności od API producenta. | Podgląd, porównanie i konwersja scen na maszynach bez licencji komercyjnych (np. u project managera). |
 | **Tracking czasu pracy** | Ręczne klikanie Start/Stop (Toggl, Harvest) lub trackery robiące zrzuty ekranu. | Cichy demon w Rust analizujący zdarzenia systemowe i nagłówki okien, bez odpytywania CPU. | Algorytm Uczciwego Czasu (brak podwójnego liczenia) + 4-warstwowy lokalny model ML z trybem `auto_safe` i rollbackiem. | Obiektywny pomiar, zero tarć dla artysty, brak oporu przed inwigilacją. |
-| **Rozliczanie renderów** | Czas renderowania pomijany lub liczony z zegarka. | Render Ledger (kontrakt `cfab_render` 3) z kluczem `(hub_instance_id, ledger_id)` i transferem do TIMEFLOW z mnożnikiem RBH. | Latarnie bezstanowe, odczyt cudzej bazy przez SQLite READONLY URI, paczka `.cfabx` dla stacji offline. | Odzyskanie 10–25 % przychodów z tytułu amortyzacji sprzętu i zużycia prądu (założenie `A-ODZYSK`). |
+| **Koszty renderów** | Czas renderowania pomijany lub liczony z zegarka. | Render Ledger (kontrakt `cfab_render` 3) z kluczem `(hub_instance_id, ledger_id)` i transferem do TIMEFLOW z mnożnikiem RBH. | Latarnie bezstanowe, odczyt cudzej bazy przez SQLite READONLY URI, paczka `.cfabx` dla stacji offline. | Wiedza o kosztach maszyny i rentowności projektu, bez obietnicy wzrostu przychodu. |
 | **Integracja z AI / LLM** | Zewnętrzne wtyczki wymagające wysyłania danych projektowych do chmury. | **Dwa lokalne serwery MCP**: TIMEFLOW (44 narzędzia, zapis za zgodą) i CFAB Hub (5 narzędzi, wyłącznie odczyt, port 8423, tylko loopback). | Sterowanie projektami i raportami przez agentów AI w standardzie MCP, bez opuszczania maszyny; kopie bezpieczeństwa przed każdym zapisem agenta. | Autonomiczni asystenci rozliczeniowi i produkcyjni przy zachowaniu NDA. |
 | **Przeglądanie plików EXR** | Płatne aplikacje (PDPlayer) lub powolne otwieranie w Photoshopie / After Effects. | Silnik EXRuster w Rust ze wsparciem SIMD i interfejsem Slint + cache miniatur oparty na `mtime`/rozmiarze. | Natywna dekompozycja kanałów wielowarstwowych, tone-mapping w czasie rzeczywistym, maks. 4 procesy dekodujące zamiast zamrożonego UI. | Błyskawiczna selekcja ujęć, wykrywanie dziur w numeracji i **automatyczne zadanie renderu na brakujące klatki**. |
 | **Baza i synchronizacja danych** | Uzależnienie od chmur SaaS (subskrypcje per-user, ryzyko wycieku danych). | Lokalne bazy SQLite (WAL), darmowy 13-krokowy protokół P2P LAN i szyfrowany E2E cloud sync. | Pełna suwerenność danych (Privacy-First), serwer widzi wyłącznie rewizje i sha256, AES-256-GCM z poświadczeniami per sesja. | Brak stałych opłat za chmurę, zgodność z restrykcyjnymi NDA, gwarancja ochrony własności intelektualnej. |
@@ -1246,7 +1248,7 @@ temu zieleń zostaje wyłącznie kolorem TIMEFLOW i nie myli się z „gotowe”
 Efekt ma służyć czytaniu, nie konkurować z nim. Dozwolone są trzy:
 - **Spacer po etapach** (rozdz. 5.1.4) — kolumny podświetlane kolejno 1 → 8, z jednym zdaniem o dniu pracy freelancera na każdym etapie. To jest główny punkt demo na spotkaniu.
 - **Impulsy na liniach relacji** `data_flow` i `file_exchange` między Hubem a TIMEFLOW (latarnie, ledger, `.cfabx`, miniatury) — wyłącznie gdy relacja jest podświetlona.
-- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `139 Funkcji`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
+- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `145 Funkcji`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
 
 ### 9.4. Materiały wspierające
 - Pobranie z poziomu mapy zsyntetyzowanego raportu PDF (*One-Pager / Pitch Deck Summary*) z tabelą założeń ROI w przypisach.
@@ -1428,7 +1430,7 @@ ale **nigdy jako działające**. Dla inwestora wiarygodna roadmapa jest aktywem;
 | `modules/assets` | ALPHA 0.22 | | `shared/cfab_contracts` | ALPHA 0.53 |
 | `modules/scenes` | ALPHA 0.621 | | `shared/cfab_bridge` | ALPHA 0.702 |
 | `modules/scratch` | ALPHA 0.133 | | `shared/cfab_native` | 0.2.0 |
-| `modules/plugins` | BETA 0.114 | | `bridges/c4d_bridge` | ALPHA 0.77 |
+| `modules/plugins` | BETA 0.114 | | `bridges/c4d_bridge` | ALPHA 0.86 |
 | `modules/bridges` | ALPHA 0.71 | | `bridges/blender_bridge` | ALPHA 0.231 |
 | | | | `bridges/max_bridge` | ALPHA 0.22 |
 | | | | `bridges/modo_bridge` | ALPHA 0.11 |

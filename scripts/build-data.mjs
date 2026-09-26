@@ -71,7 +71,7 @@ function leaf(f, nodeType, id, parent, order) {
     techStack: f.tech ?? [], replacesTools: f.rep ?? [],
     businessValue: { ...ZERO_BV, ...(f.bv ?? {}) },
     status: f.st, statusNote: langOrNull(f.note),
-    version: parent ? versionOf.get(parent) ?? null : null,
+    version: f.part ? release.parts[f.part] ?? null : parent ? versionOf.get(parent) ?? null : null,
     contract: f.k ?? null, sources: f.src ?? [], keywords: f.kw ?? [],
   };
 }

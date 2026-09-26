@@ -4,7 +4,7 @@ import path from "node:path";
 import { HUB_ROOT, OUT_JSON, resolveSource } from "./paths.mjs";
 
 // Tabela 5.0 wytycznych. Rozjazd oznacza, że dokument albo dane są nieaktualne.
-const EXPECTED = { ecosystem: 2, module: 30, bridge: 7, feature: 139 };
+const EXPECTED = { ecosystem: 2, module: 30, bridge: 7, feature: 145 };
 const STAGES = ["assets", "scene", "inspection", "render", "results", "tracking", "billing", "report"];
 const SHORT_MAX = 28;
 
@@ -61,6 +61,7 @@ for (const n of data.nodes) {
 }
 
 for (const e of data.edges) {
+  if (!["hierarchy", "data_flow", "ipc", "file_exchange", "depends_on", "replaces"].includes(e.type)) err(e.id, `nieznany typ relacji ${e.type}`);
   if (!ids.has(e.from)) err(e.id, `from ${e.from} nie istnieje`);
   if (!ids.has(e.to)) err(e.id, `to ${e.to} nie istnieje`);
   if (e.label && !filled(e.label)) err(e.id, "etykieta bez PL/EN");

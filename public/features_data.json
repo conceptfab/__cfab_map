@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-09-25T07:44:57.618Z",
-    "hubVersion": "BETA 0.443",
+    "generatedAt": "2026-09-26T18:48:28.075Z",
+    "hubVersion": "BETA 0.58",
     "timeflowVersion": "0.1.5776",
     "contracts": {
       "module": 2,
@@ -18,7 +18,7 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "150a5af",
+    "sourceCommit": "24d4e625",
     "distribution": "investor"
   },
   "nodes": [
@@ -65,7 +65,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.443",
+      "version": "BETA 0.58",
       "contract": null,
       "sources": [],
       "keywords": [],
@@ -157,7 +157,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -295,7 +295,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.12.0",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -341,7 +341,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -525,7 +525,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -617,7 +617,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.726",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -663,7 +663,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.956",
+      "version": "ALPHA 0.961",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -755,7 +755,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.665",
+      "version": "ALPHA 0.666",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -801,7 +801,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.71",
+      "version": "ALPHA 0.72",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1285,8 +1285,8 @@
         "en": "Reports"
       },
       "summary": {
-        "pl": "Raporty PDF dla klienta z dowodem pracy.",
-        "en": "Client PDF reports with proof of work."
+        "pl": "Raporty dla klienta oraz wewnętrzna analiza kosztów i rentowności projektu.",
+        "en": "Client reports and internal analysis of project costs and profitability."
       },
       "category": "finance",
       "stage": null,
@@ -1619,16 +1619,16 @@
       "module": "",
       "parentId": null,
       "title": {
-        "pl": "Koszt renderu w wycenie projektu",
-        "en": "Render Ledger and machine-cost estimates"
+        "pl": "Koszt renderu w kosztach projektu",
+        "en": "Render Ledger and project costs"
       },
       "shortTitle": {
         "pl": "Render → koszt projektu",
-        "en": "Render Ledger → estimate"
+        "en": "Render → project cost"
       },
       "summary": {
-        "pl": "Po zakończeniu renderu Hub zapisuje czas maszyny, a TIMEFLOW przypisuje go do projektu i po zatwierdzeniu dolicza koszt do wyceny.",
-        "en": "A finished render goes into the ledger; TIMEFLOW assigns it to a project and, once approved, adds machine cost to the estimate; an ACK closes the hand-off."
+        "pl": "Hub zapisuje czas renderu, a TIMEFLOW przypisuje go do projektu i oblicza koszt maszyny do wewnętrznej analizy kosztów. W uzasadnionych przypadkach artysta może osobno uwzględnić ten koszt w wycenie.",
+        "en": "Hub records render time; TIMEFLOW assigns it to a project and calculates machine cost for internal cost analysis. Where appropriate, the artist can separately include that cost in an estimate."
       },
       "category": "integration",
       "stage": "billing",
@@ -1655,9 +1655,9 @@
       "businessValue": {
         "timeSavedHoursMonth": 0,
         "costAvoidedPerSeatMonthUSD": 0,
-        "revenueRecoveryPct": 10,
-        "financialGainType": "revenue_recovery",
-        "assumptionId": "A-ODZYSK"
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
       },
       "status": "production",
       "statusNote": null,
@@ -1724,7 +1724,7 @@
         "path",
         "przypisanie"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "workflow"
     },
     {
       "id": "syn.cfabx",
@@ -1888,7 +1888,7 @@
         "autostart",
         "diagnostyka"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.start.detect",
@@ -1932,7 +1932,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -1987,7 +1987,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2040,7 +2040,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2093,7 +2093,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2146,7 +2146,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2199,7 +2199,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2253,7 +2253,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.212",
+      "version": "ALPHA 0.214",
       "contract": null,
       "sources": [
         "Start"
@@ -2293,8 +2293,8 @@
       "techMoat": {
         "isUniqueMoat": true,
         "description": {
-          "pl": "Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; rdzeń nie ma żadnej zależności zewnętrznej.",
-          "en": "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core has zero external dependencies."
+          "pl": "Format .c4d jest zamknięty. Struktura chunków, kolejność bajtów i skalowanie normalnych zostały odtworzone inżynierią wsteczną; jedyną zależnością rdzenia jest NumPy.",
+          "en": "The .c4d format is closed. Chunk layout, endianness and normal scaling were reverse-engineered; the core's only dependency is NumPy."
         }
       },
       "techStack": [
@@ -2327,7 +2327,7 @@
         "reverse engineering",
         "licencja"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": "automation"
     },
     {
       "id": "hub.scenes.max_reader",
@@ -2366,9 +2366,7 @@
         "Python",
         "OLE Compound Document"
       ],
-      "replacesTools": [
-        "licencja 3ds Max"
-      ],
+      "replacesTools": [],
       "businessValue": {
         "timeSavedHoursMonth": 0,
         "costAvoidedPerSeatMonthUSD": 0,
@@ -2388,7 +2386,7 @@
         "ole",
         "maxasset"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": "automation"
     },
     {
       "id": "hub.scenes.diag_tools",
@@ -2442,7 +2440,7 @@
         "c4dpatch",
         "corona"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": null
     },
     {
       "id": "hub.scenes.max_import",
@@ -2496,7 +2494,7 @@
         "import",
         "c4d"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": "automation"
     },
     {
       "id": "hub.scenes.max_space",
@@ -2550,7 +2548,7 @@
         "units",
         "z-up"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": "automation"
     },
     {
       "id": "hub.scenes.max_tools",
@@ -2603,7 +2601,7 @@
         "max",
         "starsza wersja"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": null
     },
     {
       "id": "hub.scenes.export",
@@ -2658,7 +2656,7 @@
         "fbx",
         "glb"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": "automation"
     },
     {
       "id": "hub.scenes.exchange_format",
@@ -2765,7 +2763,7 @@
         "materiały",
         "tekstury"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": null
     },
     {
       "id": "hub.scenes.tree",
@@ -2818,7 +2816,64 @@
         "drzewo",
         "tree"
       ],
-      "advantageId": "closed_formats"
+      "advantageId": null
+    },
+    {
+      "id": "hub.scenes.fast_read",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.scenes",
+      "parentId": "hub.scenes",
+      "title": {
+        "pl": "Szybszy odczyt dużych scen (Rust + NumPy)",
+        "en": "Faster reading of large scenes (Rust + NumPy)"
+      },
+      "shortTitle": {
+        "pl": "Scena 189 MB: 5,1 → 1,8 s",
+        "en": "189 MB scene: 5.1 → 1.8 s"
+      },
+      "summary": {
+        "pl": "Nazwy obiektów .c4d szuka moduł Rust, UV i normalne są tablicami NumPy, a .max czyta się ciągami sektorów. Scena .c4d 189 MB: 5,08 → 1,78 s; .max 858 MB: 0,91 → 0,54 s przy połowie pamięci.",
+        "en": "A Rust module finds .c4d object names, UVs and normals are NumPy arrays and .max streams are read in sector runs. A 189 MB .c4d scene: 5.08 → 1.78 s; an 858 MB .max: 0.91 → 0.54 s with half the memory."
+      },
+      "category": "core",
+      "stage": "inspection",
+      "order": 10,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust",
+        "NumPy",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.629",
+      "contract": null,
+      "sources": [
+        "Inspector"
+      ],
+      "keywords": [
+        "rust",
+        "numpy",
+        "wydajność",
+        "performance"
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.render.queue",
@@ -2873,7 +2928,7 @@
         "kolejka",
         "queue"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.render.engines",
@@ -3033,7 +3088,7 @@
         "eta",
         "log"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.job_info",
@@ -3202,7 +3257,7 @@
         "lan",
         "węzły"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.recovery",
@@ -3260,7 +3315,7 @@
         "awaria",
         "crash"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.watchdog",
@@ -3313,7 +3368,7 @@
         "watchdog",
         "deadlock"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.precheck",
@@ -3366,7 +3421,7 @@
         "precheck",
         "kontrola"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.web_panel",
@@ -3421,7 +3476,7 @@
         "www",
         "mobile"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.shutdown",
@@ -3474,7 +3529,7 @@
         "shutdown",
         "wyłączenie"
       ],
-      "advantageId": "night_render"
+      "advantageId": null
     },
     {
       "id": "hub.render.mail",
@@ -3528,7 +3583,7 @@
         "email",
         "smtp"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.ntfy",
@@ -3581,7 +3636,7 @@
         "ntfy",
         "push"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.render.sound",
@@ -3846,7 +3901,7 @@
         "historia",
         "history"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "hub.results.exruster",
@@ -3898,7 +3953,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.12.0",
       "contract": null,
       "sources": [
         "Results"
@@ -3908,7 +3963,7 @@
         "exruster",
         "rust"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.results.passes",
@@ -3952,7 +4007,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.12.0",
       "contract": null,
       "sources": [
         "Results"
@@ -3961,7 +4016,7 @@
         "passy",
         "cryptomatte"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "hub.results.sequences",
@@ -4005,7 +4060,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.12.0",
       "contract": null,
       "sources": [
         "Results"
@@ -4015,7 +4070,7 @@
         "frames",
         "missing"
       ],
-      "advantageId": "night_render"
+      "advantageId": "production"
     },
     {
       "id": "hub.results.thumb_cache",
@@ -4060,7 +4115,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.9.3",
+      "version": "0.12.0",
       "contract": null,
       "sources": [
         "Results"
@@ -4068,6 +4123,175 @@
       "keywords": [
         "cache",
         "miniatury"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.large_exr",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "Płynna praca z dużymi plikami EXR",
+        "en": "Smooth work with large EXR files"
+      },
+      "shortTitle": {
+        "pl": "EXR 6000 px: 2,3 → 0,3 s",
+        "en": "6000 px EXR: 2.3 → 0.3 s"
+      },
+      "summary": {
+        "pl": "Dekodowanie tylko pokazywanej warstwy, leniwe otwieranie, podgląd w rozdzielczości okna i kolejne klatki przygotowane w tle. 6000×4000, 12 warstw: 2,3 s i 3,5 GB → 0,30 s i 0,94 GB.",
+        "en": "Decodes only the shown layer, opens files lazily, previews at window resolution and prepares the next frames in the background. 6000×4000, 12 layers: 2.3 s and 3.5 GB → 0.30 s and 0.94 GB."
+      },
+      "category": "analysis",
+      "stage": "results",
+      "order": 4,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.12.0",
+      "contract": null,
+      "sources": [
+        "Results"
+      ],
+      "keywords": [
+        "exr",
+        "wydajność",
+        "performance",
+        "warstwy"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.tiff_psd",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "TIFF i PSD/PSB w Wynikach",
+        "en": "TIFF and PSD/PSB in Results"
+      },
+      "shortTitle": {
+        "pl": "TIFF i PSD bez warstw",
+        "en": "TIFF and PSD, no layers"
+      },
+      "summary": {
+        "pl": "Sam spłaszczony obraz bez bloku warstw Photoshopa, TIFF-y z C4D z dodatkowymi kanałami, 32-bit mapowane jak EXR. PSB 633 MB: miniatura w 4,6 s przy 4 MB RAM.",
+        "en": "Only the flattened image, skipping the Photoshop layer block; C4D TIFFs with extra channels; 32-bit tone-mapped like EXR. A 633 MB PSB: thumbnail in 4.6 s with 4 MB of RAM."
+      },
+      "category": "analysis",
+      "stage": "results",
+      "order": 5,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.12.0",
+      "contract": null,
+      "sources": [
+        "Results"
+      ],
+      "keywords": [
+        "tiff",
+        "psd",
+        "psb",
+        "photoshop"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.results.oiio",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.results",
+      "parentId": "hub.results",
+      "title": {
+        "pl": "OpenImageIO w Wynikach i EXRusterze",
+        "en": "OpenImageIO in Results and EXRuster"
+      },
+      "shortTitle": {
+        "pl": "OpenImageIO: ACES, NaN, TX",
+        "en": "OpenImageIO: ACES, NaN, TX"
+      },
+      "summary": {
+        "pl": "Przypięte OpenImageIO 3.1.17: miniatury DDS i JPEG 2000, zapas gdy brak EXRustera, eksport warstwy do JPG przez ACES 2.0, naprawa NaN i tekstura TX w nowym pliku obok źródła.",
+        "en": "Pinned OpenImageIO 3.1.17: DDS and JPEG 2000 thumbnails, a fallback when EXRuster is missing, layer export to JPG through ACES 2.0, NaN repair and a TX texture in a new file next to the source."
+      },
+      "category": "integration",
+      "stage": "results",
+      "order": 6,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "OpenImageIO",
+        "OCIO",
+        "Rust",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.12.0",
+      "contract": null,
+      "sources": [
+        "Results"
+      ],
+      "keywords": [
+        "openimageio",
+        "oiio",
+        "aces",
+        "tx",
+        "nan"
       ],
       "advantageId": null
     },
@@ -4113,7 +4337,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [
         "Assets"
@@ -4122,7 +4346,7 @@
         "audyt",
         "missing assets"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "hub.assets.relink",
@@ -4170,7 +4394,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [
         "Assets"
@@ -4180,7 +4404,7 @@
         "ścieżki",
         "paths"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "hub.assets.textures",
@@ -4197,8 +4421,8 @@
         "en": "Textures: scale and names"
       },
       "summary": {
-        "pl": "Wypakowanie z Asset Browsera Maxona, skalowanie, konwersje i masowa zmiana nazw wg standardu PBR.",
-        "en": "Extraction from Maxon's Asset Browser, resizing, conversions and bulk PBR-standard renaming."
+        "pl": "Wypakowanie z Asset Browsera Maxona, skalowanie i nazwy PBR. Konwersja do TX podmienia odwołania we wszystkich pasujących bitmapach C4D, także zapisanych samą nazwą pliku. W zapisanym projekcie backup obejmuje tylko oryginały z tex/; pliki spoza niego pozostają na miejscu.",
+        "en": "Extraction from Maxon's Asset Browser, resizing and PBR naming. TX conversion updates references in all matching C4D bitmaps, including filename-only paths. For a saved project, original-file backup is limited to its tex/ folder; files outside it stay in place."
       },
       "category": "automation",
       "stage": "inspection",
@@ -4212,7 +4436,8 @@
         "description": null
       },
       "techStack": [
-        "Python"
+        "Python",
+        "OpenImageIO"
       ],
       "replacesTools": [],
       "businessValue": {
@@ -4224,16 +4449,20 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [
         "Assets"
       ],
       "keywords": [
         "tekstury",
-        "pbr"
+        "pbr",
+        "tx",
+        "maketx",
+        "bitmap",
+        "backup"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "hub.assets.libraries",
@@ -4277,7 +4506,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [
         "Assets"
@@ -4329,7 +4558,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.223",
+      "version": "ALPHA 0.24",
       "contract": null,
       "sources": [
         "Assets"
@@ -4338,7 +4567,7 @@
         "undo",
         "cofnięcie"
       ],
-      "advantageId": null
+      "advantageId": "local_first"
     },
     {
       "id": "hub.browser.multi_tb",
@@ -4391,7 +4620,7 @@
         "nas",
         "smb"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.browser.asset_format",
@@ -4444,7 +4673,7 @@
         "asset",
         "metadane"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.browser.pairing",
@@ -4497,7 +4726,7 @@
         "parowanie",
         "pairing"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "hub.browser.jit",
@@ -4551,7 +4780,7 @@
         "rar",
         "7z"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "hub.browser.tools",
@@ -4740,8 +4969,8 @@
         "en": "Cinema 4D bridge"
       },
       "summary": {
-        "pl": "Działa w procesie C4D z tokenem, wykonuje zadania w wątku głównym, tworzy materiały Corony z tekstur, piecze geometrię i obsługuje ujęcia.",
-        "en": "Runs inside C4D with a token, executes on the main thread, builds Corona materials from textures, bakes geometry and manages takes."
+        "pl": "Działa w procesie C4D z autoryzacją tokenem i kolejką zadań w wątku głównym. Tworzy materiały Corony z tekstur, piecze geometrię, obsługuje ujęcia i udostępnia Shader Browser do porządkowania materiałów i shaderów.",
+        "en": "Runs inside C4D with token authentication and a main-thread task queue. Builds Corona materials from textures, bakes geometry, manages takes and includes Shader Browser for organising materials and shaders."
       },
       "category": "integration",
       "stage": "scene",
@@ -4773,7 +5002,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.86",
       "contract": "bridge_protocol 6",
       "sources": [
         "Connections"
@@ -4782,7 +5011,362 @@
         "c4d",
         "most",
         "bridge",
-        "texmat"
+        "texmat",
+        "shader browser"
+      ],
+      "advantageId": "workflow"
+    },
+    {
+      "id": "hub.bridges.c4d_shader_browser",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Shader Browser — drzewo materiałów i shaderów",
+        "en": "Shader Browser — material and shader tree"
+      },
+      "shortTitle": {
+        "pl": "Shader Browser",
+        "en": "Shader Browser"
+      },
+      "summary": {
+        "pl": "Wbudowane okno C4D pokazuje materiały oraz zagnieżdżone shadery C4D, Corony i V-Raya, z kanałem, teksturą i ścieżką pliku. Sortowanie kolumn, zwijanie drzewa i powiększony widok z podglądem materiałów ułatwiają inspekcję; okno można zapisać w layoucie C4D.",
+        "en": "A built-in C4D window shows materials and nested C4D, Corona and V-Ray shaders with their channel, texture and file path. Column sorting, tree folding and an enlarged view with material previews aid inspection; the window can be saved in the C4D layout."
+      },
+      "category": "ui",
+      "stage": "scene",
+      "order": 1,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Cinema 4D API"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "materiały",
+        "materials",
+        "shadery",
+        "corona",
+        "v-ray"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.bridges.c4d_shader_layers",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Selekcje i warstwy materiałów w C4D",
+        "en": "C4D material selections and layers"
+      },
+      "shortTitle": {
+        "pl": "Selekcje i warstwy",
+        "en": "Selections and layers"
+      },
+      "summary": {
+        "pl": "Shader Browser zaznacza materiały według typu lub warstwy oraz bitmapy C4D, Corony i V-Raya. Pozwala zaznaczyć wszystkie materiały, wyczyścić zaznaczenie, filtrować widok do jednej warstwy i przenieść wybrane materiały na warstwę z jednym krokiem Undo.",
+        "en": "Shader Browser selects materials by type or layer, and C4D, Corona and V-Ray bitmaps. Select all materials, clear the selection, filter the view to one layer or move selected materials to a layer with a single undo step."
+      },
+      "category": "automation",
+      "stage": "scene",
+      "order": 2,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Cinema 4D API"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "warstwy",
+        "layers",
+        "selekcje",
+        "selection"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.bridges.c4d_bitmap_conversion",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Konwersja shaderów bitmapowych C4D, Corona i V-Ray",
+        "en": "C4D, Corona and V-Ray bitmap shader conversion"
+      },
+      "shortTitle": {
+        "pl": "Konwersja bitmap",
+        "en": "Bitmap shader conversion"
+      },
+      "summary": {
+        "pl": "Zamienia shadery V-Ray Bitmap ↔ Corona Bitmap oraz C4D Bitmap ↔ Corona Bitmap. Działa na wybranych shaderach albo pasujących bitmapach wewnątrz zaznaczonych materiałów, również zagnieżdżonych; wynik operacji pojawia się na pasku statusu.",
+        "en": "Converts V-Ray Bitmap ↔ Corona Bitmap and C4D Bitmap ↔ Corona Bitmap shaders. Works on selected shaders or matching bitmaps inside selected materials, including nested shaders; the status bar reports the result."
+      },
+      "category": "automation",
+      "stage": "scene",
+      "order": 3,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Cinema 4D API"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "bitmap",
+        "conversion",
+        "konwersja",
+        "corona",
+        "v-ray"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.bridges.c4d_color_correct",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Zbiorcze dodawanie Corona Color Correct",
+        "en": "Batch Corona Color Correct insertion"
+      },
+      "shortTitle": {
+        "pl": "Corona Color Correct",
+        "en": "Corona Color Correct"
+      },
+      "summary": {
+        "pl": "Wstawia Corona Color Correct nad teksturą wybranego kanału zaznaczonych materiałów Corona Physical lub Legacy, np. koloru, szorstkości czy alfy. Zachowuje teksturę jako dziecko korektora, pomija puste lub już opakowane kanały i pozwala cofnąć operację jednym krokiem.",
+        "en": "Inserts Corona Color Correct above the texture of a chosen channel in selected Corona Physical or Legacy materials, such as colour, roughness or alpha. Keeps the texture as a child of the correction shader, skips empty or already wrapped channels and supports a single undo step."
+      },
+      "category": "automation",
+      "stage": "scene",
+      "order": 4,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Corona",
+        "Cinema 4D API"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "corona",
+        "color correct",
+        "kanały",
+        "channels"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.bridges.c4d_material_names",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Nazwy materiałów według zapisanego schematu",
+        "en": "Material names from a saved naming pattern"
+      },
+      "shortTitle": {
+        "pl": "Schematy nazw materiałów",
+        "en": "Material naming patterns"
+      },
+      "summary": {
+        "pl": "Zmienia nazwy materiałów według obiektu, selekcji poligonów, starej nazwy, warstwy, typu i numeru. Zakładka Shader Browser w CFAB Bridge zapisuje schemat, presety i opcje czyszczenia nazw z przykładem na żywo. Przed zmianą pokazuje podgląd do zatwierdzenia, rozwiązuje kolizje nazw i zapewnia jeden krok Undo.",
+        "en": "Renames materials using the object, polygon selection, old name, layer, type and index. The Shader Browser tab in CFAB Bridge saves the pattern and name-cleaning options, with presets and a live example. Renaming presents a confirmation preview, resolves name collisions and uses one undo step."
+      },
+      "category": "automation",
+      "stage": "scene",
+      "order": 5,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Cinema 4D API"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "nazwy",
+        "rename",
+        "pattern",
+        "presety",
+        "undo"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.bridges.c4d_texture_metadata",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.bridges",
+      "parentId": "hub.bridges",
+      "title": {
+        "pl": "Metadane tekstur z Huba w Shader Browserze",
+        "en": "Hub texture metadata in Shader Browser"
+      },
+      "shortTitle": {
+        "pl": "Tekstury: rozmiar, bity, TX",
+        "en": "Texture size, depth and TX"
+      },
+      "summary": {
+        "pl": "Pobiera z działającego Huba rozdzielczość, głębię bitową i dostępność plików TX. Pokazuje dane przy bitmapach oraz zbiorczy stan TX w wierszach materiałów. Pobieranie jest ręczne lub automatyczne przy otwarciu okna, także z layoutu C4D; ustawienie zapisuje zakładka Shader Browser w CFAB Bridge.",
+        "en": "Fetches resolution, bit depth and TX file availability from a running Hub. Shows bitmap metadata and an aggregate TX status on material rows. Fetch manually or automatically when opening the window, including from a C4D layout; the Shader Browser tab in CFAB Bridge saves the setting."
+      },
+      "category": "analysis",
+      "stage": "inspection",
+      "order": 0,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "OpenImageIO",
+        "HTTP"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.86",
+      "contract": null,
+      "sources": [
+        "Connections"
+      ],
+      "keywords": [
+        "c4d",
+        "shader browser",
+        "metadane",
+        "metadata",
+        "resolution",
+        "bit depth",
+        "tx"
       ],
       "advantageId": null
     },
@@ -4806,7 +5390,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 1,
+      "order": 6,
       "audiences": [
         "artist",
         "tech_director"
@@ -4829,7 +5413,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": "blender_bridge_protocol 2",
       "sources": [
         "Connections"
@@ -4838,7 +5422,7 @@
         "blender",
         "most"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.bridges.blender_mats",
@@ -4860,7 +5444,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 2,
+      "order": 7,
       "audiences": [
         "artist",
         "tech_director"
@@ -4882,7 +5466,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "Connections"
@@ -4892,7 +5476,7 @@
         "botaniq",
         "materiały"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "hub.bridges.max",
@@ -4914,7 +5498,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 3,
+      "order": 8,
       "audiences": [
         "artist",
         "tech_director"
@@ -4938,7 +5522,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": "max_bridge_protocol 1",
       "sources": [
         "Connections"
@@ -4947,7 +5531,7 @@
         "3ds max",
         "most"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.bridges.modo",
@@ -4969,7 +5553,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 4,
+      "order": 9,
       "audiences": [
         "artist",
         "tech_director"
@@ -4993,7 +5577,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": "modo_bridge_protocol 1",
       "sources": [
         "Connections"
@@ -5002,7 +5586,7 @@
         "modo",
         "most"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "hub.bridges.rizom",
@@ -5024,7 +5608,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 5,
+      "order": 10,
       "audiences": [
         "artist",
         "tech_director"
@@ -5047,7 +5631,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "Connections"
@@ -5078,7 +5662,7 @@
       },
       "category": "integration",
       "stage": "scene",
-      "order": 6,
+      "order": 11,
       "audiences": [
         "artist",
         "tech_director"
@@ -5101,7 +5685,7 @@
         "pl": "Punkt 0.1-E, otwarty.",
         "en": "Item 0.1-E, open."
       },
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "Connections"
@@ -5131,7 +5715,7 @@
       },
       "category": "automation",
       "stage": "scene",
-      "order": 7,
+      "order": 12,
       "audiences": [
         "artist",
         "tech_director"
@@ -5153,7 +5737,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.712",
+      "version": "ALPHA 0.73",
       "contract": null,
       "sources": [
         "Connections"
@@ -5587,6 +6171,60 @@
       "advantageId": null
     },
     {
+      "id": "hub.plugins.plasticity",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.plugins",
+      "parentId": "hub.plugins",
+      "title": {
+        "pl": "Plasticity Bridge dla C4D i Blendera",
+        "en": "Plasticity Bridge for C4D and Blender"
+      },
+      "shortTitle": {
+        "pl": "Plasticity → C4D i Blender",
+        "en": "Plasticity → C4D and Blender"
+      },
+      "summary": {
+        "pl": "Wtyczka Plasticity dla C4D (MIT) i dodatek dla Blendera instalowane z katalogu; bryły z Plasticity trafiają do sceny bez plików pośrednich.",
+        "en": "The Plasticity plug-in for C4D (MIT) and the Blender add-on install from the catalogue; Plasticity solids reach the scene with no intermediate files."
+      },
+      "category": "integration",
+      "stage": "scene",
+      "order": 3,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "BETA 0.116",
+      "contract": null,
+      "sources": [
+        "Plug-ins"
+      ],
+      "keywords": [
+        "plasticity",
+        "cad",
+        "nurbs"
+      ],
+      "advantageId": null
+    },
+    {
       "id": "hub.shell.shell",
       "nodeType": "feature",
       "app": "cfab_hub",
@@ -5790,7 +6428,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.726",
+      "version": "ALPHA 0.73",
       "contract": "service_api 5",
       "sources": [
         "Service"
@@ -5843,7 +6481,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.956",
+      "version": "ALPHA 0.961",
       "contract": null,
       "sources": [
         "Core"
@@ -5900,7 +6538,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.956",
+      "version": "ALPHA 0.961",
       "contract": null,
       "sources": [
         "Core"
@@ -5955,7 +6593,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.956",
+      "version": "ALPHA 0.961",
       "contract": null,
       "sources": [
         "Core"
@@ -6007,7 +6645,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.956",
+      "version": "ALPHA 0.961",
       "contract": null,
       "sources": [
         "Core"
@@ -6113,7 +6751,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.665",
+      "version": "ALPHA 0.666",
       "contract": null,
       "sources": [
         "Design system"
@@ -6139,8 +6777,8 @@
         "en": "Scans, images, hashes"
       },
       "summary": {
-        "pl": "Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur i wykrywanie duplikatów.",
-        "en": "The scanner, image_tools and hash_utils crates that speed up library scans, thumbnails and duplicate detection."
+        "pl": "Moduły Rust przyspieszają skanowanie bibliotek, tworzenie miniatur, wykrywanie duplikatów i odczyt scen .c4d.",
+        "en": "The scanner, image_tools, hash_utils and scene_scan crates speed up library scans, thumbnails, duplicate detection and .c4d reading."
       },
       "category": "core",
       "stage": null,
@@ -6173,6 +6811,61 @@
       ],
       "keywords": [
         "rust"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.native.rust_tools",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.native",
+      "parentId": "hub.native",
+      "title": {
+        "pl": "Budowanie i kontrola modułów Rust",
+        "en": "Building and checking Rust modules"
+      },
+      "shortTitle": {
+        "pl": "Rust: build i status",
+        "en": "Rust: build and status"
+      },
+      "summary": {
+        "pl": "Jedno polecenie buduje moduły Rust i EXRustera, aktualizacja Cargo cofa się po nieudanym buildzie, a Ustawienia i pasek stanu pokazują stan każdego modułu.",
+        "en": "One command builds the Rust modules and EXRuster, a Cargo update rolls back after a failed build, and Settings and the status bar show each module's state."
+      },
+      "category": "core",
+      "stage": null,
+      "order": 1,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Rust",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "0.4.0",
+      "contract": null,
+      "sources": [
+        "Rust crates"
+      ],
+      "keywords": [
+        "rust",
+        "cargo",
+        "build"
       ],
       "advantageId": null
     },
@@ -6236,7 +6929,7 @@
         "daemon",
         "tracking"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "automation"
     },
     {
       "id": "tf.daemon.title_parser",
@@ -6289,7 +6982,7 @@
         "tytuł okna",
         "title"
       ],
-      "advantageId": "honest_time"
+      "advantageId": null
     },
     {
       "id": "tf.daemon.idle",
@@ -6342,7 +7035,7 @@
         "idle",
         "bezczynność"
       ],
-      "advantageId": "honest_time"
+      "advantageId": null
     },
     {
       "id": "tf.daemon.background",
@@ -6395,7 +7088,7 @@
         "cpu",
         "tło"
       ],
-      "advantageId": "honest_time"
+      "advantageId": null
     },
     {
       "id": "tf.daemon.pid_cache",
@@ -6559,7 +7252,7 @@
         "fair time",
         "uczciwy czas"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.sessions.split",
@@ -6612,7 +7305,7 @@
         "podział",
         "split"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.sessions.transparency",
@@ -6717,7 +7410,7 @@
         "oś czasu",
         "timeline"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "tf.sessions.editing",
@@ -6824,7 +7517,7 @@
         "model",
         "ścieżki"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "automation"
     },
     {
       "id": "tf.ai.layer_apps",
@@ -7033,7 +7726,7 @@
         "idf",
         "fakty"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "automation"
     },
     {
       "id": "tf.ai.auto_safe",
@@ -7090,7 +7783,7 @@
         "auto_safe",
         "rollback"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "automation"
     },
     {
       "id": "tf.ai.ai_screen",
@@ -7144,7 +7837,7 @@
         "ai",
         "trening"
       ],
-      "advantageId": "honest_time"
+      "advantageId": "local_first"
     },
     {
       "id": "tf.mcp_arch",
@@ -7539,8 +8232,8 @@
         "en": "Machine cost (RBH)"
       },
       "summary": {
-        "pl": "Koszt maszyny ze stawek, limitów i współczynnika RBH, doliczany do wyceny dopiero po włączeniu przez artystę.",
-        "en": "Machine cost from rates, limits and the RBH factor, added to the estimate only once the artist turns it on."
+        "pl": "Oblicza koszt maszyny na podstawie czasu renderu, stawek, limitów i współczynnika RBH. To składnik kosztów projektu służący artyście do oceny rentowności; uwzględnienie go w wycenie jest osobną, opcjonalną decyzją.",
+        "en": "Calculates machine cost from render time, rates, limits and the RBH factor. It contributes to project costs and the artist’s profitability analysis; including it in an estimate is a separate, optional decision."
       },
       "category": "finance",
       "stage": "billing",
@@ -7553,8 +8246,8 @@
       "techMoat": {
         "isUniqueMoat": true,
         "description": {
-          "pl": "Czas maszyny rozliczony w wycenie — coś, czego trackery czasu w ogóle nie widzą.",
-          "en": "Machine time billed in the estimate — something time trackers never see."
+          "pl": "Łączy zmierzony czas maszyny z kosztami konkretnego projektu, oddzielnie od czasu pracy artysty.",
+          "en": "Connects measured machine time to a specific project’s costs, separately from the artist’s working time."
         }
       },
       "techStack": [
@@ -7565,9 +8258,9 @@
       "businessValue": {
         "timeSavedHoursMonth": 0,
         "costAvoidedPerSeatMonthUSD": 0,
-        "revenueRecoveryPct": 10,
-        "financialGainType": "revenue_recovery",
-        "assumptionId": "A-ODZYSK"
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
       },
       "status": "production",
       "statusNote": null,
@@ -7740,7 +8433,7 @@
       "keywords": [
         "projekty"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "tf.projects.limits",
@@ -7848,7 +8541,7 @@
         "scalanie",
         "merge"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "tf.clients.clients",
@@ -8435,7 +9128,7 @@
         "www",
         "parowanie"
       ],
-      "advantageId": "local_first"
+      "advantageId": null
     },
     {
       "id": "tf.logs",
@@ -8608,8 +9301,8 @@
         "en": "Costs beyond work time"
       },
       "summary": {
-        "pl": "Licencje, materiały, podwykonawcy i koszt maszyny obok roboczogodzin, w wycenie i raporcie.",
-        "en": "Licences, materials, subcontractors and machine cost next to hours, in the estimate and report."
+        "pl": "Ewidencja licencji, materiałów, podwykonawców i kosztów maszyny do analizy kosztów projektu. Ich uwzględnienie w wycenie zależy od sposobu rozliczenia projektu.",
+        "en": "Records licences, materials, subcontractors and machine costs for project cost analysis. Their inclusion in an estimate depends on how the project is billed."
       },
       "category": "finance",
       "stage": "billing",
@@ -8643,7 +9336,7 @@
       "keywords": [
         "koszty"
       ],
-      "advantageId": null
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.estimates.estimates",
@@ -8660,8 +9353,8 @@
         "en": "Estimate from time & rates"
       },
       "summary": {
-        "pl": "Przelicza czas na kwoty wg stawek, mnożników trudności i kosztów maszyny.",
-        "en": "Turns time into amounts using rates, difficulty multipliers and machine costs."
+        "pl": "Przelicza czas pracy na kwoty według stawek i mnożników trudności. Koszt maszyny można uwzględnić opcjonalnie, gdy uzasadnia to sposób wyceny projektu.",
+        "en": "Turns work time into amounts using rates and difficulty multipliers. Machine cost can optionally be included where the project’s pricing approach calls for it."
       },
       "category": "finance",
       "stage": "billing",
@@ -8699,7 +9392,7 @@
         "wycena",
         "estimate"
       ],
-      "advantageId": null
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.estimates.estimate_report",
@@ -8769,8 +9462,8 @@
         "en": "Client PDF report"
       },
       "summary": {
-        "pl": "Zestawienia z etapami, wykresami i galerią renderów z RBH i wartością przy każdej pozycji.",
-        "en": "Summaries with stages, charts and a render gallery showing RBH and value per item."
+        "pl": "Zestawienia dla klienta z etapami pracy, wykresami i galerią renderów. Zakres raportu dobiera się do odbiorcy; analiza kosztów maszyny służy artyście do oceny projektu.",
+        "en": "Client summaries with work stages, charts and a render gallery. Report content is tailored to the audience; machine cost analysis helps the artist evaluate the project."
       },
       "category": "finance",
       "stage": "report",
@@ -8806,7 +9499,7 @@
         "pdf",
         "raport"
       ],
-      "advantageId": "render_cost"
+      "advantageId": "production"
     },
     {
       "id": "tf.reports.profitability",
@@ -8815,16 +9508,16 @@
       "module": "tf.reports",
       "parentId": "tf.reports",
       "title": {
-        "pl": "Analiza rentowności w raporcie",
-        "en": "Profitability analysis in reports"
+        "pl": "Wewnętrzna analiza rentowności",
+        "en": "Internal profitability analysis"
       },
       "shortTitle": {
         "pl": "Czy projekt zarobił",
         "en": "Did the project pay off"
       },
       "summary": {
-        "pl": "Składniki projektu — czas pracy, czas maszyny, koszty dodatkowe — z ilością i wartością.",
-        "en": "Project components — work time, machine time, extra costs — with quantity and value."
+        "pl": "Wewnętrzne zestawienie czasu pracy, czasu maszyny i kosztów dodatkowych z ilością i wartością. Pomaga artyście lub studiu ocenić faktyczne koszty i rentowność projektu.",
+        "en": "An internal breakdown of work time, machine time and extra costs, with quantities and values. Helps the artist or studio assess actual project costs and profitability."
       },
       "category": "finance",
       "stage": "report",
@@ -8912,7 +9605,7 @@
         "szablon",
         "template"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "tf.reports.report_options",
@@ -9143,8 +9836,8 @@
       "to": "tf.estimates.estimates",
       "type": "data_flow",
       "label": {
-        "pl": "koszt maszyny → wycena",
-        "en": "machine cost → estimate"
+        "pl": "opcjonalnie → wycena",
+        "en": "optional → estimate"
       },
       "contract": null,
       "animated": true,
@@ -9365,7 +10058,86 @@
       "status": "production"
     },
     {
-      "id": "e025.hub.bridges.blender->hub.scratch.zones",
+      "id": "e025.hub.bridges.c4d_shader_browser->hub.bridges.c4d",
+      "from": "hub.bridges.c4d_shader_browser",
+      "to": "hub.bridges.c4d",
+      "type": "depends_on",
+      "label": {
+        "pl": "okno wtyczki",
+        "en": "plug-in window"
+      },
+      "contract": null,
+      "animated": false,
+      "status": "production"
+    },
+    {
+      "id": "e026.hub.bridges.c4d_shader_layers->hub.bridges.c4d_shader_browser",
+      "from": "hub.bridges.c4d_shader_layers",
+      "to": "hub.bridges.c4d_shader_browser",
+      "type": "depends_on",
+      "label": null,
+      "contract": null,
+      "animated": false,
+      "status": "production"
+    },
+    {
+      "id": "e027.hub.bridges.c4d_bitmap_conversion->hub.bridges.c4d_shader_browser",
+      "from": "hub.bridges.c4d_bitmap_conversion",
+      "to": "hub.bridges.c4d_shader_browser",
+      "type": "depends_on",
+      "label": null,
+      "contract": null,
+      "animated": false,
+      "status": "production"
+    },
+    {
+      "id": "e028.hub.bridges.c4d_color_correct->hub.bridges.c4d_shader_browser",
+      "from": "hub.bridges.c4d_color_correct",
+      "to": "hub.bridges.c4d_shader_browser",
+      "type": "depends_on",
+      "label": null,
+      "contract": null,
+      "animated": false,
+      "status": "production"
+    },
+    {
+      "id": "e029.hub.bridges.c4d_material_names->hub.bridges.c4d_shader_browser",
+      "from": "hub.bridges.c4d_material_names",
+      "to": "hub.bridges.c4d_shader_browser",
+      "type": "depends_on",
+      "label": null,
+      "contract": null,
+      "animated": false,
+      "status": "production"
+    },
+    {
+      "id": "e030.hub.bridges.c4d_texture_metadata->hub.bridges.c4d_shader_browser",
+      "from": "hub.bridges.c4d_texture_metadata",
+      "to": "hub.bridges.c4d_shader_browser",
+      "type": "data_flow",
+      "label": {
+        "pl": "metadane tekstur",
+        "en": "texture metadata"
+      },
+      "contract": null,
+      "animated": true,
+      "status": "production"
+    },
+    {
+      "id": "e031.hub.service->hub.bridges.c4d_texture_metadata",
+      "from": "hub.service",
+      "to": "hub.bridges.c4d_texture_metadata",
+      "type": "data_flow",
+      "label": {
+        "pl": "rozdzielczość, głębia, TX",
+        "en": "resolution, depth, TX"
+      },
+      "contract": null,
+      "animated": true,
+      "status": "production"
+    },
+    {
+      "id": "e032.hub.bridges.blender->hub.scratch.zones",
       "from": "hub.bridges.blender",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9378,7 +10150,7 @@
       "status": "production"
     },
     {
-      "id": "e026.hub.bridges.max->hub.scratch.zones",
+      "id": "e033.hub.bridges.max->hub.scratch.zones",
       "from": "hub.bridges.max",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9391,7 +10163,7 @@
       "status": "beta"
     },
     {
-      "id": "e027.hub.bridges.modo->hub.scratch.zones",
+      "id": "e034.hub.bridges.modo->hub.scratch.zones",
       "from": "hub.bridges.modo",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9404,7 +10176,7 @@
       "status": "beta"
     },
     {
-      "id": "e028.hub.bridges.c4d->hub.scratch.zones",
+      "id": "e035.hub.bridges.c4d->hub.scratch.zones",
       "from": "hub.bridges.c4d",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9417,7 +10189,7 @@
       "status": "production"
     },
     {
-      "id": "e029.hub.bridges.blender_mats->hub.bridges.c4d",
+      "id": "e036.hub.bridges.blender_mats->hub.bridges.c4d",
       "from": "hub.bridges.blender_mats",
       "to": "hub.bridges.c4d",
       "type": "file_exchange",
@@ -9430,7 +10202,7 @@
       "status": "beta"
     },
     {
-      "id": "e030.hub.scenes.max_import->hub.bridges.c4d",
+      "id": "e037.hub.scenes.max_import->hub.bridges.c4d",
       "from": "hub.scenes.max_import",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9440,7 +10212,7 @@
       "status": "beta"
     },
     {
-      "id": "e031.hub.scenes.max_reader->hub.scenes.max_import",
+      "id": "e038.hub.scenes.max_reader->hub.scenes.max_import",
       "from": "hub.scenes.max_reader",
       "to": "hub.scenes.max_import",
       "type": "data_flow",
@@ -9450,7 +10222,7 @@
       "status": "beta"
     },
     {
-      "id": "e032.hub.scenes.max_space->hub.scenes.max_import",
+      "id": "e039.hub.scenes.max_space->hub.scenes.max_import",
       "from": "hub.scenes.max_space",
       "to": "hub.scenes.max_import",
       "type": "depends_on",
@@ -9460,7 +10232,7 @@
       "status": "beta"
     },
     {
-      "id": "e033.hub.browser.jit->hub.scratch.zones",
+      "id": "e040.hub.browser.jit->hub.scratch.zones",
       "from": "hub.browser.jit",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -9470,7 +10242,7 @@
       "status": "production"
     },
     {
-      "id": "e034.hub.browser.visual_search->hub.browser.asset_format",
+      "id": "e041.hub.browser.visual_search->hub.browser.asset_format",
       "from": "hub.browser.visual_search",
       "to": "hub.browser.asset_format",
       "type": "depends_on",
@@ -9480,7 +10252,7 @@
       "status": "beta"
     },
     {
-      "id": "e035.hub.browser.errors_tab->hub.browser.pairing",
+      "id": "e042.hub.browser.errors_tab->hub.browser.pairing",
       "from": "hub.browser.errors_tab",
       "to": "hub.browser.pairing",
       "type": "data_flow",
@@ -9490,7 +10262,7 @@
       "status": "beta"
     },
     {
-      "id": "e036.hub.native.native->hub.browser.tools",
+      "id": "e043.hub.native.native->hub.browser.tools",
       "from": "hub.native.native",
       "to": "hub.browser.tools",
       "type": "depends_on",
@@ -9500,7 +10272,7 @@
       "status": "production"
     },
     {
-      "id": "e037.hub.core.mcp->hub.render.ledger",
+      "id": "e044.hub.core.mcp->hub.render.ledger",
       "from": "hub.core.mcp",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -9510,7 +10282,7 @@
       "status": "production"
     },
     {
-      "id": "e038.tf.mcp_tools->tf.projects.projects",
+      "id": "e045.tf.mcp_tools->tf.projects.projects",
       "from": "tf.mcp_tools",
       "to": "tf.projects.projects",
       "type": "data_flow",
@@ -9520,7 +10292,7 @@
       "status": "production"
     },
     {
-      "id": "e039.tf.mcp_backup->tf.mcp_tools",
+      "id": "e046.tf.mcp_backup->tf.mcp_tools",
       "from": "tf.mcp_backup",
       "to": "tf.mcp_tools",
       "type": "depends_on",
@@ -9530,7 +10302,7 @@
       "status": "production"
     },
     {
-      "id": "e040.tf.daemon.events->tf.sessions.no_double",
+      "id": "e047.tf.daemon.events->tf.sessions.no_double",
       "from": "tf.daemon.events",
       "to": "tf.sessions.no_double",
       "type": "data_flow",
@@ -9540,7 +10312,7 @@
       "status": "production"
     },
     {
-      "id": "e041.tf.daemon.title_parser->tf.ai.layer_tokens",
+      "id": "e048.tf.daemon.title_parser->tf.ai.layer_tokens",
       "from": "tf.daemon.title_parser",
       "to": "tf.ai.layer_tokens",
       "type": "data_flow",
@@ -9550,7 +10322,7 @@
       "status": "production"
     },
     {
-      "id": "e042.tf.ai.auto_safe->tf.sessions.timeline",
+      "id": "e049.tf.ai.auto_safe->tf.sessions.timeline",
       "from": "tf.ai.auto_safe",
       "to": "tf.sessions.timeline",
       "type": "data_flow",
@@ -9560,7 +10332,7 @@
       "status": "production"
     },
     {
-      "id": "e043.tf.sessions.split->tf.estimates.estimates",
+      "id": "e050.tf.sessions.split->tf.estimates.estimates",
       "from": "tf.sessions.split",
       "to": "tf.estimates.estimates",
       "type": "data_flow",
@@ -9573,7 +10345,7 @@
       "status": "production"
     },
     {
-      "id": "e044.tf.renders.render_sync->tf.data.lan_sync",
+      "id": "e051.tf.renders.render_sync->tf.data.lan_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.lan_sync",
       "type": "depends_on",
@@ -9583,7 +10355,7 @@
       "status": "beta"
     },
     {
-      "id": "e045.tf.renders.render_sync->tf.data.cloud_sync",
+      "id": "e052.tf.renders.render_sync->tf.data.cloud_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.cloud_sync",
       "type": "depends_on",
@@ -9593,7 +10365,7 @@
       "status": "beta"
     },
     {
-      "id": "e046.hub.core.autostart->syn.presence",
+      "id": "e053.hub.core.autostart->syn.presence",
       "from": "hub.core.autostart",
       "to": "syn.presence",
       "type": "data_flow",
@@ -9603,7 +10375,7 @@
       "status": "beta"
     },
     {
-      "id": "e047.syn.proposals->tf.pm.pm",
+      "id": "e054.syn.proposals->tf.pm.pm",
       "from": "syn.proposals",
       "to": "tf.pm.pm",
       "type": "data_flow",
@@ -9616,7 +10388,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e048.hub.assets.audit->syn.proposals",
+      "id": "e055.hub.assets.audit->syn.proposals",
       "from": "hub.assets.audit",
       "to": "syn.proposals",
       "type": "data_flow",
@@ -9626,7 +10398,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e049.hub.render.ledger_always->hub.render.ledger",
+      "id": "e056.hub.render.ledger_always->hub.render.ledger",
       "from": "hub.render.ledger_always",
       "to": "hub.render.ledger",
       "type": "depends_on",
@@ -9636,7 +10408,7 @@
       "status": "roadmap"
     },
     {
-      "id": "e050.hub.render.single->hub.render.ledger",
+      "id": "e057.hub.render.single->hub.render.ledger",
       "from": "hub.render.single",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -9686,62 +10458,162 @@
       "value": 0.2,
       "unit": "—",
       "source": "wartość robocza z funkcje.md"
-    },
-    {
-      "id": "A-ODZYSK",
-      "pl": "Odzysk przychodu z rozliczenia renderów",
-      "en": "Revenue recovered by billing renders",
-      "value": 10,
-      "maxValue": 25,
-      "unit": "%",
-      "source": "widełki do zatwierdzenia"
     }
   ],
   "advantages": [
     {
-      "id": "render_cost",
+      "id": "workflow",
       "rank": 1,
       "title": {
-        "pl": "Czas renderu trafia do wyceny",
-        "en": "Render time lands in the quote"
+        "pl": "Cały proces pracy 3D w jednym ekosystemie",
+        "en": "One ecosystem for the entire 3D workflow"
       },
       "thesis": {
-        "pl": "Hub zapisuje każdy zakończony render z maszyną i sekundami, a TIMEFLOW przypisuje go do projektu i dolicza koszt maszyny do wyceny i raportu PDF — po włączeniu przez artystę.",
-        "en": "Hub logs every finished render with its machine and seconds; TIMEFLOW assigns it to a project and adds the machine cost to the quote and the PDF report once the artist switches it on."
+        "pl": "CFAB 4D Hub łączy bibliotekę zasobów, sceny, programy 3D, renderowanie i analizę wyników. TIMEFLOW dopełnia ten proces projektami, czasem pracy i finansami. Informacje o plikach i renderach przechodzą między aplikacjami i trafiają do właściwego projektu.",
+        "en": "CFAB 4D Hub connects asset libraries, scenes, 3D applications, rendering and result review. TIMEFLOW completes the workflow with projects, work time and finances. File and render information moves between the applications and is linked to the right project."
       },
       "why": {
-        "pl": "Potrzebny jest stan renderu z wnętrza programu 3D i aplikacja rozliczeniowa po drugiej stronie. Trackery czasu nie widzą renderu, a menedżery renderu nie robią wycen.",
-        "en": "It needs render state from inside the 3D app and a billing app on the other side. Time trackers can't see renders; render managers don't do quotes."
+        "pl": "Wspólne połączenia z programami 3D, ścieżki projektów i wymiana danych łączą pracę twórczą z jej organizacją. Każda aplikacja ma własny zakres, a razem obejmują kolejne etapy realizacji projektu.",
+        "en": "Shared DCC connections, project paths and data exchange connect creative work with project organisation. Each application has its own role; together they cover successive stages of a project."
       },
-      "replacesTools": [
-        {
-          "pl": "ręczne liczenie czasu renderu",
-          "en": "manual render-time tracking"
-        },
-        {
-          "pl": "Excel",
-          "en": "Excel"
-        }
-      ],
-      "assumptionId": "A-ODZYSK",
-      "flow": [
-        {
-          "pl": "Render w Hubie",
-          "en": "Render in Hub"
-        },
-        {
-          "pl": "Księga renderów",
-          "en": "Render log"
-        },
-        {
-          "pl": "Przypisanie w TIMEFLOW",
-          "en": "Assignment in TIMEFLOW"
-        },
-        {
-          "pl": "Koszt w wycenie i PDF",
-          "en": "Cost in quote and PDF"
-        }
-      ],
+      "replacesTools": [],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.browser.multi_tb",
+        "hub.browser.asset_format",
+        "hub.bridges.c4d",
+        "hub.bridges.blender",
+        "hub.bridges.max",
+        "hub.bridges.modo",
+        "hub.render.queue",
+        "hub.results.exruster",
+        "syn.dcc_activity",
+        "syn.presence",
+        "tf.projects.projects",
+        "tf.projects.merge"
+      ]
+    },
+    {
+      "id": "automation",
+      "rank": 2,
+      "title": {
+        "pl": "Mniej ręcznej pracy między etapami",
+        "en": "Less manual work between stages"
+      },
+      "thesis": {
+        "pl": "Wyszukanie i przygotowanie zasobu, inspekcja sceny, transfer modelu z materiałami, naprawa ścieżek oraz przypisanie czasu pracy do projektu składają się na jeden obieg pracy. Automatyzacja obejmuje zarówno pliki produkcyjne, jak i organizację pracy.",
+        "en": "Finding and preparing assets, inspecting scenes, transferring models with materials, repairing paths and assigning work time to projects form one workflow. Automation covers both production files and work organisation."
+      },
+      "why": {
+        "pl": "Hub rozumie zasoby i strukturę scen, a TIMEFLOW korzysta z informacji o plikach i aktywności. Odczyt scen .c4d i .max bez uruchamiania programów, mosty DCC oraz lokalne przypisywanie sesji ograniczają powtarzalną obsługę danych.",
+        "en": "Hub understands assets and scene structure; TIMEFLOW uses file and activity context. Reading .c4d and .max scenes without launching the applications, DCC bridges and local session assignment reduce repetitive data handling."
+      },
+      "replacesTools": [],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.browser.pairing",
+        "hub.browser.jit",
+        "hub.scenes.c4d_parser",
+        "hub.scenes.max_reader",
+        "hub.scenes.max_import",
+        "hub.scenes.max_space",
+        "hub.scenes.export",
+        "hub.bridges.blender_mats",
+        "hub.assets.relink",
+        "hub.assets.textures",
+        "tf.daemon.events",
+        "tf.ai.layer_paths",
+        "tf.ai.facts_first",
+        "tf.ai.auto_safe"
+      ]
+    },
+    {
+      "id": "production",
+      "rank": 3,
+      "title": {
+        "pl": "Kontrola od przygotowania sceny do odbioru pracy",
+        "en": "Control from scene preparation to delivery"
+      },
+      "thesis": {
+        "pl": "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, wykrywanie brakujących klatek oraz raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
+        "en": "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, missing-frame detection and reports help verify and summarise completed work."
+      },
+      "why": {
+        "pl": "Przygotowanie sceny, wykonanie renderu, kontrola plików wynikowych i dokumentacja projektu są dostępne w jednym ekosystemie. Brakujące klatki mogą wrócić do kolejki, a historia renderów i sesji zachowuje przebieg pracy.",
+        "en": "Scene preparation, render execution, output validation and project documentation are available within one ecosystem. Missing frames can return to the queue, while render and session histories preserve the work record."
+      },
+      "replacesTools": [],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.assets.audit",
+        "hub.render.precheck",
+        "hub.render.recovery",
+        "hub.render.watchdog",
+        "hub.render.lan_farm",
+        "hub.render.eta_log",
+        "hub.render.web_panel",
+        "hub.render.ntfy",
+        "hub.render.mail",
+        "hub.render.history",
+        "hub.results.passes",
+        "hub.results.sequences",
+        "tf.sessions.timeline",
+        "tf.reports.pdf",
+        "tf.reports.templates"
+      ]
+    },
+    {
+      "id": "local_first",
+      "rank": 4,
+      "title": {
+        "pl": "Dane i automatyzacja pod własną kontrolą",
+        "en": "Keep control of data and automation"
+      },
+      "thesis": {
+        "pl": "Biblioteki, dane projektów i modele przypisujące czas pracy działają lokalnie. Ekosystem oferuje lokalne wyszukiwanie wizualne, synchronizację w LAN, opcjonalną szyfrowaną synchronizację online i dwa serwery MCP do integracji z agentami AI.",
+        "en": "Libraries, project data and work-time assignment models run locally. The ecosystem provides local visual search, LAN sync, optional encrypted online sync and two MCP servers for integration with AI agents."
+      },
+      "why": {
+        "pl": "Hub i TIMEFLOW mają własne lokalne bazy i mogą działać samodzielnie. Wymiana danych, kopie zapasowe i cofanie zmian wspierają kontrolę nad pracą, a szyfrowana synchronizacja pozwala przenosić dane między komputerami.",
+        "en": "Hub and TIMEFLOW maintain their own local databases and can run independently. Data exchange, backups and undo support control over work; encrypted sync carries data between computers."
+      },
+      "replacesTools": [],
+      "assumptionId": null,
+      "flow": null,
+      "ids": [
+        "hub.core.mcp",
+        "tf.mcp_arch",
+        "tf.mcp_tools",
+        "tf.mcp_backup",
+        "hub.browser.visual_search",
+        "tf.ai.ai_screen",
+        "tf.data.lan_sync",
+        "tf.data.cloud_sync",
+        "syn.beacons",
+        "hub.assets.undo"
+      ]
+    },
+    {
+      "id": "render_cost",
+      "rank": 5,
+      "title": {
+        "pl": "Wiesz, ile kosztuje praca i które projekty zarabiają",
+        "en": "Know what work costs and which projects pay off"
+      },
+      "thesis": {
+        "pl": "TIMEFLOW zestawia czas pracy i koszty dodatkowe, a Hub dostarcza czas renderowania. Rozdzielenie pracy artysty od pracy maszyny pozwala ocenić faktyczne koszty i rentowność projektu oraz lepiej planować kolejne zlecenia.",
+        "en": "TIMEFLOW brings together work time and extra costs; Hub supplies render time. Separating the artist’s work from machine time helps assess actual project costs and profitability and plan future projects."
+      },
+      "why": {
+        "pl": "To wiedza dla artysty lub studia o własnej działalności. Czas maszyny trafia do analizy kosztów projektu. Uwzględnienie kosztu renderu w wycenie jest osobną, opcjonalną decyzją, uzasadnioną sposobem rozliczenia zlecenia.",
+        "en": "This gives artists and studios insight into their own business. Machine time contributes to project cost analysis. Including render cost in an estimate is a separate, optional decision based on how a job is priced."
+      },
+      "replacesTools": [],
+      "assumptionId": null,
+      "flow": null,
       "ids": [
         "syn.machine_time",
         "hub.render.ledger",
@@ -9753,187 +10625,20 @@
         "syn.cfabx",
         "tf.renders.offline",
         "tf.renders.render_sync",
-        "tf.reports.profitability",
-        "tf.reports.pdf"
-      ]
-    },
-    {
-      "id": "closed_formats",
-      "rank": 2,
-      "title": {
-        "pl": "Pliki .c4d i .max bez programu i licencji",
-        "en": ".c4d and .max files without the app or a licence"
-      },
-      "thesis": {
-        "pl": "Inspektor czyta geometrię, hierarchię i materiały z plików Cinema 4D i 3ds Max, porównuje sceny, zmienia silnik renderu w pliku i przenosi scenę z Maxa do C4D — bez uruchamiania tych programów.",
-        "en": "The Inspector reads geometry, hierarchy and materials from Cinema 4D and 3ds Max files, compares scenes, swaps the render engine in the file and moves a Max scene into C4D — without launching either app."
-      },
-      "why": {
-        "pl": "Oba formaty są zamknięte. Strukturę .c4d odtworzono inżynierią wsteczną, a .max jest czytany ze struktur OLE bez API Autodesku.",
-        "en": "Both formats are closed. The .c4d layout was reverse-engineered; .max is read from OLE structures without Autodesk's API."
-      },
-      "replacesTools": [
-        {
-          "pl": "licencja Cinema 4D",
-          "en": "Cinema 4D licence"
-        },
-        {
-          "pl": "licencja 3ds Max",
-          "en": "3ds Max licence"
-        },
-        {
-          "pl": "Connecter",
-          "en": "Connecter"
-        },
-        {
-          "pl": "konwertery chmurowe",
-          "en": "cloud converters"
-        }
-      ],
-      "assumptionId": "A-INSPEKCJA",
-      "flow": null,
-      "ids": [
-        "hub.scenes.c4d_parser",
-        "hub.scenes.max_reader",
-        "hub.scenes.max_import",
-        "hub.scenes.max_space",
-        "hub.scenes.diag_tools",
-        "hub.scenes.max_tools",
-        "hub.scenes.export",
-        "hub.scenes.materials",
-        "hub.scenes.tree"
-      ]
-    },
-    {
-      "id": "night_render",
-      "rank": 3,
-      "title": {
-        "pl": "Nocny render kończy się klatkami",
-        "en": "An overnight render ends with frames"
-      },
-      "thesis": {
-        "pl": "Przed startem Hub sprawdza kolejkę, w trakcie pilnuje postępu i wysyła zadania na wolne maszyny w sieci lokalnej, a po awarii Cinema 4D restartuje program i renderuje tylko brakujące klatki. Rano czeka mail z miniaturami.",
-        "en": "Before the start Hub checks the queue; during the night it tracks progress and sends jobs to free LAN machines; after a Cinema 4D crash it restarts the app and renders only the missing frames. A mail with thumbnails waits in the morning."
-      },
-      "why": {
-        "pl": "Most działa wewnątrz procesu Cinema 4D, a Hub prowadzi rejestr klatek — wie, co już policzył, więc wie, co dokończyć.",
-        "en": "The bridge runs inside the Cinema 4D process and Hub keeps a frame log — it knows what is done, so it knows what to finish."
-      },
-      "replacesTools": [
-        {
-          "pl": "Deadline",
-          "en": "Deadline"
-        },
-        {
-          "pl": "Team Render",
-          "en": "Team Render"
-        }
-      ],
-      "assumptionId": null,
-      "flow": null,
-      "ids": [
-        "hub.render.precheck",
-        "hub.render.recovery",
-        "hub.render.watchdog",
-        "hub.render.lan_farm",
-        "hub.render.eta_log",
-        "hub.render.web_panel",
-        "hub.render.ntfy",
-        "hub.render.mail",
-        "hub.results.sequences",
-        "hub.render.shutdown"
-      ]
-    },
-    {
-      "id": "honest_time",
-      "rank": 4,
-      "title": {
-        "pl": "Czas pracy liczy się sam i uczciwie",
-        "en": "Work time counts itself, fairly"
-      },
-      "thesis": {
-        "pl": "Demon mierzy pracę ze zdarzeń systemu, bez stopera. Nie liczy podwójnie przy przełączaniu okien ani pracy maszyny w tle, a lokalny model przypisuje sesje do projektów — także po ścieżce pliku otwartego w programie 3D, którą podaje Hub.",
-        "en": "The daemon measures work from system events, with no stopwatch. It doesn't double-count window switching or background machine work, and a local model assigns sessions to projects — including by the path of the file open in the 3D app, supplied by Hub."
-      },
-      "why": {
-        "pl": "Haki zdarzeń Win32 i Quartz w Rust, Algorytm Uczciwego Czasu i model uczący się lokalnie. Ścieżkę pliku z wnętrza programu 3D ma tylko para Hub i TIMEFLOW.",
-        "en": "Win32 and Quartz event hooks in Rust, the Fair Time Algorithm and a model that learns locally. Only the Hub–TIMEFLOW pair has the file path from inside the 3D app."
-      },
-      "replacesTools": [
-        {
-          "pl": "Toggl",
-          "en": "Toggl"
-        },
-        {
-          "pl": "Harvest",
-          "en": "Harvest"
-        },
-        {
-          "pl": "Clockify",
-          "en": "Clockify"
-        }
-      ],
-      "assumptionId": null,
-      "flow": null,
-      "ids": [
-        "tf.daemon.events",
-        "tf.daemon.title_parser",
-        "tf.daemon.idle",
-        "tf.daemon.background",
         "tf.sessions.no_double",
         "tf.sessions.split",
-        "syn.dcc_activity",
-        "tf.ai.layer_paths",
-        "tf.ai.facts_first",
-        "tf.ai.auto_safe",
-        "tf.ai.ai_screen"
-      ]
-    },
-    {
-      "id": "local_first",
-      "rank": 5,
-      "title": {
-        "pl": "Dane i AI zostają na komputerze",
-        "en": "Data and AI stay on the machine"
-      },
-      "thesis": {
-        "pl": "Dwa lokalne serwery MCP dla agentów AI, wyszukiwanie po obrazie na lokalnym modelu, synchronizacja w sieci lokalnej bez chmury i szyfrowana synchronizacja online, w której serwer widzi tylko rewizje i sumy kontrolne.",
-        "en": "Two local MCP servers for AI agents, image search on a local model, LAN sync with no cloud, and encrypted online sync where the server sees only revisions and checksums."
-      },
-      "why": {
-        "pl": "Cały stos działa lokalnie: serwery MCP tylko na pętli zwrotnej, model DINOv2 lub CLIP na maszynie, AES-256-GCM z kluczem, którego serwer nie zna.",
-        "en": "The whole stack is local: MCP servers on loopback only, a DINOv2 or CLIP model on the machine, AES-256-GCM with a key the server never sees."
-      },
-      "replacesTools": [
-        {
-          "pl": "chmury SaaS",
-          "en": "SaaS clouds"
-        }
-      ],
-      "assumptionId": null,
-      "flow": null,
-      "ids": [
-        "hub.core.mcp",
-        "tf.mcp_arch",
-        "tf.mcp_tools",
-        "tf.mcp_backup",
-        "hub.browser.visual_search",
-        "tf.data.lan_sync",
-        "tf.data.cloud_sync",
-        "syn.beacons",
-        "tf.webserver"
+        "tf.estimates.costs",
+        "tf.estimates.estimates",
+        "tf.reports.profitability"
       ]
     }
   ],
   "alsoStrong": [
-    "hub.results.exruster",
-    "hub.results.passes",
-    "hub.results.thumb_cache",
-    "hub.assets.relink",
-    "hub.bridges.c4d",
-    "hub.bridges.blender_mats",
-    "hub.bridges.max",
-    "hub.bridges.modo",
-    "hub.browser.jit"
+    "hub.bridges.c4d_shader_browser",
+    "hub.bridges.c4d_shader_layers",
+    "hub.bridges.c4d_bitmap_conversion",
+    "hub.bridges.c4d_color_correct",
+    "hub.bridges.c4d_material_names",
+    "hub.bridges.c4d_texture_metadata"
   ]
 }

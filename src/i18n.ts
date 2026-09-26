@@ -8,8 +8,8 @@ export const STAGES: { id: Stage; pl: string; en: string }[] = [
   { id: "render", pl: "Render", en: "Render" },
   { id: "results", pl: "Wyniki", en: "Results" },
   { id: "tracking", pl: "Czas pracy", en: "Time tracking" },
-  { id: "billing", pl: "Wycena", en: "Billing" },
-  { id: "report", pl: "Raport dla klienta", en: "Client report" },
+  { id: "billing", pl: "Koszty i wycena", en: "Costs & estimates" },
+  { id: "report", pl: "Raporty i rentowność", en: "Reports & profitability" },
 ];
 
 const STRINGS = {
