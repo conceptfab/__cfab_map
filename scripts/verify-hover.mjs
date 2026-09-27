@@ -11,12 +11,14 @@ await page.mouse.move(10,70);
 await page.waitForTimeout(100);
 const labels=await page.locator('.graph-labels text').evaluateAll(els=>els.map(e=>({text:e.textContent,rect:e.getBoundingClientRect().toJSON()})));
 const results=[];
+let checked=0;
 for(const item of labels.filter(x=>x.rect.x>20&&x.rect.y>100&&x.rect.right<1400&&x.rect.bottom<880).slice(0,60)){
  await page.mouse.move(10,70);
  const el=page.locator('.graph-labels text').filter({hasText:item.text}).first();
  if(!await el.count())continue;
  const box=await el.boundingBox();if(!box)continue;
  await page.evaluate(()=>{window.hoverChanges=[];window.hoverObs=new MutationObserver(()=>{const e=document.querySelector('.graph-node.is-active');const id=e?.getAttribute('aria-label')||'';if(window.hoverChanges.at(-1)!==id)window.hoverChanges.push(id);});window.hoverObs.observe(document.querySelector('.cloud'),{subtree:true,attributes:true,attributeFilter:['class']});});
+ checked++;
  await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
  await page.waitForTimeout(120);
  const changes=await page.evaluate(()=>{window.hoverObs.disconnect();return window.hoverChanges;});
@@ -24,6 +26,6 @@ for(const item of labels.filter(x=>x.rect.x>20&&x.rect.y>100&&x.rect.right<1400&
  if(!after||Math.abs(after.x-box.x)>0.5||Math.abs(after.y-box.y)>0.5||changes.length>3)results.push({label:item.text,before:box,after,changes});
 }
 await browser.close();
-assert.ok(labels.length >= 20, 'Expected enough labels to exercise collisions');
+assert.ok(checked >= 20, 'Expected enough labels to exercise collisions');
 assert.deepEqual(results, [], 'Hover must not move or remove the label under the pointer');
-console.log(`PASS: stable label placement on hover (${labels.length} visible labels).`);
+console.log(`PASS: stable label placement on hover (${checked} labels tested).`);
