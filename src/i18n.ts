@@ -31,15 +31,12 @@ const STRINGS = {
   foundation: { pl: "Fundament", en: "Foundation" },
   synergy: { pl: "Połączenie Huba i TIMEFLOW", en: "Hub and TIMEFLOW integration" },
   features: { pl: "funkcji", en: "features" },
-  statusProduction: { pl: "gotowe", en: "ready" },
-  statusBeta: { pl: "w odbiorze", en: "in sign-off" },
-  statusRoadmap: { pl: "planowane", en: "planned" },
   metricSystems: { pl: "Systemy", en: "Systems" },
   metricModules: { pl: "Moduły", en: "Modules" },
-  metricFeatures: { pl: "Udokumentowane funkcje", en: "Documented features" },
+  metricFeatures: { pl: "Funkcje aplikacji", en: "Application features" },
   metricBridges: { pl: "Mosty do programów 3D", en: "3D app bridges" },
   metricMcp: { pl: "Serwery MCP dla agentów AI", en: "MCP servers for AI agents" },
-  metricCloud: { pl: "Dane w chmurze", en: "Data in the cloud" },
+  metricIntegrations: { pl: "Integracje Hub–TIMEFLOW", en: "Hub–TIMEFLOW integrations" },
 } satisfies Record<string, { pl: string; en: string }>;
 
 export type StringKey = keyof typeof STRINGS;

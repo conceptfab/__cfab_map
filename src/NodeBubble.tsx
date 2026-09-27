@@ -1,9 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { FeatureNode, FeaturesData, LangKey, Status } from "./types";
+import type { FeatureNode, FeaturesData, LangKey } from "./types";
 import { STAGES, t } from "./i18n";
 import type { Group } from "./graphModel";
 
-const MARKER: Record<Status, string> = { production: "●", beta: "◐", roadmap: "○" };
 
 export interface ConnectionItem {
   id: string;
@@ -134,12 +133,6 @@ export default function NodeBubble({
   const group = groups.get(node.id) ?? "foundation";
   const stage = STAGES.find((s) => s.id === group);
   const stageName = stage ? stage[lang] : t("foundation", lang);
-  const statusKey =
-    node.status === "production"
-      ? "statusProduction"
-      : node.status === "beta"
-      ? "statusBeta"
-      : "statusRoadmap";
 
   const connections = useMemo(
     () => getNodeConnections(node, data, groups),
@@ -262,12 +255,6 @@ export default function NodeBubble({
 
       <div className="bubble-main-info">
         <h3 className="bubble-title">{node.title[lang]}</h3>
-        <div className={`bubble-status status-${node.status}`}>
-          <span className="marker" aria-hidden="true">
-            {node.nodeType === "bridge" ? "◆" : MARKER[node.status]}
-          </span>
-          <span className="status-text">{t(statusKey, lang)}</span>
-        </div>
         <p className="bubble-summary">{node.summary[lang]}</p>
         {node.statusNote && <p className="bubble-note">{node.statusNote[lang]}</p>}
       </div>

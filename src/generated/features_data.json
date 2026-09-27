@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-26T18:48:28.281Z",
+    "generatedAt": "2026-09-27T08:06:48.119Z",
     "hubVersion": "BETA 0.58",
     "timeflowVersion": "0.1.5776",
     "contracts": {
@@ -86,8 +86,8 @@
         "en": "TIMEFLOW"
       },
       "summary": {
-        "pl": "Śledzenie czasu, wyceny i analityka biznesowa dla freelancerów i małych studiów — lokalnie, bez chmury.",
-        "en": "Time tracking, estimates and business analytics for freelancers and small studios — local, no cloud."
+        "pl": "Organizacja projektów i zadań, automatyczny pomiar czasu, wyceny i analiza rentowności. Lokalne dane z opcjonalną synchronizacją między komputerami.",
+        "en": "Project and task organisation, automatic time tracking, estimates and profitability analysis. Local data with optional sync between computers."
       },
       "category": "core",
       "stage": null,
@@ -1547,7 +1547,7 @@
         "en": "Detecting apps"
       },
       "summary": {
-        "pl": "Hub i TIMEFLOW zapisują informację o uruchomieniu. Dane drugiej aplikacji czytają bez prawa zapisu; każda może też działać samodzielnie.",
+        "pl": "Hub i TIMEFLOW wykrywają drugą aplikację lokalnie. Każda zarządza własną bazą danych i może działać samodzielnie.",
         "en": "Each app writes a JSON presence file; it opens the other's database read-only, and a missing partner breaks nothing."
       },
       "category": "integration",
@@ -1560,8 +1560,8 @@
       "techMoat": {
         "isUniqueMoat": true,
         "description": {
-          "pl": "Integracja bez HTTP i bez współdzielonego zapisu — fundament zgodności z NDA i odporności na awarie.",
-          "en": "Integration with no HTTP and no shared writes — the basis of NDA compliance and fault tolerance."
+          "pl": "Oddzielne bazy danych i odczyt danych drugiej aplikacji bez prawa zapisu.",
+          "en": "Separate databases and read-only access to the other application’s data."
         }
       },
       "techStack": [
@@ -1834,16 +1834,16 @@
       "module": "",
       "parentId": null,
       "title": {
-        "pl": "Zatwierdzanie danych z Huba w TIMEFLOW",
-        "en": "Approving Hub data in TIMEFLOW"
+        "pl": "Zatwierdzanie przypisań renderów w TIMEFLOW",
+        "en": "Approving render assignments in TIMEFLOW"
       },
       "shortTitle": {
         "pl": "Zatwierdzanie danych",
         "en": "Approve Hub data"
       },
       "summary": {
-        "pl": "Hub proponuje projekt dla renderu, a TIMEFLOW zatwierdza propozycję jednym kliknięciem, także kilka naraz; paczka .cfabx niesie propozycje renderów i kosztów.",
-        "en": "Hub proposes a project for a render and TIMEFLOW approves it in one click, several at once too; a .cfabx package carries render and cost proposals."
+        "pl": "Hub proponuje projekt dla renderu. W TIMEFLOW można zatwierdzić przypisanie pojedynczo lub zbiorczo, także dla renderów zaimportowanych z paczki .cfabx.",
+        "en": "Hub proposes a project for a render. TIMEFLOW lets you approve assignments individually or in bulk, including renders imported from a .cfabx package."
       },
       "category": "integration",
       "stage": "billing",
@@ -1869,11 +1869,8 @@
         "financialGainType": "cost_reduction",
         "assumptionId": ""
       },
-      "status": "beta",
-      "statusNote": {
-        "pl": "Rendery działają; Hub nie wysyła jeszcze kosztów ani wyników audytu sceny.",
-        "en": "Renders work; Hub does not send costs or scene-audit findings yet."
-      },
+      "status": "production",
+      "statusNote": null,
       "version": null,
       "contract": null,
       "sources": [
@@ -5728,57 +5725,6 @@
       "advantageId": null
     },
     {
-      "id": "hub.bridges.rizom_hub",
-      "nodeType": "feature",
-      "app": "cfab_hub",
-      "module": "hub.bridges",
-      "parentId": "hub.bridges",
-      "title": {
-        "pl": "Przepływ RizomUV uruchamiany z Huba",
-        "en": "RizomUV flow started from Hub"
-      },
-      "shortTitle": {
-        "pl": "Rizom z poziomu Huba",
-        "en": "Rizom from Hub"
-      },
-      "summary": {
-        "pl": "Scena z Huba do RizomUV i siatka z UV z powrotem, bez przechodzenia przez C4D.",
-        "en": "Scene from Hub to RizomUV and the UV'd mesh back, without going through C4D."
-      },
-      "category": "integration",
-      "stage": "scene",
-      "order": 11,
-      "audiences": [
-        "artist",
-        "tech_director"
-      ],
-      "techMoat": {
-        "isUniqueMoat": false,
-        "description": null
-      },
-      "techStack": [],
-      "replacesTools": [],
-      "businessValue": {
-        "timeSavedHoursMonth": 0,
-        "costAvoidedPerSeatMonthUSD": 0,
-        "revenueRecoveryPct": 0,
-        "financialGainType": "cost_reduction",
-        "assumptionId": ""
-      },
-      "status": "roadmap",
-      "statusNote": {
-        "pl": "Punkt 0.1-E, otwarty.",
-        "en": "Item 0.1-E, open."
-      },
-      "version": "ALPHA 0.73",
-      "contract": null,
-      "sources": [],
-      "keywords": [
-        "rizom"
-      ],
-      "advantageId": null
-    },
-    {
       "id": "hub.bridges.installs",
       "nodeType": "feature",
       "app": "cfab_hub",
@@ -5798,7 +5744,7 @@
       },
       "category": "automation",
       "stage": "scene",
-      "order": 12,
+      "order": 11,
       "audiences": [
         "artist",
         "tech_director"
@@ -6422,57 +6368,6 @@
         "instalacja",
         "update",
         "windows"
-      ],
-      "advantageId": null
-    },
-    {
-      "id": "hub.shell.login_autostart",
-      "nodeType": "feature",
-      "app": "cfab_hub",
-      "module": "hub.shell",
-      "parentId": "hub.shell",
-      "title": {
-        "pl": "Autostart przy logowaniu",
-        "en": "Autostart at login"
-      },
-      "shortTitle": {
-        "pl": "Autostart przy logowaniu",
-        "en": "Autostart at login"
-      },
-      "summary": {
-        "pl": "Uruchamianie Huba razem z systemem (Login Items / Startup).",
-        "en": "Starting Hub with the OS (Login Items / Startup)."
-      },
-      "category": "automation",
-      "stage": null,
-      "order": 2,
-      "audiences": [
-        "artist",
-        "tech_director"
-      ],
-      "techMoat": {
-        "isUniqueMoat": false,
-        "description": null
-      },
-      "techStack": [],
-      "replacesTools": [],
-      "businessValue": {
-        "timeSavedHoursMonth": 0,
-        "costAvoidedPerSeatMonthUSD": 0,
-        "revenueRecoveryPct": 0,
-        "financialGainType": "cost_reduction",
-        "assumptionId": ""
-      },
-      "status": "roadmap",
-      "statusNote": {
-        "pl": "Pozycja otwarta w fali 0.15.",
-        "en": "Open item in wave 0.15."
-      },
-      "version": "ALPHA 0.72",
-      "contract": null,
-      "sources": [],
-      "keywords": [
-        "autostart"
       ],
       "advantageId": null
     },
@@ -7130,7 +7025,7 @@
         "idle",
         "bezczynność"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "tf.daemon.background",
@@ -7356,16 +7251,16 @@
       "module": "tf.sessions",
       "parentId": "tf.sessions",
       "title": {
-        "pl": "Proporcjonalny podział sesji",
-        "en": "Proportional session split"
+        "pl": "Podział nakładającego się czasu",
+        "en": "Allocation of overlapping time"
       },
       "shortTitle": {
-        "pl": "Podział czasu wg fokusu",
-        "en": "Time split by focus"
+        "pl": "Podział wspólnego czasu",
+        "en": "Overlapping time allocation"
       },
       "summary": {
-        "pl": "Algorytm rozdziela minuty między projekty proporcjonalnie do rzeczywistego zaangażowania i fokusu.",
-        "en": "The algorithm splits minutes between projects in proportion to real engagement and focus."
+        "pl": "W trybie unikalnego czasu nakładający się odcinek jest dzielony między aktywne projekty, a następnie sesje danego projektu. Suma pozostaje zgodna z czasem rzeczywistym.",
+        "en": "In unique-time mode, an overlapping interval is shared between active projects and then between their sessions. The total remains consistent with elapsed time."
       },
       "category": "analysis",
       "stage": "tracking",
@@ -7559,7 +7454,7 @@
         "sesje",
         "manual"
       ],
-      "advantageId": null
+      "advantageId": "production"
     },
     {
       "id": "tf.ai.layer_paths",
@@ -8590,7 +8485,7 @@
         "nadgodziny",
         "boost"
       ],
-      "advantageId": null
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.projects.merge",
@@ -8697,7 +8592,7 @@
       "keywords": [
         "klienci"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "tf.pm.pm",
@@ -8754,7 +8649,7 @@
         "numeracja",
         "foldery"
       ],
-      "advantageId": null
+      "advantageId": "automation"
     },
     {
       "id": "tf.todo.todo",
@@ -8771,8 +8666,8 @@
         "en": "Tasks with due dates"
       },
       "summary": {
-        "pl": "Zadania globalne, klienta albo projektu z terminem, priorytetem i notatkami, pogrupowane na zaległe, dzisiejsze, tygodniowe i późniejsze.",
-        "en": "Global, client or project tasks with a due date, priority and notes, grouped into overdue, today, this week and later."
+        "pl": "Zadania globalne, klienta i projektu z priorytetami, terminami oraz zakresami dni. Lista, kalendarz i najbliższe terminy na pulpicie; synchronizacja między komputerami. Zadania same nie mierzą czasu.",
+        "en": "Global, client and project tasks with priorities, due dates and date ranges. List, calendar and upcoming deadlines on the dashboard; sync between computers. Tasks do not track time themselves."
       },
       "category": "ui",
       "stage": "tracking",
@@ -8809,7 +8704,7 @@
         "zadania",
         "todo"
       ],
-      "advantageId": null
+      "advantageId": "workflow"
     },
     {
       "id": "tf.applications.apps",
@@ -8969,7 +8864,7 @@
       "keywords": [
         "analiza"
       ],
-      "advantageId": null
+      "advantageId": "render_cost"
     },
     {
       "id": "tf.dashboard.dashboard",
@@ -10495,40 +10390,17 @@
       "status": "beta"
     },
     {
-      "id": "e054.syn.proposals->tf.pm.pm",
-      "from": "syn.proposals",
-      "to": "tf.pm.pm",
-      "type": "data_flow",
-      "label": {
-        "pl": "znaleziska → zadania",
-        "en": "findings → tasks"
-      },
-      "contract": null,
-      "animated": true,
-      "status": "roadmap"
-    },
-    {
-      "id": "e055.hub.assets.audit->syn.proposals",
-      "from": "hub.assets.audit",
-      "to": "syn.proposals",
-      "type": "data_flow",
-      "label": null,
-      "contract": null,
-      "animated": true,
-      "status": "roadmap"
-    },
-    {
-      "id": "e056.hub.render.ledger_always->hub.render.ledger",
+      "id": "e054.hub.render.ledger_always->hub.render.ledger",
       "from": "hub.render.ledger_always",
       "to": "hub.render.ledger",
       "type": "depends_on",
       "label": null,
       "contract": null,
       "animated": false,
-      "status": "roadmap"
+      "status": "production"
     },
     {
-      "id": "e057.hub.render.single->hub.render.ledger",
+      "id": "e055.hub.render.single->hub.render.ledger",
       "from": "hub.render.single",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -10589,8 +10461,8 @@
         "en": "One ecosystem for the entire 3D workflow"
       },
       "thesis": {
-        "pl": "CFAB 4D Hub łączy bibliotekę zasobów, sceny, programy 3D, renderowanie i analizę wyników. TIMEFLOW dopełnia ten proces projektami, czasem pracy i finansami. Informacje o plikach i renderach przechodzą między aplikacjami i trafiają do właściwego projektu.",
-        "en": "CFAB 4D Hub connects asset libraries, scenes, 3D applications, rendering and result review. TIMEFLOW completes the workflow with projects, work time and finances. File and render information moves between the applications and is linked to the right project."
+        "pl": "CFAB 4D Hub łączy bibliotekę zasobów, inspekcję scen, programy 3D, renderowanie i analizę wyników. TIMEFLOW obejmuje klientów, projekty i zadania, pomiar czasu oraz finanse. Ścieżki plików i dane renderów łączą produkcję z właściwym projektem.",
+        "en": "CFAB 4D Hub connects asset libraries, scene inspection, 3D applications, rendering and result review. TIMEFLOW covers clients, projects and tasks, time tracking and finances. File paths and render data connect production to the right project."
       },
       "why": {
         "pl": "Wspólne połączenia z programami 3D, ścieżki projektów i wymiana danych łączą pracę twórczą z jej organizacją. Każda aplikacja ma własny zakres, a razem obejmują kolejne etapy realizacji projektu.",
@@ -10611,7 +10483,9 @@
         "syn.dcc_activity",
         "syn.presence",
         "tf.projects.projects",
-        "tf.projects.merge"
+        "tf.projects.merge",
+        "tf.clients.clients",
+        "tf.todo.todo"
       ]
     },
     {
@@ -10622,8 +10496,8 @@
         "en": "Less manual work between stages"
       },
       "thesis": {
-        "pl": "Wyszukanie i przygotowanie zasobu, inspekcja sceny, transfer modelu z materiałami, naprawa ścieżek oraz przypisanie czasu pracy do projektu składają się na jeden obieg pracy. Automatyzacja obejmuje zarówno pliki produkcyjne, jak i organizację pracy.",
-        "en": "Finding and preparing assets, inspecting scenes, transferring models with materials, repairing paths and assigning work time to projects form one workflow. Automation covers both production files and work organisation."
+        "pl": "Hub automatyzuje przygotowanie zasobów, odczyt scen, transfer modeli z materiałami i naprawę ścieżek. TIMEFLOW tworzy numerację i foldery projektów z szablonów, mierzy pracę w tle i przypisuje sesje na podstawie plików oraz lokalnego modelu.",
+        "en": "Hub automates asset preparation, scene reading, model and material transfer, and path repair. TIMEFLOW generates project numbers and folder structures from templates, tracks work in the background and assigns sessions using file context and a local model."
       },
       "why": {
         "pl": "Hub rozumie zasoby i strukturę scen, a TIMEFLOW korzysta z informacji o plikach i aktywności. Odczyt scen .c4d i .max bez uruchamiania programów, mosty DCC oraz lokalne przypisywanie sesji ograniczają powtarzalną obsługę danych.",
@@ -10646,7 +10520,8 @@
         "tf.daemon.events",
         "tf.ai.layer_paths",
         "tf.ai.facts_first",
-        "tf.ai.auto_safe"
+        "tf.ai.auto_safe",
+        "tf.pm.pm"
       ]
     },
     {
@@ -10657,8 +10532,8 @@
         "en": "Control from scene preparation to delivery"
       },
       "thesis": {
-        "pl": "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, wykrywanie brakujących klatek oraz raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
-        "en": "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, missing-frame detection and reports help verify and summarise completed work."
+        "pl": "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, kontrola sesji i raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
+        "en": "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, session inspection and reports help verify and summarise completed work."
       },
       "why": {
         "pl": "Przygotowanie sceny, wykonanie renderu, kontrola plików wynikowych i dokumentacja projektu są dostępne w jednym ekosystemie. Brakujące klatki mogą wrócić do kolejki, a historia renderów i sesji zachowuje przebieg pracy.",
@@ -10682,7 +10557,9 @@
         "hub.results.sequences",
         "tf.sessions.timeline",
         "tf.reports.pdf",
-        "tf.reports.templates"
+        "tf.reports.templates",
+        "tf.sessions.editing",
+        "tf.daemon.idle"
       ]
     },
     {
@@ -10749,16 +10626,11 @@
         "tf.sessions.split",
         "tf.estimates.costs",
         "tf.estimates.estimates",
-        "tf.reports.profitability"
+        "tf.reports.profitability",
+        "tf.projects.limits",
+        "tf.analysis.analysis"
       ]
     }
   ],
-  "alsoStrong": [
-    "hub.bridges.c4d_shader_browser",
-    "hub.bridges.c4d_shader_layers",
-    "hub.bridges.c4d_bitmap_conversion",
-    "hub.bridges.c4d_color_correct",
-    "hub.bridges.c4d_material_names",
-    "hub.bridges.c4d_texture_metadata"
-  ]
+  "alsoStrong": []
 }

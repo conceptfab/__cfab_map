@@ -1,4 +1,4 @@
-import type { App, FeaturesData, LangKey, FeatureNode, Status } from "./types";
+import type { App, FeaturesData, LangKey, FeatureNode } from "./types";
 import { metrics } from "./layout";
 import { t } from "./i18n";
 
@@ -18,28 +18,16 @@ function AppShare({ nodes }: { nodes: FeatureNode[] }) {
 export function KpiStrip({ data, lang }: { data: FeaturesData; lang: LangKey }) {
   const pl = lang === "pl";
   const m = metrics(data);
-  const items = data.nodes.filter((n) => n.nodeType === "feature" || n.nodeType === "bridge");
-  const count = (s: Status) => items.filter((n) => n.status === s).length;
-  const ready = count("production");
   const tiles: [string | number, string][] = [
     [m.features, t("metricFeatures", lang)],
     [m.modules, t("metricModules", lang)],
     [m.systems, t("metricSystems", lang)],
     [m.bridges, t("metricBridges", lang)],
     [m.mcp, t("metricMcp", lang)],
-    ["0 %", t("metricCloud", lang)],
+    [m.integrations, t("metricIntegrations", lang)],
   ];
   return <section className="kpi-strip" aria-label={pl ? "Najważniejsze liczby" : "Key numbers"}>
     <dl className="kpi-tiles">{tiles.map(([value, label], index) => <div key={label} className={`kpi ${index === tiles.length - 1 ? "kpi-accent" : ""}`}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    <div className="kpi-ready">
-      <span className="kpi-ready-label"><b>{ready}</b> {pl ? `z ${items.length} funkcji gotowych w kodzie` : `of ${items.length} features shipped in code`}</span>
-      <span className="kpi-ready-bar" role="img" aria-label={`${ready} / ${items.length}`}>
-        <i className="seg-production" style={{ flexGrow: ready }} />
-        <i className="seg-beta" style={{ flexGrow: count("beta") }} />
-        <i className="seg-roadmap" style={{ flexGrow: count("roadmap") }} />
-      </span>
-      <span className="kpi-ready-rest">◐ {t("statusBeta", lang)} {count("beta")} · ○ {t("statusRoadmap", lang)} {count("roadmap")}</span>
-    </div>
   </section>;
 }
 
@@ -90,6 +78,5 @@ export default function Advantages({ data, lang, expandedId, onExpand, onSelectN
         </div>}
       </article>;
     })}</div>
-    <div className="adv-also"><strong>{label ? "Narzędzia w ekosystemie" : "Tools in the ecosystem"}</strong><div>{data.alsoStrong.map((id) => { const node = byId.get(id); return node ? <button key={id} onClick={() => onSelectNode(id)}>{node.shortTitle[lang]}</button> : null; })}</div></div>
   </main>;
 }

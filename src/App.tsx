@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import raw from "./generated/features_data.json";
-import type { FeaturesData, FeatureNode, LangKey, Status } from "./types";
+import type { FeaturesData, FeatureNode, LangKey } from "./types";
 import { STAGES, t } from "./i18n";
 import { buildBlocks, metrics, type Block } from "./layout";
 import Cloud from "./Cloud";
@@ -10,7 +10,6 @@ import Advantages, { APPS } from "./Advantages";
 const data = raw as unknown as FeaturesData;
 const groups = nodeGroups(data);
 
-const MARKER: Record<Status, string> = { production: "●", beta: "◐", roadmap: "○" };
 type View = "advantages" | "cloud" | "grid";
 type ColorBy = "app" | "stage";
 // Na wąskim ekranie chmura jest nieczytelna — bez parametru ?view= startuje od Przewag.
@@ -25,8 +24,8 @@ function initialLang(): LangKey {
 function Chip({ node, lang, onSelect, dimmed }: { node: FeatureNode; lang: LangKey; onSelect: (id: string) => void; dimmed: boolean }) {
   return (
     <li><button className={`chip group-${groups.get(node.id)} app-${node.app} status-${node.status} ${dimmed ? "is-dimmed" : ""}`} data-id={node.id} onClick={() => onSelect(node.id)} title={node.title[lang]}>
-      <span className="marker" aria-hidden>{node.nodeType === "bridge" ? "◆" : MARKER[node.status]}</span>
-      <span className="label">{node.shortTitle[lang]}{node.status !== "production" && <span className="status-tag">{t(node.status === "beta" ? "statusBeta" : "statusRoadmap", lang)}</span>}</span>
+      <span className="marker" aria-hidden>{node.nodeType === "bridge" ? "◆" : "●"}</span>
+      <span className="label">{node.shortTitle[lang]}</span>
     </button></li>
   );
 }
@@ -52,7 +51,6 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
   data.nodes.forEach(n => { if (n.parentId === node.id) connectedIds.add(n.id); });
   data.edges.forEach(e => { if (e.from === node.id) connectedIds.add(e.to); if (e.to === node.id) connectedIds.add(e.from); });
   const connected = data.nodes.filter(n => connectedIds.has(n.id));
-  const statusKey = node.status === "production" ? "statusProduction" : node.status === "beta" ? "statusBeta" : "statusRoadmap";
   const advantage = node.advantageId ? advantageById.get(node.advantageId) : null;
   return (
     <aside className={`card group-${groups.get(node.id)} app-${node.app}`} aria-label={node.title[lang]}>
@@ -61,7 +59,6 @@ function Card({ node, parent, lang, onClose, onSelect, onOpenAdvantage }: { node
       {parent && <p className="card-parent">{parent.title[lang]}{node.version ? ` · ${node.version}` : ""}</p>}
       <p className={`stage-badge group-${groups.get(node.id)}`}><span className="graph-dot" />{STAGES.find(s => s.id === groups.get(node.id))?.[lang] ?? t("foundation",lang)}</p>
       <h2>{node.title[lang]}</h2>
-      <p className={`card-status status-${node.status}`}>{MARKER[node.status]} {t(statusKey, lang)}</p>
       <p>{node.summary[lang]}</p>
       {node.statusNote && <p className="card-note">{node.statusNote[lang]}</p>}
       {connected.length > 0 && <section className="card-connections"><h3>{lang === "pl" ? "Połączone elementy" : "Connected nodes"} · {connected.length}</h3><ul>{connected.map(n => <li key={n.id}><button onClick={() => onSelect(n.id)}><span className={`graph-dot group-${groups.get(n.id)} app-${n.app}`} />{n.title[lang]}<span aria-hidden="true">↗</span></button></li>)}</ul></section>}
@@ -104,7 +101,6 @@ export default function App() {
   const columns = useMemo(() => STAGES.map((s) => ({ stage: s, blocks: buildBlocks(data, s.id) })), []);
   const foundation = useMemo(() => buildBlocks(data, null), []);
   const m = useMemo(() => metrics(data), []);
-  const statusCounts = useMemo(() => Object.fromEntries((["production", "beta", "roadmap"] as Status[]).map((status) => [status, data.nodes.filter((node) => (node.nodeType === "feature" || node.nodeType === "bridge") && node.status === status).length])) as Record<Status, number>, []);
   const activeAdvantage = activeAdvId ? advantageById.get(activeAdvId) ?? null : null;
   const highlightIds = useMemo(() => activeAdvantage ? new Set(activeAdvantage.ids) : null, [activeAdvantage]);
   const topRef = useRef<HTMLElement>(null);
@@ -180,7 +176,7 @@ export default function App() {
     [t("metricFeatures", lang), m.features],
     [lang === "pl" ? "Mosty 3D" : "3D bridges", m.bridges],
     [lang === "pl" ? "Serwery MCP" : "MCP servers", m.mcp],
-    [lang === "pl" ? "Danych w chmurze" : "Data in the cloud", "0 %"],
+    [t("metricIntegrations", lang), m.integrations],
   ];
 
   return (
@@ -259,22 +255,13 @@ export default function App() {
           <span><i className="legend-node legend-feature" />{lang === "pl" ? "funkcja · dalsze orbity" : "feature · outer orbits"}</span>
           <span><i className="legend-node legend-bridge" />{lang === "pl" ? "wspólna funkcja · między aplikacjami" : "shared feature · between apps"}</span>
         </div>
-        <div className="legend-group">
-          <strong>{lang === "pl" ? "Stan" : "Status"}</strong>
-          <span><i className="legend-status legend-ready" />{t("statusProduction", lang)} {statusCounts.production}</span>
-          <span><i className="legend-status legend-beta" />{t("statusBeta", lang)} {statusCounts.beta}</span>
-          <span><i className="legend-status legend-planned" />{t("statusRoadmap", lang)} {statusCounts.roadmap}</span>
-        </div>
         <div className="legend-group legend-hint">
           <span>{lang === "pl" ? "Poświata oznacza wskazany węzeł · Linie pokazują powiązania" : "Glow marks the focused node · Lines show connections"}</span>
         </div>
       </footer> : view === "grid" ? <footer className="legend legend-grid" aria-label={lang === "pl" ? "Oznaczenia etapów pracy" : "Work-stage key"}>
-        <span>● {t("statusProduction", lang)} {statusCounts.production}</span>
-        <span>◐ {t("statusBeta", lang)} {statusCounts.beta}</span>
-        <span>○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span>
         <span>◆ {lang === "pl" ? "wspólna funkcja" : "shared feature"}</span>
         <span className="grid-hint">{lang === "pl" ? "Czytaj od lewej do prawej — tak wygląda dzień pracy." : "Read left to right — that's a working day."}</span>
-      </footer> : <footer className="legend legend-advantages"><span>● {t("statusProduction", lang)} {statusCounts.production} · ◐ {t("statusBeta", lang)} {statusCounts.beta} · ○ {t("statusRoadmap", lang)} {statusCounts.roadmap}</span></footer>}
+      </footer> : null}
       {view === "advantages" && selected && <Card node={selected} lang={lang} parent={data.nodes.find(n => n.id === selected.parentId) ?? null} onClose={() => setSelectedId(null)} onSelect={setSelectedId} onOpenAdvantage={openAdvantage} />}
     </div>
   );

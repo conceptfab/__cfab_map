@@ -4,7 +4,7 @@ import path from "node:path";
 import { HUB_ROOT, OUT_JSON, resolveSource } from "./paths.mjs";
 
 // Tabela 5.0 wytycznych. Rozjazd oznacza, że dokument albo dane są nieaktualne.
-const EXPECTED = { ecosystem: 2, module: 30, bridge: 7, feature: 145 };
+const EXPECTED = { ecosystem: 2, module: 30, bridge: 7, feature: 143 };
 const STAGES = ["assets", "scene", "inspection", "render", "results", "tracking", "billing", "report"];
 const SHORT_MAX = 28;
 
@@ -37,7 +37,7 @@ for (const n of data.nodes) {
   if (nonZero && !assumptionIds.has(bv.assumptionId)) err(n.id, `liczba bez założenia (${bv.assumptionId || "brak"})`);
   // 5. gotowa funkcja ma istniejące źródło
   if (data.meta.distribution === "internal") {
-    if (n.nodeType === "feature" && n.status === "production" && n.sources.length === 0) err(n.id, "funkcja production bez sources");
+    if (["feature", "bridge"].includes(n.nodeType) && n.sources.length === 0) err(n.id, "funkcja lub integracja bez źródła implementacji");
     if (!OFFLINE) for (const s of n.sources) if (!fs.existsSync(resolveSource(s))) err(n.id, `źródło nie istnieje: ${s}`);
   }
   // 7. krótki tytuł
@@ -54,6 +54,7 @@ for (const n of data.nodes) {
     seen.add(n.order);
     blockOrders.set(key, seen);
   }
+  if (n.status === "roadmap") err(n.id, "katalog istniejących funkcji nie jest roadmapą");
   // status i nota
   if (!["production", "beta", "roadmap"].includes(n.status)) err(n.id, `nieznany status ${n.status}`);
   if (n.status !== "production" && !filled(n.statusNote)) err(n.id, `status ${n.status} bez noty PL/EN`);
@@ -64,6 +65,7 @@ for (const e of data.edges) {
   if (!["hierarchy", "data_flow", "ipc", "file_exchange", "depends_on", "replaces"].includes(e.type)) err(e.id, `nieznany typ relacji ${e.type}`);
   if (!ids.has(e.from)) err(e.id, `from ${e.from} nie istnieje`);
   if (!ids.has(e.to)) err(e.id, `to ${e.to} nie istnieje`);
+  if (e.status === "roadmap") err(e.id, "niepotwierdzony przepływ w katalogu istniejących funkcji");
   if (e.label && !filled(e.label)) err(e.id, "etykieta bez PL/EN");
 }
 

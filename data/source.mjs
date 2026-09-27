@@ -1,7 +1,6 @@
-// Źródło treści mapy. Treść pochodzi wyłącznie z rozdziałów 2–4
-// lokalnych wytycznych (wytyczne_interaktywna_mapa_funkcjonalnosci.md).
-// Aktualizacja C4D 2026-09-26: rozdz. 2.5 i 2.7 zweryfikowane z kodem bridge'a ALPHA 0.86.
-// Nie dopisuj funkcji spoza dokumentu (reguła R1). Zmiana w rozdz. 2–4 = zmiana tutaj.
+// Źródło treści mapy istniejących funkcji. Opisy weryfikujemy w kodzie Huba i TIMEFLOW.
+// Katalog nie jest roadmapą. Starsza dokumentacja nie potwierdza implementacji.
+// Audyt 2026-09-27: ANALIZA_EKOSYSTEMU_2026-09-27.md.
 //
 // Skróty pól: p = rodzic, s = etap (null = Fundament), st = status,
 // t = tytuł [pl, en], sh = krótki tytuł [pl, en] (≤ 28 znaków),
@@ -24,8 +23,8 @@ export const ecosystems = [
     id: "tf", app: "timeflow",
     t: ["TIMEFLOW", "TIMEFLOW"],
     sh: ["TIMEFLOW", "TIMEFLOW"],
-    d: ["Śledzenie czasu, wyceny i analityka biznesowa dla freelancerów i małych studiów — lokalnie, bez chmury.",
-        "Time tracking, estimates and business analytics for freelancers and small studios — local, no cloud."],
+    d: ["Organizacja projektów i zadań, automatyczny pomiar czasu, wyceny i analiza rentowności. Lokalne dane z opcjonalną synchronizacją między komputerami.",
+        "Project and task organisation, automatic time tracking, estimates and profitability analysis. Local data with optional sync between computers."],
     tech: ["Rust", "Tauri 2", "React", "TypeScript", "SQLite"], versionFrom: "timeflow",
   },
 ];
@@ -102,10 +101,10 @@ export const modules = [
 export const bridges = [
   { id: "syn.beacons", s: null, st: "production", k: "cfab_render 3",
     t: ["Wykrywanie drugiej aplikacji", "Detecting the other app"], sh: ["Wykrywanie aplikacji", "Detecting apps"],
-    d: ["Hub i TIMEFLOW zapisują informację o uruchomieniu. Dane drugiej aplikacji czytają bez prawa zapisu; każda może też działać samodzielnie.",
+    d: ["Hub i TIMEFLOW wykrywają drugą aplikację lokalnie. Każda zarządza własną bazą danych i może działać samodzielnie.",
         "Each app writes a JSON presence file; it opens the other's database read-only, and a missing partner breaks nothing."],
-    m: ["Integracja bez HTTP i bez współdzielonego zapisu — fundament zgodności z NDA i odporności na awarie.",
-        "Integration with no HTTP and no shared writes — the basis of NDA compliance and fault tolerance."],
+    m: ["Oddzielne bazy danych i odczyt danych drugiej aplikacji bez prawa zapisu.",
+        "Separate databases and read-only access to the other application’s data."],
     tech: ["JSON", "SQLite READONLY"], src: ["hub:shared/cfab_core/integration_beacon.py", "hub:shared/cfab_core/timeflow_bridge.py"],
     kw: ["latarnia", "beacon", "integracja", "readonly"] },
   { id: "syn.machine_time", s: "tracking", st: "production",
@@ -139,11 +138,10 @@ export const bridges = [
     m: ["Czas maszyny nie przepada tylko dlatego, że stacja nie widzi bazy studia.", "Machine time is not lost just because a station can't see the studio database."],
     tech: ["Python", "Rust"], src: ["hub:shared/cfab_core/cfabx.py", "tf:dashboard/src-tauri/src/commands/cfab_offline.rs"],
     kw: ["cfabx", "offline", "farma"] },
-  { id: "syn.proposals", s: "billing", st: "beta",
-    t: ["Zatwierdzanie danych z Huba w TIMEFLOW", "Approving Hub data in TIMEFLOW"], sh: ["Zatwierdzanie danych", "Approve Hub data"],
-    d: ["Hub proponuje projekt dla renderu, a TIMEFLOW zatwierdza propozycję jednym kliknięciem, także kilka naraz; paczka .cfabx niesie propozycje renderów i kosztów.",
-        "Hub proposes a project for a render and TIMEFLOW approves it in one click, several at once too; a .cfabx package carries render and cost proposals."],
-    note: ["Rendery działają; Hub nie wysyła jeszcze kosztów ani wyników audytu sceny.", "Renders work; Hub does not send costs or scene-audit findings yet."],
+  { id: "syn.proposals", s: "billing", st: "production",
+    t: ["Zatwierdzanie przypisań renderów w TIMEFLOW", "Approving render assignments in TIMEFLOW"], sh: ["Zatwierdzanie danych", "Approve Hub data"],
+    d: ["Hub proponuje projekt dla renderu. W TIMEFLOW można zatwierdzić przypisanie pojedynczo lub zbiorczo, także dla renderów zaimportowanych z paczki .cfabx.",
+        "Hub proposes a project for a render. TIMEFLOW lets you approve assignments individually or in bulk, including renders imported from a .cfabx package."],
     tech: ["Python", "Rust", "SQLite"], src: ["hub:shared/cfab_core/cfabx.py", "tf:dashboard/src-tauri/src/commands/cfab_offline.rs", "tf:dashboard/src/pages/Renders.tsx"],
     kw: ["proposal", "ack", "cfab_proposals"] },
   { id: "syn.presence", s: null, st: "production",
@@ -516,10 +514,6 @@ export const features = [
     d: ["Okno CFAB Bridge w C4D z eksportem i importem do RizomUV; ścieżka z Programów Huba, C4D nie zamarza w oczekiwaniu.",
         "A CFAB Bridge window in C4D with export/import to RizomUV; the path comes from Hub Programs and C4D does not freeze while waiting."],
     tech: ["Python", "FBX"], src: ["hub:bridges/c4d_bridge/C4Dcfabbridge"], kw: ["rizom", "uv"] },
-  { p: "hub.bridges", id: "rizom_hub", s: "scene", st: "roadmap", c: "integration",
-    t: ["Przepływ RizomUV uruchamiany z Huba", "RizomUV flow started from Hub"], sh: ["Rizom z poziomu Huba", "Rizom from Hub"],
-    d: ["Scena z Huba do RizomUV i siatka z UV z powrotem, bez przechodzenia przez C4D.", "Scene from Hub to RizomUV and the UV'd mesh back, without going through C4D."],
-    note: ["Punkt 0.1-E, otwarty.", "Item 0.1-E, open."], tech: [], src: [], kw: ["rizom"] },
   { p: "hub.bridges", id: "installs", s: "scene", st: "production", c: "automation",
     t: ["Zarządzanie instalacjami wtyczek", "Plug-in installation management"], sh: ["Instalacja i aktualizacja", "Install and update"],
     d: ["Weryfikacja wtyczek w profilach C4D, Blendera, Maxa i MODO z wersją; instalacja, aktualizacja, przywracanie i usuwanie jednym kliknięciem.",
@@ -585,10 +579,6 @@ export const features = [
     d: ["Aplikacja z ikoną na macOS i Windows, odświeżanie zależności i paczka kompletnej instalacji do przeniesienia na inny komputer.",
         "An app with an icon on macOS and Windows, dependency refresh and a full-install package to move to another computer."],
     tech: ["Python", "PyInstaller"], src: ["hub:shell/cfab_shell/launcher.py", "hub:update.py", "hub:package_windows.py"], kw: ["instalacja", "update", "windows"] },
-  { p: "hub.shell", id: "login_autostart", s: null, st: "roadmap", c: "automation",
-    t: ["Autostart przy logowaniu", "Autostart at login"], sh: ["Autostart przy logowaniu", "Autostart at login"],
-    d: ["Uruchamianie Huba razem z systemem (Login Items / Startup).", "Starting Hub with the OS (Login Items / Startup)."],
-    note: ["Pozycja otwarta w fali 0.15.", "Open item in wave 0.15."], tech: [], src: [], kw: ["autostart"] },
   { p: "hub.service", id: "service", s: null, st: "production", c: "automation", k: "service_api 5",
     t: ["Usługa Huba działająca w tle", "Headless Hub service"], sh: ["Usługa działająca w tle", "Background service"],
     d: ["Sprawdza połączenia, obsługuje panel WWW i powiadomienia oraz wymienia dane z TIMEFLOW bez otwartego okna Huba.",
@@ -672,9 +662,9 @@ export const features = [
     m: ["Algorytm Uczciwego Czasu — rdzeń zaufania do rozliczeń.", "The Fair Time Algorithm — the core of trust in billing."],
     tech: ["Rust"], rep: ["Toggl", "Harvest"], src: ["tf:dashboard/src-tauri/src/commands/time_algorithm.rs"], kw: ["fair time", "uczciwy czas"] },
   { p: "tf.sessions", id: "split", s: "tracking", st: "production", c: "analysis",
-    t: ["Proporcjonalny podział sesji", "Proportional session split"], sh: ["Podział czasu wg fokusu", "Time split by focus"],
-    d: ["Algorytm rozdziela minuty między projekty proporcjonalnie do rzeczywistego zaangażowania i fokusu.",
-        "The algorithm splits minutes between projects in proportion to real engagement and focus."],
+    t: ["Podział nakładającego się czasu", "Allocation of overlapping time"], sh: ["Podział wspólnego czasu", "Overlapping time allocation"],
+    d: ["W trybie unikalnego czasu nakładający się odcinek jest dzielony między aktywne projekty, a następnie sesje danego projektu. Suma pozostaje zgodna z czasem rzeczywistym.",
+        "In unique-time mode, an overlapping interval is shared between active projects and then between their sessions. The total remains consistent with elapsed time."],
     tech: ["Rust"], src: ["tf:dashboard/src-tauri/src/commands/time_algorithm.rs"], kw: ["podział", "split"] },
   { p: "tf.sessions", id: "transparency", s: "tracking", st: "production", c: "finance",
     t: ["Rozliczenie zgodne z czasem pracy", "Evidence-grade transparency"], sh: ["Rzeczywisty czas pracy", "Billing as evidence"],
@@ -804,8 +794,8 @@ export const features = [
     tech: ["React", "Rust"], src: ["tf:dashboard/src/pages/PM.tsx", "tf:dashboard/src-tauri/src/commands/pm_manager.rs", "tf:dashboard/src-tauri/src/commands/pm.rs"], kw: ["pm", "numeracja", "foldery"] },
   { p: "tf.todo", id: "todo", s: "tracking", st: "production", c: "ui",
     t: ["Lista zadań z terminami", "Task list with due dates"], sh: ["Zadania z terminami", "Tasks with due dates"],
-    d: ["Zadania globalne, klienta albo projektu z terminem, priorytetem i notatkami, pogrupowane na zaległe, dzisiejsze, tygodniowe i późniejsze.",
-        "Global, client or project tasks with a due date, priority and notes, grouped into overdue, today, this week and later."],
+    d: ["Zadania globalne, klienta i projektu z priorytetami, terminami oraz zakresami dni. Lista, kalendarz i najbliższe terminy na pulpicie; synchronizacja między komputerami. Zadania same nie mierzą czasu.",
+        "Global, client and project tasks with priorities, due dates and date ranges. List, calendar and upcoming deadlines on the dashboard; sync between computers. Tasks do not track time themselves."],
     tech: ["React", "Rust"], src: ["tf:dashboard/src/pages/Todo.tsx", "tf:dashboard/src-tauri/src/commands/todos.rs"], kw: ["zadania", "todo"] },
 
   // ===================== 3.7 Aplikacje, analiza, dashboard, dane
@@ -916,8 +906,8 @@ export const advantages = [
       "One ecosystem for the entire 3D workflow"
     ],
     "d": [
-      "CFAB 4D Hub łączy bibliotekę zasobów, sceny, programy 3D, renderowanie i analizę wyników. TIMEFLOW dopełnia ten proces projektami, czasem pracy i finansami. Informacje o plikach i renderach przechodzą między aplikacjami i trafiają do właściwego projektu.",
-      "CFAB 4D Hub connects asset libraries, scenes, 3D applications, rendering and result review. TIMEFLOW completes the workflow with projects, work time and finances. File and render information moves between the applications and is linked to the right project."
+      "CFAB 4D Hub łączy bibliotekę zasobów, inspekcję scen, programy 3D, renderowanie i analizę wyników. TIMEFLOW obejmuje klientów, projekty i zadania, pomiar czasu oraz finanse. Ścieżki plików i dane renderów łączą produkcję z właściwym projektem.",
+      "CFAB 4D Hub connects asset libraries, scene inspection, 3D applications, rendering and result review. TIMEFLOW covers clients, projects and tasks, time tracking and finances. File paths and render data connect production to the right project."
     ],
     "why": [
       "Wspólne połączenia z programami 3D, ścieżki projektów i wymiana danych łączą pracę twórczą z jej organizacją. Każda aplikacja ma własny zakres, a razem obejmują kolejne etapy realizacji projektu.",
@@ -935,7 +925,9 @@ export const advantages = [
       "syn.dcc_activity",
       "syn.presence",
       "tf.projects.projects",
-      "tf.projects.merge"
+      "tf.projects.merge",
+      "tf.clients.clients",
+      "tf.todo.todo"
     ],
     "rep": [],
     "assumptionId": null,
@@ -949,8 +941,8 @@ export const advantages = [
       "Less manual work between stages"
     ],
     "d": [
-      "Wyszukanie i przygotowanie zasobu, inspekcja sceny, transfer modelu z materiałami, naprawa ścieżek oraz przypisanie czasu pracy do projektu składają się na jeden obieg pracy. Automatyzacja obejmuje zarówno pliki produkcyjne, jak i organizację pracy.",
-      "Finding and preparing assets, inspecting scenes, transferring models with materials, repairing paths and assigning work time to projects form one workflow. Automation covers both production files and work organisation."
+      "Hub automatyzuje przygotowanie zasobów, odczyt scen, transfer modeli z materiałami i naprawę ścieżek. TIMEFLOW tworzy numerację i foldery projektów z szablonów, mierzy pracę w tle i przypisuje sesje na podstawie plików oraz lokalnego modelu.",
+      "Hub automates asset preparation, scene reading, model and material transfer, and path repair. TIMEFLOW generates project numbers and folder structures from templates, tracks work in the background and assigns sessions using file context and a local model."
     ],
     "why": [
       "Hub rozumie zasoby i strukturę scen, a TIMEFLOW korzysta z informacji o plikach i aktywności. Odczyt scen .c4d i .max bez uruchamiania programów, mosty DCC oraz lokalne przypisywanie sesji ograniczają powtarzalną obsługę danych.",
@@ -970,7 +962,8 @@ export const advantages = [
       "tf.daemon.events",
       "tf.ai.layer_paths",
       "tf.ai.facts_first",
-      "tf.ai.auto_safe"
+      "tf.ai.auto_safe",
+      "tf.pm.pm"
     ],
     "rep": [],
     "assumptionId": null,
@@ -984,8 +977,8 @@ export const advantages = [
       "Control from scene preparation to delivery"
     ],
     "d": [
-      "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, wykrywanie brakujących klatek oraz raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
-      "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, missing-frame detection and reports help verify and summarise completed work."
+      "Audyt zasobów i kontrola przed renderem pomagają wykryć problemy wcześniej. Kolejka, farma LAN, monitoring i wznowienie po awarii wspierają realizację. Przegląd wyników, kontrola sesji i raporty pozwalają sprawdzić i podsumować wykonaną pracę.",
+      "Asset audits and render prechecks help catch problems early. The queue, LAN farm, monitoring and crash recovery support production. Result review, session inspection and reports help verify and summarise completed work."
     ],
     "why": [
       "Przygotowanie sceny, wykonanie renderu, kontrola plików wynikowych i dokumentacja projektu są dostępne w jednym ekosystemie. Brakujące klatki mogą wrócić do kolejki, a historia renderów i sesji zachowuje przebieg pracy.",
@@ -1006,7 +999,9 @@ export const advantages = [
       "hub.results.sequences",
       "tf.sessions.timeline",
       "tf.reports.pdf",
-      "tf.reports.templates"
+      "tf.reports.templates",
+      "tf.sessions.editing",
+      "tf.daemon.idle"
     ],
     "rep": [],
     "assumptionId": null,
@@ -1073,7 +1068,9 @@ export const advantages = [
       "tf.sessions.split",
       "tf.estimates.costs",
       "tf.estimates.estimates",
-      "tf.reports.profitability"
+      "tf.reports.profitability",
+      "tf.projects.limits",
+      "tf.analysis.analysis"
     ],
     "rep": [],
     "assumptionId": null,
@@ -1081,7 +1078,7 @@ export const advantages = [
   }
 ];
 
-export const alsoStrong = ["hub.bridges.c4d_shader_browser", "hub.bridges.c4d_shader_layers", "hub.bridges.c4d_bitmap_conversion", "hub.bridges.c4d_color_correct", "hub.bridges.c4d_material_names", "hub.bridges.c4d_texture_metadata"];
+export const alsoStrong = [];
 
 // Założenia modelu ROI (rozdz. 7.2). Wartości ⚠ są szacunkami do zatwierdzenia.
 export const assumptions = [
@@ -1147,8 +1144,6 @@ export const edges = [
   ["tf.renders.render_sync", "tf.data.lan_sync", "depends_on", null, null, "beta"],
   ["tf.renders.render_sync", "tf.data.cloud_sync", "depends_on", null, null, "beta"],
   ["hub.core.autostart", "syn.presence", "data_flow", null, null, "beta"],
-  ["syn.proposals", "tf.pm.pm", "data_flow", ["znaleziska → zadania", "findings → tasks"], null, "roadmap"],
-  ["hub.assets.audit", "syn.proposals", "data_flow", null, null, "roadmap"],
-  ["hub.render.ledger_always", "hub.render.ledger", "depends_on", null, null, "roadmap"],
+  ["hub.render.ledger_always", "hub.render.ledger", "depends_on", null, null, "production"],
   ["hub.render.single", "hub.render.ledger", "data_flow", null, "history_db 2", "beta"],
 ];

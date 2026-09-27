@@ -5,10 +5,13 @@ Statyczna strona z mapą funkcjonalności dla inwestorów. Specyfikacja:
 
 ## Dane
 
-- `data/source.mjs` — treść (PL/EN) wyłącznie z rozdz. 2–4 wytycznych.
+- `data/source.mjs` — treść PL/EN weryfikowana w kodzie Huba i TIMEFLOW.
   Aktualizacja C4D z 2026-09-26 obejmuje sześć funkcji Shader Browsera,
   ustawienia zapisywane w C4D i poprawiony przepływ TX. Analiza źródeł:
-  `ZMIANY_2026-09-26.md`.
+  `ZMIANY_2026-09-26.md` i `ANALIZA_EKOSYSTEMU_2026-09-27.md`.
+- Mapa obejmuje 143 funkcje aplikacji oraz osobno 7 integracji Hub–TIMEFLOW.
+  Nie zawiera roadmapy ani licznika gotowości. Liczby opisują katalog na stronie,
+  nie liczbę metod lub wszystkich operacji dostępnych w aplikacjach.
 - `npm run data` — składa `features_data.json` i dopisuje wersje z repozytoriów
   (`CFAB_HUB_ROOT`, domyślnie `../__c4d`; `CFAB_TIMEFLOW_ROOT`, domyślnie
   `../__TIMEFLOW/__cfab_demon`). `node scripts/build-data.mjs --public` — poziom

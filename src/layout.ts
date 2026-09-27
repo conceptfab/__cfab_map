@@ -52,6 +52,7 @@ export function metrics(data: FeaturesData) {
     systems: count("ecosystem"),
     modules: count("module"),
     features: count("feature"),
+    integrations: count("bridge"),
     bridges,
     mcp: 2, // stała z tabeli kafelków w rozdz. 5.6: MCP Huba + MCP TIMEFLOW
   };

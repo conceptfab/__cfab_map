@@ -1,5 +1,7 @@
 # WYTYCZNE WYKONAWCZE: STRONA WWW Z INTERAKTYWNĄ MAPĄ FUNKCJONALNOŚCI CFAB 4D HUB & TIMEFLOW (DLA INWESTORÓW)
 
+> Aktualizacja zakresu 2026-09-27, nadrzędna wobec starszych zapisów poniżej: strona przedstawia istniejące funkcje zweryfikowane w kodzie. Bez roadmapy, etykiet gotowości i porównania „gotowe / wszystkie”. Katalog: **143 funkcje aplikacji + 7 integracji**, 30 modułów, 2 aplikacje. Przewagi dotyczą całego ekosystemu; nie wyróżniamy ostatnich zmian jako głównych narzędzi. Koszty renderu służą wewnętrznej analizie. Szczegóły: [analiza](ANALIZA_EKOSYSTEMU_2026-09-27.md), [aktualny brief](BRIEF_PRZEWAGI.md).
+
 > **Dokument strategiczno-techniczny i specyfikacja wdrożeniowa**
 > **Adresat:** wykonawca (model lub człowiek) budujący finalną aplikację mapy — brief w rozdziale 0
 > **Produkt końcowy:** **czytelna mapa funkcjonalności** — uporządkowana, a nie efektowna (rozdz. 5)
@@ -395,7 +397,6 @@ Aktualizacja powyższych sześciu funkcji: 2026-09-26, bridge `ALPHA 0.86`; źr�
   - Przepływy `modo_to_c4d` i `c4d_to_modo` przez `staging/` (FBX + manifest `.cfab.json`) z przeliczeniem jednostek (metry MODO ↔ centymetry C4D); z Cinema 4D do MODO jadą wyłącznie modele i bryły.
   - Wskaźnik MODO w pasku górnym Huba, karta na ekranie Start, komendy MODO w palecie Cinema 4D.
 - 🟢 **Most do RizomUV:** okno **CFAB Bridge** we wtyczce C4D z zakładkami Blender / Rizom UV (Export / Import, lista map UV, zmiana nazwy, ustawienia, ikony). Ścieżka do RizomUV pochodzi z Programów Huba albo z autowykrycia — nie ze sztywnego `S:\`. C4D nie zamarza: opcja „Czekaj na zamknięcie i importuj” działa w wątku roboczym z Timerem.
-  - ⚪ Przepływ uruchamiany **z poziomu Huba** (Sceny → Rizom → siatka z UV z powrotem) pozostaje otwarty (punkt 0.1-E); osobna część `bridges/rizom_bridge/` wymagałaby zatwierdzenia jako nowy obszar.
 - 🟢 **Zarządzanie instalacjami:** Panel weryfikacji zainstalowanych wtyczek w profilach C4D, Blendera, Maxa i MODO; kolumna z wersją zainstalowanej wtyczki; instalacja, aktualizacja, przywracanie z kopii zapasowej i usuwanie jednym kliknięciem; powiadomienie o nieaktualnej wtyczce z nazwami konkretnych instalacji i przejściem do instalatora; wykrycie skasowanego haka startowego i pliku makra.
 
 ### 2.8. Moduł: Przestrzeń Robocza & Temp Storage (`modules/scratch`, ALPHA 0.133)
@@ -431,7 +432,6 @@ Aktualizacja powyższych sześciu funkcji: 2026-09-26, bridge `ALPHA 0.86`; źr�
 - 🟢 **Serwer MCP Huba** ([shared/cfab_core/mcp_server.py](shared/cfab_core/mcp_server.py)): lokalny serwer Model Context Protocol (`cfab-hub-mcp`, port 8423, **wyłącznie loopback, wyłącznie odczyt**, hardened headers) wystawiający agentom AI: `list_render_jobs`, `get_render_ledger`, `get_active_documents`, `get_integration_status`, `get_project_summary`. Włączany w Ustawienia → Integracja.
 - 🟢 **Raport diagnostyczny integracji** ([shared/cfab_core/diagnostic.py](shared/cfab_core/diagnostic.py)): stan obu latarni, wyniki prób połączenia z bazami, numery kontraktów po obu stronach — jeden przycisk zamiast zgadywania, gdzie pękła integracja.
 - 🟢 **Skoordynowany autostart** ([shared/cfab_core/autostart.py](shared/cfab_core/autostart.py)): opcja „Uruchamiaj TIMEFLOW razem z CFAB Hub” oraz autostart serwera MCP.
-- ⚪ **Systemowy autostart przy logowaniu (Login Items / Startup)** — otwarta pozycja fali 0.15. Ikona aplikacji i zejście do zasobnika są już w powłoce (wyżej).
 
 ---
 
@@ -624,7 +624,6 @@ co już działa, a co jest w kolejce.
 
 ### 4.8. Jedna obecność w systemie 🟢
 - Skoordynowany autostart (opcja „Uruchamiaj TIMEFLOW razem z CFAB Hub”), autostart serwera MCP, wzajemne wskaźniki obecności w interfejsach, wspólny raport diagnostyczny integracji, zdarzenia Huba przekazywane do TIMEFLOW (render, eksport i wczytanie paczki offline).
-- ⚪ Otwarte: systemowy autostart przy logowaniu. Hub ma już własną ikonę i zejście do zasobnika; wspólnej ikony obu programów nie ma.
 
 ### 4.9. Mapa etapów synergii
 
@@ -662,8 +661,8 @@ dają następujący rozkład (stan 2026-09-26):
 | `module` — części warstwy wspólnej Huba | 7 | shell, service, cfab_core, cfab_ui, cfab_contracts, cfab_bridge, cfab_native (rozdz. 2.10) |
 | `module` — obszary TIMEFLOW | 14 | nawigacja aplikacji (rozdz. 3) |
 | `bridge` — elementy pomostu synergii | 7 | rozdz. 4.1–4.6 i 4.8 (4.7 usunięte z mapy 2026-09-25; 4.9 to tabela etapów, nie element) |
-| `feature` — funkcje | **145** | wypunktowania ze statusem w rozdz. 2–3: Hub 91, TIMEFLOW 54 |
-| **Razem** | **184 elementów** | |
+| `feature` — funkcje | **143** | wypunktowania ze statusem w rozdz. 2–3: Hub 89, TIMEFLOW 54 |
+| **Razem** | **182 elementy** | |
 
 Metoda liczenia `feature`: każde wypunktowanie oznaczone 🟢 / 🟡 / ⚪ w rozdziałach 2–4 to
 jedna funkcja; podpunkty bez własnego znacznika statusu są treścią karty tej funkcji, nie
@@ -672,7 +671,7 @@ i ledger bez TIMEFLOW, 4.8: autostart przy logowaniu) powtarzają funkcje z rozd
 liczą się raz, jako funkcje swojego modułu. Generator (rozdz. 10) liczy tak samo — jeśli jego wynik różni się od
 tabeli, poprawia się tabelę, nie generator.
 
-Komunikat dla inwestora: **„2 systemy · 30 modułów · 145 udokumentowanych funkcji · 4 mosty DCC
+Komunikat dla inwestora: **„2 systemy · 30 modułów · 143 funkcje aplikacji + 7 integracji · 4 mosty DCC
 + most UV · 2 serwery MCP · lokalne wyszukiwanie AI · farma renderująca w LAN · 100% local-first”**.
 Każda z tych liczb ma pokrycie w tabeli wyżej i w pliku danych — nie wolno ich zaokrąglać
 w górę „na oko”.
@@ -691,7 +690,7 @@ Siatka, w której **kolumny to etapy pracy**, a **kolory to programy**:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][145 funkcji][4 mosty][2 MCP][0 %] │
+│ Jedna osoba. Cały pipeline.        [2 systemy][30 modułów][143 funkcje][4 mosty][2 MCP][0 %] │
 │ [Mapa zakresu] [Moduły] [Matryca]      Filtry: Program · Status · Moaty · Odbiorca   [PL|EN] │
 ├──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬─────────────────┤
 │1 Zasoby  │2 Scena   │3 Inspek- │4 Render  │5 Wyniki  │6 Czas    │7 Wycena  │8 Raport         │
@@ -1248,7 +1247,7 @@ temu zieleń zostaje wyłącznie kolorem TIMEFLOW i nie myli się z „gotowe”
 Efekt ma służyć czytaniu, nie konkurować z nim. Dozwolone są trzy:
 - **Spacer po etapach** (rozdz. 5.1.4) — kolumny podświetlane kolejno 1 → 8, z jednym zdaniem o dniu pracy freelancera na każdym etapie. To jest główny punkt demo na spotkaniu.
 - **Impulsy na liniach relacji** `data_flow` i `file_exchange` między Hubem a TIMEFLOW (latarnie, ledger, `.cfabx`, miniatury) — wyłącznie gdy relacja jest podświetlona.
-- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `145 Funkcji`, `4 Mosty DCC`, `2 Serwery MCP`, `0 % danych w chmurze`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
+- **Licznik metryk** u góry ekranu, zasilany **z pliku danych, nie z tekstu**: `2 Systemy`, `30 Modułów`, `143 Funkcje`, `4 Mosty DCC`, `2 Serwery MCP`, `7 Integracji Hub–TIMEFLOW`. Jednorazowe odliczanie od zera przy pierwszym otwarciu jest dozwolone (≤ 800 ms, wyłączone przy `prefers-reduced-motion`).
 
 ### 9.4. Materiały wspierające
 - Pobranie z poziomu mapy zsyntetyzowanego raportu PDF (*One-Pager / Pitch Deck Summary*) z tabelą założeń ROI w przypisach.
@@ -1395,25 +1394,15 @@ nie może łamać własnej obietnicy.**
 
 ---
 
-## 13. DODATEK A: STAN REALIZACJI — CO JEST 🟡 I CZEGO BRAKUJE DO 🟢
+## 13. ZASADY ZGODNOŚCI Z KODEM
 
-Źródło: [docs/BETA.md](docs/BETA.md) (fale 0.1 i 0.15), [CHANGELOG.md](CHANGELOG.md) oraz odbiory potwierdzone przez właściciela 2026-09-24 (monitoring C4D, samonaprawa i strażnik zamykania, farma LAN, ntfy i dźwięk, mosty 3ds Max / MODO / Blender → C4D / RizomUV w C4D, wyszukiwanie AI, zakładka Błędy, karta EXRustera, instalacja i przenosiny, zmiany TIMEFLOW z „Unreleased”, rozdział czasu maszyny, rejestr aktywności DCC, wspólny start). `docs/BETA.md` w repo Huba nie ma jeszcze tych odhaczeń.
+Katalog prezentuje istniejące funkcje, a nie propozycje rozwoju. Starsze listy pomysłów i nieodhaczone zadania w dokumentacji nie są dowodem braku implementacji ani deklaracją planu użytkownika.
 
-| Funkcja | Status | Czego brakuje |
-|---|---|---|
-| Wizualny dowód pracy (miniatury w raporcie PDF) | 🟡 | wydanie TIMEFLOW z poprawką wyświetlania (`data:` URL z backendu raportu) i odbiór na żywym raporcie; oś czasu projektu nie pokazuje miniatur |
-| Propozycja → ACK (`cfab_proposals`) | 🟡 | rendery działają; Hub nie wysyła propozycji kosztów, znalezisk audytu ani prognoz |
-| Okno globalnych ustawień (0.1-G) | 🟡 | odbiór ergonomii: „da się znaleźć i zmienić parametr bez znajomości kodu” (na mapie część funkcji „Pasek modułów, ustawienia i zasobnik”) |
-| Przepływ RizomUV uruchamiany z Huba (0.1-E) | ⚪ | Sceny → Rizom → siatka z UV z powrotem; okno Rizom w C4D odebrane |
-| Prognoza kosztu renderu przed kolejką, limity w Hubie (etap C) | ⚪ | nierozpoczęte |
-| Znaleziska audytu sceny → zadania TIMEFLOW (etap D) | ⚪ | nierozpoczęte; kontrakt `cfab_proposals` 1 już jest (rendery) |
-| Systemowy autostart przy logowaniu | ⚪ | osobny plan poza specyfikacją renderu (ikona i zasobnik już są) |
-| Wyszukiwanie tekstem w Bibliotece, prognoza kosztu renderu, diagnoza nieudanego renderu | ⚪ | propozycje z [docs/ANALIZA_AI.md](docs/ANALIZA_AI.md); nierozpoczęte — **nie pokazywać na mapie**, dopóki nie trafią do `docs/BETA.md` |
-| Narzędzie PBR (C4D / Corona / V-Ray), Max → materiał → konwersja | ⚪ | fala 0.16, świadomie poza bieżącym etapem |
-
-**Zasada prezentacji:** funkcje ⚪ pokazujemy na mapie jako roadmapę z datą docelową lub bez niej,
-ale **nigdy jako działające**. Dla inwestora wiarygodna roadmapa jest aktywem; funkcja
-„udająca gotową” i zdemaskowana na demo jest kosztem.
+- Każda funkcja i integracja ma źródło implementacji.
+- Połączenie RizomUV jest opisane jako działający przepływ z Cinema 4D. Usunięto niepotwierdzony osobny przepływ uruchamiany z Huba.
+- Wspólne uruchamianie Huba i TIMEFLOW pozostaje oddzielną funkcją od systemowego autostartu Huba przy logowaniu; tego drugiego nie ma w katalogu.
+- Zatwierdzanie danych dotyczy zaimplementowanego przypisywania renderów. Nie sugerujemy wysyłania audytów scen do zadań TIMEFLOW ani kosztów do wycen na podstawie samego kontraktu danych.
+- UI nie prezentuje statusów odbioru jako procentu gotowości kodu.
 
 ---
 
