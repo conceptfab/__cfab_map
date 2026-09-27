@@ -578,6 +578,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .node-bubble-scroll {
   position: relative;
   z-index: 2;
+  min-width: 0;
   overflow-x: hidden;
   background: var(--bg-surface);
   border: 1px solid var(--line-strong);
@@ -649,6 +650,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  min-width: 0;
 }
 
 .bubble-badges {
@@ -656,6 +658,8 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   align-items: center;
   gap: 6px;
   flex-wrap: wrap;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .bubble-parent-pill {
@@ -665,13 +669,13 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   background: var(--bg-canvas);
   border-radius: 4px;
   border: 1px solid var(--line-subtle);
-  max-width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .bubble-close-btn {
+  flex: 0 0 auto;
   width: 26px;
   height: 26px;
   border-radius: 6px;
@@ -697,6 +701,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .bubble-title {
@@ -704,6 +709,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   font-weight: 650;
   color: var(--text-strong);
   line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .bubble-status {
@@ -727,6 +733,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .bubble-summary {
   line-height: 1.5;
   margin: 2px 0 0 0;
+  overflow-wrap: anywhere;
 }
 
 .bubble-note {
@@ -736,6 +743,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   border-left: 2px solid var(--line-strong);
   padding-left: 8px;
   margin: 4px 0 0 0;
+  overflow-wrap: anywhere;
 }
 
 /* Bubble Connections */
@@ -746,6 +754,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .bubble-section-head {
@@ -797,6 +806,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   border: 1px solid var(--line-subtle);
   background: var(--bg-canvas);
   text-align: left;
+  white-space: normal;
   cursor: pointer;
   transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
@@ -819,15 +829,15 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   font-size: 12px;
   font-weight: 550;
   color: var(--text-strong);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .connection-meta {
   font-size: 10.5px;
   color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .connection-arrow {
@@ -857,6 +867,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .bubble-moat-box {
@@ -879,6 +890,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   font-size: 12px;
   line-height: 1.45;
   color: var(--text-primary);
+  overflow-wrap: anywhere;
 }
 
 .bubble-tags-row {
@@ -907,6 +919,8 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   border-radius: 4px;
   border: 1px solid var(--line-subtle);
   font-family: var(--font-mono);
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .replace-tag {
@@ -988,7 +1002,7 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .adv-map-button:hover { background: var(--primary-hover); }
 .view-advantages .legend { padding: 7px 0; }
 .view-advantages > .card { position: fixed; z-index: 10; top: 80px; right: 28px; max-height: calc(100dvh - 110px); }
-.card-adv-link, .bubble-adv-link { padding: 7px 10px; border: 1px solid var(--line-strong); border-left: 3px solid var(--info); border-radius: 3px; background: var(--bg-hover); color: var(--text-strong); text-align: left; font-size: 11px; line-height: 1.35; cursor: pointer; }
+.card-adv-link, .bubble-adv-link { width: 100%; max-width: 100%; min-width: 0; padding: 7px 10px; border: 1px solid var(--line-strong); border-left: 3px solid var(--info); border-radius: 3px; background: var(--bg-hover); color: var(--text-strong); text-align: left; font-size: 11px; line-height: 1.35; white-space: normal; overflow-wrap: anywhere; cursor: pointer; }
 .card-adv-link:hover, .bubble-adv-link:hover { background: var(--bg-selection); }
 .adv-map-bar { position: relative; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; padding: 5px 12px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--bg-surface); font-size: 12px; }
 .adv-map-bar strong { color: var(--text-strong); }
