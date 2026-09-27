@@ -382,10 +382,10 @@ export const features = [
     tech: ["Rust"], src: ["hub:modules/results/exruster/src/io/tiff_composite.rs", "hub:modules/results/exruster/src/io/psd_composite.rs"],
     kw: ["tiff", "psd", "psb", "photoshop"] },
   { p: "hub.results", id: "oiio", s: "results", st: "production", c: "integration",
-    t: ["OpenImageIO w Wynikach i EXRusterze", "OpenImageIO in Results and EXRuster"], sh: ["OpenImageIO: ACES, NaN, TX", "OpenImageIO: ACES, NaN, TX"],
-    d: ["Przypięte OpenImageIO 3.1.17: miniatury DDS i JPEG 2000, zapas gdy brak EXRustera, eksport warstwy do JPG przez ACES 2.0, naprawa NaN i tekstura TX w nowym pliku obok źródła.",
-        "Pinned OpenImageIO 3.1.17: DDS and JPEG 2000 thumbnails, a fallback when EXRuster is missing, layer export to JPG through ACES 2.0, NaN repair and a TX texture in a new file next to the source."],
-    tech: ["OpenImageIO", "OCIO", "Rust", "Python"], src: ["hub:modules/results/view.py", "hub:modules/results/exruster"],
+    t: ["Eksport i naprawa obrazów w EXRusterze", "Image export and repair in EXRuster"], sh: ["Eksport i naprawa obrazów", "Image export and repair"],
+    d: ["Zapisuje wybraną warstwę obrazu jako JPG z przekształceniem kolorów ACES 2.0, zastępuje błędne wartości pikseli (NaN i nieskończoność) średnią z sąsiadów oraz tworzy tekstury w formacie TX. Każda operacja zapisuje nowy plik obok oryginału. Ta sama biblioteka obsługuje też miniatury DDS i JPEG 2000 w Hubie.",
+        "Saves the selected image layer as JPG using an ACES 2.0 colour transform, replaces invalid pixel values (NaN and infinity) with the neighbouring average, and creates TX textures. Each operation writes a new file beside the original. The same library also provides DDS and JPEG 2000 thumbnails in Hub."],
+    tech: ["OpenImageIO", "OCIO", "Rust", "Python"], src: ["hub:shared/cfab_core/exr.py", "hub:modules/results/exruster/src/processing/oiio_tool.rs", "hub:modules/results/exruster/src/ui/setup.rs"],
     kw: ["openimageio", "oiio", "aces", "tx", "nan"] },
 
   // ===================== 2.5 Zasoby

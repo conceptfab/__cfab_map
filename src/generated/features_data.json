@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-27T08:06:48.119Z",
+    "generatedAt": "2026-09-27T08:11:22.923Z",
     "hubVersion": "BETA 0.58",
     "timeflowVersion": "0.1.5776",
     "contracts": {
@@ -18,7 +18,7 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "24d4e625",
+    "sourceCommit": "66fe3aa7",
     "distribution": "internal"
   },
   "nodes": [
@@ -4310,16 +4310,16 @@
       "module": "hub.results",
       "parentId": "hub.results",
       "title": {
-        "pl": "OpenImageIO w Wynikach i EXRusterze",
-        "en": "OpenImageIO in Results and EXRuster"
+        "pl": "Eksport i naprawa obrazów w EXRusterze",
+        "en": "Image export and repair in EXRuster"
       },
       "shortTitle": {
-        "pl": "OpenImageIO: ACES, NaN, TX",
-        "en": "OpenImageIO: ACES, NaN, TX"
+        "pl": "Eksport i naprawa obrazów",
+        "en": "Image export and repair"
       },
       "summary": {
-        "pl": "Przypięte OpenImageIO 3.1.17: miniatury DDS i JPEG 2000, zapas gdy brak EXRustera, eksport warstwy do JPG przez ACES 2.0, naprawa NaN i tekstura TX w nowym pliku obok źródła.",
-        "en": "Pinned OpenImageIO 3.1.17: DDS and JPEG 2000 thumbnails, a fallback when EXRuster is missing, layer export to JPG through ACES 2.0, NaN repair and a TX texture in a new file next to the source."
+        "pl": "Zapisuje wybraną warstwę obrazu jako JPG z przekształceniem kolorów ACES 2.0, zastępuje błędne wartości pikseli (NaN i nieskończoność) średnią z sąsiadów oraz tworzy tekstury w formacie TX. Każda operacja zapisuje nowy plik obok oryginału. Ta sama biblioteka obsługuje też miniatury DDS i JPEG 2000 w Hubie.",
+        "en": "Saves the selected image layer as JPG using an ACES 2.0 colour transform, replaces invalid pixel values (NaN and infinity) with the neighbouring average, and creates TX textures. Each operation writes a new file beside the original. The same library also provides DDS and JPEG 2000 thumbnails in Hub."
       },
       "category": "integration",
       "stage": "results",
@@ -4351,8 +4351,9 @@
       "version": "0.12.0",
       "contract": null,
       "sources": [
-        "hub:modules/results/view.py",
-        "hub:modules/results/exruster"
+        "hub:shared/cfab_core/exr.py",
+        "hub:modules/results/exruster/src/processing/oiio_tool.rs",
+        "hub:modules/results/exruster/src/ui/setup.rs"
       ],
       "keywords": [
         "openimageio",

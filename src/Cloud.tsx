@@ -158,18 +158,18 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const bridgeNetwork = size.width >= 1150;
   const bridges = graph.points.filter(p => p.node.nodeType === "bridge");
   const radius = (p: Point) => p.node.nodeType === "ecosystem" ? 6 : p.node.nodeType === "module" ? 5 : p.node.nodeType === "bridge" ? 4 : 3.2;
-  // Stable labels: try nearby free positions before using a short leader line.
-  // Selection never reorders labels or shrinks the text.
+  // Hover only highlights/reveals labels; it must never change their placement.
+  // Otherwise a label moves out from under the pointer and toggles hover again.
+  const labelPriority = focus ? related : new Set<string>();
   const occupied: {x: number; y: number; w: number; h: number}[] = graph.points.filter(p => p.node.nodeType === "ecosystem").map(p => ({x:p.x*transform.k+transform.x-72,y:p.y*transform.k+transform.y-40,w:144,h:80}));
   const labelWidth = (text: string, fontSize: number) => text.length * fontSize * 0.53 + 8;
   const labels = [...graph.points].sort((a,b) => {
-    const rank = (p: Point) => related.has(p.id) || matchIds.has(p.id) ? 0 : p.node.nodeType === "module" ? 1 : p.node.nodeType === "bridge" ? 2 : 3;
+    const rank = (p: Point) => labelPriority.has(p.id) || matchIds.has(p.id) ? 0 : p.node.nodeType === "module" ? 1 : p.node.nodeType === "bridge" ? 2 : 3;
     return rank(a) - rank(b);
   }).flatMap(p => {
     if (p.node.nodeType === "ecosystem" || (bridgeNetwork && p.node.nodeType === "bridge")) return [];
     const detail = p.node.nodeType === "feature";
     if (detail && focus && !related.has(p.id) && !matchIds.has(p.id)) return [];
-    if (detail && !showLabels && transform.k < 0.85 && !related.has(p.id) && !matchIds.has(p.id)) return [];
     const pos = position(p);
     const x = pos.x * transform.k + transform.x, y = pos.y * transform.k + transform.y;
     if (x < -20 || x > size.width + 20 || y < -20 || y > size.height + 20) return [];
@@ -184,6 +184,8 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     const box = candidates.find(c => c.x > 5 && c.x+c.w < size.width-5 && c.y > 66 && c.y+c.h < size.height-65 && !occupied.some(b => c.x < b.x+b.w+5 && c.x+c.w+5 > b.x && c.y < b.y+b.h+3 && c.y+c.h+3 > b.y));
     if (!box) return [];
     occupied.push(box);
+    // Reserve space even for a hidden label so revealing it cannot move others.
+    if (detail && !showLabels && transform.k < 0.85 && !related.has(p.id) && !matchIds.has(p.id)) return [];
     return [{p, x:box.x+4, y:box.y+fontSize, nodeX:x, nodeY:y, fontSize, text,
       leader: Math.hypot(box.x + w/2 - x, box.y + h/2 - y) > w/2+18}];
   });
