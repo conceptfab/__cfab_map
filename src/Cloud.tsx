@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { layoutGraph, nodeGroups, orbitalPosition, type Point } from "./graphModel";
+import { ARC_RADIUS, SECTOR_INNER, SECTOR_OUTER, arcPath, layoutGraph, nodeGroups, wedgePath, type GraphLink, type Point } from "./graphModel";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import type { FeaturesData, LangKey } from "./types";
 import NodeBubble from "./NodeBubble";
-import { STAGES } from "./i18n";
+import { STAGES, STAGE_ARC } from "./i18n";
 
 export interface CloudProps {
   data: FeaturesData;
@@ -16,6 +16,25 @@ export interface CloudProps {
   onOpenAdvantage: (id: string) => void;
 }
 
+// Pulses travel at a constant world speed, so a long integration edge takes
+// longer than a short one. Files move slower than a data stream (spec 5.5.4).
+const PULSE_SPEED = { data_flow: 150, file_exchange: 80 } as const;
+const ARC_FONT = 19; // world units ≈ 11 px at the 1440 px fit
+
+type Curve = { s: { x: number; y: number }; t: { x: number; y: number }; c1?: { x: number; y: number }; c2?: { x: number; y: number } };
+const curveLength = (c: Curve) => {
+  if (!c.c1 || !c.c2) return Math.hypot(c.t.x - c.s.x, c.t.y - c.s.y);
+  let length = 0, previous = c.s;
+  for (let i = 1; i <= 12; i++) { const p = curvePoint(c, i / 12); length += Math.hypot(p.x - previous.x, p.y - previous.y); previous = p; }
+  return length;
+};
+const curvePoint = (c: Curve, u: number) => {
+  if (!c.c1 || !c.c2) return { x: c.s.x + (c.t.x - c.s.x) * u, y: c.s.y + (c.t.y - c.s.y) * u };
+  const v = 1 - u;
+  return { x: v*v*v*c.s.x + 3*v*v*u*c.c1.x + 3*v*u*u*c.c2.x + u*u*u*c.t.x, y: v*v*v*c.s.y + 3*v*v*u*c.c1.y + 3*v*u*u*c.c2.y + u*u*u*c.t.y };
+};
+const curvePath = (c: Curve) => c.c1 && c.c2 ? `M ${c.s.x} ${c.s.y} C ${c.c1.x} ${c.c1.y} ${c.c2.x} ${c.c2.y} ${c.t.x} ${c.t.y}` : `M ${c.s.x} ${c.s.y} L ${c.t.x} ${c.t.y}`;
+
 export default function Cloud({ data, lang, territoryLabels, selectedId, highlightIds, onSelect, onOpenAdvantage }: CloudProps) {
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -23,6 +42,11 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const [size, setSize] = useState({ width: 1200, height: 720 });
   const graph = useMemo(() => layoutGraph(data, size.width, size.height), [data, size]);
   const groups = useMemo(() => nodeGroups(data), [data]);
+  const childCount = useMemo(() => {
+    const counts = new Map<string, number>();
+    data.nodes.forEach(n => { if (n.nodeType === "feature" && n.parentId) counts.set(n.parentId, (counts.get(n.parentId) ?? 0) + 1); });
+    return counts;
+  }, [data]);
   const [transform, setTransform] = useState(zoomIdentity);
   const transformRef = useRef(zoomIdentity);
   const viewAnimationRef = useRef<number | null>(null);
@@ -33,9 +57,6 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const [showLabels, setShowLabels] = useState(false);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [phase, setPhase] = useState(0);
-  const elapsed = useRef(0);
-  const moving = !paused && !reducedMotion && !hover && !selectedId && !query.trim();
   useEffect(() => {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReducedMotion(media.matches);
@@ -47,28 +68,22 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+  // Pulses are SMIL animations: pausing the SVG clock stops every one of them at once.
+  const flowing = !paused && !reducedMotion;
   useEffect(() => {
-    if (!moving) return;
-    let frame: number;
-    let previous = performance.now();
-    let painted = previous;
-    const tick = (now: number) => {
-      if (!document.hidden) elapsed.current += Math.min(now - previous, 100) / 1000;
-      previous = now;
-      if (now - painted >= 50) { setPhase(elapsed.current); painted = now; }
-      frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [moving]);
+    const svg = svgRef.current;
+    if (!svg) return;
+    if (flowing) svg.unpauseAnimations(); else svg.pauseAnimations();
+  }, [flowing]);
   const pl = lang === "pl";
   const fit = useMemo(() => {
     if (size.width < 700) {
       const k = Math.min(size.width/1120, Math.max(150,size.height-160)/1120);
       return zoomIdentity.translate(size.width/2,(size.height+90)/2).scale(k).translate(-560,-560);
     }
-    const k = Math.min(size.width / graph.worldWidth, Math.max(100,size.height - 140) / graph.worldHeight);
-    return zoomIdentity.translate(size.width / 2, size.height / 2).scale(k).translate(-graph.worldWidth/2, -graph.worldHeight/2);
+    // Leave room for the header and colour key above and the legend below.
+    const k = Math.min(size.width / graph.worldWidth, Math.max(100,size.height - 170) / graph.worldHeight);
+    return zoomIdentity.translate(size.width / 2, (size.height + 44) / 2).scale(k).translate(-graph.worldWidth/2, -graph.worldHeight/2);
   }, [size, graph.worldWidth, graph.worldHeight]);
   useEffect(() => {
     const el = svgRef.current!;
@@ -84,7 +99,6 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
       if (e.sourceEvent) {
         if (viewAnimationRef.current !== null) cancelAnimationFrame(viewAnimationRef.current);
         viewAnimationRef.current = null;
-        setPaused(true);
       }
     }).on("zoom", e => {
       transformRef.current = e.transform;
@@ -138,9 +152,8 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
       moveViewTo(fit);
       return;
     }
-    const point = orbitalPosition(target, phase);
     const k = Math.max(fit.k * 1.8, 1);
-    moveViewTo(zoomIdentity.translate(size.width * (size.width > 700 ? 0.36 : 0.5), size.height * 0.43).scale(k).translate(-point.x, -point.y));
+    moveViewTo(zoomIdentity.translate(size.width * (size.width > 700 ? 0.36 : 0.5), size.height * 0.43).scale(k).translate(-target.x, -target.y));
   };
   const focus = selectedId;
   const active = selectedId ?? hover;
@@ -154,10 +167,27 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
   const stageIds = stageIndex === null ? null : new Set(data.nodes.filter((node) => node.stage === STAGES[stageIndex].id).map((node) => node.id));
   const effectiveHighlight = highlightIds ?? stageIds;
   const dimmed = (id: string) => focus ? !related.has(id) : query.trim() ? !matchIds.has(id) : effectiveHighlight ? !effectiveHighlight.has(id) : false;
-  const position = (p: Point) => orbitalPosition(p, phase);
+  const hasFocus = Boolean(active || query.trim() || effectiveHighlight);
   const bridgeNetwork = size.width >= 1150;
   const bridges = graph.points.filter(p => p.node.nodeType === "bridge");
   const radius = (p: Point) => p.node.nodeType === "ecosystem" ? 6 : p.node.nodeType === "module" ? 5 : p.node.nodeType === "bridge" ? 4 : 3.2;
+  const curve = (l: GraphLink): Curve => {
+    const s = l.source, t = l.target;
+    if (bridgeNetwork && (s.node.nodeType === "bridge" || t.node.nodeType === "bridge" || s.node.app !== t.node.app)) {
+      const bend = Math.abs(t.x - s.x) * 0.48;
+      const direction = Math.sign(t.x - s.x);
+      return { s, t, c1: { x: s.x + bend * direction, y: s.y }, c2: { x: t.x - bend * direction, y: t.y } };
+    }
+    if (l.relation !== "integration") return { s, t };
+    // Flows inside one application arc away from its centre instead of slicing through it.
+    const dx = t.x - s.x, dy = t.y - s.y, length = Math.hypot(dx, dy) || 1;
+    const nx = -dy / length, ny = dx / length;
+    const midX = (s.x + t.x) / 2, midY = (s.y + t.y) / 2;
+    const cx = s.orbitRadius ? s.centerX : t.centerX, cy = s.orbitRadius ? s.centerY : t.centerY;
+    const sign = (midX - cx) * nx + (midY - cy) * ny >= 0 ? 1 : -1;
+    const bend = length * 0.22 * sign;
+    return { s, t, c1: { x: s.x + dx / 3 + nx * bend, y: s.y + dy / 3 + ny * bend }, c2: { x: s.x + dx * 2 / 3 + nx * bend, y: s.y + dy * 2 / 3 + ny * bend } };
+  };
   // Hover only highlights/reveals labels; it must never change their placement.
   // Otherwise a label moves out from under the pointer and toggles hover again.
   const labelPriority = focus ? related : new Set<string>();
@@ -170,10 +200,10 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     if (p.node.nodeType === "ecosystem" || (bridgeNetwork && p.node.nodeType === "bridge")) return [];
     const detail = p.node.nodeType === "feature";
     if (detail && focus && !related.has(p.id) && !matchIds.has(p.id)) return [];
-    const pos = position(p);
-    const x = pos.x * transform.k + transform.x, y = pos.y * transform.k + transform.y;
+    const x = p.x * transform.k + transform.x, y = p.y * transform.k + transform.y;
     if (x < -20 || x > size.width + 20 || y < -20 || y > size.height + 20) return [];
-    const text = p.node.shortTitle[lang];
+    const count = p.node.nodeType === "module" ? childCount.get(p.id) : undefined;
+    const text = count ? `${p.node.shortTitle[lang]} · ${count}` : p.node.shortTitle[lang];
     const fontSize = detail ? 13 : 14;
     const w = labelWidth(text, fontSize), h = fontSize + 5;
     const candidates = p.node.nodeType === "bridge" ? [{x:x-w/2,y:y+10,w,h}] : [];
@@ -188,6 +218,13 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     if (detail && !showLabels && transform.k < 0.85 && !related.has(p.id) && !matchIds.has(p.id)) return [];
     return [{p, x:box.x+4, y:box.y+fontSize, nodeX:x, nodeY:y, fontSize, text,
       leader: Math.hypot(box.x + w/2 - x, box.y + h/2 - y) > w/2+18}];
+  });
+  // Stage names ride the outer arc; a name that would overflow its arc is dropped.
+  const stageArcs = graph.stageArcs.flatMap(arc => {
+    const label = STAGE_ARC[arc.group][lang].toLocaleUpperCase();
+    const geometry = arcPath(arc, ARC_RADIUS + (Math.sin((arc.start + arc.end) / 2) > 0 ? ARC_FONT * 0.8 : 0));
+    if (label.length * ARC_FONT * 0.78 > geometry.length) return [];
+    return [{ ...arc, label, ...geometry }];
   });
   const scaleBy = (factor: number) => { if (behaviorRef.current) select(svgRef.current!).call(behaviorRef.current.scaleBy, factor); };
   const reset = () => {
@@ -212,37 +249,54 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     {!highlightIds && <div className="graph-stage-lens">
       {stageIndex === null ? <button onClick={() => { onSelect(null); setStageIndex(0); }}>{pl ? "Spacer po etapach" : "Walk through stages"} →</button> : <><span>{String(stageIndex + 1).padStart(2, "0")}/08 · {STAGES[stageIndex][lang]}</span><button onClick={() => { onSelect(null); setStageIndex((stageIndex + 7) % 8); }} aria-label={pl ? "Poprzedni etap" : "Previous stage"}>←</button><button onClick={() => { onSelect(null); setStageIndex((stageIndex + 1) % 8); }} aria-label={pl ? "Następny etap" : "Next stage"}>→</button><button onClick={() => setStageIndex(null)} aria-label={pl ? "Zamknij spacer" : "Close stage walk"}>×</button></>}
     </div>}
-    <svg ref={svgRef} className="cloud" data-motion={moving ? "running" : "paused"} aria-label={pl ? "Interaktywna mapa powiązań" : "Interactive relationship graph"} onClick={e => {if (e.target === e.currentTarget) onSelect(null);}}>
+    <svg ref={svgRef} className={`cloud ${hasFocus ? "has-focus" : ""}`} data-flow={flowing ? "running" : "paused"} aria-label={pl ? "Interaktywna mapa powiązań" : "Interactive relationship graph"} onClick={e => {if (e.target === e.currentTarget) onSelect(null);}}>
       <defs>
         <filter id="popout-shadow" x="-80%" y="-80%" width="260%" height="260%">
           <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="rgba(0,0,0,0.45)" />
           <feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="rgba(0,0,0,0.28)" />
         </filter>
       </defs>
+      {/* Module wedges: the ring becomes a share chart of the scope. */}
+      <g className="sector-wedges" transform={transform.toString()} aria-hidden="true">
+        {graph.sectors.map(sector => {
+          const lit = effectiveHighlight ? [...effectiveHighlight].some(id => graph.byId.get(id)?.node.parentId === sector.id) : active ? related.has(sector.id) || [...related].some(id => graph.byId.get(id)?.node.parentId === sector.id) : true;
+          return <path key={sector.id} className={`sector-wedge group-${sector.group} app-${sector.app} ${lit ? "is-lit" : ""}`} d={wedgePath(sector, SECTOR_INNER, SECTOR_OUTER)} />;
+        })}
+      </g>
       <g className="orbit-tracks" transform={transform.toString()} aria-hidden="true">
         {graph.orbits.map(orbit => <circle key={orbit.id} cx={orbit.x} cy={orbit.y} r={orbit.radius} vectorEffect="non-scaling-stroke" />)}
       </g>
+      <g className="stage-arcs" transform={transform.toString()} aria-hidden="true">
+        {stageArcs.map(arc => <g key={arc.id} className={`stage-arc group-${arc.group} app-${arc.app}`}>
+          <path id={`arc-${arc.id}`} d={arc.d} fill="none" stroke="none" />
+          <text fontSize={ARC_FONT}><textPath href={`#arc-${arc.id}`} startOffset="50%" textAnchor="middle">{arc.label}</textPath></text>
+        </g>)}
+      </g>
       <g className="graph-edges" transform={transform.toString()}>
-        {graph.links.map(l => {
-          const s = position(l.source), t = position(l.target);
+        {graph.links.map((l, index) => {
+          const c = curve(l);
           const advantageTrace = !active && Boolean(highlightIds?.has(l.source.id) && highlightIds?.has(l.target.id) && l.relation === "integration");
           const lit = l.source.id === active || l.target.id === active || advantageTrace;
-          const bridgeLink = bridgeNetwork && (l.source.node.nodeType === "bridge" || l.target.node.nodeType === "bridge");
-          const key = `${l.source.id}-${l.target.id}-${l.kind}`;
-          const shared = { "data-relation": l.relation, "data-kind": l.kind,
-            className: `group-${l.source.group} app-${l.source.node.app} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""} ${advantageTrace ? "is-advantage-trace" : ""}`,
-            opacity: lit ? 1 : active || highlightIds ? 0.025 : bridgeLink ? 0.5 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18,
-            vectorEffect: "non-scaling-stroke" as const };
-          if (bridgeLink) {
-            const bend = Math.abs(t.x - s.x) * 0.48;
-            const direction = Math.sign(t.x - s.x);
-            return <path key={key} {...shared} d={`M ${s.x} ${s.y} C ${s.x + bend * direction} ${s.y} ${t.x - bend * direction} ${t.y} ${t.x} ${t.y}`} />;
-          }
-          return <line key={key} {...shared} x1={s.x} y1={s.y} x2={t.x} y2={t.y} />;
+          const bridgeLink = Boolean(c.c1) && (l.source.node.nodeType === "bridge" || l.target.node.nodeType === "bridge");
+          const speed = PULSE_SPEED[l.kind as keyof typeof PULSE_SPEED];
+          const duration = speed ? Math.max(1.4, curveLength(c) / speed) : 0;
+          const muted = Boolean(active || highlightIds);
+          // The line stays faint at rest; the pulse riding it carries the message.
+          const lineOpacity = lit ? 1 : muted ? 0.025 : bridgeLink ? 0.5 : l.animated ? 0.14 : l.relation === "integration" ? 0.045 : l.relation === "module" ? 0.12 : 0.18;
+          return <g key={l.id} data-relation={l.relation} data-kind={l.kind}
+            className={`edge group-${l.source.group} app-${l.source.node.app} relation-${l.relation} ${bridgeLink ? "bridge-link" : ""} ${lit ? "is-lit" : ""} ${advantageTrace ? "is-advantage-trace" : ""}`}>
+            <path id={`edge-${l.id}`} d={curvePath(c)} vectorEffect="non-scaling-stroke" opacity={lineOpacity} />
+            {l.animated && !reducedMotion && <g className={`flow-pulse kind-${l.kind}`} opacity={lit ? 1 : muted ? 0.05 : 0.8}>
+              {l.kind === "file_exchange"
+                ? <rect x={-3.5} y={-3.5} width={7} height={7} transform="rotate(45)" />
+                : <><circle className="pulse-glow" r={11} /><circle className="pulse-core" r={4} /></>}
+              <animateMotion dur={`${duration.toFixed(2)}s`} begin={`-${((index * 0.83) % duration).toFixed(2)}s`} repeatCount="indefinite"><mpath href={`#edge-${l.id}`} /></animateMotion>
+            </g>}
+          </g>;
         })}
       </g>
       {bridgeNetwork && bridges.length > 0 && <text className="bridge-network-title" x={graph.worldWidth/2*transform.k+transform.x} y={(bridges[0].y-53)*transform.k+transform.y} textAnchor="middle">{territoryLabels.synergy}</text>}
-      {graph.points.map(p => {const pos = position(p); const x = pos.x*transform.k+transform.x, y = pos.y*transform.k+transform.y; const bridgeIndex = bridges.findIndex(b => b.id === p.id); return <g key={p.id} className={`graph-node group-${p.group} app-${p.node.app} status-${p.node.status} ${p.node.nodeType === "ecosystem" ? "orbit-center" : ""} ${p.node.nodeType === "bridge" && bridgeNetwork ? "bridge-node" : ""} ${p.id===active ? "is-active" : ""}`} transform={`translate(${x},${y})`} opacity={dimmed(p.id) ? 0.15 : 1} role="button" tabIndex={0} aria-label={p.node.title[lang]} aria-pressed={selectedId===p.id}
+      {graph.points.map(p => {const x = p.x*transform.k+transform.x, y = p.y*transform.k+transform.y; const bridgeIndex = bridges.findIndex(b => b.id === p.id); return <g key={p.id} className={`graph-node group-${p.group} app-${p.node.app} status-${p.node.status} ${p.node.nodeType === "ecosystem" ? "orbit-center" : ""} ${p.node.nodeType === "bridge" && bridgeNetwork ? "bridge-node" : ""} ${p.id===active ? "is-active" : ""}`} transform={`translate(${x},${y})`} opacity={dimmed(p.id) ? 0.15 : 1} role="button" tabIndex={0} aria-label={p.node.title[lang]} aria-pressed={selectedId===p.id}
         onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(p.id)} onBlur={() => setHover(null)}
         onKeyDown={e => {if (e.key === "Enter" || e.key === " ") {e.preventDefault(); moveTo(p.id);} if(e.key === "Escape") onSelect(null);}}
         onClick={() => moveTo(p.id)}>
@@ -258,6 +312,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
         </> : <>
           <circle className="graph-hit" r={Math.max(10,radius(p)+5)} />
           <circle className="graph-ring" r={radius(p)+5} />
+          {p.node.techMoat.isUniqueMoat && <circle className="graph-moat" r={radius(p)+3} />}
           <circle className="graph-point" r={radius(p)} />
         </>}
 
@@ -266,13 +321,17 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
         {leader && <line x1={nodeX} y1={nodeY} x2={x} y2={y-5} className="label-leader" />}
         <text x={x} y={y} fontSize={fontSize} textAnchor="start" className={`${p.node.nodeType === "ecosystem" ? "graph-root" : ""} ${p.node.nodeType === "module" ? "graph-module" : ""}`} onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onClick={() => moveTo(p.id)}>{text}</text>
       </g>)}</g>
+      {/* What travels along a lit edge, written at its midpoint. */}
+      <g className="edge-labels" aria-hidden="true">{active && graph.links.filter(l => l.label && (l.source.id === active || l.target.id === active)).map(l => {
+        const m = curvePoint(curve(l), 0.5);
+        return <text key={l.id} className={`edge-label group-${l.source.group} app-${l.source.node.app}`} x={m.x*transform.k+transform.x} y={m.y*transform.k+transform.y - 7} textAnchor="middle">{l.label![lang]}</text>;
+      })}</g>
       {/* Foreground 3D popped-out node layer */}
       {selectedId && (() => {
         const p = graph.byId.get(selectedId);
         if (!p) return null;
-        const pos = position(p);
-        const x = pos.x * transform.k + transform.x;
-        const y = pos.y * transform.k + transform.y;
+        const x = p.x * transform.k + transform.x;
+        const y = p.y * transform.k + transform.y;
         const baseR = radius(p);
         const poppedR = Math.max(13, baseR * 2.4);
 
@@ -342,9 +401,8 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     {selectedId && (() => {
       const selectedPoint = graph.byId.get(selectedId);
       if (!selectedPoint) return null;
-      const pos = position(selectedPoint);
-      const screenX = pos.x * transform.k + transform.x;
-      const screenY = pos.y * transform.k + transform.y;
+      const screenX = selectedPoint.x * transform.k + transform.x;
+      const screenY = selectedPoint.y * transform.k + transform.y;
       return (
         <NodeBubble
           key={selectedPoint.id}
@@ -364,7 +422,7 @@ export default function Cloud({ data, lang, territoryLabels, selectedId, highlig
     {selectedId && trail.length > 1 && <nav className="graph-trail" aria-label={pl ? "Odwiedzone węzły" : "Visited nodes"}><span>{pl ? "Twoja ścieżka" : "Your path"}</span>{trail.map((id, index) => <span key={id} className="graph-trail-item">{index > 0 && <i aria-hidden="true">›</i>}<button aria-current={id === selectedId} onClick={() => moveTo(id)}>{graph.byId.get(id)?.node.shortTitle[lang] ?? id}</button></span>)}</nav>}
     <div className="graph-controls" aria-label={pl ? "Sterowanie mapą" : "Graph controls"}>
       <button onClick={() => setShowLabels(!showLabels)} aria-pressed={showLabels} title={pl ? "Pokaż podpisy funkcji" : "Show feature labels"}>{pl ? "Podpisy funkcji" : "Feature labels"}</button>
-      <button className="orbit-motion-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reducedMotion} title={reducedMotion ? (pl ? "Ograniczenie ruchu w ustawieniach systemu" : "System reduced motion preference") : undefined}>{paused ? (pl ? "Wznów orbity" : "Resume orbits") : (pl ? "Zatrzymaj orbity" : "Pause orbits")}</button>
+      <button className="orbit-motion-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused} disabled={reducedMotion} title={reducedMotion ? (pl ? "Ograniczenie ruchu w ustawieniach systemu" : "System reduced motion preference") : undefined}>{paused ? (pl ? "Wznów przepływ" : "Resume flow") : (pl ? "Zatrzymaj przepływ" : "Pause flow")}</button>
       <span className="control-divider" />
       <button onClick={() => scaleBy(1.35)} aria-label={pl ? "Przybliż" : "Zoom in"}>+</button>
       <button onClick={() => scaleBy(1/1.35)} aria-label={pl ? "Oddal" : "Zoom out"}>−</button>

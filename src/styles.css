@@ -222,11 +222,11 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .graph-ring { fill: var(--group-color); }
 .cloud .graph-node:focus-visible { outline: none; }
 .cloud .graph-node:focus-visible .graph-ring { fill: var(--focus); opacity: .42; }
-.graph-edges .relation-feature { stroke: var(--group-ink); stroke-width: var(--edge-feature); }
-.graph-edges .relation-module { stroke: var(--line-strong); stroke-width: var(--edge-module); }
-.graph-edges .relation-integration { stroke: var(--group-ink); stroke-width: var(--edge-integration); }
-.graph-edges [data-kind="ipc"] { stroke-dasharray: 6 4; }
-.graph-edges [data-kind="file_exchange"] { stroke-dasharray: 2 4; }
+.graph-edges .relation-feature path { stroke: var(--group-ink); stroke-width: var(--edge-feature); }
+.graph-edges .relation-module path { stroke: var(--line-strong); stroke-width: var(--edge-module); }
+.graph-edges .relation-integration path { stroke: var(--group-ink); stroke-width: var(--edge-integration); }
+.graph-edges [data-kind="ipc"] path { stroke-dasharray: 6 4; }
+.graph-edges [data-kind="file_exchange"] path { stroke-dasharray: 2 4; }
 .page .top { position: relative; display: grid; border-bottom: 1px solid var(--line-subtle); }
 .page .intro { position: relative; }
 .page .intro h1 { font-size: 18px; letter-spacing: -0.035em; }
@@ -318,8 +318,29 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
   --warning: inherit;
 }
 
-/* Application-centred orbits preserve ownership at every animation frame. */
-.orbit-tracks { fill: none; stroke: var(--line-strong); opacity: 0.45; pointer-events: none; }
+/* Static rings: module wedges make the orbit a share chart, stage names ride the outer arc. */
+.orbit-tracks { fill: none; stroke: var(--line-strong); opacity: 0.3; pointer-events: none; }
+.sector-wedges { pointer-events: none; }
+.sector-wedge { fill: var(--group-color); opacity: .15; transition: opacity .18s; }
+.page[data-graph-theme="charcoal"] .sector-wedge { opacity: .1; }
+.cloud.has-focus .sector-wedge { opacity: .05; }
+.cloud.has-focus .sector-wedge.is-lit { opacity: .2; }
+.stage-arcs { pointer-events: none; }
+.stage-arc text { fill: var(--group-ink); font-family: var(--font-mono); font-weight: 500; letter-spacing: .14em; opacity: .85; }
+.cloud.has-focus .stage-arc text { opacity: .35; }
+.graph-moat { fill: none; stroke: var(--group-ink); stroke-width: 1px; opacity: .8; }
+.legend-moat { width: 12px; height: 12px; position: relative; background: var(--bg-canvas); border: 1px solid var(--ink-foundation); }
+.legend-moat::after { content: ""; position: absolute; inset: 3.5px; border-radius: 50%; background: var(--stage-foundation); }
+/* Pulses: a data stream is a glowing dot, a file exchange is a packet. */
+.edge path { fill: none; }
+.flow-pulse { fill: var(--group-ink); stroke: none; }
+.flow-pulse .pulse-glow { opacity: .22; }
+.flow-pulse.kind-file_exchange rect { opacity: .9; }
+.edge.is-lit .flow-pulse { fill: var(--text-strong); }
+.edge-labels { pointer-events: none; }
+.edge-label { font-size: 11.5px; font-weight: 500; fill: var(--group-ink); paint-order: stroke; stroke: var(--bg-canvas); stroke-width: 4px; stroke-linejoin: round; }
+.legend-pulse { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--ink-foundation); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ink-foundation) 22%, transparent); vertical-align: middle; }
+@media (prefers-reduced-motion: reduce) { .sector-wedge { transition: none; } }
 .orbit-center-disc { fill: var(--bg-surface); stroke: var(--line-strong); }
 .orbit-center-title { fill: var(--text-strong); font-size: 15px; font-weight: 600; }
 .orbit-center-caption { fill: var(--text-muted); font-size: 9px; letter-spacing: 1.5px; }
@@ -411,8 +432,8 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .bridge-backdrop { pointer-events: none; fill: none; }
 .bridge-spine-glow { stroke: var(--line-strong); stroke-width: 15; opacity: .1; }
 .bridge-spine { stroke: var(--line-strong); stroke-width: 1.5; opacity: .8; }
-.graph-edges .bridge-link { fill: none; stroke-width: 1.45; }
-.graph-edges .bridge-link.is-lit { stroke-width: 2.2; }
+.graph-edges .bridge-link path { stroke-width: 1.45; }
+.graph-edges .bridge-link.is-lit path { stroke-width: 2.2; }
 .bridge-network-title {
   fill: var(--text-primary);
   font-size: 12px;
@@ -1057,12 +1078,12 @@ h1, h2 { min-width: 0; overflow-wrap: anywhere; }
 .graph-trail button { max-width: 150px; overflow: hidden; border: 0; background: transparent; color: var(--text-primary); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
 .graph-trail button[aria-current="true"] { color: var(--text-strong); font-weight: 600; }
 .graph-trail button:hover { color: var(--text-accent); }
-.graph-edges .is-advantage-trace { stroke-width: 2.2; animation: advantage-line-in 520ms ease-out 1; }
+.graph-edges .is-advantage-trace path { stroke-width: 2.2; animation: advantage-line-in 520ms ease-out 1; }
 @keyframes advantage-line-in { from { stroke-dasharray: 0 5000; opacity: .2; } to { stroke-dasharray: 5000 0; opacity: 1; } }
 @media (max-width: 700px) {
   .graph-trail { bottom: 66px; left: 4px; max-width: calc(100% - 8px); }
 }
-@media (prefers-reduced-motion: reduce) { .graph-edges .is-advantage-trace { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .graph-edges .is-advantage-trace path { animation: none; } }
 
 /* The cloud is a full-screen canvas. Its controls overlay it after interaction,
    so revealing the interface never changes the graph's size or node positions. */

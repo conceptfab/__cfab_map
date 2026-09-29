@@ -22,8 +22,8 @@ z etykietami („sekundy renderu”, „wpisy ledgera”), a chmura rysuje je ja
 3. **Łukowe podpisy etapów.** Na zewnętrznym łuku (r ≈ 515) `textPath` z nazwą etapu
    dla każdego ciągłego pasma etapu (scalenie sąsiednich sektorów o tym samym etapie).
    Font mono, wersaliki, `--text-muted`, wielkość w jednostkach świata dobrana tak, żeby
-   przy dopasowaniu 1440 px mieć ~11 px. Etykiety krótsze niż łuk: gdy tekst nie mieści się,
-   podpis pomijany (Fundament ma własny podpis pod okręgiem).
+   przy dopasowaniu 1440 px mieć ~11 px. Krótkie nazwy z `STAGE_ARC` (i18n); podpis, który
+   nie mieści się w łuku, jest pomijany. Fundament dostaje podpis na dole okręgu.
 4. **Znacznik fosy.** Funkcje z `isUniqueMoat` dostają dodatkowy pierścień (r+3, obrys
    `--group-ink`). Legenda: „◎ trudne do skopiowania”.
 
@@ -38,7 +38,10 @@ stabilne, a algorytm rozkładu podpisów nie walczy z obrotem.
    - `data_flow`: kółko r 2,6 + poświata, prędkość ~150 j/s, ciągły strumień.
    - `file_exchange`: romb 5×5, prędkość ~80 j/s, „paczki”.
    Kolor: `--group-ink` źródła (w trybie „Program” kolor programu). Start przesunięty
-   (`begin` ujemny) tak, aby impulsy nie ruszały jednocześnie.
+   (`begin` ujemny) tak, aby impulsy nie ruszały jednocześnie. Linia przepływu zostaje
+   blada (0,14), impuls ma własną przezroczystość (0,8), więc niesie przekaz sam.
+   Przepływy wewnątrz jednej aplikacji są łukami wygiętymi od środka okręgu, żeby nie
+   przecinały dysku aplikacji.
 2. **Etykieta krawędzi.** Przy podświetleniu (hover/klik) krawędź z `label` pokazuje tekst
    w środku łuku, na podkładzie tła, w warstwie ekranowej obok podpisów węzłów.
 3. **Sterowanie.** Przycisk „Zatrzymaj orbity” → „Zatrzymaj przepływ” (`pauseAnimations` /

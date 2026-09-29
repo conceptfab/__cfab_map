@@ -12,6 +12,19 @@ export const STAGES: { id: Stage; pl: string; en: string }[] = [
   { id: "report", pl: "Raporty i rentowność", en: "Reports & profitability" },
 ];
 
+// Krótkie nazwy etapów na łuki wokół orbit (chmura); pełne nazwy zostają w legendzie.
+export const STAGE_ARC: Record<Stage | "foundation", { pl: string; en: string }> = {
+  assets: { pl: "Zasoby", en: "Assets" },
+  scene: { pl: "Scena", en: "Scene" },
+  inspection: { pl: "Inspekcja", en: "Inspection" },
+  render: { pl: "Render", en: "Render" },
+  results: { pl: "Wyniki", en: "Results" },
+  tracking: { pl: "Czas pracy", en: "Time" },
+  billing: { pl: "Wycena", en: "Costs" },
+  report: { pl: "Raporty", en: "Reports" },
+  foundation: { pl: "Fundament", en: "Foundation" },
+};
+
 const STRINGS = {
   viewAdvantages: { pl: "Przewagi", en: "Advantages" },
   mapTitle: { pl: "Mapa funkcjonalności", en: "Feature map" },

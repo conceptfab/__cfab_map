@@ -254,9 +254,10 @@ export default function App() {
           <span><i className="legend-node legend-module" />{lang === "pl" ? "moduł · bliższa orbita" : "module · inner orbit"}</span>
           <span><i className="legend-node legend-feature" />{lang === "pl" ? "funkcja · dalsze orbity" : "feature · outer orbits"}</span>
           <span><i className="legend-node legend-bridge" />{lang === "pl" ? "wspólna funkcja · między aplikacjami" : "shared feature · between apps"}</span>
+          <span><i className="legend-node legend-moat" />{lang === "pl" ? "trudna do skopiowania" : "hard to copy"}</span>
         </div>
         <div className="legend-group legend-hint">
-          <span>{lang === "pl" ? "Poświata oznacza wskazany węzeł · Linie pokazują powiązania" : "Glow marks the focused node · Lines show connections"}</span>
+          <span><i className="legend-pulse" aria-hidden="true" />{lang === "pl" ? "Impulsy pokazują przepływ danych · Wskaż węzeł, żeby zobaczyć powiązania" : "Pulses show data flow · Point at a node to see its connections"}</span>
         </div>
       </footer> : view === "grid" ? <footer className="legend legend-grid" aria-label={lang === "pl" ? "Oznaczenia etapów pracy" : "Work-stage key"}>
         <span>◆ {lang === "pl" ? "wspólna funkcja" : "shared feature"}</span>
