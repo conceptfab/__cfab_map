@@ -1183,7 +1183,8 @@ export const edges = [
   ["tf.sessions.split", "tf.estimates.estimates", "data_flow", ["godziny → kwoty", "hours → amounts"], null, "production"],
   ["tf.renders.render_sync", "tf.data.lan_sync", "depends_on", null, null, "beta"],
   ["tf.renders.render_sync", "tf.data.cloud_sync", "depends_on", null, null, "beta"],
-  ["hub.core.autostart", "syn.presence", "data_flow", null, null, "beta"],
+  ["hub.core.autostart", "syn.presence", "data_flow", ["heartbeat i PID", "heartbeat and PID"], null, "beta"],
+  ["syn.presence", "tf.renders.integration_state", "data_flow", ["heartbeat Huba", "Hub heartbeat"], null, "production"],
   ["hub.render.ledger_always", "hub.render.ledger", "depends_on", null, null, "production"],
   ["hub.render.single", "hub.render.ledger", "data_flow", null, "history_db 2", "beta"],
 ];

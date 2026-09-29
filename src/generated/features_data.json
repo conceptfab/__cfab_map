@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generatedAt": "2026-09-29T13:07:16.365Z",
+    "generatedAt": "2026-09-29T13:19:48.066Z",
     "hubVersion": "BETA 0.599",
     "timeflowVersion": "0.1.5777",
     "contracts": {
@@ -10667,13 +10667,29 @@
       "from": "hub.core.autostart",
       "to": "syn.presence",
       "type": "data_flow",
-      "label": null,
+      "label": {
+        "pl": "heartbeat i PID",
+        "en": "heartbeat and PID"
+      },
       "contract": null,
       "animated": true,
       "status": "beta"
     },
     {
-      "id": "e056.hub.render.ledger_always->hub.render.ledger",
+      "id": "e056.syn.presence->tf.renders.integration_state",
+      "from": "syn.presence",
+      "to": "tf.renders.integration_state",
+      "type": "data_flow",
+      "label": {
+        "pl": "heartbeat Huba",
+        "en": "Hub heartbeat"
+      },
+      "contract": null,
+      "animated": true,
+      "status": "production"
+    },
+    {
+      "id": "e057.hub.render.ledger_always->hub.render.ledger",
       "from": "hub.render.ledger_always",
       "to": "hub.render.ledger",
       "type": "depends_on",
@@ -10683,7 +10699,7 @@
       "status": "production"
     },
     {
-      "id": "e057.hub.render.single->hub.render.ledger",
+      "id": "e058.hub.render.single->hub.render.ledger",
       "from": "hub.render.single",
       "to": "hub.render.ledger",
       "type": "data_flow",
