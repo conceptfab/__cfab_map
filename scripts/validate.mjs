@@ -4,7 +4,7 @@ import path from "node:path";
 import { HUB_ROOT, OUT_JSON, resolveSource } from "./paths.mjs";
 
 // Tabela 5.0 wytycznych. Rozjazd oznacza, że dokument albo dane są nieaktualne.
-const EXPECTED = { ecosystem: 2, module: 30, bridge: 7, feature: 143 };
+const EXPECTED = { ecosystem: 2, module: 31, bridge: 7, feature: 149 };
 const STAGES = ["assets", "scene", "inspection", "render", "results", "tracking", "billing", "report"];
 const SHORT_MAX = 28;
 

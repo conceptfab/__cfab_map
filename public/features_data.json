@@ -1,8 +1,8 @@
 {
   "meta": {
-    "generatedAt": "2026-09-27T08:11:22.734Z",
-    "hubVersion": "BETA 0.58",
-    "timeflowVersion": "0.1.5776",
+    "generatedAt": "2026-09-29T13:07:16.365Z",
+    "hubVersion": "BETA 0.599",
+    "timeflowVersion": "0.1.5777",
     "contracts": {
       "module": 2,
       "service_api": 5,
@@ -18,7 +18,7 @@
       "ai_vector_db": 1,
       "asset_format": null
     },
-    "sourceCommit": "66fe3aa7",
+    "sourceCommit": "be677c70",
     "distribution": "investor"
   },
   "nodes": [
@@ -65,7 +65,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.58",
+      "version": "BETA 0.599",
       "contract": null,
       "sources": [],
       "keywords": [],
@@ -114,7 +114,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [],
@@ -157,7 +157,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -203,7 +203,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -249,12 +249,58 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [],
       "keywords": [
         "render",
         "render"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.nodes",
+      "nodeType": "module",
+      "app": "cfab_hub",
+      "module": "hub",
+      "parentId": "hub",
+      "title": {
+        "pl": "Klienci LAN",
+        "en": "LAN clients"
+      },
+      "shortTitle": {
+        "pl": "Klienci LAN",
+        "en": "LAN clients"
+      },
+      "summary": {
+        "pl": "Węzły renderujące w sieci lokalnej: stan Cinema 4D na każdej maszynie, zdalny start i link do panelu węzła.",
+        "en": "Render nodes on the local network: Cinema 4D state on every machine, remote launch and a link to each node's panel."
+      },
+      "category": "automation",
+      "stage": null,
+      "order": 3,
+      "audiences": [],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.104",
+      "contract": null,
+      "sources": [],
+      "keywords": [
+        "klienci lan",
+        "lan clients"
       ],
       "advantageId": null
     },
@@ -278,7 +324,7 @@
       },
       "category": "analysis",
       "stage": null,
-      "order": 3,
+      "order": 4,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -295,7 +341,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -324,7 +370,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 4,
+      "order": 5,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -341,7 +387,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -370,7 +416,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 5,
+      "order": 6,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -387,7 +433,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -416,7 +462,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 6,
+      "order": 7,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -433,7 +479,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -462,7 +508,7 @@
       },
       "category": "automation",
       "stage": null,
-      "order": 7,
+      "order": 8,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -479,7 +525,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.116",
+      "version": "BETA 0.117",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -508,7 +554,7 @@
       },
       "category": "integration",
       "stage": null,
-      "order": 8,
+      "order": 9,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -525,7 +571,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -554,7 +600,7 @@
       },
       "category": "ui",
       "stage": null,
-      "order": 9,
+      "order": 10,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -571,7 +617,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.72",
+      "version": "ALPHA 0.723",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -600,7 +646,7 @@
       },
       "category": "automation",
       "stage": null,
-      "order": 10,
+      "order": 11,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -617,7 +663,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.743",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -646,7 +692,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 11,
+      "order": 12,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -663,7 +709,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.961",
+      "version": "ALPHA 0.963",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -692,7 +738,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 12,
+      "order": 13,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -738,7 +784,7 @@
       },
       "category": "ui",
       "stage": null,
-      "order": 13,
+      "order": 14,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -755,7 +801,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.666",
+      "version": "ALPHA 0.669",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -784,7 +830,7 @@
       },
       "category": "integration",
       "stage": null,
-      "order": 14,
+      "order": 15,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -830,7 +876,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 15,
+      "order": 16,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -876,7 +922,7 @@
       },
       "category": "analysis",
       "stage": null,
-      "order": 16,
+      "order": 17,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -893,7 +939,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -922,7 +968,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 17,
+      "order": 18,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -939,7 +985,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -968,7 +1014,7 @@
       },
       "category": "finance",
       "stage": null,
-      "order": 18,
+      "order": 19,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -985,7 +1031,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1014,7 +1060,7 @@
       },
       "category": "finance",
       "stage": null,
-      "order": 19,
+      "order": 20,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1031,7 +1077,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1060,7 +1106,7 @@
       },
       "category": "finance",
       "stage": null,
-      "order": 20,
+      "order": 21,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1077,7 +1123,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1106,7 +1152,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 21,
+      "order": 22,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1123,7 +1169,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1152,7 +1198,7 @@
       },
       "category": "analysis",
       "stage": null,
-      "order": 22,
+      "order": 23,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1169,7 +1215,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1198,7 +1244,7 @@
       },
       "category": "ai",
       "stage": null,
-      "order": 23,
+      "order": 24,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1215,7 +1261,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1244,7 +1290,7 @@
       },
       "category": "security",
       "stage": null,
-      "order": 24,
+      "order": 25,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1261,7 +1307,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1290,7 +1336,7 @@
       },
       "category": "finance",
       "stage": null,
-      "order": 25,
+      "order": 26,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1307,7 +1353,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1336,7 +1382,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 26,
+      "order": 27,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1353,7 +1399,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1382,7 +1428,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 27,
+      "order": 28,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1399,7 +1445,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1428,7 +1474,7 @@
       },
       "category": "core",
       "stage": null,
-      "order": 28,
+      "order": 29,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1445,7 +1491,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1474,7 +1520,7 @@
       },
       "category": "finance",
       "stage": null,
-      "order": 29,
+      "order": 30,
       "audiences": [],
       "techMoat": {
         "isUniqueMoat": false,
@@ -1491,7 +1537,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [],
       "keywords": [
@@ -1929,7 +1975,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -1984,7 +2030,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2037,7 +2083,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2090,7 +2136,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2143,7 +2189,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2196,7 +2242,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2250,7 +2296,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.214",
+      "version": "ALPHA 0.216",
       "contract": null,
       "sources": [
         "Start"
@@ -2312,7 +2358,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2373,7 +2419,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2427,7 +2473,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2481,7 +2527,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2535,7 +2581,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2589,7 +2635,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2642,7 +2688,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2697,7 +2743,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2751,7 +2797,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2804,7 +2850,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2859,7 +2905,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.629",
+      "version": "ALPHA 0.63",
       "contract": null,
       "sources": [
         "Inspector"
@@ -2916,7 +2962,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -2969,7 +3015,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3023,7 +3069,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3076,7 +3122,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3129,7 +3175,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3183,7 +3229,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": "history_db 2",
       "sources": [
         "Render"
@@ -3243,7 +3289,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3302,7 +3348,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3356,7 +3402,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3409,7 +3455,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3435,8 +3481,8 @@
         "en": "LAN web panel"
       },
       "summary": {
-        "pl": "Panel z tokenem pokazuje klatki, postęp i ETA na telefonie oraz pozwala przejrzeć dyski maszyny renderującej.",
-        "en": "A token-protected panel shows frames, progress and ETA on a phone and lets you browse the render machine's drives."
+        "pl": "Panel z tokenem pokazuje klatki, postęp i ETA na telefonie, pozwala przejrzeć dyski maszyny renderującej, wybrać scenę i dodać ją do kolejki, sterować kolejką i uruchomić Cinema 4D.",
+        "en": "A token-protected panel shows frames, progress and ETA on a phone, lets you browse the render machine's drives, pick a scene and add it to the queue, control the queue and launch Cinema 4D."
       },
       "category": "ui",
       "stage": "render",
@@ -3463,7 +3509,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3517,7 +3563,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3571,7 +3617,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3624,7 +3670,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3677,7 +3723,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3730,7 +3776,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": "cfab_render 3",
       "sources": [
         "Render"
@@ -3783,7 +3829,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3836,7 +3882,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3889,7 +3935,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.748",
       "contract": null,
       "sources": [
         "Render"
@@ -3899,6 +3945,229 @@
         "history"
       ],
       "advantageId": "production"
+    },
+    {
+      "id": "hub.render.webhook",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.render",
+      "parentId": "hub.render",
+      "title": {
+        "pl": "Powiadomienia przez webhooki",
+        "en": "Webhook notifications"
+      },
+      "shortTitle": {
+        "pl": "Webhook: Discord, Slack",
+        "en": "Webhooks: Discord, Slack"
+      },
+      "summary": {
+        "pl": "Komunikaty z kolejki wysyłane na webhook Discorda, Slacka, n8n/Make albo własnego API; tylko adresy http/https, treść dopasowana do usługi.",
+        "en": "Queue messages sent to a Discord, Slack, n8n/Make or custom API webhook; http/https addresses only, payload shaped for the service."
+      },
+      "category": "automation",
+      "stage": "render",
+      "order": 19,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "HTTP"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.748",
+      "contract": null,
+      "sources": [
+        "Render"
+      ],
+      "keywords": [
+        "webhook",
+        "discord",
+        "slack",
+        "n8n"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.nodes.registry",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.nodes",
+      "parentId": "hub.nodes",
+      "title": {
+        "pl": "Rejestr węzłów LAN ze stanem Cinema 4D",
+        "en": "LAN node registry with Cinema 4D state"
+      },
+      "shortTitle": {
+        "pl": "Węzły LAN i stan C4D",
+        "en": "LAN nodes and C4D state"
+      },
+      "summary": {
+        "pl": "Tabela węzłów sieci lokalnej z wersją i procesem Cinema 4D, stanem mostu i renderowania, czasem odpowiedzi oraz kartami podsumowania klastra: dostępne, renderujące, czas odpowiedzi. Czytelne stany „Gotowy”, „Renderowanie”, „Brak programu C4D”, „Zły token” zamiast surowych błędów.",
+        "en": "A table of local-network nodes with Cinema 4D version and process, bridge and render state, response time and cluster summary cards: available, rendering, response time. Plain states such as Ready, Rendering, No C4D or Bad token instead of raw errors."
+      },
+      "category": "automation",
+      "stage": "render",
+      "order": 0,
+      "audiences": [
+        "agency_owner",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "PyQt6",
+        "Python"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.104",
+      "contract": null,
+      "sources": [
+        "LAN clients"
+      ],
+      "keywords": [
+        "lan",
+        "węzły",
+        "nodes",
+        "klaster",
+        "farma"
+      ],
+      "advantageId": "production"
+    },
+    {
+      "id": "hub.nodes.remote_launch",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.nodes",
+      "parentId": "hub.nodes",
+      "title": {
+        "pl": "Zdalne uruchamianie Cinema 4D na węzłach",
+        "en": "Remote Cinema 4D launch on nodes"
+      },
+      "shortTitle": {
+        "pl": "Zdalny start Cinema 4D",
+        "en": "Remote Cinema 4D launch"
+      },
+      "summary": {
+        "pl": "Uruchamia Cinema 4D na wybranym węźle LAN albo lokalnie przez panel WWW Huba tej maszyny; przyciski blokują się, gdy usługa jest zajęta, a widok odświeża się sam przy otwartej zakładce.",
+        "en": "Launches Cinema 4D on a selected LAN node or locally through that machine's Hub web panel; buttons lock while the service is busy and the view refreshes itself while the tab is open."
+      },
+      "category": "automation",
+      "stage": "render",
+      "order": 1,
+      "audiences": [
+        "agency_owner",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "HTTP"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.104",
+      "contract": null,
+      "sources": [
+        "LAN clients"
+      ],
+      "keywords": [
+        "zdalny start",
+        "launch",
+        "c4d"
+      ],
+      "advantageId": "production"
+    },
+    {
+      "id": "hub.nodes.lan_link",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.nodes",
+      "parentId": "hub.nodes",
+      "title": {
+        "pl": "Łącze LAN z tokenem do panelu węzła",
+        "en": "Token LAN link to a node's panel"
+      },
+      "shortTitle": {
+        "pl": "Link LAN z tokenem",
+        "en": "LAN link with token"
+      },
+      "summary": {
+        "pl": "Węzeł łączy się z panelem WWW Huba na maszynie renderującej przez link LAN z tokenem; tokeny zostają w usłudze, a widok dostaje tylko informację, czy token jest. Link tego Huba kopiuje się jednym kliknięciem.",
+        "en": "A node connects to the Hub web panel on the render machine through a LAN link with a token; tokens stay inside the service and the view only learns whether one exists. This Hub's own link is copied in one click."
+      },
+      "category": "integration",
+      "stage": "render",
+      "order": 2,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "HTTP"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.104",
+      "contract": null,
+      "sources": [
+        "LAN clients"
+      ],
+      "keywords": [
+        "token",
+        "link",
+        "panel"
+      ],
+      "advantageId": null
     },
     {
       "id": "hub.results.exruster",
@@ -3915,8 +4184,8 @@
         "en": "EXRuster: Rust + SIMD"
       },
       "summary": {
-        "pl": "Dekodowanie OpenEXR i HDR z SIMD, tone mapping na żywo i histogram poza wątkiem UI; wygląd z tokenów Huba.",
-        "en": "SIMD OpenEXR and HDR decoding, live tone mapping and an off-thread histogram; styled from Hub tokens."
+        "pl": "Dekodowanie OpenEXR i HDR z SIMD, tone mapping na żywo i histogram poza wątkiem UI; wygląd z tokenów Huba. Na Windows dwa warianty (AVX2, AVX-512) wybierane według procesora.",
+        "en": "SIMD OpenEXR and HDR decoding, live tone mapping and an off-thread histogram; styled from Hub tokens. On Windows two builds (AVX2, AVX-512) are picked to match the CPU."
       },
       "category": "analysis",
       "stage": "results",
@@ -3950,7 +4219,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4004,7 +4273,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4057,7 +4326,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4112,7 +4381,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4165,7 +4434,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4220,7 +4489,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4278,7 +4547,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.12.0",
+      "version": "0.12.3",
       "contract": null,
       "sources": [
         "Results"
@@ -4334,7 +4603,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [
         "Assets"
@@ -4391,7 +4660,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [
         "Assets"
@@ -4446,7 +4715,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [
         "Assets"
@@ -4503,7 +4772,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [
         "Assets"
@@ -4555,7 +4824,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.24",
+      "version": "ALPHA 0.242",
       "contract": null,
       "sources": [
         "Assets"
@@ -4608,7 +4877,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -4661,7 +4930,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -4714,7 +4983,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -4767,7 +5036,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -4821,7 +5090,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -4882,7 +5151,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": "ai_vector_db 1",
       "sources": [
         "Library"
@@ -4939,7 +5208,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "1.8.0",
+      "version": "1.8.2",
       "contract": null,
       "sources": [
         "Library"
@@ -5382,8 +5651,8 @@
         "en": "Blender bridge"
       },
       "summary": {
-        "pl": "Dwukierunkowy import i eksport siatek (GLB, USD, Alembic), naprawa siatek, profile Cycles i spłaszczanie scen linkowanych.",
-        "en": "Two-way mesh import/export (GLB, USD, Alembic), mesh repair, Cycles profiles and flattening of linked scenes."
+        "pl": "Dwukierunkowy import i eksport siatek (GLB, USD, Alembic), naprawa siatek, profile Cycles i spłaszczanie scen linkowanych. Operator „Zrób dane lokalnymi” zamienia zlinkowane biblioteki i Library Override na dane lokalne.",
+        "en": "Two-way mesh import/export (GLB, USD, Alembic), mesh repair, Cycles profiles and flattening of linked scenes. The “Make data local” operator converts linked libraries and Library Overrides into local data."
       },
       "category": "integration",
       "stage": "scene",
@@ -5410,14 +5679,15 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": "blender_bridge_protocol 2",
       "sources": [
         "Connections"
       ],
       "keywords": [
         "blender",
-        "most"
+        "most",
+        "make_local"
       ],
       "advantageId": "workflow"
     },
@@ -5463,7 +5733,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": null,
       "sources": [
         "Connections"
@@ -5519,7 +5789,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": "max_bridge_protocol 1",
       "sources": [
         "Connections"
@@ -5574,7 +5844,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": "modo_bridge_protocol 1",
       "sources": [
         "Connections"
@@ -5628,7 +5898,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": null,
       "sources": [
         "Connections"
@@ -5654,8 +5924,8 @@
         "en": "Install and update"
       },
       "summary": {
-        "pl": "Weryfikacja wtyczek w profilach C4D, Blendera, Maxa i MODO z wersją; instalacja, aktualizacja, przywracanie i usuwanie jednym kliknięciem.",
-        "en": "Checks plug-ins in C4D, Blender, Max and MODO profiles with their version; install, update, restore and remove in one click."
+        "pl": "Weryfikacja wtyczek w profilach C4D, Blendera, Maxa i MODO z wersją; instalacja, aktualizacja, przywracanie i usuwanie jednym kliknięciem. Instalacje usunięte z listy widać po włączeniu „Pokaż ukryte instalacje” i można je przywrócić.",
+        "en": "Checks plug-ins in C4D, Blender, Max and MODO profiles with their version; install, update, restore and remove in one click. Installs removed from the list reappear under “Show hidden installs” and can be restored."
       },
       "category": "automation",
       "stage": "scene",
@@ -5681,7 +5951,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.741",
       "contract": null,
       "sources": [
         "Connections"
@@ -5734,7 +6004,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [
         "Scratch"
@@ -5787,7 +6057,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [
         "Scratch"
@@ -5840,7 +6110,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [
         "Scratch"
@@ -5895,7 +6165,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [
         "Scratch"
@@ -5948,7 +6218,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.133",
+      "version": "ALPHA 0.134",
       "contract": null,
       "sources": [
         "Scratch"
@@ -6000,7 +6270,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.116",
+      "version": "BETA 0.117",
       "contract": null,
       "sources": [
         "Plug-ins"
@@ -6051,7 +6321,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.116",
+      "version": "BETA 0.117",
       "contract": null,
       "sources": [
         "Plug-ins"
@@ -6104,7 +6374,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.116",
+      "version": "BETA 0.117",
       "contract": null,
       "sources": [
         "Plug-ins"
@@ -6156,7 +6426,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "BETA 0.116",
+      "version": "BETA 0.117",
       "contract": null,
       "sources": [
         "Plug-ins"
@@ -6210,7 +6480,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.72",
+      "version": "ALPHA 0.723",
       "contract": null,
       "sources": [
         "Shell"
@@ -6265,7 +6535,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.72",
+      "version": "ALPHA 0.723",
       "contract": null,
       "sources": [
         "Shell"
@@ -6274,6 +6544,117 @@
         "instalacja",
         "update",
         "windows"
+      ],
+      "advantageId": null
+    },
+    {
+      "id": "hub.shell.auto_update",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.shell",
+      "parentId": "hub.shell",
+      "title": {
+        "pl": "Automatyczna aktualizacja kodu i wtyczek przy starcie",
+        "en": "Automatic code and plug-in update at startup"
+      },
+      "shortTitle": {
+        "pl": "Aktualizacja przy starcie",
+        "en": "Update at startup"
+      },
+      "summary": {
+        "pl": "Launcher pobiera nowy stan gałęzi main z GitHuba tylko przy czystym repozytorium i szybkim przewinięciu, uruchamia nowy kod i odświeża zainstalowane mosty oraz zestawy wtyczek; wynik widać w oknie Huba i w auto_update.log. Można wyłączyć w ustawieniach.",
+        "en": "At launch the launcher fast-forwards main from GitHub only on a clean checkout, restarts on the new code and refreshes installed bridges and plug-in sets; the outcome shows in the Hub window and in auto_update.log. Can be switched off in settings."
+      },
+      "category": "automation",
+      "stage": null,
+      "order": 2,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "Git"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.723",
+      "contract": null,
+      "sources": [
+        "Shell"
+      ],
+      "keywords": [
+        "aktualizacja",
+        "update",
+        "github",
+        "wtyczki"
+      ],
+      "advantageId": "local_first"
+    },
+    {
+      "id": "hub.shell.discord_status",
+      "nodeType": "feature",
+      "app": "cfab_hub",
+      "module": "hub.shell",
+      "parentId": "hub.shell",
+      "title": {
+        "pl": "Raport stanu aplikacji na Discord",
+        "en": "Application status report to Discord"
+      },
+      "shortTitle": {
+        "pl": "Stan Huba na Discordzie",
+        "en": "Hub status on Discord"
+      },
+      "summary": {
+        "pl": "Zmiany stanu (czeka na usługę, na Cinema 4D, na render, renderuje) i przebieg aktualizacji trafiają na webhook Discorda razem z nazwą komputera i odczytami stacji: wolne miejsce na dysku wyjściowym i zasilanie.",
+        "en": "State changes (waiting for the service, for Cinema 4D, for a render, rendering) and update progress go to a Discord webhook with the computer name and workstation readings: free space on the output drive and power."
+      },
+      "category": "automation",
+      "stage": "render",
+      "order": 0,
+      "audiences": [
+        "artist",
+        "tech_director"
+      ],
+      "techMoat": {
+        "isUniqueMoat": false,
+        "description": null
+      },
+      "techStack": [
+        "Python",
+        "HTTP"
+      ],
+      "replacesTools": [],
+      "businessValue": {
+        "timeSavedHoursMonth": 0,
+        "costAvoidedPerSeatMonthUSD": 0,
+        "revenueRecoveryPct": 0,
+        "financialGainType": "cost_reduction",
+        "assumptionId": ""
+      },
+      "status": "production",
+      "statusNote": null,
+      "version": "ALPHA 0.723",
+      "contract": null,
+      "sources": [
+        "Shell"
+      ],
+      "keywords": [
+        "discord",
+        "status",
+        "stacja robocza"
       ],
       "advantageId": null
     },
@@ -6319,7 +6700,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.73",
+      "version": "ALPHA 0.743",
       "contract": "service_api 5",
       "sources": [
         "Service"
@@ -6372,7 +6753,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.961",
+      "version": "ALPHA 0.963",
       "contract": null,
       "sources": [
         "Core"
@@ -6429,7 +6810,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.961",
+      "version": "ALPHA 0.963",
       "contract": null,
       "sources": [
         "Core"
@@ -6484,7 +6865,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.961",
+      "version": "ALPHA 0.963",
       "contract": null,
       "sources": [
         "Core"
@@ -6536,7 +6917,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.961",
+      "version": "ALPHA 0.963",
       "contract": null,
       "sources": [
         "Core"
@@ -6642,7 +7023,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "ALPHA 0.666",
+      "version": "ALPHA 0.669",
       "contract": null,
       "sources": [
         "Design system"
@@ -6810,7 +7191,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -6864,7 +7245,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -6917,7 +7298,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -6970,7 +7351,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -7023,7 +7404,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -7075,7 +7456,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Daemon"
@@ -7134,7 +7515,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Sessions"
@@ -7187,7 +7568,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Sessions"
@@ -7240,7 +7621,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Sessions"
@@ -7292,7 +7673,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Sessions"
@@ -7346,7 +7727,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Sessions"
@@ -7399,7 +7780,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7452,7 +7833,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7504,7 +7885,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7556,7 +7937,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7608,7 +7989,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7665,7 +8046,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7719,7 +8100,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "AI & model"
@@ -7776,7 +8157,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -7831,7 +8212,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -7885,7 +8266,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -7937,7 +8318,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -7991,7 +8372,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": "cfab_render 3",
       "sources": [
         "Renders"
@@ -8044,7 +8425,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Renders"
@@ -8097,7 +8478,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Renders"
@@ -8123,8 +8504,8 @@
         "en": "Machine cost (RBH)"
       },
       "summary": {
-        "pl": "Oblicza koszt maszyny na podstawie czasu renderu, stawek, limitów i współczynnika RBH. To składnik kosztów projektu służący artyście do oceny rentowności; uwzględnienie go w wycenie jest osobną, opcjonalną decyzją.",
-        "en": "Calculates machine cost from render time, rates, limits and the RBH factor. It contributes to project costs and the artist’s profitability analysis; including it in an estimate is a separate, optional decision."
+        "pl": "Oblicza koszt maszyny na podstawie czasu renderu, stawek, limitów i współczynnika RBH. To składnik kosztów projektu służący artyście do oceny rentowności; uwzględnienie go w wycenie jest osobną, opcjonalną decyzją. Opcjonalnie czas renderu wlicza się do limitu godzin projektu.",
+        "en": "Calculates machine cost from render time, rates, limits and the RBH factor. It contributes to project costs and the artist’s profitability analysis; including it in an estimate is a separate, optional decision. Optionally render time counts toward the project's hour limit."
       },
       "category": "finance",
       "stage": "billing",
@@ -8155,7 +8536,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Renders"
@@ -8210,7 +8591,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Renders"
@@ -8263,7 +8644,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Renders"
@@ -8288,8 +8669,8 @@
         "en": "Rates, colours, folders"
       },
       "summary": {
-        "pl": "Kolory, mapowanie folderów, stawki godzinowe, zamrażanie, wykluczanie i archiwum.",
-        "en": "Colours, folder mapping, hourly rates, freezing, exclusion and archive."
+        "pl": "Kolory, mapowanie folderów, stawki godzinowe, zamrażanie, wykluczanie i archiwum; filtry statusu (wszystkie, aktywne, zamrożone) z liczbą projektów.",
+        "en": "Colours, folder mapping, hourly rates, freezing, exclusion and archive; status filters (all, active, frozen) with project counts."
       },
       "category": "finance",
       "stage": "billing",
@@ -8316,7 +8697,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Projects"
@@ -8369,7 +8750,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Projects"
@@ -8423,7 +8804,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Projects"
@@ -8477,7 +8858,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Clients"
@@ -8530,7 +8911,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "PM"
@@ -8585,7 +8966,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Tasks"
@@ -8638,7 +9019,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Applications"
@@ -8691,7 +9072,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Applications"
@@ -8745,7 +9126,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Time analysis"
@@ -8797,7 +9178,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Dashboard"
@@ -8850,7 +9231,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Data"
@@ -8904,7 +9285,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Data"
@@ -8957,7 +9338,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -9010,7 +9391,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -9063,7 +9444,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -9115,7 +9496,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -9167,7 +9548,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "TIMEFLOW"
@@ -9219,7 +9600,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Estimates"
@@ -9274,7 +9655,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Estimates"
@@ -9327,7 +9708,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Estimates"
@@ -9353,8 +9734,8 @@
         "en": "Client PDF report"
       },
       "summary": {
-        "pl": "Zestawienia dla klienta z etapami pracy, wykresami i galerią renderów. Zakres raportu dobiera się do odbiorcy; analiza kosztów maszyny służy artyście do oceny projektu.",
-        "en": "Client summaries with work stages, charts and a render gallery. Report content is tailored to the audience; machine cost analysis helps the artist evaluate the project."
+        "pl": "Zestawienia dla klienta z etapami pracy, wykresami i galerią renderów z podsumowaniem: liczba, łączny czas, RBH i wartość. Zakres raportu dobiera się do odbiorcy; analiza kosztów maszyny służy artyście do oceny projektu.",
+        "en": "Client summaries with work stages, charts and a render gallery with a summary: count, total time, RBH and value. Report content is tailored to the audience; machine cost analysis helps the artist evaluate the project."
       },
       "category": "finance",
       "stage": "report",
@@ -9381,7 +9762,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Reports"
@@ -9434,7 +9815,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Reports"
@@ -9487,7 +9868,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Reports"
@@ -9540,7 +9921,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Reports"
@@ -9599,7 +9980,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Data"
@@ -9661,7 +10042,7 @@
       },
       "status": "production",
       "statusNote": null,
-      "version": "0.1.5776",
+      "version": "0.1.5777",
       "contract": null,
       "sources": [
         "Data"
@@ -9791,7 +10172,33 @@
       "status": "production"
     },
     {
-      "id": "e011.hub.render.single->syn.machine_time",
+      "id": "e011.hub.render.tf_tab->syn.proposals",
+      "from": "hub.render.tf_tab",
+      "to": "syn.proposals",
+      "type": "file_exchange",
+      "label": {
+        "pl": "propozycje projektów",
+        "en": "project proposals"
+      },
+      "contract": "cfab_proposals 1",
+      "animated": true,
+      "status": "production"
+    },
+    {
+      "id": "e012.syn.proposals->tf.renders.assign",
+      "from": "syn.proposals",
+      "to": "tf.renders.assign",
+      "type": "data_flow",
+      "label": {
+        "pl": "zatwierdzone przypisanie",
+        "en": "approved assignment"
+      },
+      "contract": null,
+      "animated": true,
+      "status": "production"
+    },
+    {
+      "id": "e013.hub.render.single->syn.machine_time",
       "from": "hub.render.single",
       "to": "syn.machine_time",
       "type": "data_flow",
@@ -9804,7 +10211,7 @@
       "status": "beta"
     },
     {
-      "id": "e012.syn.machine_time->tf.daemon.background",
+      "id": "e014.syn.machine_time->tf.daemon.background",
       "from": "syn.machine_time",
       "to": "tf.daemon.background",
       "type": "data_flow",
@@ -9814,7 +10221,7 @@
       "status": "beta"
     },
     {
-      "id": "e013.hub.bridges.c4d->syn.dcc_activity",
+      "id": "e015.hub.bridges.c4d->syn.dcc_activity",
       "from": "hub.bridges.c4d",
       "to": "syn.dcc_activity",
       "type": "data_flow",
@@ -9827,7 +10234,7 @@
       "status": "beta"
     },
     {
-      "id": "e014.syn.dcc_activity->tf.ai.facts_first",
+      "id": "e016.syn.dcc_activity->tf.ai.facts_first",
       "from": "syn.dcc_activity",
       "to": "tf.ai.facts_first",
       "type": "data_flow",
@@ -9840,7 +10247,7 @@
       "status": "beta"
     },
     {
-      "id": "e015.syn.beacons->hub.core.diagnostic",
+      "id": "e017.syn.beacons->hub.core.diagnostic",
       "from": "syn.beacons",
       "to": "hub.core.diagnostic",
       "type": "file_exchange",
@@ -9850,7 +10257,7 @@
       "status": "production"
     },
     {
-      "id": "e016.syn.beacons->tf.renders.integration_state",
+      "id": "e018.syn.beacons->tf.renders.integration_state",
       "from": "syn.beacons",
       "to": "tf.renders.integration_state",
       "type": "file_exchange",
@@ -9860,7 +10267,7 @@
       "status": "production"
     },
     {
-      "id": "e017.syn.beacons->hub.render.tf_tab",
+      "id": "e019.syn.beacons->hub.render.tf_tab",
       "from": "syn.beacons",
       "to": "hub.render.tf_tab",
       "type": "file_exchange",
@@ -9870,7 +10277,7 @@
       "status": "production"
     },
     {
-      "id": "e018.tf.projects.projects->hub.start.active_badge",
+      "id": "e020.tf.projects.projects->hub.start.active_badge",
       "from": "tf.projects.projects",
       "to": "hub.start.active_badge",
       "type": "data_flow",
@@ -9883,7 +10290,7 @@
       "status": "production"
     },
     {
-      "id": "e019.hub.results.sequences->hub.render.queue",
+      "id": "e021.hub.results.sequences->hub.render.queue",
       "from": "hub.results.sequences",
       "to": "hub.render.queue",
       "type": "data_flow",
@@ -9896,7 +10303,7 @@
       "status": "production"
     },
     {
-      "id": "e020.hub.render.precheck->hub.render.queue",
+      "id": "e022.hub.render.precheck->hub.render.queue",
       "from": "hub.render.precheck",
       "to": "hub.render.queue",
       "type": "depends_on",
@@ -9906,7 +10313,7 @@
       "status": "production"
     },
     {
-      "id": "e021.hub.render.recovery->hub.render.queue",
+      "id": "e023.hub.render.recovery->hub.render.queue",
       "from": "hub.render.recovery",
       "to": "hub.render.queue",
       "type": "depends_on",
@@ -9916,7 +10323,7 @@
       "status": "beta"
     },
     {
-      "id": "e022.hub.render.lan_farm->hub.bridges.c4d",
+      "id": "e024.hub.render.lan_farm->hub.bridges.c4d",
       "from": "hub.render.lan_farm",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9926,7 +10333,7 @@
       "status": "beta"
     },
     {
-      "id": "e023.hub.render.queue->hub.bridges.c4d",
+      "id": "e025.hub.render.queue->hub.bridges.c4d",
       "from": "hub.render.queue",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9936,7 +10343,7 @@
       "status": "production"
     },
     {
-      "id": "e024.hub.assets.relink->hub.bridges.c4d",
+      "id": "e026.hub.assets.relink->hub.bridges.c4d",
       "from": "hub.assets.relink",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -9949,7 +10356,7 @@
       "status": "production"
     },
     {
-      "id": "e025.hub.bridges.c4d_shader_browser->hub.bridges.c4d",
+      "id": "e027.hub.bridges.c4d_shader_browser->hub.bridges.c4d",
       "from": "hub.bridges.c4d_shader_browser",
       "to": "hub.bridges.c4d",
       "type": "depends_on",
@@ -9962,7 +10369,7 @@
       "status": "production"
     },
     {
-      "id": "e026.hub.bridges.c4d_shader_layers->hub.bridges.c4d_shader_browser",
+      "id": "e028.hub.bridges.c4d_shader_layers->hub.bridges.c4d_shader_browser",
       "from": "hub.bridges.c4d_shader_layers",
       "to": "hub.bridges.c4d_shader_browser",
       "type": "depends_on",
@@ -9972,7 +10379,7 @@
       "status": "production"
     },
     {
-      "id": "e027.hub.bridges.c4d_bitmap_conversion->hub.bridges.c4d_shader_browser",
+      "id": "e029.hub.bridges.c4d_bitmap_conversion->hub.bridges.c4d_shader_browser",
       "from": "hub.bridges.c4d_bitmap_conversion",
       "to": "hub.bridges.c4d_shader_browser",
       "type": "depends_on",
@@ -9982,7 +10389,7 @@
       "status": "production"
     },
     {
-      "id": "e028.hub.bridges.c4d_color_correct->hub.bridges.c4d_shader_browser",
+      "id": "e030.hub.bridges.c4d_color_correct->hub.bridges.c4d_shader_browser",
       "from": "hub.bridges.c4d_color_correct",
       "to": "hub.bridges.c4d_shader_browser",
       "type": "depends_on",
@@ -9992,7 +10399,7 @@
       "status": "production"
     },
     {
-      "id": "e029.hub.bridges.c4d_material_names->hub.bridges.c4d_shader_browser",
+      "id": "e031.hub.bridges.c4d_material_names->hub.bridges.c4d_shader_browser",
       "from": "hub.bridges.c4d_material_names",
       "to": "hub.bridges.c4d_shader_browser",
       "type": "depends_on",
@@ -10002,7 +10409,7 @@
       "status": "production"
     },
     {
-      "id": "e030.hub.bridges.c4d_texture_metadata->hub.bridges.c4d_shader_browser",
+      "id": "e032.hub.bridges.c4d_texture_metadata->hub.bridges.c4d_shader_browser",
       "from": "hub.bridges.c4d_texture_metadata",
       "to": "hub.bridges.c4d_shader_browser",
       "type": "data_flow",
@@ -10015,7 +10422,7 @@
       "status": "production"
     },
     {
-      "id": "e031.hub.service->hub.bridges.c4d_texture_metadata",
+      "id": "e033.hub.service->hub.bridges.c4d_texture_metadata",
       "from": "hub.service",
       "to": "hub.bridges.c4d_texture_metadata",
       "type": "data_flow",
@@ -10028,7 +10435,7 @@
       "status": "production"
     },
     {
-      "id": "e032.hub.bridges.blender->hub.scratch.zones",
+      "id": "e034.hub.bridges.blender->hub.scratch.zones",
       "from": "hub.bridges.blender",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -10041,7 +10448,7 @@
       "status": "production"
     },
     {
-      "id": "e033.hub.bridges.max->hub.scratch.zones",
+      "id": "e035.hub.bridges.max->hub.scratch.zones",
       "from": "hub.bridges.max",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -10054,7 +10461,7 @@
       "status": "beta"
     },
     {
-      "id": "e034.hub.bridges.modo->hub.scratch.zones",
+      "id": "e036.hub.bridges.modo->hub.scratch.zones",
       "from": "hub.bridges.modo",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -10067,7 +10474,7 @@
       "status": "beta"
     },
     {
-      "id": "e035.hub.bridges.c4d->hub.scratch.zones",
+      "id": "e037.hub.bridges.c4d->hub.scratch.zones",
       "from": "hub.bridges.c4d",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -10080,7 +10487,7 @@
       "status": "production"
     },
     {
-      "id": "e036.hub.bridges.blender_mats->hub.bridges.c4d",
+      "id": "e038.hub.bridges.blender_mats->hub.bridges.c4d",
       "from": "hub.bridges.blender_mats",
       "to": "hub.bridges.c4d",
       "type": "file_exchange",
@@ -10093,7 +10500,7 @@
       "status": "beta"
     },
     {
-      "id": "e037.hub.scenes.max_import->hub.bridges.c4d",
+      "id": "e039.hub.scenes.max_import->hub.bridges.c4d",
       "from": "hub.scenes.max_import",
       "to": "hub.bridges.c4d",
       "type": "ipc",
@@ -10103,7 +10510,7 @@
       "status": "beta"
     },
     {
-      "id": "e038.hub.scenes.max_reader->hub.scenes.max_import",
+      "id": "e040.hub.scenes.max_reader->hub.scenes.max_import",
       "from": "hub.scenes.max_reader",
       "to": "hub.scenes.max_import",
       "type": "data_flow",
@@ -10113,7 +10520,7 @@
       "status": "beta"
     },
     {
-      "id": "e039.hub.scenes.max_space->hub.scenes.max_import",
+      "id": "e041.hub.scenes.max_space->hub.scenes.max_import",
       "from": "hub.scenes.max_space",
       "to": "hub.scenes.max_import",
       "type": "depends_on",
@@ -10123,7 +10530,7 @@
       "status": "beta"
     },
     {
-      "id": "e040.hub.browser.jit->hub.scratch.zones",
+      "id": "e042.hub.browser.jit->hub.scratch.zones",
       "from": "hub.browser.jit",
       "to": "hub.scratch.zones",
       "type": "file_exchange",
@@ -10133,7 +10540,7 @@
       "status": "production"
     },
     {
-      "id": "e041.hub.browser.visual_search->hub.browser.asset_format",
+      "id": "e043.hub.browser.visual_search->hub.browser.asset_format",
       "from": "hub.browser.visual_search",
       "to": "hub.browser.asset_format",
       "type": "depends_on",
@@ -10143,7 +10550,7 @@
       "status": "beta"
     },
     {
-      "id": "e042.hub.browser.errors_tab->hub.browser.pairing",
+      "id": "e044.hub.browser.errors_tab->hub.browser.pairing",
       "from": "hub.browser.errors_tab",
       "to": "hub.browser.pairing",
       "type": "data_flow",
@@ -10153,7 +10560,7 @@
       "status": "beta"
     },
     {
-      "id": "e043.hub.native.native->hub.browser.tools",
+      "id": "e045.hub.native.native->hub.browser.tools",
       "from": "hub.native.native",
       "to": "hub.browser.tools",
       "type": "depends_on",
@@ -10163,7 +10570,7 @@
       "status": "production"
     },
     {
-      "id": "e044.hub.core.mcp->hub.render.ledger",
+      "id": "e046.hub.core.mcp->hub.render.ledger",
       "from": "hub.core.mcp",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -10173,7 +10580,7 @@
       "status": "production"
     },
     {
-      "id": "e045.tf.mcp_tools->tf.projects.projects",
+      "id": "e047.tf.mcp_tools->tf.projects.projects",
       "from": "tf.mcp_tools",
       "to": "tf.projects.projects",
       "type": "data_flow",
@@ -10183,7 +10590,7 @@
       "status": "production"
     },
     {
-      "id": "e046.tf.mcp_backup->tf.mcp_tools",
+      "id": "e048.tf.mcp_backup->tf.mcp_tools",
       "from": "tf.mcp_backup",
       "to": "tf.mcp_tools",
       "type": "depends_on",
@@ -10193,7 +10600,7 @@
       "status": "production"
     },
     {
-      "id": "e047.tf.daemon.events->tf.sessions.no_double",
+      "id": "e049.tf.daemon.events->tf.sessions.no_double",
       "from": "tf.daemon.events",
       "to": "tf.sessions.no_double",
       "type": "data_flow",
@@ -10203,7 +10610,7 @@
       "status": "production"
     },
     {
-      "id": "e048.tf.daemon.title_parser->tf.ai.layer_tokens",
+      "id": "e050.tf.daemon.title_parser->tf.ai.layer_tokens",
       "from": "tf.daemon.title_parser",
       "to": "tf.ai.layer_tokens",
       "type": "data_flow",
@@ -10213,7 +10620,7 @@
       "status": "production"
     },
     {
-      "id": "e049.tf.ai.auto_safe->tf.sessions.timeline",
+      "id": "e051.tf.ai.auto_safe->tf.sessions.timeline",
       "from": "tf.ai.auto_safe",
       "to": "tf.sessions.timeline",
       "type": "data_flow",
@@ -10223,7 +10630,7 @@
       "status": "production"
     },
     {
-      "id": "e050.tf.sessions.split->tf.estimates.estimates",
+      "id": "e052.tf.sessions.split->tf.estimates.estimates",
       "from": "tf.sessions.split",
       "to": "tf.estimates.estimates",
       "type": "data_flow",
@@ -10236,7 +10643,7 @@
       "status": "production"
     },
     {
-      "id": "e051.tf.renders.render_sync->tf.data.lan_sync",
+      "id": "e053.tf.renders.render_sync->tf.data.lan_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.lan_sync",
       "type": "depends_on",
@@ -10246,7 +10653,7 @@
       "status": "beta"
     },
     {
-      "id": "e052.tf.renders.render_sync->tf.data.cloud_sync",
+      "id": "e054.tf.renders.render_sync->tf.data.cloud_sync",
       "from": "tf.renders.render_sync",
       "to": "tf.data.cloud_sync",
       "type": "depends_on",
@@ -10256,7 +10663,7 @@
       "status": "beta"
     },
     {
-      "id": "e053.hub.core.autostart->syn.presence",
+      "id": "e055.hub.core.autostart->syn.presence",
       "from": "hub.core.autostart",
       "to": "syn.presence",
       "type": "data_flow",
@@ -10266,7 +10673,7 @@
       "status": "beta"
     },
     {
-      "id": "e054.hub.render.ledger_always->hub.render.ledger",
+      "id": "e056.hub.render.ledger_always->hub.render.ledger",
       "from": "hub.render.ledger_always",
       "to": "hub.render.ledger",
       "type": "depends_on",
@@ -10276,7 +10683,7 @@
       "status": "production"
     },
     {
-      "id": "e055.hub.render.single->hub.render.ledger",
+      "id": "e057.hub.render.single->hub.render.ledger",
       "from": "hub.render.single",
       "to": "hub.render.ledger",
       "type": "data_flow",
@@ -10424,6 +10831,8 @@
         "hub.render.recovery",
         "hub.render.watchdog",
         "hub.render.lan_farm",
+        "hub.nodes.registry",
+        "hub.nodes.remote_launch",
         "hub.render.eta_log",
         "hub.render.web_panel",
         "hub.render.ntfy",
@@ -10457,6 +10866,7 @@
       "assumptionId": null,
       "flow": null,
       "ids": [
+        "hub.shell.auto_update",
         "hub.core.mcp",
         "tf.mcp_arch",
         "tf.mcp_tools",

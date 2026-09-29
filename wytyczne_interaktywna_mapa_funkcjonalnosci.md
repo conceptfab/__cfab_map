@@ -1,6 +1,6 @@
 # WYTYCZNE WYKONAWCZE: STRONA WWW Z INTERAKTYWNĄ MAPĄ FUNKCJONALNOŚCI CFAB 4D HUB & TIMEFLOW (DLA INWESTORÓW)
 
-> Aktualizacja zakresu 2026-09-27, nadrzędna wobec starszych zapisów poniżej: strona przedstawia istniejące funkcje zweryfikowane w kodzie. Bez roadmapy, etykiet gotowości i porównania „gotowe / wszystkie”. Katalog: **143 funkcje aplikacji + 7 integracji**, 30 modułów, 2 aplikacje. Przewagi dotyczą całego ekosystemu; nie wyróżniamy ostatnich zmian jako głównych narzędzi. Koszty renderu służą wewnętrznej analizie. Szczegóły: [analiza](ANALIZA_EKOSYSTEMU_2026-09-27.md), [aktualny brief](BRIEF_PRZEWAGI.md).
+> Aktualizacja zakresu 2026-09-27, nadrzędna wobec starszych zapisów poniżej: strona przedstawia istniejące funkcje zweryfikowane w kodzie. Bez roadmapy, etykiet gotowości i porównania „gotowe / wszystkie”. Katalog: **149 funkcji aplikacji + 7 integracji**, 31 modułów, 2 aplikacje (aktualizacja 2026-09-29: moduł Klienci LAN i funkcje z Huba BETA 0.599, patrz `ZMIANY_2026-09-29.md`). Przewagi dotyczą całego ekosystemu; nie wyróżniamy ostatnich zmian jako głównych narzędzi. Koszty renderu służą wewnętrznej analizie. Szczegóły: [analiza](ANALIZA_EKOSYSTEMU_2026-09-27.md), [aktualny brief](BRIEF_PRZEWAGI.md).
 
 > **Dokument strategiczno-techniczny i specyfikacja wdrożeniowa**
 > **Adresat:** wykonawca (model lub człowiek) budujący finalną aplikację mapy — brief w rozdziale 0
